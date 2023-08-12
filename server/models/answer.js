@@ -1,23 +1,22 @@
 module.exports = function(sequelize, DataTypes) {
-    const Pitanja = sequelize.define("Pitanja", {
+    const answer = sequelize.define('answer', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
         },
-        pitanje: {
+        answer_text: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        oblast: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        tezina: {
-            type: DataTypes.ENUM('lako', 'srednje', 'tesko'),
+        correctness: {
+            type: DataTypes.BOOLEAN,
             allowNull: true
         }
+    }, {
+        timestamps: false
     })
-    return Pitanje
+
+    return answer
 }
