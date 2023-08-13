@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
         difficulty: {
             type: DataTypes.ENUM('lako', 'srednje', 'tesko'),
             allowNull: true
+        },
+        importance: {
+            type: DataTypes.ENUM('manje', 'srednje', 'bitno'),
+            allowNull: true
         }
     }, {
         timestamps: false
