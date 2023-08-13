@@ -1,25 +1,30 @@
 import './App.css'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import Areas from './pages/areas'
+import AddArea from './pages/addArea'
 
-function App() {
-  const [areas, setAreas] = useState([])
-  useEffect(() => {
-    axios.get('http://localhost:3001/areas').then((response) => {
-      setAreas(response.data)
-    })
-  }, [])
+function App () {
   return (
-    <div className="App">
-      {areas.map((area, key) => {
-        return (
-          <div key={key}>
-            <h1>{area.area_name}</h1>
-          </div>
-        )
-      })}
+    <div className='App'>
+      <Router>
+        <nav>
+          <Link className='navBarLink' to='/'>
+            Почетна страна
+          </Link>
+          <Link className='navBarLink' to='/areas'>
+            Прегледај све области
+          </Link>
+          <Link className='navBarLink' to='/addArea'>
+            Додај нову област
+          </Link>
+        </nav>
+        <Routes>
+          <Route path='/areas' element={<Areas />} />
+          <Route path='/addArea' element={<AddArea />} />
+        </Routes>
+      </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
