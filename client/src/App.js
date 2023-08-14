@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import Areas from './pages/areas'
-import AddArea from './pages/addArea'
+import GetAllAreas from './views/getAllAreas'
+import AddArea from './views/addArea'
 
 function App () {
   return (
@@ -11,7 +11,7 @@ function App () {
           <Link className='navBarLink' to='/'>
             Почетна страна
           </Link>
-          <Link className='navBarLink' to='/areas'>
+          <Link className='navBarLink' to='/getAllAreas'>
             Прегледај све области
           </Link>
           <Link className='navBarLink' to='/addArea'>
@@ -19,7 +19,7 @@ function App () {
           </Link>
         </nav>
         <Routes>
-          <Route path='/areas' element={<Areas />} />
+          <Route path='/getAllAreas' element={<GetAllAreas />} />
           <Route path='/addArea' element={<AddArea />} />
         </Routes>
       </Router>

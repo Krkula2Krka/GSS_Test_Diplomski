@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-function Areas () {
+function GetAllAreas () {
   const [areas, setAreas] = useState([])
   useEffect(() => {
     axios.get('http://localhost:3001/areas').then(response => {
@@ -22,4 +22,4 @@ function Areas () {
   )
 }
 
-export default Areas
+export default GetAllAreas
