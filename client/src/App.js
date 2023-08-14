@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import GetAllAreas from './views/getAllAreas'
 import AddArea from './views/addArea'
+import AreaDetails from './views/areaDetails'
 
 function App () {
   return (
@@ -21,6 +22,7 @@ function App () {
         <Routes>
           <Route path='/getAllAreas' element={<GetAllAreas />} />
           <Route path='/addArea' element={<AddArea />} />
+          <Route path='/areaDetails/:id' element={<AreaDetails />} />
         </Routes>
       </Router>
     </div>

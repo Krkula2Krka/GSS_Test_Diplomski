@@ -2,11 +2,14 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
+import { useNavigate, generatePath } from 'react-router-dom'
 
-function addArea () {
+function AddArea () {
   const initialValues = {
     area_name: ''
   }
+
+  const navigate = useNavigate()
 
   const validationSchema = Yup.object().shape({
     area_name: Yup.string().required('Обавезно поље')
@@ -14,7 +17,7 @@ function addArea () {
 
   const onSubmit = data => {
     axios.post('http://localhost:3001/areas', data).then(response => {
-      console.log('IT WORKED')
+      navigate(generatePath('/getAllAreas'))
     })
   }
   return (
@@ -35,4 +38,4 @@ function addArea () {
   )
 }
 
-export default addArea
+export default AddArea
