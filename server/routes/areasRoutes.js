@@ -1,16 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { area } = require('../models')
+const { getAllAreasInController, createAreaInController } = require('../controllers/areasController')
 
-router.get('/', async (req, res) => {
-    const areas = await area.findAll()
-    res.json(areas)
-})
+router.get('/', getAllAreasInController)
 
-router.post('/', async (req, res) => {
-    const newArea = req.body
-    await area.create(newArea)
-    res.json(newArea)
-})
+router.post('/', createAreaInController)
 
 module.exports = router
