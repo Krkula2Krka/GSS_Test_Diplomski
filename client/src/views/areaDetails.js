@@ -5,13 +5,15 @@ import axios from 'axios'
 
 function AreaDetails () {
   const { id } = useParams()
-  const [areaObject, setAreaObject] = useState({})
+  const [questionObjects, setQuestionObjects] = useState([])
   useEffect(() => {
-    axios.get(`http://localhost:3001/areas/${id}`).then(response => {
-      setAreaObject(response.data)
+    axios.get(`http://localhost:3001/questions/${id}`).then(response => {
+      setQuestionObjects(response.data)
     })
   }, [id])
-  return <div>{areaObject.area_name}</div>
+  return <div>{questionObjects.map((questionObject) => {
+    return <div>{questionObject.question_text}</div>
+  })}</div>
 }
 
 export default AreaDetails
