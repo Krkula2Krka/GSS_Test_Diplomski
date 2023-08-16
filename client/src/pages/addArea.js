@@ -29,7 +29,7 @@ function AddArea () {
       >
         <Form className='formContainer'>
           <label>Назив нове области: </label>
-          <ErrorMessage name='area_name' component='span' />
+          <ErrorMessage name='area_name' component='span' className='errorMessage' />
           <Field name='area_name' />
           <button type='submit'>Додај</button>
         </Form>

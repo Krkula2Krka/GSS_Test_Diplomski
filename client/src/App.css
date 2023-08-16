@@ -1,7 +1,33 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
 }
 
-.navBarLink {
-  margin: 5px;
+.sidebar {
+  position: fixed;
+  margin: 0%;
+}
+
+.content {
+  margin-left: 6rem;
+  margin-top: 2rem;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border: 5px solid dodgerblue;
+  border-radius: 5px;
+}
+
+.errorMessage {
+  color: red;
 }

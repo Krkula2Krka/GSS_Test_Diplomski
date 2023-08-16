@@ -1,34 +1,28 @@
 import './App.css'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import GetAllAreas from './views/getAllAreas'
-import AddArea from './views/addArea'
-import AreaDetails from './views/areaDetails'
-import AddQuestion from './views/addQuestion'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import GetAllAreas from './pages/getAllAreas'
+import AddArea from './pages/addArea'
+import AreaDetails from './pages/areaDetails'
+import AddQuestion from './pages/addQuestion'
+import Navbar from './components/navbar'
 
 function App () {
   return (
-    <div className='App'>
+    <div>
       <Router>
-        <nav>
-          <Link className='navBarLink' to='/'>
-            Почетна страна
-          </Link>
-          <Link className='navBarLink' to='/getAllAreas'>
-            Прегледај све области
-          </Link>
-          <Link className='navBarLink' to='/addArea'>
-            Додај нову област
-          </Link>
-          <Link className='navBarLink' to='/addQuestion'>
-            Додај ново питање
-          </Link>
-        </nav>
-        <Routes>
-          <Route path='/getAllAreas' element={<GetAllAreas />} />
-          <Route path='/addArea' element={<AddArea />} />
-          <Route path='/addQuestion' element={<AddQuestion />} />
-          <Route path='/areaDetails/:id' element={<AreaDetails />} />
-        </Routes>
+        <div className='main'>
+          <div className='sidebar'>
+            <Navbar />
+          </div>
+          <div className='content'>
+            <Routes>
+              <Route path='/getAllAreas' element={<GetAllAreas />} />
+              <Route path='/addArea' element={<AddArea />} />
+              <Route path='/addQuestion' element={<AddQuestion />} />
+              <Route path='/areaDetails/:id' element={<AreaDetails />} />
+            </Routes>
+          </div>
+        </div>
       </Router>
     </div>
   )

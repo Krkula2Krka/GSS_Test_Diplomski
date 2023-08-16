@@ -11,7 +11,7 @@ function AreaDetails () {
       setQuestionObjects(response.data)
     })
   }, [id])
-  return <div>{questionObjects.map((questionObject) => {
+  return <div >{questionObjects.map((questionObject) => {
     return <div>{questionObject.question_text}</div>
   })}</div>
 }
