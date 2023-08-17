@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate, generatePath } from 'react-router-dom'
+import * as AiIcons from 'react-icons/ai'
 
 function GetAllAreas () {
   const [areas, setAreas] = useState([])
@@ -12,16 +13,21 @@ function GetAllAreas () {
     })
   }, [])
   return (
-    <div>
+    <div className='table'>
       {areas.map((area, key) => {
         return (
-          <div
-            key={key}
-            onClick={() => {
+          <div className='table-row' key={key}>
+            <div className='area-name'>
+              <h1>{area.area_name}</h1>
+            </div>
+            <div
+              className='edit-area-button'
+              onClick={() => {
                 navigate(generatePath('/areaDetails/:id', { id: area.id }))
-            }}
-          >
-            <h1>{area.area_name}</h1>
+              }}
+            >
+              <AiIcons.AiFillEdit />
+            </div>
           </div>
         )
       })}

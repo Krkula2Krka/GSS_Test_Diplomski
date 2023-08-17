@@ -9,14 +9,10 @@ function Navbar () {
   const [sidebar, setSidebar] = useState(false)
   const showSidebar = () => {
     setSidebar(!sidebar)
-    /*if (sidebar) {
-      document.getElementsByClassName('contentContainer')[0].classList.remove('contentMarginWide')
-      document.getElementsByClassName('contentContainer')[0].classList.add('contentMarginNarrow')
-    }
-    else {
-      document.getElementsByClassName('contentContainer')[0].classList.remove('contentMarginNarrow')
-      document.getElementsByClassName('contentContainer')[0].classList.add('contentMarginWide')
-    }*/
+    if (sidebar)
+      document.getElementsByClassName('content')[0].style.paddingLeft = '6rem'
+    else
+      document.getElementsByClassName('content')[0].style.paddingLeft = '18rem'
   }
   return (
     <div>

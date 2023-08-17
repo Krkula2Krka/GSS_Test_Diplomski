@@ -9,12 +9,10 @@
 
 .sidebar {
   position: fixed;
-  margin: 0%;
 }
 
 .content {
-  margin-left: 6rem;
-  margin-top: 2rem;
+  padding-top: 2rem;
 }
 
 .formContainer {
@@ -24,8 +22,38 @@
   width: 500px;
   height: auto;
   padding: 20px;
-  border: 5px solid dodgerblue;
+  border: 5px solid #060b26;
   border-radius: 5px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 700px;
+  height: auto;
+  padding: 20px;
+  border: 5px solid #060b26;
+  background-color: #060b26;
+  border-radius: 5px;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  border: 5px solid #060b26;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.edit-area-button {
+  border: 5px solid #060b26;
+  border-radius: 5px;
+  width: 5rem;
 }
 
 .errorMessage {
