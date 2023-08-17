@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        GSS_number: {
-            type: DataTypes.INTEGER,
+        GSS_identification: {
+            type: DataTypes.STRING,
             allowNull: true,
             unique: true
         }
