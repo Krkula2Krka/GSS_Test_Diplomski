@@ -5,6 +5,10 @@ import AddArea from './pages/addArea'
 import AreaDetails from './pages/areaDetails'
 import AddQuestion from './pages/addQuestion'
 import Navbar from './components/navbar'
+import Home from './pages/home'
+import CredentialsForTest from './pages/credentialsForTest'
+import TakeTest from './pages/takeTest'
+import Registration from './pages/registration'
 
 function App () {
   return (
@@ -20,6 +24,10 @@ function App () {
               <Route path='/addArea' element={<AddArea />} />
               <Route path='/addQuestion' element={<AddQuestion />} />
               <Route path='/areaDetails/:id' element={<AreaDetails />} />
+              <Route path='/home' element={<Home />} />
+              <Route path='/credentialsForTest' element={<CredentialsForTest />} />
+              <Route path='/takeTest/:id' element={<TakeTest />} />
+              <Route path='/registration' element={<Registration />} />
             </Routes>
           </div>
         </div>
