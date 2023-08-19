@@ -2,11 +2,17 @@ const express = require('express')
 const router = express.Router()
 const {
   createUserInController,
-  loginUserInController
+  loginUserForTestingInController,
+  checkIfUserIsLoggedInForTestingInController,
+  logoutUserForTestingInController
 } = require('../controllers/usersController')
 
 router.post('/', createUserInController)
 
-router.post('/login', loginUserInController)
+router.post('/login', loginUserForTestingInController)
+
+router.get('/checkLoginForTesting/:id', checkIfUserIsLoggedInForTestingInController)
+
+router.post('/logoutForTesting/:id', logoutUserForTestingInController)
 
 module.exports = router

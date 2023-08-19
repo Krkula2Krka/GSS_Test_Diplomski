@@ -14,7 +14,27 @@ const checkIfUserExistsInService = checkUser => {
   })
 }
 
+const loginUserForTestingInService = id => {
+  user.update({logged_in_for_testing: true}, {where: {id: id}})
+}
+
+const checkIfUserIsLoggedInForTestingInService = id => {
+  return user.findOne({
+    where: {
+      id: id,
+      logged_in_for_testing: true
+    }
+  })
+}
+
+const logoutUserForTestingInService = id => {
+  user.update({logged_in_for_testing: false}, {where: {id: id}})
+}
+
 module.exports = {
   createUserInService: createUserInService,
-  checkIfUserExistsInService: checkIfUserExistsInService
+  checkIfUserExistsInService: checkIfUserExistsInService,
+  loginUserForTestingInService: loginUserForTestingInService,
+  logoutUserForTestingInService: logoutUserForTestingInService,
+  checkIfUserIsLoggedInForTestingInService: checkIfUserIsLoggedInForTestingInService
 }

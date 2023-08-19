@@ -1,6 +1,9 @@
 const {
   createUserInService,
-  checkIfUserExistsInService
+  checkIfUserExistsInService,
+  loginUserForTestingInService,
+  logoutUserForTestingInService,
+  checkIfUserIsLoggedInForTestingInService
 } = require('../service/usersService')
 const bcrypt = require('bcrypt')
 
@@ -13,7 +16,7 @@ const createUserInController = async (req, res) => {
   res.json('User created!')
 }
 
-const loginUserInController = async (req, res) => {
+const loginUserForTestingInController = async (req, res) => {
   const user = req.body
   const users = await checkIfUserExistsInService(user)
   if (users.length === 0) {
@@ -24,15 +27,40 @@ const loginUserInController = async (req, res) => {
       .compare(user.GSS_identification, users[i].GSS_identification)
       .then(result => {
         if (result) {
-          res.json({ loginSuccessful: true, message: 'User logged in!', id: users[i].id })
+          loginUserForTestingInService(users[i].id)
+          res.json({
+            loginSuccessful: true,
+            message: `User with id ${users[i].id} logged in for testing!`,
+            id: users[i].id
+          })
         } else {
-          res.json({ loginSuccessful: false, message: 'Wrong password!', id: 0 })
+          res.json({
+            loginSuccessful: false,
+            message: 'Wrong password!',
+            id: 0
+          })
         }
       })
   }
 }
 
+const checkIfUserIsLoggedInForTestingInController = async (req, res) => {
+  const id = req.params.id
+  const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(id)
+  if (userLoggedIn) res.json({ loggedIn: true })
+  else res.json({ loggedIn: false })
+}
+
+const logoutUserForTestingInController = async (req, res) => {
+  const id = req.params.id
+  await logoutUserForTestingInService(id)
+  res.json(`User with id ${id} logged out for testing!`)
+}
+
 module.exports = {
   createUserInController: createUserInController,
-  loginUserInController: loginUserInController
+  loginUserForTestingInController: loginUserForTestingInController,
+  checkIfUserIsLoggedInForTestingInController:
+    checkIfUserIsLoggedInForTestingInController,
+  logoutUserForTestingInController: logoutUserForTestingInController
 }
