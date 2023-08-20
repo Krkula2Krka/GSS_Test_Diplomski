@@ -6,12 +6,13 @@ import axios from 'axios'
 function TakeTest () {
   const { id } = useParams()
   useEffect(() => {
-    window.addEventListener('beforeunload', function (e) {
-      e.preventDefault()
-      //window.prompt('Напуштање или освежавање ове странице може довести до тога да 
-      //Ваши подаци у вези полагања теста не буду замапћени. Да ли сте сигурни да желите да
-      //наставите?')
+    window.addEventListener('locationchange', function () {
       axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+    })
+    window.addEventListener('beforeunload', event => {
+      event.preventDefault()
+      //axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+      return (event.returnValue = '')
     })
     axios
       .get(`http://localhost:3001/auth/checkLoginForTesting/${id}`)
