@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 
-function Registration () {
+function LoginForm (props) {
   const navigate = useNavigate()
   const initialValues = {
     first_name: '',
@@ -19,13 +19,21 @@ function Registration () {
     GSS_identification: Yup.string().required('Обавезно поље')
   })
   const onSubmit = data => {
-    axios.post('http://localhost:3001/auth', data).then(response => {
-      navigate(generatePath('/home'))
-    })
+    if (props.isRegestration)
+      axios
+        .post('http://localhost:3001/auth', data)
+        .then(() => navigate(generatePath('/')))
+    else
+      axios.post('http://localhost:3001/auth/login', data).then(response => {
+        if (response.data.loginSuccessful)
+          navigate(
+            generatePath(`${props.navigateToLocation}/${response.data.id}`)
+          )
+      })
   }
   return (
     <div>
-      <h1>Регистрација</h1>
+      <h1>{props.mainHeaderContent}</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -60,11 +68,18 @@ function Registration () {
             className='errorMessage'
           />
           <Field name='GSS_identification' />
-          <button type='submit'>Региструј се</button>
+          <button type='submit'>{props.submitButtonContent}</button>
         </Form>
       </Formik>
+      {!props.isRegestration && (
+        <h1>
+          Уколико немате налог кликните{' '}
+          <a href='http://localhost:3000/registration'>овде</a> да се
+          региструјете!
+        </h1>
+      )}
     </div>
   )
 }
 
-export default Registration
+export default LoginForm
