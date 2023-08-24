@@ -7,9 +7,6 @@ function TakeTest () {
   const { id } = useParams()
   const [loggedIn, setLoggedIn] = useState(false)
   useEffect(() => {
-    window.addEventListener('locationchange', function () {
-      axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
-    })
     window.addEventListener('beforeunload', event => {
       event.preventDefault()
       //axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)

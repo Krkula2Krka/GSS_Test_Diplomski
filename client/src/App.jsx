@@ -8,15 +8,17 @@ import Navbar from './components/navbar'
 import Home from './pages/home'
 import TakeTest from './pages/takeTest'
 import LoginForm from './components/loginForm'
+import ShowNavBar from './components/showNavBar'
+import Content from './components/Content'
 
 function App () {
   return (
-    <div>
+    <Content>
       <Router>
-        <div className='main'>
-          <div className='sidebar'>
+        <div>
+          <ShowNavBar>
             <Navbar />
-          </div>
+          </ShowNavBar>
           <div className='content'>
             <Routes>
               <Route path='/getAllAreas' element={<GetAllAreas />} />
@@ -31,7 +33,7 @@ function App () {
                     navigateToLocation='/takeTest'
                     mainHeaderContent='Унесите ваше податке да би сте наставили:'
                     isRegestration={false}
-                    submitButtonContent='Додај'
+                    submitButtonContent='Настави'
                   />
                 }
               />
@@ -51,7 +53,7 @@ function App () {
           </div>
         </div>
       </Router>
-    </div>
+    </Content>
   )
 }
 

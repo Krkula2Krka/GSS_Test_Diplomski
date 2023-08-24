@@ -7,12 +7,7 @@
   font-family: 'Lato', sans-serif;
 }
 
-.sidebar {
-  position: fixed;
-}
-
 .content {
-  padding-top: 2rem;
   padding-left: 6rem;
 }
 
