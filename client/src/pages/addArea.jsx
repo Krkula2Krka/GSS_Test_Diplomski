@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
+import Navbar from '../components/navbar'
 
 function AddArea () {
   const initialValues = {
@@ -22,6 +23,7 @@ function AddArea () {
   }
   return (
     <div>
+      <Navbar />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -29,7 +31,11 @@ function AddArea () {
       >
         <Form className='formContainer'>
           <label>Назив нове области: </label>
-          <ErrorMessage name='area_name' component='span' className='errorMessage' />
+          <ErrorMessage
+            name='area_name'
+            component='span'
+            className='errorMessage'
+          />
           <Field name='area_name' />
           <button type='submit'>Додај</button>
         </Form>

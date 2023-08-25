@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate, generatePath } from 'react-router-dom'
+import Navbar from '../components/navbar'
+import './css/home.css'
 
 function Home () {
   const navigate = useNavigate()
@@ -8,9 +10,10 @@ function Home () {
   }
   return (
     <div>
-      <button onClick={takeTest}>Полажи тест</button>
-      <button>Вежбање</button>
-      <button>Рад са базом</button>
+      <Navbar />
+      <button className="homeButton" onClick={takeTest}>Полажи тест</button>
+      <button className="homeButton">Вежбање</button>
+      <button className="homeButton">Рад са базом</button>
     </div>
   )
 }

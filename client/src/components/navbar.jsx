@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { SidebarData } from './sidebar_data'
-import './navbar.css'
+import './css/navbar.css'
+import { NavbarShownContext } from '../helper/context'
 
 function Navbar () {
-  const [sidebar, setSidebar] = useState(false)
+  const { navbarShown, setNavbarShown } = React.useContext(NavbarShownContext)
+  const [sidebar, setSidebar] = useState(navbarShown) // false for mobile screen
   const showSidebar = () => {
     setSidebar(!sidebar)
-    if (sidebar)
-      document.getElementsByClassName('content')[0].style.paddingLeft = '6rem'
-    else
-      document.getElementsByClassName('content')[0].style.paddingLeft = '18rem'
+    setNavbarShown(!navbarShown)
   }
   return (
     <div>

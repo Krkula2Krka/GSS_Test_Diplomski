@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
+import Navbar from '../components/navbar'
 
 function LoginForm (props) {
   const navigate = useNavigate()
@@ -33,6 +34,7 @@ function LoginForm (props) {
   }
   return (
     <div>
+      <Navbar />
       <h1>{props.mainHeaderContent}</h1>
       <Formik
         initialValues={initialValues}

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate, generatePath } from 'react-router-dom'
 import * as AiIcons from 'react-icons/ai'
+import Navbar from '../components/navbar'
 
 function GetAllAreas () {
   const [areas, setAreas] = useState([])
@@ -14,6 +15,7 @@ function GetAllAreas () {
   }, [])
   return (
     <div className='table'>
+      <Navbar />
       {areas.map((area, key) => {
         return (
           <div className='table-row' key={key}>

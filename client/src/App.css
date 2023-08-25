@@ -7,10 +7,6 @@
   font-family: 'Lato', sans-serif;
 }
 
-.content {
-  padding-left: 6rem;
-}
-
 .formContainer {
   display: flex;
   flex-direction: column;
