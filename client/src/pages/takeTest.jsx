@@ -2,32 +2,38 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import LeaveModal from '../components/leaveModal'
+import InfoModal from '../components/infoModal'
 
 function TakeTest () {
   const { id } = useParams()
   const [loggedIn, setLoggedIn] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(true)
+
   useEffect(() => {
-    window.onbeforeunload = () => {
-      //setModalOpen(true)
-      //return ''
+    const handleBeforeUnload = () => {
       axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+      return ''
     }
+    window.addEventListener('beforeunload', handleBeforeUnload)
     axios
       .get(`http://localhost:3001/auth/checkLoginForTesting/${id}`)
       .then(response => setLoggedIn(response.data.loggedIn))
-    return () => axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+    }
   }, [id])
   return (
     <div>
       {loggedIn ? (
         <div>
           <h1>Улоговани сте</h1>
-          {modalOpen && <LeaveModal setOpenModal={setModalOpen} />}
+          {modalOpen && <InfoModal setOpenModal={setModalOpen} />}
         </div>
       ) : (
-        <h1>Нисте улоговани</h1>
+        <div>
+          <h1>Нисте улоговани</h1>
+        </div>
       )}
     </div>
   )
