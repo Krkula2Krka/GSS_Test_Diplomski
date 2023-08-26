@@ -8,7 +8,7 @@ import { NavbarShownContext } from '../helper/context'
 
 function Navbar () {
   const { navbarShown, setNavbarShown } = React.useContext(NavbarShownContext)
-  const [sidebar, setSidebar] = useState(navbarShown) // false for mobile screen
+  const [sidebar, setSidebar] = useState(navbarShown)
   const showSidebar = () => {
     setSidebar(!sidebar)
     setNavbarShown(!navbarShown)

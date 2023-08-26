@@ -1,4 +1,4 @@
-import './App.css'
+import './css/App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import GetAllAreas from './pages/getAllAreas'
 import AddArea from './pages/addArea'
