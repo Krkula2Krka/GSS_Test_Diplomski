@@ -3,26 +3,46 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import InfoModal from '../components/infoModal'
+import useUnloadConditionally from '../components/hooks/useUnloadConditionally'
+import useOnWindowResizeConditionally from '../components/hooks/useOnWindowResizeConditionally'
+import useVisibilityChangeConditionally from '../components/hooks/useVisibilityChangeConditionally'
+import useDisableBackButton from '../components/hooks/useDisableBackButton'
 
-function TakeTest () {
+function TakeTest ({ navigation }) {
   const { id } = useParams()
   const [loggedIn, setLoggedIn] = useState(false)
   const [modalOpen, setModalOpen] = useState(true)
 
+  useDisableBackButton()
+
+  useVisibilityChangeConditionally(() => {
+    // comment out when in developing phase, but uncommented when in production phase
+    axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+    setLoggedIn(false)
+  }, loggedIn)
+
+  useOnWindowResizeConditionally(() => {
+    axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+    setLoggedIn(false)
+  }, loggedIn)
+
+  useUnloadConditionally(event => {
+    event.preventDefault()
+    axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+    event.returnValue = ''
+  }, loggedIn)
+
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
-      return ''
-    }
-    window.addEventListener('beforeunload', handleBeforeUnload)
+    /*window.history.pushState(null, null, window.location.href)
+    window.onpopstate = function () {
+      window.history.go(1)
+    }*/
     axios
       .get(`http://localhost:3001/auth/checkLoginForTesting/${id}`)
       .then(response => setLoggedIn(response.data.loggedIn))
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-      axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
-    }
+    return () => axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
   }, [id])
+
   return (
     <div>
       {loggedIn ? (
