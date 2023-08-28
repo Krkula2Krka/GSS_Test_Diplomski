@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Navbar from '../components/navbar'
 
-function AreaDetails () {
+export const AreaDetails = () => {
   const { id } = useParams()
   const [questionObjects, setQuestionObjects] = useState([])
   useEffect(() => {
@@ -21,5 +21,3 @@ function AreaDetails () {
     </div>
   )
 }
-
-export default AreaDetails

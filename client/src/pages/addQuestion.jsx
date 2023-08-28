@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import Navbar from '../components/navbar'
 
-function AddQuestion () {
+export const AddQuestion = () => {
   const navigate = useNavigate()
   const [areas, setAreas] = useState([])
   useEffect(() => {
@@ -89,5 +89,3 @@ function AddQuestion () {
     </div>
   )
 }
-
-export default AddQuestion

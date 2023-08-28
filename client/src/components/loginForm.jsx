@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import Navbar from '../components/navbar'
 
-function LoginForm (props) {
+export const LoginForm = (props) => {
   const navigate = useNavigate()
   const initialValues = {
     first_name: '',
@@ -83,5 +83,3 @@ function LoginForm (props) {
     </div>
   )
 }
-
-export default LoginForm

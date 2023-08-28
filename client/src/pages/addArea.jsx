@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import Navbar from '../components/navbar'
 
-function AddArea () {
+export const AddArea = () => {
   const initialValues = {
     area_name: ''
   }
@@ -43,5 +43,3 @@ function AddArea () {
     </div>
   )
 }
-
-export default AddArea

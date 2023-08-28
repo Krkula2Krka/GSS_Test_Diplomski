@@ -3,7 +3,7 @@ import { useNavigate, generatePath } from 'react-router-dom'
 import Navbar from '../components/navbar'
 import './css/home.css'
 
-function Home () {
+export const Home =  () => {
   const navigate = useNavigate()
   const takeTest = () => {
     navigate(generatePath('/credentialsForTest'))
@@ -17,5 +17,3 @@ function Home () {
     </div>
   )
 }
-
-export default Home

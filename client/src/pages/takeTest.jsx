@@ -8,7 +8,7 @@ import useOnWindowResizeConditionally from '../components/hooks/useOnWindowResiz
 import useVisibilityChangeConditionally from '../components/hooks/useVisibilityChangeConditionally'
 import useDisableBackButton from '../components/hooks/useDisableBackButton'
 
-function TakeTest ({ navigation }) {
+export const TakeTest = () => {
   const { id } = useParams()
   const [loggedIn, setLoggedIn] = useState(false)
   const [modalOpen, setModalOpen] = useState(true)
@@ -33,10 +33,6 @@ function TakeTest ({ navigation }) {
   }, loggedIn)
 
   useEffect(() => {
-    /*window.history.pushState(null, null, window.location.href)
-    window.onpopstate = function () {
-      window.history.go(1)
-    }*/
     axios
       .get(`http://localhost:3001/auth/checkLoginForTesting/${id}`)
       .then(response => setLoggedIn(response.data.loggedIn))
@@ -58,5 +54,3 @@ function TakeTest ({ navigation }) {
     </div>
   )
 }
-
-export default TakeTest

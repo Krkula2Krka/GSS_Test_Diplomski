@@ -5,7 +5,7 @@ import { useNavigate, generatePath } from 'react-router-dom'
 import * as AiIcons from 'react-icons/ai'
 import Navbar from '../components/navbar'
 
-function GetAllAreas () {
+export const GetAllAreas =  () => {
   const [areas, setAreas] = useState([])
   const navigate = useNavigate()
   useEffect(() => {
@@ -36,5 +36,3 @@ function GetAllAreas () {
     </div>
   )
 }
-
-export default GetAllAreas
