@@ -1,24 +1,25 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useLoaderData, useNavigation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import InfoModal from '../components/infoModal'
 import useUnloadConditionally from '../components/hooks/useUnloadConditionally'
 import useOnWindowResizeConditionally from '../components/hooks/useOnWindowResizeConditionally'
 import useVisibilityChangeConditionally from '../components/hooks/useVisibilityChangeConditionally'
-import useDisableBackButton from '../components/hooks/useDisableBackButton'
+import useDisableBackButtonConditionally from '../components/hooks/useDisableBackButtonConditionally'
 
 export const TakeTest = () => {
+  const navigation = useNavigation()
   const { id } = useParams()
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(useLoaderData())
   const [modalOpen, setModalOpen] = useState(true)
 
-  useDisableBackButton()
+  useDisableBackButtonConditionally(loggedIn)
 
   useVisibilityChangeConditionally(() => {
     // comment out when in developing phase, but uncommented when in production phase
-    axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
-    setLoggedIn(false)
+    //axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
+    //setLoggedIn(false)
   }, loggedIn)
 
   useOnWindowResizeConditionally(() => {
@@ -26,18 +27,19 @@ export const TakeTest = () => {
     setLoggedIn(false)
   }, loggedIn)
 
-  useUnloadConditionally(event => {
-    event.preventDefault()
-    axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
-    event.returnValue = ''
-  }, loggedIn)
+  // put given answers andquestions in local storage, then retrive it in mounting phase
+  useUnloadConditionally(
+    () => axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`),
+    loggedIn
+  )
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/auth/checkLoginForTesting/${id}`)
-      .then(response => setLoggedIn(response.data.loggedIn))
     return () => axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`)
   }, [id])
+
+  if (navigation.state === 'loading') {
+    return <div>Loading...</div>
+  }
 
   return (
     <div>
@@ -53,4 +55,13 @@ export const TakeTest = () => {
       )}
     </div>
   )
+}
+
+export const checkLoginForTesting = async (req, _) => {
+  const id = req.params.id
+  const res = await fetch(
+    `http://localhost:3001/auth/checkLoginForTesting/${id}`
+  )
+  const data = await res.json()
+  return data.loggedIn
 }

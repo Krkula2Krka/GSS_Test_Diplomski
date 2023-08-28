@@ -13,7 +13,7 @@ import { LoginForm } from './components/loginForm'
 import { Root } from './components/root'
 
 // Pages
-import { TakeTest } from './pages/takeTest'
+import { TakeTest, checkLoginForTesting } from './pages/takeTest'
 import { AreaDetails } from './pages/areaDetails'
 import { AddQuestion } from './pages/addQuestion'
 import { AddArea } from './pages/addArea'
@@ -32,7 +32,7 @@ export const App = () => {
         <Route path='/addArea' element={<AddArea />} />
         <Route path='/addQuestion' element={<AddQuestion />} />
         <Route path='/areaDetails/:id' element={<AreaDetails />} />
-        <Route path='/takeTest/:id' element={<TakeTest />} />
+        <Route path='/takeTest/:id' element={<TakeTest />} loader={checkLoginForTesting} />
         <Route
           path='/credentialsForTest'
           element={
