@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, generatePath } from 'react-router-dom'
-import Navbar from '../components/navbar'
+import { Navbar } from '../components/navbar'
 import './css/home.css'
 
 export const Home =  () => {

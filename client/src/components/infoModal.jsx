@@ -1,7 +1,7 @@
 import React from 'react'
 import './css/infoModal.css'
 
-function InfoModal ({ setOpenModal }) {
+export const InfoModal = ({ setOpenModal }) => {
   return (
     <div>
       <div className='modalBackground'>
@@ -22,5 +22,3 @@ function InfoModal ({ setOpenModal }) {
     </div>
   )
 }
-
-export default InfoModal

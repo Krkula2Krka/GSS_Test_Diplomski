@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate, generatePath } from 'react-router-dom'
 import * as AiIcons from 'react-icons/ai'
-import Navbar from '../components/navbar'
+import { Navbar } from '../components/navbar'
 
 export const GetAllAreas =  () => {
   const [areas, setAreas] = useState([])

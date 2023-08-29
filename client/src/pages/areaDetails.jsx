@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Navbar from '../components/navbar'
+import { Navbar } from '../components/navbar'
 
 export const AreaDetails = () => {
   const { id } = useParams()

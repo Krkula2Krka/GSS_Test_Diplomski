@@ -6,7 +6,7 @@ import { SidebarData } from './sidebar_data'
 import './css/navbar.css'
 import { NavbarShownContext } from '../helper/context'
 
-function Navbar () {
+export const Navbar = () => {
   const { navbarShown, setNavbarShown } = React.useContext(NavbarShownContext)
   const [sidebar, setSidebar] = useState(navbarShown)
   const showSidebar = () => {
@@ -42,5 +42,3 @@ function Navbar () {
     </div>
   )
 }
-
-export default Navbar

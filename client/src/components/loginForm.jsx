@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
-import Navbar from '../components/navbar'
+import { Navbar } from '../components/navbar'
 
 export const LoginForm = (props) => {
   const navigate = useNavigate()
