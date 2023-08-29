@@ -1,5 +1,7 @@
 import './css/App.css'
 import { NavbarShownContext } from './helper/context'
+
+// Libraries
 import { useState } from 'react'
 import {
   createBrowserRouter,
@@ -7,6 +9,7 @@ import {
   Route,
   RouterProvider
 } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 // Components
 import { LoginForm } from './components/loginForm'
@@ -21,7 +24,6 @@ import { GetAllAreas } from './pages/getAllAreas'
 import { Home } from './pages/home'
 
 export const App = () => {
-
   const [navbarShown, setNavbarShown] = useState(false)
 
   const router = createBrowserRouter(
@@ -32,7 +34,11 @@ export const App = () => {
         <Route path='/addArea' element={<AddArea />} />
         <Route path='/addQuestion' element={<AddQuestion />} />
         <Route path='/areaDetails/:id' element={<AreaDetails />} />
-        <Route path='/takeTest/:id' element={<TakeTest />} loader={checkLoginForTesting} />
+        <Route
+          path='/takeTest/:id'
+          element={<TakeTest />}
+          loader={checkLoginForTesting}
+        />
         <Route
           path='/credentialsForTest'
           element={
@@ -60,8 +66,14 @@ export const App = () => {
   )
 
   return (
-    <NavbarShownContext.Provider value={{ navbarShown, setNavbarShown }}>
-      <RouterProvider router={router} />
-    </NavbarShownContext.Provider>
+    <QueryClientProvider client={new QueryClient({defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false
+      }
+    }})}>
+      <NavbarShownContext.Provider value={{ navbarShown, setNavbarShown }}>
+        <RouterProvider router={router} />
+      </NavbarShownContext.Provider>
+    </QueryClientProvider>
   )
 }

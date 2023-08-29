@@ -1,19 +1,19 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import { Navbar } from '../components/navbar'
+import { useQuery } from 'react-query'
 
 export const AddQuestion = () => {
+  const { data: areas, isLoading, isFetching, isError } = useQuery('areas', () => {
+    return axios
+      .get('http://localhost:3001/areas')
+      .then(response => response.data)
+  })
+
   const navigate = useNavigate()
-  const [areas, setAreas] = useState([])
-  useEffect(() => {
-    axios.get('http://localhost:3001/areas').then(response => {
-      setAreas(response.data)
-    })
-  }, [])
 
   const validationSchema = Yup.object().shape({
     question_text: Yup.string().required('Обавезно поље'),
@@ -34,6 +34,28 @@ export const AddQuestion = () => {
     area_id: '1',
     importance: '1'
   }
+
+  if (isError) {
+    return <div>Došlo je do greške...</div>
+  }
+
+  /*
+  isLoading - When true, indicates that the query is currently loading for 
+  the first time, and has no data yet. This will be true for the first request 
+  fired off, but not for subsequent requests. isFetching - When true, indicates 
+  that the query is currently fetching, but might have data from an earlier request
+  */
+
+  // add refetch function of React Query to takeTest page instead of state
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (isFetching) {
+    return <div>Fetching...</div>
+  }
+
   return (
     <div>
       <Navbar />
@@ -69,7 +91,9 @@ export const AddQuestion = () => {
           />
           <Field as='select' name='area_id'>
             {areas.map(({ id, area_name }) => (
-              <option value={id}>{area_name}</option>
+              <option key={id} value={id}>
+                {area_name}
+              </option>
             ))}
           </Field>
           <label>Важност питања: </label>
