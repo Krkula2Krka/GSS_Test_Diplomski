@@ -5,9 +5,7 @@ import './css/home.css'
 
 export const Home =  () => {
   const navigate = useNavigate()
-  const takeTest = () => {
-    navigate(generatePath('/credentialsForTest'))
-  }
+  const takeTest = () => navigate(generatePath('/credentialsForTest'))
   return (
     <div>
       <Navbar />

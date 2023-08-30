@@ -4,14 +4,10 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import { Navbar } from '../components/navbar'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 export const AddQuestion = () => {
-  const { data: areas, isLoading, isFetching, isError } = useQuery('areas', () => {
-    return axios
-      .get('http://localhost:3001/areas')
-      .then(response => response.data)
-  })
+  const { data: areas } = useQuery(getAllAreas())
 
   const navigate = useNavigate()
 
@@ -33,27 +29,6 @@ export const AddQuestion = () => {
     difficulty: '1',
     area_id: '1',
     importance: '1'
-  }
-
-  if (isError) {
-    return <div>Došlo je do greške...</div>
-  }
-
-  /*
-  isLoading - When true, indicates that the query is currently loading for 
-  the first time, and has no data yet. This will be true for the first request 
-  fired off, but not for subsequent requests. isFetching - When true, indicates 
-  that the query is currently fetching, but might have data from an earlier request
-  */
-
-  // add refetch function of React Query to takeTest page instead of state
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (isFetching) {
-    return <div>Fetching...</div>
   }
 
   return (
@@ -112,4 +87,18 @@ export const AddQuestion = () => {
       </Formik>
     </div>
   )
+}
+
+const getAllAreas = () => ({
+  queryKey: ['areas'],
+  queryFn: () => {
+    return axios
+      .get('http://localhost:3001/areas')
+      .then(response => response.data)
+  }
+})
+
+export const areasLoader = queryClient => async () => {
+  const query = getAllAreas()
+  return queryClient.getQueryData(query) ?? await queryClient.fetchQuery(query)
 }
