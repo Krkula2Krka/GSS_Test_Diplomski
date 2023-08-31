@@ -2,9 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Navbar } from '../components/navbar'
 
-export const AreaDetails = () => {
+export const AreaDetails = ({children}) => {
   const { id } = useParams()
   const [questionObjects, setQuestionObjects] = useState([])
   useEffect(() => {
@@ -14,7 +13,7 @@ export const AreaDetails = () => {
   }, [id])
   return (
     <div>
-      <Navbar />
+      {children}
       {questionObjects.map(questionObject => {
         return <div>{questionObject.question_text}</div>
       })}

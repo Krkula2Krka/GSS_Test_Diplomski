@@ -3,10 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
-import { Navbar } from '../components/navbar'
 import { useQuery } from '@tanstack/react-query'
 
-export const AddQuestion = () => {
+export const AddQuestion = ({children}) => {
   const { data: areas } = useQuery(getAllAreas())
 
   const navigate = useNavigate()
@@ -33,7 +32,7 @@ export const AddQuestion = () => {
 
   return (
     <div>
-      <Navbar />
+      {children}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
