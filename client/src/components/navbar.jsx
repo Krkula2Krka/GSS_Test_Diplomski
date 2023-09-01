@@ -1,24 +1,24 @@
-import React, { memo, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { SidebarData } from './sidebar_data'
 import './css/navbar.css'
-import { NavbarShownContext } from '../helper/context'
 
 export const Navbar = () => {
-  const { navbarShown, setNavbarShown } = useContext(NavbarShownContext)
-  console.log('Navbar Rendered')
+
+  const [sidebar, setSidebar] = useState(false)
+
   return (
     <div>
       <div className='navbar'>
         <Link to='#' className='menu-bars'>
-          <FaIcons.FaBars onClick={() => setNavbarShown(true)} />
+          <FaIcons.FaBars onClick={() => setSidebar(true)} />
         </Link>
       </div>
-      <nav className={navbarShown ? 'nav-menu active' : 'nav-menu'}>
+      <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
         <ul className='nav-menu-items'>
-          <li className='navbar-toggle' onClick={() => setNavbarShown(false)}>
+          <li className='navbar-toggle' onClick={() => setSidebar(false)}>
             <Link to='#' className='menu-bars'>
               <AiIcons.AiOutlineClose />
             </Link>
@@ -38,5 +38,3 @@ export const Navbar = () => {
     </div>
   )
 }
-
-export const NavbarMemo = memo(Navbar)

@@ -4,7 +4,6 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { NavbarMemo } from '../components/navbar'
 
 export const AddQuestion = () => {
   const { data: areas } = useQuery(getAllAreas())
@@ -33,7 +32,6 @@ export const AddQuestion = () => {
 
   return (
     <div>
-      <NavbarMemo />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

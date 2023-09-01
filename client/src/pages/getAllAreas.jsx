@@ -3,9 +3,8 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate, generatePath } from 'react-router-dom'
 import * as AiIcons from 'react-icons/ai'
-import { NavbarMemo } from '../components/navbar'
 
-export const GetAllAreas =  ({children}) => {
+export const GetAllAreas = () => {
   const [areas, setAreas] = useState([])
   const navigate = useNavigate()
   useEffect(() => {
@@ -15,7 +14,6 @@ export const GetAllAreas =  ({children}) => {
   }, [])
   return (
     <div className='table'>
-      <NavbarMemo />
       {areas.map((area, key) => {
         return (
           <div className='table-row' key={key}>

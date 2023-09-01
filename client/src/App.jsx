@@ -1,8 +1,6 @@
 import './css/App.css'
-import { NavbarShownContext } from './helper/context'
 
 // Libraries
-import { useState } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -19,8 +17,6 @@ import { GetAllAreas } from './pages/getAllAreas'
 import { Home } from './pages/home'
 
 export const App = () => {
-  const [navbarShown, setNavbarShown] = useState(false)
-
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -56,11 +52,6 @@ export const App = () => {
           element: <AreaDetails />
         },
         {
-          path: '/takeTest/:id',
-          element: <TakeTest />,
-          loader: loggedInLoader(queryClient)
-        },
-        {
           path: '/credentialsForTest',
           element: (
             <LoginForm
@@ -83,14 +74,17 @@ export const App = () => {
           )
         }
       ]
+    },
+    {
+      path: '/takeTest/:id',
+      element: <TakeTest />,
+      loader: loggedInLoader(queryClient)
     }
   ])
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NavbarShownContext.Provider value={{ navbarShown, setNavbarShown }}>
-        <RouterProvider router={router} />
-      </NavbarShownContext.Provider>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   )
 }

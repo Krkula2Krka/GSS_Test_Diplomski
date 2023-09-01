@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
-import { NavbarMemo } from '../components/navbar'
 
 export const AddArea = () => {
   const initialValues = {
@@ -23,7 +22,6 @@ export const AddArea = () => {
   }
   return (
     <div>
-      <NavbarMemo />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
