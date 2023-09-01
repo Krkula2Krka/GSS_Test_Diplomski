@@ -2,9 +2,10 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
-import { useNavigate, generatePath } from 'react-router-dom'
+import { useNavigate, generatePath, Link } from 'react-router-dom'
+import './css/loginForm.css'
 
-export const LoginForm = (props) => {
+export const LoginForm = props => {
   const navigate = useNavigate()
   const initialValues = {
     first_name: '',
@@ -73,8 +74,8 @@ export const LoginForm = (props) => {
       </Formik>
       {!props.isRegestration && (
         <h1>
-          Уколико немате налог кликните{' '}
-          <a href='http://localhost:3000/registration'>овде</a> да се
+          Уколико немате налог кликните да 
+          се <Link to='/registration' className='link'>овде</Link>{' '}
           региструјете!
         </h1>
       )}
