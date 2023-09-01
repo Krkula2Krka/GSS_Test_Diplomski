@@ -6,6 +6,7 @@ import './css/home.css'
 export const Home =  () => {
   const navigate = useNavigate()
   const takeTest = () => navigate(generatePath('/credentialsForTest'))
+  console.log('Home Rendered')
   return (
     <div>
       <NavbarMemo />
