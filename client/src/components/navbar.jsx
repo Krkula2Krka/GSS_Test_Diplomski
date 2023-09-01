@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
@@ -42,3 +42,5 @@ export const Navbar = () => {
     </div>
   )
 }
+
+export const NavbarMemo = memo(Navbar)

@@ -17,7 +17,6 @@ import { AddQuestion, areasLoader } from './pages/addQuestion'
 import { AddArea } from './pages/addArea'
 import { GetAllAreas } from './pages/getAllAreas'
 import { Home } from './pages/home'
-import { Navbar } from './components/navbar'
 
 export const App = () => {
   const [navbarShown, setNavbarShown] = useState(false)
@@ -37,44 +36,24 @@ export const App = () => {
       children: [
         {
           index: true,
-          element: (
-            <Home>
-              <Navbar />
-            </Home>
-          )
+          element: <Home />
         },
         {
           path: '/getAllAreas',
-          element: (
-            <GetAllAreas>
-              <Navbar />
-            </GetAllAreas>
-          )
+          element: <GetAllAreas />
         },
         {
           path: '/addArea',
-          element: (
-            <AddArea>
-              <Navbar />
-            </AddArea>
-          )
+          element: <AddArea />
         },
         {
           path: '/addQuestion',
-          element: (
-            <AddQuestion>
-              <Navbar />
-            </AddQuestion>
-          ),
+          element: <AddQuestion />,
           loader: areasLoader(queryClient)
         },
         {
           path: '/areaDetails/:id',
-          element: (
-            <AreaDetails>
-              <Navbar />
-            </AreaDetails>
-          )
+          element: <AreaDetails />
         },
         {
           path: '/takeTest/:id',
@@ -89,9 +68,7 @@ export const App = () => {
               mainHeaderContent='Унесите ваше податке да би сте наставили:'
               isRegestration={false}
               submitButtonContent='Настави'
-            >
-              <Navbar />
-            </LoginForm>
+            />
           )
         },
         {
@@ -102,9 +79,7 @@ export const App = () => {
               mainHeaderContent='Регистрација:'
               isRegestration={true}
               submitButtonContent='Региструј се'
-            >
-              <Navbar />
-            </LoginForm>
+            />
           )
         }
       ]
