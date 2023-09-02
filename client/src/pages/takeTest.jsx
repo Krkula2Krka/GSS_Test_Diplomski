@@ -9,8 +9,11 @@ import useDisableBackButtonConditionally from '../components/hooks/useDisableBac
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const TakeTest = () => {
-  const queryClient = useQueryClient()
   const { id } = useParams()
+
+  console.log('rendered')
+
+  const queryClient = useQueryClient()
   const { data: loggedIn } = useQuery(checkLoginForTesting(id))
 
   const { mutateAsync: logoutForTesting } = useMutation({
@@ -29,7 +32,7 @@ export const TakeTest = () => {
     // await logoutForTesting()
   }, loggedIn)
 
-  useOnWindowResizeConditionally( async () => {
+  useOnWindowResizeConditionally(async () => {
     await logoutForTesting()
   }, loggedIn)
 
@@ -57,7 +60,10 @@ const checkLoginForTesting = id => ({
   queryFn: () => {
     return axios
       .get(`http://localhost:3001/auth/checkLoginForTesting/${id}`)
-      .then(response => response.data.loggedIn)
+      .then(response => {
+        console.log('query ' + response.data.loggedIn)
+        return response.data.loggedIn
+      })
   }
 })
 
@@ -66,6 +72,7 @@ export const loggedInLoader =
   async ({ id }) => {
     const query = checkLoginForTesting(id)
     return (
-      queryClient.getQueryData(query) ?? (await queryClient.fetchQuery(query))
+      (await queryClient.getQueryData(query)) ??
+      (await queryClient.fetchQuery(query))
     )
   }

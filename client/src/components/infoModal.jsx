@@ -1,7 +1,8 @@
 import React from 'react'
 import './css/infoModal.css'
+import { memo } from 'react'
 
-export const InfoModal = ({ setOpenModal }) => {
+export const InfoModal = memo(({ setOpenModal }) => {
   return (
     <div>
       <div className='modalBackground'>
@@ -21,4 +22,4 @@ export const InfoModal = ({ setOpenModal }) => {
       </div>
     </div>
   )
-}
+})
