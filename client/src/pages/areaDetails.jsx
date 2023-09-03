@@ -1,26 +1,42 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 
-export const AreaDetails = () => {
-  const { id } = useParams()
+const getQuestionsForArea = id => ({
+  queryKey: ['questions', id],
+  queryFn: async () => {
+    const res = await fetch(`http://localhost:3001/questions/${id}`)
+    const data = await res.json()
+    return data
+  }
+})
 
-  const { data: questions, isLoading } = useQuery({
-    queryKey: ['questions', { id }],
-    queryFn: () => {
-      return axios.get(`http://localhost:3001/questions/${id}`)
-    }
-  })
-
-  if (isLoading) {
-    return <div>Loading...</div>
+export const questionsLoader =
+  queryClient =>
+  async ({ params }) => {
+    const query = getQuestionsForArea(params.id)
+    return await queryClient.ensureQueryData({
+      queryKey: query.queryKey,
+      queryFn: query.queryFn
+    })
   }
 
+export const AreaDetails = () => {
+  
+  const { id } = useParams()
+
+  const { data: questions } = useQuery(getQuestionsForArea(id))
+
+  console.log(questions)
+
   return (
-    <div>
-      {questions.data.map(question => {
-        return <div key={question.id}>{question.question_text}</div>
+    <div className='table'>
+      {questions.map((question, key) => {
+        return (
+          <div className='table-row' key={key}>
+            <h1>{question.question_text}</h1>
+          </div>
+        )
       })}
     </div>
   )

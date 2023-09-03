@@ -16,10 +16,11 @@ export const AddArea = () => {
   })
 
   const onSubmit = data => {
-    axios.post('http://localhost:3001/areas', data).then(response => {
+    axios.post('http://localhost:3001/areas', data).then(() => {
       navigate(generatePath('/getAllAreas'))
     })
   }
+  
   return (
     <div>
       <Formik

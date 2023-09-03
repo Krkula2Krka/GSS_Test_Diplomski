@@ -10,10 +10,10 @@ import { Root } from './components/root'
 
 // Pages
 import { TakeTest, loggedInLoader } from './pages/takeTest'
-import { AreaDetails } from './pages/areaDetails'
-import { AddQuestion, areasLoader } from './pages/addQuestion'
+import { AreaDetails, questionsLoader } from './pages/areaDetails'
+import { AddQuestion } from './pages/addQuestion'
 import { AddArea } from './pages/addArea'
-import { GetAllAreas } from './pages/getAllAreas'
+import { GetAllAreas, areasLoader } from './pages/getAllAreas'
 import { Home } from './pages/home'
 
 export const App = () => {
@@ -36,7 +36,8 @@ export const App = () => {
         },
         {
           path: '/getAllAreas',
-          element: <GetAllAreas />
+          element: <GetAllAreas />,
+          loader: areasLoader(queryClient)
         },
         {
           path: '/addArea',
@@ -49,7 +50,8 @@ export const App = () => {
         },
         {
           path: '/areaDetails/:id',
-          element: <AreaDetails />
+          element: <AreaDetails />,
+          loader: questionsLoader(queryClient)
         },
         {
           path: '/credentialsForTest',

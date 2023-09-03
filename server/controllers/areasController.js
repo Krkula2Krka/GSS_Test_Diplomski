@@ -4,7 +4,7 @@ const {
   getAreaByIdInService
 } = require('../service/areasService')
 
-const getAllAreasInController = async (req, res) => {
+const getAllAreasInController = async (_, res) => {
   const areas = await getAllAreasInService()
   res.json(areas)
 }

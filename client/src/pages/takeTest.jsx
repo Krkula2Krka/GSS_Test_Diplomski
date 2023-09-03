@@ -8,18 +8,38 @@ import useVisibilityChangeConditionally from '../components/hooks/useVisibilityC
 import useDisableBackButtonConditionally from '../components/hooks/useDisableBackButtonConditionally'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
+const checkLoginForTesting = id => ({
+  queryKey: ['loggedIn', id],
+  queryFn: async () => {
+    const res = await fetch(
+      `http://localhost:3001/auth/checkLoginForTesting/${id}`
+    )
+    const data = await res.json()
+    return data.loggedIn
+  }
+})
+
+export const loggedInLoader =
+  queryClient =>
+  async ({ params }) => {
+    const query = checkLoginForTesting(params.id)
+    return await queryClient.ensureQueryData({
+      queryKey: query.queryKey,
+      queryFn: query.queryFn
+    })
+  }
+
 export const TakeTest = () => {
+
   const { id } = useParams()
 
-  console.log('rendered')
-
-  const queryClient = useQueryClient()
+  
   const { data: loggedIn } = useQuery(checkLoginForTesting(id))
-
+  const queryClient = useQueryClient()
   const { mutateAsync: logoutForTesting } = useMutation({
     mutationFn: () =>
       axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`),
-    onSuccess: () => queryClient.invalidateQueries(['loggedIn', { id }]),
+    onSuccess: () => queryClient.invalidateQueries(['loggedIn', id]),
     onError: () => console.log('error in logoutForTesting mutation')
   })
 
@@ -36,7 +56,6 @@ export const TakeTest = () => {
     await logoutForTesting()
   }, loggedIn)
 
-  // put given answers andquestions in local storage, then retrive it in mounting phase
   useUnloadConditionally(async () => await logoutForTesting(), loggedIn)
 
   return (
@@ -54,25 +73,3 @@ export const TakeTest = () => {
     </div>
   )
 }
-
-const checkLoginForTesting = id => ({
-  queryKey: ['loggedIn', { id }],
-  queryFn: () => {
-    return axios
-      .get(`http://localhost:3001/auth/checkLoginForTesting/${id}`)
-      .then(response => {
-        console.log('query ' + response.data.loggedIn)
-        return response.data.loggedIn
-      })
-  }
-})
-
-export const loggedInLoader =
-  queryClient =>
-  async ({ id }) => {
-    const query = checkLoginForTesting(id)
-    return (
-      (await queryClient.getQueryData(query)) ??
-      (await queryClient.fetchQuery(query))
-    )
-  }

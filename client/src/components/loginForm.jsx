@@ -6,19 +6,23 @@ import { useNavigate, generatePath, Link } from 'react-router-dom'
 import './css/loginForm.css'
 
 export const LoginForm = props => {
+
   const navigate = useNavigate()
+
   const initialValues = {
     first_name: '',
     last_name: '',
     nickname: '',
     GSS_identification: ''
   }
+
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required('Обавезно поље'),
     last_name: Yup.string().required('Обавезно поље'),
     nickname: Yup.string().required('Обавезно поље'),
     GSS_identification: Yup.string().required('Обавезно поље')
   })
+
   const onSubmit = data => {
     if (props.isRegestration)
       axios
@@ -32,6 +36,7 @@ export const LoginForm = props => {
           )
       })
   }
+  
   return (
     <div>
       <h1>{props.mainHeaderContent}</h1>

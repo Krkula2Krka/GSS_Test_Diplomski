@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { SidebarData } from './sidebar_data'
-import './css/navbar.css'
+import './css/sidebar.css'
 
-export const Navbar = () => {
+export const Sidebar = () => {
 
   const [sidebar, setSidebar] = useState(false)
 
