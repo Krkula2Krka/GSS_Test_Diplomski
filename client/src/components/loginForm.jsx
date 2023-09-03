@@ -6,7 +6,6 @@ import { useNavigate, generatePath, Link } from 'react-router-dom'
 import './css/loginForm.css'
 
 export const LoginForm = props => {
-
   const navigate = useNavigate()
 
   const initialValues = {
@@ -15,6 +14,8 @@ export const LoginForm = props => {
     nickname: '',
     GSS_identification: ''
   }
+
+  console.log('login form rendered')
 
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required('Обавезно поље'),
@@ -36,16 +37,16 @@ export const LoginForm = props => {
           )
       })
   }
-  
+
   return (
     <div>
-      <h1>{props.mainHeaderContent}</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
         <Form className='formContainer'>
+          <h1>{props.mainHeaderContent}</h1>
           <label>Име: </label>
           <ErrorMessage
             name='first_name'
@@ -75,15 +76,17 @@ export const LoginForm = props => {
           />
           <Field name='GSS_identification' />
           <button type='submit'>{props.submitButtonContent}</button>
+          {!props.isRegestration && (
+            <h1>
+              Уколико немате налог кликните да се{' '}
+              <Link to='/registration' className='link'>
+                овде
+              </Link>{' '}
+              региструјете!
+            </h1>
+          )}
         </Form>
       </Formik>
-      {!props.isRegestration && (
-        <h1>
-          Уколико немате налог кликните да 
-          се <Link to='/registration' className='link'>овде</Link>{' '}
-          региструјете!
-        </h1>
-      )}
     </div>
   )
 }

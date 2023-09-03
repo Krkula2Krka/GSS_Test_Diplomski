@@ -20,10 +20,13 @@ export const AddArea = () => {
       navigate(generatePath('/getAllAreas'))
     })
   }
+
+  console.log('add area rendered')
   
   return (
     <div>
       <Formik
+        className='centtralized'
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}

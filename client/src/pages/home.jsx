@@ -1,17 +1,14 @@
 import React from 'react'
-import { useNavigate, generatePath } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './css/home.css'
 
 export const Home =  () => {
   
-  const navigate = useNavigate()
-  const takeTest = () => navigate(generatePath('/credentialsForTest'))
-  
   return (
     <div>
-      <button className="homeButton" onClick={takeTest}>Полажи тест</button>
-      <button className="homeButton">Вежбање</button>
-      <button className="homeButton">Рад са базом</button>
+      <Link to='/credentialsForTest' className='homeLink'>Полажи тест</Link>
+      <Link className='homeLink'>Вежбање</Link>
+      <Link className='homeLink'>Рад са базом</Link>
     </div>
   )
 }

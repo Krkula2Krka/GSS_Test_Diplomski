@@ -1,4 +1,4 @@
-.homeButton {
+.homeLink {
     background-color: #060b26;
     color: white;
     padding: 14px 20px;
@@ -14,4 +14,6 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    text-decoration: none;
+    text-align: center;
 }
