@@ -7,6 +7,12 @@
   margin-top: 0%;
 }
 
+.menu-bars:hover {
+  color: #1a83ff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
