@@ -25,8 +25,6 @@ export const AddQuestion = () => {
 
   const navigate = useNavigate()
 
-  console.log('add question rendered')
-
   const validationSchema = Yup.object().shape({
     question_text: Yup.string().required('Обавезно поље'),
     difficulty: Yup.number(),

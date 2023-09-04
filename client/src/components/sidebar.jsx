@@ -11,17 +11,17 @@ export const Sidebar = () => {
 
   return (
     <div>
-      <div className='navbar'>
-        <Link to='#' className='menu-bars'>
+      <div className='sidebar'>
+        <div className='menu-bars'>
           <FaIcons.FaBars onClick={() => setSidebar(true)} />
-        </Link>
+        </div>
       </div>
       <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
         <ul className='nav-menu-items'>
           <li className='navbar-toggle' onClick={() => setSidebar(false)}>
-            <Link to='#' className='menu-bars'>
+            <div className='menu-bars'>
               <AiIcons.AiOutlineClose />
-            </Link>
+            </div>
           </li>
           {SidebarData.map((item, index) => {
             return (

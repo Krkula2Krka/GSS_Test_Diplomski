@@ -20,8 +20,6 @@ export const AddArea = () => {
       navigate(generatePath('/getAllAreas'))
     })
   }
-
-  console.log('add area rendered')
   
   return (
     <div>

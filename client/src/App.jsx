@@ -17,6 +17,7 @@ import { GetAllAreas, areasLoader } from './pages/getAllAreas'
 import { Home } from './pages/home'
 
 export const App = () => {
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {

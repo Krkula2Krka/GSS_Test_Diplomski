@@ -27,8 +27,6 @@ export const AreaDetails = () => {
 
   const { data: questions } = useQuery(getQuestionsForArea(id))
 
-  console.log('area details rendered')
-
   return (
     <div className='table'>
       {questions.map((question, key) => {

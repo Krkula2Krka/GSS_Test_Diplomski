@@ -6,6 +6,7 @@ import { useNavigate, generatePath, Link } from 'react-router-dom'
 import './css/loginForm.css'
 
 export const LoginForm = props => {
+  
   const navigate = useNavigate()
 
   const initialValues = {
@@ -14,8 +15,6 @@ export const LoginForm = props => {
     nickname: '',
     GSS_identification: ''
   }
-
-  console.log('login form rendered')
 
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required('Обавезно поље'),

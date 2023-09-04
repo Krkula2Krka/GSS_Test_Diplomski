@@ -32,7 +32,6 @@ export const loggedInLoader =
 export const TakeTest = () => {
 
   const { id } = useParams()
-
   
   const { data: loggedIn } = useQuery(checkLoginForTesting(id))
   const queryClient = useQueryClient()
