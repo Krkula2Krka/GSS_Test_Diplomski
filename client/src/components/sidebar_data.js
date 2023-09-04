@@ -10,24 +10,24 @@ export const SidebarData = [
         title: 'Почетна страна',
         path: '/',
         icon: <AiIcons.AiFillHome/>,
-        cName: 'nav-text'
+        cName: 'side-text'
     },
     {
         title: 'Прегледај све области',
         path: '/getAllAreas',
         icon: <RiIcons.RiMedicineBottleFill/>,
-        cName: 'nav-text'
+        cName: 'side-text'
     },
     {
         title: 'Додај нову област',
         path: '/addArea',
         icon: <AiIcons.AiOutlineMedicineBox/>,
-        cName: 'nav-text'
+        cName: 'side-text'
     },
     {
         title: 'Додај ново питање',
         path: '/addQuestion',
         icon: <BsIcons.BsQuestionOctagonFill/>,
-        cName: 'nav-text'
+        cName: 'side-text'
     }
 ]
