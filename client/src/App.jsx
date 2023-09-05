@@ -9,12 +9,17 @@ import { LoginForm } from './components/loginForm'
 import { Root } from './components/root'
 
 // Pages
-import { TakeTest, loggedInLoader } from './pages/takeTest'
-import { AreaDetails, questionsLoader } from './pages/areaDetails'
+import { TakeTest } from './pages/takeTest'
+import { AreaDetails } from './pages/areaDetails'
 import { AddQuestion } from './pages/addQuestion'
 import { AddArea } from './pages/addArea'
-import { GetAllAreas, areasLoader } from './pages/getAllAreas'
+import { GetAllAreas } from './pages/getAllAreas'
 import { Home } from './pages/home'
+
+// queries
+import { loggedInLoader } from './pages/queries/userQueries'
+import { areasLoader } from './pages/queries/areaQueries'
+import { questionsLoader } from './pages/queries/questionQueries'
 
 export const App = () => {
 

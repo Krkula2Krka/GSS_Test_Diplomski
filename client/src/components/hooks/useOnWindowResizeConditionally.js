@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const useOnWindowResizeConditionally = (callback, condition) => {
+export const useOnWindowResizeConditionally = (callback, condition) => {
   const callbackRef = useRef(callback)
   useEffect(() => {
     if (condition) {
@@ -10,5 +10,3 @@ const useOnWindowResizeConditionally = (callback, condition) => {
     }
   }, [callback, condition])
 }
-
-export default useOnWindowResizeConditionally

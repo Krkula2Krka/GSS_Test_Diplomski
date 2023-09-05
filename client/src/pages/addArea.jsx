@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 
 export const AddArea = () => {
+  
   const initialValues = {
     area_name: ''
   }

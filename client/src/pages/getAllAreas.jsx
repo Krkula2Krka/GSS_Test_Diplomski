@@ -2,27 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import * as AiIcons from 'react-icons/ai'
 import { useQuery } from '@tanstack/react-query'
-
-const getAllAreas = () => ({
-  queryKey: ['areas'],
-  queryFn: async () => {
-    const res = await fetch('http://localhost:3001/areas')
-    const data = await res.json()
-    return data
-  }
-})
-
-export const areasLoader = queryClient => async () => {
-  const query = getAllAreas()
-  return await queryClient.ensureQueryData({
-    queryKey: query.queryKey,
-    queryFn: query.queryFn
-  })
-}
+import { getAllAreasQuery } from './queries/areaQueries'
 
 export const GetAllAreas = () => {
 
-  const { data: areas } = useQuery(getAllAreas())
+  const { data: areas } = useQuery(getAllAreasQuery())
 
   return (
     <div className='table'>

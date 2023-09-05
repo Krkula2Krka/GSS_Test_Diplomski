@@ -1,31 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-
-const getQuestionsForArea = id => ({
-  queryKey: ['questions', id],
-  queryFn: async () => {
-    const res = await fetch(`http://localhost:3001/questions/${id}`)
-    const data = await res.json()
-    return data
-  }
-})
-
-export const questionsLoader =
-  queryClient =>
-  async ({ params }) => {
-    const query = getQuestionsForArea(params.id)
-    return await queryClient.ensureQueryData({
-      queryKey: query.queryKey,
-      queryFn: query.queryFn
-    })
-  }
+import { getQuestionsForAreaQuery } from './queries/questionQueries'
 
 export const AreaDetails = () => {
   
   const { id } = useParams()
 
-  const { data: questions } = useQuery(getQuestionsForArea(id))
+  const { data: questions } = useQuery(getQuestionsForAreaQuery(id))
+  console.log(questions)
 
   return (
     <div className='table'>

@@ -4,24 +4,12 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-
-const getAllAreas = () => ({
-  queryKey: ['areas'],
-  queryFn: () => {
-    return axios
-      .get('http://localhost:3001/areas')
-      .then(response => response.data)
-  }
-})
-
-export const areasLoader = queryClient => async () => {
-  const query = getAllAreas()
-  return queryClient.getQueryData(query) ?? await queryClient.fetchQuery(query)
-}
+import { getAllAreasQuery } from './queries/areaQueries'
 
 export const AddQuestion = () => {
   
-  const { data: areas } = useQuery(getAllAreas())
+  const { data: areas } = useQuery(getAllAreasQuery())
+  console.log(areas)
 
   const navigate = useNavigate()
 
