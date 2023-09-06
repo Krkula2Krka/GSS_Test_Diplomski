@@ -3,12 +3,15 @@ const router = express.Router()
 const {
   getAllAreasInController,
   createAreaInController,
-  getAreaByIdInController
+  getAreaByIdInController,
+  getPageOfAreasInController
 } = require('../controllers/areasController')
 
 router.get('/', getAllAreasInController)
 
 router.get('/:id', getAreaByIdInController)
+
+router.get('/page/:pageNumber', getPageOfAreasInController)
 
 router.post('/', createAreaInController)
 

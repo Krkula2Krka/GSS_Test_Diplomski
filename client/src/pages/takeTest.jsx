@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { InfoModal } from '../components/infoModal'
 import useUnloadConditionally from '../components/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../components/hooks/useOnWindowResizeConditionally'
@@ -10,23 +9,30 @@ import {
   checkLoginForTestingQuery
 } from './queries/userQueries'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getAllAreasPaginatedQuery } from './queries/areaQueries'
+import { Link, useParams } from 'react-router-dom'
 
 export const TakeTest = () => {
 
-  const { id } = useParams()
+  const { id, pageNumber } = useParams()
+
+  const [modalOpen, setModalOpen] = useState(true)
 
   const { data: loggedIn } = useQuery(checkLoginForTestingQuery(id))
   const queryClient = useQueryClient()
   const { mutateAsync: logoutForTesting } = useMutation(
     logoutForTestingQuery(id, queryClient)
   )
+  const { data: areas } = useQuery(
+    getAllAreasPaginatedQuery(pageNumber, loggedIn && !modalOpen)
+  )
 
-  const [modalOpen, setModalOpen] = useState(true)
+  console.log('rendered')
 
   useDisableBackButtonConditionally(loggedIn)
 
   useVisibilityChangeConditionally(async () => {
-    await logoutForTesting()
+    // await logoutForTesting()
   }, loggedIn)
 
   useOnWindowResizeConditionally(async () => await logoutForTesting(), loggedIn)
@@ -37,8 +43,29 @@ export const TakeTest = () => {
     <div>
       {loggedIn ? (
         <div>
-          <h1>Улоговани сте</h1>
-          {modalOpen && <InfoModal setOpenModal={setModalOpen} />}
+          {!modalOpen ? (
+            <div className='table'>
+              {areas?.map((area, key) => {
+                return (
+                  <div className='table-row' key={key}>
+                    <h1>{area.area_name}</h1>
+                  </div>
+                )
+              })}
+              <Link to={`/takeTest/${id}/${pageNumber - 1}`}
+                disabled={pageNumber === 1}
+              >
+                Prev
+              </Link>
+              <Link to={`/takeTest/${id}/${pageNumber + 1}`}
+                disabled={pageNumber === 1}
+              >
+                Next
+              </Link>
+            </div>
+          ) : (
+            <InfoModal setOpenModal={setModalOpen} />
+          )}
         </div>
       ) : (
         <div>
