@@ -13,6 +13,7 @@ import { getAllAreasPaginatedQuery } from './queries/areaQueries'
 import { useParams } from 'react-router-dom'
 
 export const TakeTest = () => {
+  
   const { id } = useParams()
 
   const [modalOpen, setModalOpen] = useState(true)
@@ -26,8 +27,6 @@ export const TakeTest = () => {
   const { data: areas } = useQuery(
     getAllAreasPaginatedQuery(pageNumber, loggedIn && !modalOpen)
   )
-
-  console.log('rendered')
 
   useDisableBackButtonConditionally(loggedIn)
 
