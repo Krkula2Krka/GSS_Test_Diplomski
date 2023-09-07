@@ -10,13 +10,13 @@ import {
 } from './queries/userQueries'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getAllAreasPaginatedQuery } from './queries/areaQueries'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export const TakeTest = () => {
-
-  const { id, pageNumber } = useParams()
+  const { id } = useParams()
 
   const [modalOpen, setModalOpen] = useState(true)
+  const [pageNumber, setPageNumber] = useState(1)
 
   const { data: loggedIn } = useQuery(checkLoginForTestingQuery(id))
   const queryClient = useQueryClient()
@@ -52,16 +52,18 @@ export const TakeTest = () => {
                   </div>
                 )
               })}
-              <Link to={`/takeTest/${id}/${pageNumber - 1}`}
+              <button
+                onClick={() => setPageNumber(pageNumber => pageNumber - 1)}
                 disabled={pageNumber === 1}
               >
-                Prev
-              </Link>
-              <Link to={`/takeTest/${id}/${pageNumber + 1}`}
-                disabled={pageNumber === 1}
+                Previous
+              </button>
+              <button
+                onClick={() => setPageNumber(pageNumber => pageNumber + 1)}
+                disabled={pageNumber === 16}
               >
                 Next
-              </Link>
+              </button>
             </div>
           ) : (
             <InfoModal setOpenModal={setModalOpen} />

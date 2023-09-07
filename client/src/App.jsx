@@ -18,7 +18,7 @@ import { Home } from './pages/home'
 
 // queries
 import { loggedInLoader } from './pages/queries/userQueries'
-import { areasLoader, areasPaginatedLoader } from './pages/queries/areaQueries'
+import { areasLoader } from './pages/queries/areaQueries'
 import { questionsLoader } from './pages/queries/questionQueries'
 
 export const App = () => {
@@ -84,10 +84,9 @@ export const App = () => {
       ]
     },
     {
-      path: '/takeTest/:id/:pageNumber',
+      path: '/takeTest/:id',
       element: <TakeTest />,
-      loader: loggedInLoader(queryClient),
-      loader: areasPaginatedLoader(queryClient, 1)
+      loader: loggedInLoader(queryClient)
     }
   ])
 
