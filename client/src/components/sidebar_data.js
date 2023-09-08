@@ -1,33 +1,50 @@
 import React from 'react'
-import * as AiIcons from 'react-icons/ai'
-import * as BsIcons from 'react-icons/bs'
-import * as RiIcons from 'react-icons/ri'
-
-
+import { AiFillHome, AiOutlineMedicineBox } from 'react-icons/ai'
+import { BsQuestionOctagonFill } from 'react-icons/bs'
+import { RiMedicineBottleFill } from 'react-icons/ri'
 
 export const SidebarData = [
-    {
-        title: 'Почетна страна',
-        path: '/',
-        icon: <AiIcons.AiFillHome/>,
-        cName: 'side-text'
-    },
-    {
-        title: 'Прегледај све области',
-        path: '/getAllAreas',
-        icon: <RiIcons.RiMedicineBottleFill/>,
-        cName: 'side-text'
-    },
-    {
+  {
+    title: 'Почетна страна',
+    path: '/',
+    icon: <AiFillHome />,
+    cName: 'side-text'
+  },
+  {
+    title: 'Прегледај све области',
+    path: '/getAllAreas',
+    icon: <RiMedicineBottleFill />,
+    cName: 'side-text'
+  },
+  {
+    title: 'Додај нову област',
+    path: '/addArea',
+    icon: <AiOutlineMedicineBox />,
+    cName: 'side-text'
+  },
+  {
+    title: 'Додај ново питање',
+    path: '/addQuestion',
+    icon: <BsQuestionOctagonFill />,
+    cName: 'side-text'
+  },
+  {
+    title: 'Области',
+    icon: <BsQuestionOctagonFill />,
+    cName: 'side-text',
+    children: [
+      {
         title: 'Додај нову област',
         path: '/addArea',
-        icon: <AiIcons.AiOutlineMedicineBox/>,
+        icon: <AiOutlineMedicineBox />,
         cName: 'side-text'
-    },
-    {
-        title: 'Додај ново питање',
-        path: '/addQuestion',
-        icon: <BsIcons.BsQuestionOctagonFill/>,
+      },
+      {
+        title: 'Прегледај све области',
+        path: '/getAllAreas',
+        icon: <RiMedicineBottleFill />,
         cName: 'side-text'
-    }
+      }
+    ]
+  }
 ]

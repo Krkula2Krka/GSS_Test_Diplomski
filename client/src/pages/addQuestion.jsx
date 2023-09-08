@@ -9,7 +9,6 @@ import { getAllAreasQuery } from './queries/areaQueries'
 export const AddQuestion = () => {
   
   const { data: areas } = useQuery(getAllAreasQuery())
-  console.log(areas)
 
   const navigate = useNavigate()
 
