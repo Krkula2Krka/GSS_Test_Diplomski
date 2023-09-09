@@ -11,18 +11,6 @@ export const SidebarData = [
     cName: 'side-text'
   },
   {
-    title: 'Прегледај све области',
-    path: '/getAllAreas',
-    icon: <RiMedicineBottleFill />,
-    cName: 'side-text'
-  },
-  {
-    title: 'Додај нову област',
-    path: '/addArea',
-    icon: <AiOutlineMedicineBox />,
-    cName: 'side-text'
-  },
-  {
     title: 'Додај ново питање',
     path: '/addQuestion',
     icon: <BsQuestionOctagonFill />,

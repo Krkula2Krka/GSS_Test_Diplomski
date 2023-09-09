@@ -4,89 +4,87 @@ import { NavLink } from 'react-router-dom'
 import './css/sidebar.css'
 
 export const SidebarItem = ({ sidebarExtended, item }) => {
-    
   const [elementExtended, setElementExtended] = useState(false)
 
-  if (item.children)
-    return (
-      <div>
-        {sidebarExtended || elementExtended ? (
-          <div
+  return item.children ? (
+    sidebarExtended ? (
+      elementExtended ? (
+        <div>
+          <button
             className='side-text'
             onClick={() => setElementExtended(!elementExtended)}
           >
-            <NavLink to='#'>
-              <span>
+            <div>
+              {item.icon}
+              <span>{item.title}</span>
+            </div>
+            <MdExpandLess />
+          </button>
+          {item.children.map((item, index) => {
+            return (
+              <NavLink
+                to={item.path}
+                className='side-text'
+                key={index}
+                activeClassName='active'
+              >
                 {item.icon}
                 <span>{item.title}</span>
-              </span>
-              <span className='expand-icon'>
-                {elementExtended ? <MdExpandLess /> : <MdExpandMore />}
-              </span>
-            </NavLink>
-            {elementExtended ?? (
-              <div className='sidebar-submenu'>
-                {item.children.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <SidebarItem
-                        sidebarExtended={elementExtended}
-                        item={item}
-                      />
-                    </li>
-                  )
-                })}
-              </div>
-            )}
+              </NavLink>
+            )
+          })}
+        </div>
+      ) : (
+        <button
+          className='side-text'
+          onClick={() => setElementExtended(!elementExtended)}
+        >
+          <div>
+            {item.icon}
+            <span>{item.title}</span>
           </div>
-        ) : (
-          <div
-            className='side-text'
-            onClick={() => setElementExtended(!elementExtended)}
-          >
-            <NavLink to='#'>
-              <span>{item.icon}</span>
-              <span>
-                {elementExtended ? <MdExpandLess /> : <MdExpandMore />}
-              </span>
-            </NavLink>
-            {elementExtended ?? (
-              <div className='sidebar-submenu'>
-                {item.children.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <SidebarItem
-                        sidebarExtended={elementExtended}
-                        item={item}
-                      />
-                    </li>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    )
-  else
-    return (
+          <MdExpandMore />
+        </button>
+      )
+    ) : elementExtended ? (
       <div>
-        {sidebarExtended || elementExtended ? (
-          <div className='side-text'>
-            <NavLink to={item.path}>
-              <span>
-                {item.icon}
-                <span>{item.title}</span>
-              </span>
+        <button
+          className='side-text'
+          onClick={() => setElementExtended(!elementExtended)}
+        >
+          {item.icon}
+          <MdExpandLess />
+        </button>
+        {item.children.map((item, index) => {
+          return (
+            <NavLink
+              to={item.path}
+              className='side-text'
+              key={index}
+              activeClassName='active'
+            >
+              {item.icon}
             </NavLink>
-          </div>
-        ) : (
-          <div className='side-text'>
-            <NavLink to={item.path}>
-              <span>{item.icon}</span>
-            </NavLink>
-          </div>
-        )}
+          )
+        })}
       </div>
+    ) : (
+      <button
+        className='side-text'
+        onClick={() => setElementExtended(!elementExtended)}
+      >
+        {item.icon}
+        <MdExpandMore />
+      </button>
     )
+  ) : sidebarExtended ? (
+    <NavLink to={item.path} className='side-text'>
+      {item.icon}
+      <span>{item.title}</span>
+    </NavLink>
+  ) : (
+    <NavLink to={item.path} className='side-text'>
+      {item.icon}
+    </NavLink>
+  )
 }
