@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // Components
 import { LoginForm } from './components/loginForm'
 import { Root } from './components/root'
+import { PageNotFound } from './components/pageNotFound'
 
 // Pages
 import { TakeTest } from './pages/takeTest'
@@ -87,6 +88,10 @@ export const App = () => {
       path: '/takeTest/:id',
       element: <TakeTest />,
       loader: loggedInLoader(queryClient)
+    },
+    {
+      path: '*',
+      element: <PageNotFound />
     }
   ])
 
