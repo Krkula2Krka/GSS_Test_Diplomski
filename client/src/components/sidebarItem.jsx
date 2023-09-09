@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import './css/sidebar.css'
 
 export const SidebarItem = ({ sidebarExtended, item }) => {
+
   const [elementExtended, setElementExtended] = useState(false)
 
   return item.children ? (
@@ -26,7 +27,6 @@ export const SidebarItem = ({ sidebarExtended, item }) => {
                 to={item.path}
                 className='side-text'
                 key={index}
-                activeClassName='active'
               >
                 {item.icon}
                 <span>{item.title}</span>
@@ -61,7 +61,6 @@ export const SidebarItem = ({ sidebarExtended, item }) => {
               to={item.path}
               className='side-text'
               key={index}
-              activeClassName='active'
             >
               {item.icon}
             </NavLink>
