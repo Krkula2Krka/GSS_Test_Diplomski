@@ -3,7 +3,6 @@ import { InfoModal } from '../components/infoModal'
 import useUnloadConditionally from '../components/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../components/hooks/useOnWindowResizeConditionally'
 import useVisibilityChangeConditionally from '../components/hooks/useVisibilityChangeConditionally'
-import { useDisableBackButtonConditionally } from '../components/hooks/useDisableBackButtonConditionally'
 import {
   logoutForTestingQuery,
   checkLoginForTestingQuery
@@ -28,10 +27,8 @@ export const TakeTest = () => {
     getAllAreasPaginatedQuery(pageNumber, loggedIn && !modalOpen)
   )
 
-  useDisableBackButtonConditionally(loggedIn)
-
   useVisibilityChangeConditionally(async () => {
-    // await logoutForTesting()
+    await logoutForTesting()
   }, loggedIn)
 
   useOnWindowResizeConditionally(async () => await logoutForTesting(), loggedIn)

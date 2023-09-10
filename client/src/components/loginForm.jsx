@@ -30,10 +30,12 @@ export const LoginForm = props => {
         .then(() => navigate(generatePath('/')))
     else
       axios.post('http://localhost:3001/auth/login', data).then(response => {
-        if (response.data.loginSuccessful)
-          navigate(
+        if (response.data.loginSuccessful) {
+          navigate(generatePath('/'))
+          window.open(
             generatePath(`${props.navigateToLocation}/${response.data.id}`)
           )
+        }
       })
   }
 
