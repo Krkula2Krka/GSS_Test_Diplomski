@@ -1,25 +1,30 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
-import { useNavigate, generatePath } from 'react-router-dom'
+import { useMutation , useQueryClient} from '@tanstack/react-query'
+import { addAreaMutation } from './queries/areaQueries'
 
 export const AddArea = () => {
+
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
   
   const initialValues = {
     area_name: ''
   }
 
-  const navigate = useNavigate()
+  const { mutateAsync: addArea } = useMutation(
+    addAreaMutation(queryClient)
+  )
 
   const validationSchema = Yup.object().shape({
     area_name: Yup.string().required('Обавезно поље')
   })
 
-  const onSubmit = data => {
-    axios.post('http://localhost:3001/areas', data).then(() => {
-      navigate(generatePath('/getAllAreas'))
-    })
+  const onSubmit = async data => {
+    await addArea(data)
+    navigate('/getAllAreas')
   }
   
   return (

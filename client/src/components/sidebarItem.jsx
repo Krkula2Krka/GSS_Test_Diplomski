@@ -16,7 +16,7 @@ export const SidebarItem = ({ sidebarExtended, item }) => {
             onClick={() => setElementExtended(!elementExtended)}
           >
             <div>
-              {item.icon}
+              {item.expandedIcon}
               <span>{item.title}</span>
             </div>
             <MdExpandLess />
@@ -40,7 +40,7 @@ export const SidebarItem = ({ sidebarExtended, item }) => {
           onClick={() => setElementExtended(!elementExtended)}
         >
           <div>
-            {item.icon}
+            {item.collapsedIcon}
             <span>{item.title}</span>
           </div>
           <MdExpandMore />
@@ -52,7 +52,7 @@ export const SidebarItem = ({ sidebarExtended, item }) => {
           className='side-text'
           onClick={() => setElementExtended(!elementExtended)}
         >
-          {item.icon}
+          {item.expandedIcon}
           <MdExpandLess />
         </button>
         {item.children.map((item, index) => {
@@ -72,7 +72,7 @@ export const SidebarItem = ({ sidebarExtended, item }) => {
         className='side-text'
         onClick={() => setElementExtended(!elementExtended)}
       >
-        {item.icon}
+        {item.collapsedIcon}
         <MdExpandMore />
       </button>
     )

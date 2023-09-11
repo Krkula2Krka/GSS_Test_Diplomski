@@ -25,7 +25,7 @@ export const loggedInLoader =
     })
   }
 
-export const logoutForTestingQuery = (id, queryClient) => ({
+export const logoutForTestingMutation = (id, queryClient) => ({
   mutationFn: () => axios.post(`http://localhost:3001/auth/logoutForTesting/${id}`),
   onSuccess: () => queryClient.invalidateQueries(queryKeys.loggedIn(id)),
   onError: () => console.log('error in logoutForTesting mutation')

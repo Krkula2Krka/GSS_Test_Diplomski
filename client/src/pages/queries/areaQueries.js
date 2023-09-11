@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const queryKeys = {
   areas: ['areas'],
   areasPaginated: pageNumber => ['areas', pageNumber]
@@ -43,3 +45,11 @@ export const areasPaginatedLoader =
       queryFn: query.queryFn
     })
   }
+
+export const addAreaMutation = queryClient => ({
+  mutationFn: data => axios.post('http://localhost:3001/areas', data),
+  onSuccess: () => {
+    queryClient.invalidateQueries(queryKeys.areas)
+  },
+  onError: () => console.log('Unsuccessful addArea mutation!')
+})

@@ -1,7 +1,8 @@
 import React from 'react'
-import { AiFillHome, AiOutlineMedicineBox } from 'react-icons/ai'
+import { AiFillHome } from 'react-icons/ai'
 import { BsQuestionOctagonFill } from 'react-icons/bs'
-import { RiMedicineBottleFill } from 'react-icons/ri'
+import { RiMedicineBottleFill, RiBook2Fill, RiBookOpenFill } from 'react-icons/ri'
+import { BiSolidBookmarkAltPlus } from 'react-icons/bi'
 
 export const SidebarData = [
   {
@@ -18,13 +19,14 @@ export const SidebarData = [
   },
   {
     title: 'Области',
-    icon: <BsQuestionOctagonFill />,
+    collapsedIcon: <RiBook2Fill />,
+    expandedIcon: <RiBookOpenFill />,
     cName: 'side-text',
     children: [
       {
         title: 'Додај нову област',
         path: '/addArea',
-        icon: <AiOutlineMedicineBox />,
+        icon: <BiSolidBookmarkAltPlus />,
         cName: 'side-text'
       },
       {

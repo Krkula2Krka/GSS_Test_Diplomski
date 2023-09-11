@@ -4,7 +4,7 @@ import useUnloadConditionally from '../components/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../components/hooks/useOnWindowResizeConditionally'
 import useVisibilityChangeConditionally from '../components/hooks/useVisibilityChangeConditionally'
 import {
-  logoutForTestingQuery,
+  logoutForTestingMutation,
   checkLoginForTestingQuery
 } from './queries/userQueries'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -21,7 +21,7 @@ export const TakeTest = () => {
   const { data: loggedIn } = useQuery(checkLoginForTestingQuery(id))
   const queryClient = useQueryClient()
   const { mutateAsync: logoutForTesting } = useMutation(
-    logoutForTestingQuery(id, queryClient)
+    logoutForTestingMutation(id, queryClient)
   )
   const { data: areas } = useQuery(
     getAllAreasPaginatedQuery(pageNumber, loggedIn && !modalOpen)
