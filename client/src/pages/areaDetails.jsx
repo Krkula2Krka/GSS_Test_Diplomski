@@ -11,7 +11,7 @@ export const AreaDetails = () => {
   console.log(questions)
 
   return (
-    <div className='table'>
+    <div className='table centered'>
       {questions.map((question, key) => {
         return (
           <div className='table-row' key={key}>

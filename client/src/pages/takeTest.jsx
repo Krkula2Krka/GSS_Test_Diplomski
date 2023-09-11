@@ -40,7 +40,7 @@ export const TakeTest = () => {
       {loggedIn ? (
         <div>
           {!modalOpen ? (
-            <div className='table'>
+            <div className='table centered'>
               {areas?.map((area, key) => {
                 return (
                   <div className='table-row' key={key}>

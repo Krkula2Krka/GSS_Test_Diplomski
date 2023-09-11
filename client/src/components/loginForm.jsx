@@ -6,7 +6,7 @@ import { useNavigate, generatePath, Link } from 'react-router-dom'
 import './css/loginForm.css'
 
 export const LoginForm = props => {
-  
+
   const navigate = useNavigate()
 
   const initialValues = {
@@ -27,67 +27,67 @@ export const LoginForm = props => {
     if (props.isRegestration)
       axios
         .post('http://localhost:3001/auth', data)
-        .then(() => navigate(generatePath('/')))
+        .then(() => navigate('/'))
     else
       axios.post('http://localhost:3001/auth/login', data).then(response => {
         if (response.data.loginSuccessful) {
-          navigate(generatePath('/'))
+          navigate('/')
           window.open(
             generatePath(`${props.navigateToLocation}/${response.data.id}`)
           )
+        } else {
+          navigate('/wrongCredentials')
         }
       })
   }
 
   return (
-    <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        <Form className='formContainer'>
-          <h1>{props.mainHeaderContent}</h1>
-          <label>Име: </label>
-          <ErrorMessage
-            name='first_name'
-            component='span'
-            className='errorMessage'
-          />
-          <Field name='first_name' />
-          <label>Презиме: </label>
-          <ErrorMessage
-            name='last_name'
-            component='span'
-            className='errorMessage'
-          />
-          <Field name='last_name' />
-          <label>Надимак: </label>
-          <ErrorMessage
-            name='nickname'
-            component='span'
-            className='errorMessage'
-          />
-          <Field name='nickname' />
-          <label>ГСС број: </label>
-          <ErrorMessage
-            name='GSS_identification'
-            component='span'
-            className='errorMessage'
-          />
-          <Field name='GSS_identification' />
-          <button type='submit'>{props.submitButtonContent}</button>
-          {!props.isRegestration && (
-            <h1>
-              Уколико немате налог кликните да се{' '}
-              <Link to='/registration' className='link'>
-                овде
-              </Link>{' '}
-              региструјете!
-            </h1>
-          )}
-        </Form>
-      </Formik>
-    </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      <Form className='formContainer centered'>
+        <h1>{props.mainHeaderContent}</h1>
+        <label>Име: </label>
+        <ErrorMessage
+          name='first_name'
+          component='span'
+          className='errorMessage'
+        />
+        <Field name='first_name' />
+        <label>Презиме: </label>
+        <ErrorMessage
+          name='last_name'
+          component='span'
+          className='errorMessage'
+        />
+        <Field name='last_name' />
+        <label>Надимак: </label>
+        <ErrorMessage
+          name='nickname'
+          component='span'
+          className='errorMessage'
+        />
+        <Field name='nickname' />
+        <label>ГСС број: </label>
+        <ErrorMessage
+          name='GSS_identification'
+          component='span'
+          className='errorMessage'
+        />
+        <Field name='GSS_identification' />
+        <button type='submit'>{props.submitButtonContent}</button>
+        {!props.isRegestration && (
+          <h1>
+            Уколико немате налог кликните да се{' '}
+            <Link to='/registration' className='link'>
+              овде
+            </Link>{' '}
+            региструјете!
+          </h1>
+        )}
+      </Form>
+    </Formik>
   )
 }

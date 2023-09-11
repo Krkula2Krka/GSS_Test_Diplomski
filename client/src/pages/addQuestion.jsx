@@ -39,7 +39,7 @@ export const AddQuestion = () => {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        <Form className='formContainer'>
+        <Form className='formContainer centered'>
           <label>Текст питања: </label>
           <ErrorMessage
             name='question_text'

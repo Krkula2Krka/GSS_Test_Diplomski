@@ -16,8 +16,13 @@
   padding: 20px;
   border: 5px solid #060b26;
   border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.centered {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .table {
@@ -30,8 +35,6 @@
   border: 5px solid #060b26;
   background-color: #060b26;
   border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .table-row {

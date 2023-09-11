@@ -25,12 +25,11 @@ export const AddArea = () => {
   return (
     <div>
       <Formik
-        className='centtralized'
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form className='formContainer'>
+        <Form className='formContainer centered'>
           <label>Назив нове области: </label>
           <ErrorMessage
             name='area_name'

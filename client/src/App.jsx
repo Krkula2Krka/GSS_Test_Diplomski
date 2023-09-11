@@ -3,11 +3,13 @@ import './css/App.css'
 // Libraries
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 // Components
 import { LoginForm } from './components/loginForm'
 import { Root } from './components/root'
 import { PageNotFound } from './components/pageNotFound'
+import { WrongCredentials } from './components/wrongCredentials'
 
 // Pages
 import { TakeTest } from './pages/takeTest'
@@ -80,6 +82,10 @@ export const App = () => {
           )
         },
         {
+          path: '/wrongCredentials',
+          element: <WrongCredentials />
+        },
+        {
           path: '/registration',
           element: (
             <LoginForm
@@ -106,6 +112,7 @@ export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

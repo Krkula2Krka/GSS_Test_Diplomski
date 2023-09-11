@@ -9,7 +9,7 @@ export const GetAllAreas = () => {
   const { data: areas } = useQuery(getAllAreasQuery())
 
   return (
-    <div className='table'>
+    <div className='table centered'>
       {areas.map((area, key) => {
         return (
           <div className='table-row' key={key}>

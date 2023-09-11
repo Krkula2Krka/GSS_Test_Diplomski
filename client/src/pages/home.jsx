@@ -5,7 +5,7 @@ import './css/home.css'
 export const Home =  () => {
   
   return (
-    <div>
+    <div className='centered'>
       <Link to='/credentialsForTest' className='homeLink'>Полажи тест</Link>
       <Link className='homeLink'>Вежбање</Link>
       <Link className='homeLink'>Рад са базом</Link>
