@@ -10,6 +10,8 @@ export const AddQuestion = () => {
   
   const { data: areas } = useQuery(getAllAreasQuery())
 
+  console.log(areas)
+
   const navigate = useNavigate()
 
   const validationSchema = Yup.object().shape({

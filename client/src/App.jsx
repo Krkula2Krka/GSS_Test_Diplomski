@@ -11,10 +11,6 @@ import { PageNotFound } from './components/pageNotFound'
 
 // Pages
 import { TakeTest } from './pages/takeTest'
-import { AreaDetails } from './pages/areaDetails'
-import { AddQuestion } from './pages/addQuestion'
-import { AddArea } from './pages/addArea'
-import { GetAllAreas } from './pages/getAllAreas'
 import { Home } from './pages/home'
 
 // queries
@@ -43,21 +39,33 @@ export const App = () => {
         },
         {
           path: '/getAllAreas',
-          element: <GetAllAreas />,
+          lazy: async () => {
+            const { GetAllAreas } = await import('./pages/getAllAreas')
+            return { Component: GetAllAreas }
+          },
           loader: areasLoader(queryClient)
         },
         {
           path: '/addArea',
-          element: <AddArea />
+          lazy: async () => {
+            const { AddArea } = await import('./pages/addArea')
+            return { Component: AddArea }
+          }
         },
         {
           path: '/addQuestion',
-          element: <AddQuestion />,
+          lazy: async () => {
+            const { AddQuestion } = await import('./pages/addQuestion')
+            return { Component: AddQuestion }
+          },
           loader: areasLoader(queryClient)
         },
         {
           path: '/areaDetails/:id',
-          element: <AreaDetails />,
+          lazy: async () => {
+            const { AreaDetails } = await import('./pages/areaDetails')
+            return { Component: AreaDetails }
+          },
           loader: questionsLoader(queryClient)
         },
         {
