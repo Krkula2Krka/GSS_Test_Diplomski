@@ -25,10 +25,16 @@
   transform: translate(-50%, -50%);
 }
 
-.centered-horizontal {
+.centeredHorizontal {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0%);
+}
+
+.centeredVertical {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
 }
 
 .table {
@@ -55,12 +61,11 @@
   border-radius: 5px;
 }
 
-.edit-area-button {
-  border: 5px solid #060b26;
-  border-radius: 5px;
-  width: 5rem;
-}
-
 .errorMessage {
   color: red;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }

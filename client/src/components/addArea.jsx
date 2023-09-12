@@ -1,14 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useMutation , useQueryClient} from '@tanstack/react-query'
-import { addAreaMutation } from './queries/areaQueries'
+import { addAreaMutation } from '../pages/queries/areaQueries'
 
 export const AddArea = () => {
 
   const queryClient = useQueryClient()
-  const navigate = useNavigate()
   
   const initialValues = {
     area_name: ''
@@ -24,7 +22,6 @@ export const AddArea = () => {
 
   const onSubmit = async data => {
     await addArea(data)
-    navigate('/getAllAreas')
   }
   
   return (
@@ -34,7 +31,7 @@ export const AddArea = () => {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form className='formContainer centered'>
+        <Form className='formContainer centeredHorizontal'>
           <label>Назив нове области: </label>
           <ErrorMessage
             name='area_name'

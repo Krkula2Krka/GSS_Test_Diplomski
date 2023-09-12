@@ -4,7 +4,8 @@ const {
   getAllAreasInController,
   createAreaInController,
   getAreaByIdInController,
-  getPageOfAreasInController
+  getPageOfAreasInController,
+  deleteAreaInController
 } = require('../controllers/areasController')
 
 router.get('/', getAllAreasInController)
@@ -14,5 +15,7 @@ router.get('/:id', getAreaByIdInController)
 router.get('/page/:pageNumber', getPageOfAreasInController)
 
 router.post('/', createAreaInController)
+
+router.post('/delete/:id', deleteAreaInController)
 
 module.exports = router

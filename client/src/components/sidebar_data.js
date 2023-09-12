@@ -1,8 +1,8 @@
 import React from 'react'
 import { AiFillHome } from 'react-icons/ai'
 import { BsQuestionOctagonFill } from 'react-icons/bs'
-import { RiMedicineBottleFill, RiBook2Fill, RiBookOpenFill } from 'react-icons/ri'
-import { BiSolidBookmarkAltPlus } from 'react-icons/bi'
+import { RiBook2Fill, RiBookOpenFill } from 'react-icons/ri'
+import { GiNotebook } from 'react-icons/gi'
 
 export const SidebarData = [
   {
@@ -18,21 +18,15 @@ export const SidebarData = [
     cName: 'side-text'
   },
   {
-    title: 'Области',
+    title: 'Литература',
     collapsedIcon: <RiBook2Fill />,
     expandedIcon: <RiBookOpenFill />,
     cName: 'side-text',
     children: [
       {
-        title: 'Додај нову област',
-        path: '/addArea',
-        icon: <BiSolidBookmarkAltPlus />,
-        cName: 'side-text'
-      },
-      {
-        title: 'Прегледај све области',
+        title: 'Преглед свих области',
         path: '/getAllAreas',
-        icon: <RiMedicineBottleFill />,
+        icon: <GiNotebook />,
         cName: 'side-text'
       }
     ]

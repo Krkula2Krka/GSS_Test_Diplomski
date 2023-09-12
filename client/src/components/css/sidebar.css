@@ -19,12 +19,13 @@
   top: 0;
   transition: width 0.3s ease-in-out;
   width: 80px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .side-menu.active {
   background-color: #060b26;
-  width: 300px;
+  width: 240px;
   transition: width 0.3s ease-in-out;
 }
 

@@ -18,6 +18,14 @@ const createAreaInService = (newArea) => {
     return newArea
 }
 
+const deleteAreaInService = (id) => {
+    area.destroy({
+        where: {
+            id: id
+        }
+    })
+}
+
 const getAreaByIdInService = (id) => {
     const wantedArea = area.findByPk(id)
     return wantedArea
@@ -27,5 +35,6 @@ module.exports = {
     getAllAreasInService: getAllAreasInService,
     createAreaInService: createAreaInService,
     getAreaByIdInService: getAreaByIdInService,
-    getPageOfAreasInService: getPageOfAreasInService
+    getPageOfAreasInService: getPageOfAreasInService,
+    deleteAreaInService: deleteAreaInService
 }

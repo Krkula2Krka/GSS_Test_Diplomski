@@ -48,13 +48,6 @@ export const App = () => {
           loader: areasLoader(queryClient)
         },
         {
-          path: '/addArea',
-          lazy: async () => {
-            const { AddArea } = await import('./pages/addArea')
-            return { Component: AddArea }
-          }
-        },
-        {
           path: '/addQuestion',
           lazy: async () => {
             const { AddQuestion } = await import('./pages/addQuestion')
