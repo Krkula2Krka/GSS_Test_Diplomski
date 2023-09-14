@@ -18,12 +18,14 @@ import { RxCrossCircled } from 'react-icons/rx'
 
 // components
 import { AddArea } from '../components/addArea'
+import { EditArea } from '../components/editArea'
 
 // queries
 import { deleteAreaMutation } from './queries/areaQueries'
 
 export const GetAllAreas = () => {
-  const [deleteButtonId, setDeleteButtonId] = useState(0)
+
+  const [deleteOrEditButtonId, setDeleteOrEditButtonId] = useState(0)
 
   const queryClient = useQueryClient()
 
@@ -42,16 +44,21 @@ export const GetAllAreas = () => {
               return (
                 <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
                   <div>
-                    {deleteButtonId !== area.id ? (
+                    {deleteOrEditButtonId !== area.id + 100 &&
+                    deleteOrEditButtonId !== area.id ? (
                       <div className='area'>
                         <h1 className='areaName'>{area.area_name}</h1>
                         <div className='areaButtons'>
-                          <button className='areaButton'>
+                          <button
+                            onClick={() => setDeleteOrEditButtonId(area.id)}
+                            className='areaButton'
+                          >
                             <AiFillEdit />
                           </button>
                           <button
-                            onClick={() => setDeleteButtonId(area.id)}
-                            //onClick={ async () =>  await deleteArea(area.id)}
+                            onClick={() =>
+                              setDeleteOrEditButtonId(100 + area.id)
+                            }
                             className='areaButton'
                           >
                             <RiDeleteBin6Fill />
@@ -64,28 +71,35 @@ export const GetAllAreas = () => {
                           </Link>
                         </div>
                       </div>
-                    ) : (
-                      <div className='confirmDeleteArea'>
-                        <h1 className='areaName'>Да ли сте сигурни?</h1>
+                    ) : deleteOrEditButtonId > 100 ? (
+                      <div className='confirmDeleteOrEditArea'>
+                        <h1 className='areaConfirmQuestion'>
+                          Да ли сте сигурни?
+                        </h1>
                         <h6 className='areaMessage'>
                           Брисањем ове области обрисаћете сва питања везана за
                           ову област и све њихове одговаре.
                         </h6>
                         <div className='confirmButtons'>
                           <button
-                            onClick={ async () =>  await deleteArea(area.id)}
+                            onClick={async () => await deleteArea(area.id)}
                             className='areaButton'
                           >
                             <BsFillCheckCircleFill />
                           </button>
                           <button
-                            onClick={() => setDeleteButtonId(0)}
+                            onClick={() => setDeleteOrEditButtonId(0)}
                             className='areaButton'
                           >
                             <RxCrossCircled />
                           </button>
                         </div>
                       </div>
+                    ) : (
+                      <EditArea
+                        id={area.id}
+                        resetState={() => setDeleteOrEditButtonId(0)}
+                      />
                     )}
                   </div>
                 </div>

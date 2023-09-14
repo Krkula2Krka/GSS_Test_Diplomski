@@ -61,3 +61,11 @@ export const deleteAreaMutation = queryClient => ({
   },
   onError: () => console.log('Unsuccessful deleteArea mutation!')
 })
+
+export const editAreaMutation = queryClient => ({
+  mutationFn: (id, area_name) => axios.post(`http://localhost:3001/areas/edit/${id}/${area_name}`),
+  onSuccess: () => {
+    queryClient.invalidateQueries(queryKeys.areas)
+  },
+  onError: () => console.log('Unsuccessful editArea mutation!')
+})
