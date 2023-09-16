@@ -1,9 +1,16 @@
+// libraries
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+
+// queries
 import { editAreaMutation } from '../../queries/areaQueries'
+
+// css
 import '../../css/getAllAreas.css'
+
+//icons
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { RxCrossCircled } from 'react-icons/rx'
 
@@ -12,8 +19,6 @@ export const EditArea = props => {
   const id = props.id
 
   const queryClient = useQueryClient()
-
-  console.log('edit render')
 
   const initialValues = {
     area_name: ''
