@@ -8,7 +8,7 @@ import {
   checkLoginForTestingQuery
 } from '../queries/userQueries'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getAllAreasPaginatedQuery } from './queries/areaQueries'
+import { getAllAreasPaginatedQuery } from '../queries/areaQueries'
 import { useParams } from 'react-router-dom'
 
 export const TakeTest = () => {

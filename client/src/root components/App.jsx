@@ -1,4 +1,4 @@
-import './css/App.css'
+import '../css/App.css'
 
 // Libraries
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -6,19 +6,19 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 // Components
-import { LoginForm } from './components/loginForm'
-import { Root } from './components/root'
-import { PageNotFound } from './components/error/pageNotFound'
-import { WrongCredentials } from './components/error/wrongCredentials'
+import { LoginForm } from '../components/loginForm'
+import { Root } from './root'
+import { PageNotFound } from '../components/error/pageNotFound'
+import { WrongCredentials } from '../components/error/wrongCredentials'
 
 // Pages
-import { TakeTest } from './pages/takeTest'
-import { Home } from './pages/home'
+import { TakeTest } from '../pages/takeTest'
+import { Home } from '../pages/home'
 
 // queries
-import { loggedInLoader } from './queries/userQueries'
-import { areasLoader } from './queries/areaQueries'
-import { questionsLoader } from './queries/questionQueries'
+import { loggedInLoader } from '../queries/userQueries'
+import { areasLoader } from '..//queries/areaQueries'
+import { questionsLoader } from '../queries/questionQueries'
 
 export const App = () => {
 
@@ -42,7 +42,7 @@ export const App = () => {
         {
           path: '/getAllAreas',
           lazy: async () => {
-            const { GetAllAreas } = await import('./pages/getAllAreas')
+            const { GetAllAreas } = await import('../pages/getAllAreas')
             return { Component: GetAllAreas }
           },
           loader: areasLoader(queryClient)
@@ -50,7 +50,7 @@ export const App = () => {
         {
           path: '/addQuestion',
           lazy: async () => {
-            const { AddQuestion } = await import('./pages/addQuestion')
+            const { AddQuestion } = await import('../pages/addQuestion')
             return { Component: AddQuestion }
           },
           loader: areasLoader(queryClient)
@@ -58,7 +58,7 @@ export const App = () => {
         {
           path: '/areaDetails/:id',
           lazy: async () => {
-            const { AreaDetails } = await import('./pages/areaDetails')
+            const { AreaDetails } = await import('../pages/areaDetails')
             return { Component: AreaDetails }
           },
           loader: questionsLoader(queryClient)
