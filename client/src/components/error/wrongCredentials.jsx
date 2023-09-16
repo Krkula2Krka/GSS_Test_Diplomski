@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../css/App.css'
+import '../../css/App.css'
 
 export const WrongCredentials = () => {
   return (

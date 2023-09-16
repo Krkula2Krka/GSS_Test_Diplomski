@@ -6,7 +6,7 @@ import useVisibilityChangeConditionally from '../components/hooks/useVisibilityC
 import {
   logoutForTestingMutation,
   checkLoginForTestingQuery
-} from './queries/userQueries'
+} from '../queries/userQueries'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getAllAreasPaginatedQuery } from './queries/areaQueries'
 import { useParams } from 'react-router-dom'

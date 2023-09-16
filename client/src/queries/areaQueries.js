@@ -48,24 +48,18 @@ export const areasPaginatedLoader =
 
 export const addAreaMutation = queryClient => ({
   mutationFn: data => axios.post('http://localhost:3001/areas', data),
-  onSuccess: () => {
-    queryClient.invalidateQueries(queryKeys.areas)
-  },
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.areas),
   onError: () => console.log('Unsuccessful addArea mutation!')
 })
 
 export const deleteAreaMutation = queryClient => ({
   mutationFn: id => axios.post(`http://localhost:3001/areas/delete/${id}`),
-  onSuccess: () => {
-    queryClient.invalidateQueries(queryKeys.areas)
-  },
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.areas),
   onError: () => console.log('Unsuccessful deleteArea mutation!')
 })
 
 export const editAreaMutation = queryClient => ({
-  mutationFn: data => {
-    axios.post(`http://localhost:3001/areas/edit/${data.id}/${data.name}`)
-  },
+  mutationFn: data => axios.post(`http://localhost:3001/areas/edit/${data.id}/${data.name}`),
   onSuccess: () => queryClient.invalidateQueries(queryKeys.areas),
   onError: () => console.log('Unsuccessful editArea mutation!')
 })

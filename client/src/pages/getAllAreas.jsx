@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 // queries
-import { getAllAreasQuery } from './queries/areaQueries'
+import { getAllAreasQuery } from '../queries/areaQueries'
 
 // css
-import './css/getAllAreas.css'
+import '../css/getAllAreas.css'
 
 // icons
 import { AiFillEdit } from 'react-icons/ai'
@@ -17,11 +17,11 @@ import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { RxCrossCircled } from 'react-icons/rx'
 
 // components
-import { AddArea } from '../components/addArea'
-import { EditArea } from '../components/editArea'
+import { AddArea } from '../components/area/addArea'
+import { EditArea } from '../components/area/editArea'
 
 // queries
-import { deleteAreaMutation } from './queries/areaQueries'
+import { deleteAreaMutation } from '../queries/areaQueries'
 
 export const GetAllAreas = () => {
 
@@ -34,6 +34,8 @@ export const GetAllAreas = () => {
   const { mutateAsync: deleteArea } = useMutation(
     deleteAreaMutation(queryClient)
   )
+
+  console.log('area render')
 
   return (
     <div>

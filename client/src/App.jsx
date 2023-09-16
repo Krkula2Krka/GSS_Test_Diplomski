@@ -8,17 +8,17 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 // Components
 import { LoginForm } from './components/loginForm'
 import { Root } from './components/root'
-import { PageNotFound } from './components/pageNotFound'
-import { WrongCredentials } from './components/wrongCredentials'
+import { PageNotFound } from './components/error/pageNotFound'
+import { WrongCredentials } from './components/error/wrongCredentials'
 
 // Pages
 import { TakeTest } from './pages/takeTest'
 import { Home } from './pages/home'
 
 // queries
-import { loggedInLoader } from './pages/queries/userQueries'
-import { areasLoader } from './pages/queries/areaQueries'
-import { questionsLoader } from './pages/queries/questionQueries'
+import { loggedInLoader } from './queries/userQueries'
+import { areasLoader } from './queries/areaQueries'
+import { questionsLoader } from './queries/questionQueries'
 
 export const App = () => {
 

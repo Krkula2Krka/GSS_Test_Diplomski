@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 import { NavLink } from 'react-router-dom'
-import './css/sidebar.css'
+import '../../css/sidebar.css'
 
 export const SidebarItem = ({ sidebarExtended, item }) => {
 

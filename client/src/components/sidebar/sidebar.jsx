@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa'
 import { SidebarData } from './sidebar_data'
-import './css/sidebar.css'
+import '../../css/sidebar.css'
 import { SidebarItem } from './sidebarItem'
 
 export const Sidebar = () => {

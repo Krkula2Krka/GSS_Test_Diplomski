@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { getQuestionsForAreaQuery } from './queries/questionQueries'
+import { getQuestionsForAreaQuery } from '../queries/questionQueries'
 
 export const AreaDetails = () => {
   
