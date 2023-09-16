@@ -24,7 +24,8 @@ export const EditArea = props => {
   const { mutateAsync: editArea } = useMutation(editAreaMutation(queryClient))
 
   const onSubmit = async data => {
-    await editArea(id, data.area_name)
+    const areaData = { id: id, name: data.area_name}
+    await editArea(areaData)
     props.resetState()
   }
 
