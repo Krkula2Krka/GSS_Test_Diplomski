@@ -20,6 +20,16 @@
     font-size: 4rem;
 }
 
+.noAreaButton {
+    padding: 0;
+    border: none;
+    color: #060b26;
+}
+
+.noAreaButton:hover {
+    color: #1a83ff;
+}
+
 .confirmDeleteOrEditArea {
     display: flex;
     flex-direction: column;

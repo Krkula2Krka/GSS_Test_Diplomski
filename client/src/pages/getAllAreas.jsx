@@ -16,6 +16,7 @@ import { DeleteArea } from '../components/area/deleteArea'
 
 // queries
 import { deleteAreaMutation } from '../queries/areaQueries'
+import { NoArea } from '../components/area/noArea'
 
 export const GetAllAreas = () => {
 
@@ -24,12 +25,18 @@ export const GetAllAreas = () => {
   const queryClient = useQueryClient()
 
   const { data: areas } = useQuery(getAllAreasQuery())
+
   const areasWithDummyData = [...areas]
-  areasWithDummyData.push({ id: -1, area_name: 'dummy' })
+  if (areas.length !== 0)
+    areasWithDummyData.push({ id: -1, area_name: 'dummy' })
 
   const { mutateAsync: deleteArea } = useMutation(
     deleteAreaMutation(queryClient)
   )
+
+  const arr = []
+
+  if (arr.length === 0) return <NoArea />
 
   return (
     <div className='areas'>
@@ -39,13 +46,10 @@ export const GetAllAreas = () => {
             return (
               <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
                 {key + 1 !== areasWithDummyData.length ? (
-                  stateButton !== area.id + 100 &&
-                  stateButton !== area.id ? (
+                  stateButton !== area.id + 100 && stateButton !== area.id ? (
                     <Area
                       setEditState={() => setStateButton(area.id)}
-                      setDeleteState={() =>
-                        setStateButton(100 + area.id)
-                      }
+                      setDeleteState={() => setStateButton(100 + area.id)}
                       areaName={area.area_name}
                       id={area.id}
                     />
