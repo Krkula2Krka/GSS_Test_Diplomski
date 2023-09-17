@@ -1,0 +1,66 @@
+.question {
+    display: flex;
+    background-color: #060b26;
+    margin: 1rem;
+    padding: 1rem;
+    border: solid;
+    border-radius: 1rem;
+    justify-content: space-between;
+    width: 20rem;
+    height: 10rem;
+}
+
+.questionText {
+    color: #f5f5f5;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.confirmDeleteOrEditQuestion {
+    display: flex;
+    flex-direction: column;
+    background-color: #060b26;
+    margin: 1rem;
+    padding: 1rem;
+    border: solid;
+    border-radius: 1rem;
+    justify-content: space-between;
+    width: 20rem;
+    height: 10rem;
+}
+
+.confirmDeleteOrEditQuestion input:focus {
+    outline: none;
+}
+
+.questionConfirmQuestion {
+    color: #f5f5f5;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.questionText {
+    color: #f5f5f5;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.confirmButtons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.questionButton {
+    border: none;
+    padding-right: 1rem;
+    background-color: #060b26;
+    padding-bottom: 0.9rem;
+    color: #f5f5f5;
+}

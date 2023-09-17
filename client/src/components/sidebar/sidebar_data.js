@@ -1,6 +1,5 @@
 import React from 'react'
 import { AiFillHome } from 'react-icons/ai'
-import { BsQuestionOctagonFill } from 'react-icons/bs'
 import { RiBook2Fill, RiBookOpenFill } from 'react-icons/ri'
 import { GiNotebook } from 'react-icons/gi'
 
@@ -12,13 +11,7 @@ export const SidebarData = [
     cName: 'side-text'
   },
   {
-    title: 'Додај ново питање',
-    path: '/addQuestion',
-    icon: <BsQuestionOctagonFill />,
-    cName: 'side-text'
-  },
-  {
-    title: 'Литература',
+    title: 'База',
     collapsedIcon: <RiBook2Fill />,
     expandedIcon: <RiBookOpenFill />,
     cName: 'side-text',

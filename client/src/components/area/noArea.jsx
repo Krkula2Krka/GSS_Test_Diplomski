@@ -1,4 +1,7 @@
+// libraries
 import React, { useState } from 'react'
+
+// components
 import { AddArea } from './addArea'
 
 export const NoArea = () => {

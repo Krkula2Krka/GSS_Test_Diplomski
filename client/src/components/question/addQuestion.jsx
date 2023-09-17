@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate, generatePath } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { getAllAreasQuery } from '../queries/areaQueries'
+import { getAllAreasQuery } from '../../queries/areaQueries'
 
 export const AddQuestion = () => {
   

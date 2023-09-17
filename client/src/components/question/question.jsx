@@ -1,19 +1,19 @@
 // libraries
-import { Link } from 'react-router-dom'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // icons
 import { AiFillEdit } from 'react-icons/ai'
 import { RiDeleteBin6Fill } from 'react-icons/ri'
-import { FaQuestion } from 'react-icons/fa'
+import { FcAnswers } from 'react-icons/fc'
 
 // css
-import '../../css/getAllAreas.css'
+import '../../css/areaDetails.css'
 
-export const Area = props => {
+export const Question = props => {
   return (
-    <div className='area'>
-      <h1 className='areaName'>{props.areaName}</h1>
+    <div className='question'>
+      <h1 className='questionText'>{props.questionText}</h1>
       <div className='areaButtons'>
         <button onClick={props.setEditState} className='areaButton'>
           <AiFillEdit />
@@ -21,8 +21,8 @@ export const Area = props => {
         <button onClick={props.setDeleteState} className='areaButton'>
           <RiDeleteBin6Fill />
         </button>
-        <Link to={`/areaDetails/${props.id}`} className='areaButton'>
-          <FaQuestion />
+        <Link className='areaButton'>
+          <FcAnswers />
         </Link>
       </div>
     </div>

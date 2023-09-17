@@ -16,6 +16,7 @@ import { RxCrossCircled } from 'react-icons/rx'
 import '../../css/getAllAreas.css'
 
 export const AddArea = props => {
+  
   const queryClient = useQueryClient()
 
   const initialValues = {
