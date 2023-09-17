@@ -34,9 +34,7 @@ export const GetAllAreas = () => {
     deleteAreaMutation(queryClient)
   )
 
-  const arr = []
-
-  if (arr.length === 0) return <NoArea />
+  if (areasWithDummyData.length === 0) return <NoArea />
 
   return (
     <div className='areas'>
