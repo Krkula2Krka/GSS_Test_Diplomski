@@ -1,90 +1,109 @@
+// libraries
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
-import { useNavigate, generatePath } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { getAllAreasQuery } from '../../queries/areaQueries'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useParams } from 'react-router-dom'
 
-export const AddQuestion = () => {
-  
-  const { data: areas } = useQuery(getAllAreasQuery())
+// queries
+import { addQuestionMutation } from '../../queries/questionQueries'
 
-  const navigate = useNavigate()
+// icons
+import { BsPlusCircleFill } from 'react-icons/bs'
+import { BsFillCheckCircleFill } from 'react-icons/bs'
+import { RxCrossCircled } from 'react-icons/rx'
+
+export const AddQuestion = props => {
+
+  const queryClient = useQueryClient()
+
+  const { id } = useParams()
+
+  const { mutateAsync: addQuestion } = useMutation(
+    addQuestionMutation(queryClient, id)
+  )
 
   const validationSchema = Yup.object().shape({
     question_text: Yup.string().required('Обавезно поље'),
     difficulty: Yup.number(),
-    area_id: Yup.number(),
     importance: Yup.number()
   })
 
-  const onSubmit = data => {
-    axios.post('http://localhost:3001/questions', data).then(response => {
-      navigate(generatePath('/'))
-    })
+  const onSubmit = async data => {
+    const questionData = {
+      question_text: data.question_text,
+      difficulty: data.difficulty,
+      area_id: id,
+      importance: data.importance
+    }
+    await addQuestion(questionData)
+    props.resetState()
   }
 
   const initialValues = {
     question_text: '',
     difficulty: '1',
-    area_id: '1',
     importance: '1'
   }
 
   return (
     <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        <Form className='formContainer centered'>
-          <label>Текст питања: </label>
-          <ErrorMessage
-            name='question_text'
-            component='span'
-            className='errorMessage'
-          />
-          <Field name='question_text' />
-          <label>Тежина питања: </label>
-          <ErrorMessage
-            name='difficulty'
-            component='span'
-            className='errorMessage'
-          />
-          <Field as='select' name='difficulty'>
-            <option value='1'>Лако</option>
-            <option value='2'>Средње</option>
-            <option value='3'>Тешко</option>
-          </Field>
-          <label>Област: </label>
-          <ErrorMessage
-            name='area_id'
-            component='span'
-            className='errorMessage'
-          />
-          <Field as='select' name='area_id'>
-            {areas.map(({ id, area_name }) => (
-              <option key={id} value={id}>
-                {area_name}
-              </option>
-            ))}
-          </Field>
-          <label>Важност питања: </label>
-          <ErrorMessage
-            name='importance'
-            component='span'
-            className='errorMessage'
-          />
-          <Field as='select' name='importance'>
-            <option value='1'>Мање</option>
-            <option value='2'>Средње</option>
-            <option value='3'>Битно</option>
-          </Field>
-          <button type='submit'>Додај</button>
-        </Form>
-      </Formik>
+      {props.buttonPressed === 200 ? (
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          <Form className='confirmDeleteOrEditQuestion addQuestionForm'>
+            <label className='questionTextChange'>Текст питања:</label>
+            <ErrorMessage
+              name='question_text'
+              component='span'
+              className='errorMessage'
+            />
+            <Field name='question_text' />
+            <label className='questionTextChange'>Тежина питања:</label>
+            <ErrorMessage
+              name='difficulty'
+              component='span'
+              className='errorMessage'
+            />
+            <Field as='select' name='difficulty'>
+              <option value='1'>Лако</option>
+              <option value='2'>Средње</option>
+              <option value='3'>Тешко</option>
+            </Field>
+            <label className='questionTextChange'>Важност питања:</label>
+            <ErrorMessage
+              name='importance'
+              component='span'
+              className='errorMessage'
+            />
+            <Field as='select' name='importance'>
+              <option value='1'>Мање</option>
+              <option value='2'>Средње</option>
+              <option value='3'>Битно</option>
+            </Field>
+            <div className='confirmButtons'>
+              <button type='submit' className='questionButton'>
+                <BsFillCheckCircleFill />
+              </button>
+              <button onClick={props.resetState} className='questionButton'>
+                <RxCrossCircled />
+              </button>
+            </div>
+          </Form>
+        </Formik>
+      ) : (
+        <div className='question'>
+          <button
+            onClick={props.setAddNewQuestionState}
+            className='questionButton centeredQuestionButton'
+          >
+            <BsPlusCircleFill />
+          </button>
+        </div>
+      )}
     </div>
   )
 }

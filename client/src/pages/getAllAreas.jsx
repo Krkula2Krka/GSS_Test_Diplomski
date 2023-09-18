@@ -1,6 +1,6 @@
 // libraries
 import React, { useState } from 'react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 // queries
 import { getAllAreasQuery } from '../queries/areaQueries'
@@ -13,26 +13,17 @@ import { AddArea } from '../components/area/addArea'
 import { EditArea } from '../components/area/editArea'
 import { Area } from '../components/area/area'
 import { DeleteArea } from '../components/area/deleteArea'
-
-// queries
-import { deleteAreaMutation } from '../queries/areaQueries'
 import { NoArea } from '../components/area/noArea'
 
 export const GetAllAreas = () => {
 
   const [stateButton, setStateButton] = useState(0)
 
-  const queryClient = useQueryClient()
-
   const { data: areas } = useQuery(getAllAreasQuery())
 
   const areasWithDummyData = [...areas]
   if (areas.length !== 0)
     areasWithDummyData.push({ id: -1, area_name: 'dummy' })
-
-  const { mutateAsync: deleteArea } = useMutation(
-    deleteAreaMutation(queryClient)
-  )
 
   if (areasWithDummyData.length === 0) return <NoArea />
 
@@ -53,7 +44,7 @@ export const GetAllAreas = () => {
                     />
                   ) : stateButton > 100 ? (
                     <DeleteArea
-                      deleteArea={async () => await deleteArea(area.id)}
+                      id={area.id}
                       setDeleteState={() => setStateButton(0)}
                     />
                   ) : (

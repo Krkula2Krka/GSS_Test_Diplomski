@@ -1,5 +1,6 @@
 // libraries
 import React from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 // icons
 import { BsFillCheckCircleFill } from 'react-icons/bs'
@@ -8,7 +9,17 @@ import { RxCrossCircled } from 'react-icons/rx'
 // css
 import '../../css/getAllAreas.css'
 
+// queries
+import { deleteAreaMutation } from '../../queries/areaQueries'
+
 export const DeleteArea = props => {
+
+  const queryClient = useQueryClient()
+
+  const { mutateAsync: deleteArea } = useMutation(
+    deleteAreaMutation(queryClient)
+  )
+
   return (
     <div className='confirmDeleteOrEditArea'>
       <h1 className='areaConfirmQuestion'>Да ли сте сигурни?</h1>
@@ -18,7 +29,7 @@ export const DeleteArea = props => {
       </h6>
       <div className='confirmButtons'>
         <button
-          onClick={props.deleteArea}
+          onClick={async () => await deleteArea(props.id)}
           className='areaButton'
         >
           <BsFillCheckCircleFill />

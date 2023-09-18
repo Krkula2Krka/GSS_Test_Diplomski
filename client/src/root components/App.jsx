@@ -56,6 +56,14 @@ export const App = () => {
           loader: questionsLoader(queryClient)
         },
         {
+          path: '/questionDetails/:id',
+          lazy: async () => {
+            const { QuestionDetails } = await import('../pages/questionDetails')
+            return { Component: QuestionDetails }
+          },
+          loader: questionsLoader(queryClient)
+        },
+        {
           path: '/credentialsForTest',
           element: (
             <LoginForm
