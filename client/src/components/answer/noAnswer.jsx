@@ -2,23 +2,24 @@
 import React, { useState } from 'react'
 
 // components
-import { AddQuestion } from './addQuestion'
+import { AddAnswer } from './addAnswer'
 
-export const NoQuestion = () => {
+export const NoAnswer = () => {
 
   const [buttonClicked, setButtonClicked] = useState(false)
-  
-  return <div className='centered'>
-    <h1>
-        У бази тренутно нема ниједно питање везано за ову област. Кликните{' '}
-        <button onClick={() => setButtonClicked(true)} className='noAreaButton'>
+
+  return (
+    <div className='centered'>
+      <h1>
+        У бази тренутно нема ниједан одговор на ово пирање. Кликните{' '}
+        <button onClick={() => setButtonClicked(true)} className='noAnswerButton'>
           овде
         </button>{' '}
-        да додате питање!
+        да додате одговор!
       </h1>
       <div className='centeredHorizontal'>
         {buttonClicked ? (
-          <AddQuestion
+          <AddAnswer
             buttonPressed={200}
             resetState={() => setButtonClicked(false)}
           />
@@ -26,5 +27,6 @@ export const NoQuestion = () => {
           <div></div>
         )}
       </div>
-  </div>
+    </div>
+  )
 }

@@ -2,7 +2,6 @@ const { question } = require('../models')
 
 const createQuestionInService = newQuestion => {
   question.create(newQuestion)
-  return newQuestion
 }
 
 const deleteQuestionInService = id => {

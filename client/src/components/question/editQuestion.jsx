@@ -15,7 +15,7 @@ import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { RxCrossCircled } from 'react-icons/rx'
 
 export const EditQuestion = props => {
-
+  
   const id = props.areaId
 
   const queryClient = useQueryClient()

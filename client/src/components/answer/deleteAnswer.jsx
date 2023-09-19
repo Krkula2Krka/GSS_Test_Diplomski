@@ -7,33 +7,32 @@ import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { RxCrossCircled } from 'react-icons/rx'
 
 // css
-import '../../css/areaDetails.css'
+import '../../css/questionDetails.css'
 
 // queries
-import { deleteQuestionMutation } from '../../queries/questionQueries'
+import { deleteAnswerMutation } from '../../queries/answerQueries'
 
-export const DeleteQuestion = props => {
-  
+export const DeleteAnswer = props => {
   const queryClient = useQueryClient()
 
-  const { mutateAsync: deleteQuestion } = useMutation(
-    deleteQuestionMutation(queryClient, props.areaId)
+  const { mutateAsync: deleteAnswer } = useMutation(
+    deleteAnswerMutation(queryClient, props.questionId)
   )
 
   return (
-    <div className='confirmDeleteOrEditQuestion'>
-      <h1 className='questionConfirmQuestion'>Да ли сте сигурни?</h1>
-      <h6 className='answerMessage'>
+    <div className='confirmDeleteOrEditAnswer'>
+      <h1 className='answerConfirmQuestion'>Да ли сте сигурни?</h1>
+      <h6 className='questionMessage'>
         Брисањем овог питања обрисаћете све одговоре везане за ово питање.
       </h6>
       <div className='confirmButtons'>
         <button
-          onClick={async () => await deleteQuestion(props.questionId)}
-          className='answerButton'
+          onClick={async () => await deleteAnswer(props.answerId)}
+          className='questionButton'
         >
           <BsFillCheckCircleFill />
         </button>
-        <button onClick={props.setDeleteState} className='answerButton'>
+        <button onClick={props.setDeleteState} className='questionButton'>
           <RxCrossCircled />
         </button>
       </div>

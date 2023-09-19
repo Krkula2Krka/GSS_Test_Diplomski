@@ -25,20 +25,24 @@ export const questionsLoader =
     })
   }
 
-  export const deleteQuestionMutation = (queryClient, id) => ({
-    mutationFn: id => axios.post(`http://localhost:3001/questions/delete/${id}`),
-    onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id)),
-    onError: () => console.log('Unsuccessful deleteQuestion mutation!')
-  })
+export const deleteQuestionMutation = (queryClient, id) => ({
+  mutationFn: id => axios.post(`http://localhost:3001/questions/delete/${id}`),
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id)),
+  onError: () => console.log('Unsuccessful deleteQuestion mutation!')
+})
 
-  export const addQuestionMutation = (queryClient, id) => ({
-    mutationFn: data => axios.post('http://localhost:3001/questions', data),
-    onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id)),
-    onError: () => console.log('Unsuccessful addQuestion mutation!')
-  })
+export const addQuestionMutation = (queryClient, id) => ({
+  mutationFn: data => axios.post('http://localhost:3001/questions', data),
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id)),
+  onError: () => console.log('Unsuccessful addQuestion mutation!')
+})
 
-  export const editQuestionMutation = (queryClient, id) => ({
-    mutationFn: data => axios.post(`http://localhost:3001/questions/edit/${data.id}`, data.formData),
-    onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id)),
-    onError: () => console.log('Unsuccessful editQuestion mutation!')
-  })
+export const editQuestionMutation = (queryClient, id) => ({
+  mutationFn: data =>
+    axios.post(
+      `http://localhost:3001/questions/edit/${data.id}`,
+      data.formData
+    ),
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id)),
+  onError: () => console.log('Unsuccessful editQuestion mutation!')
+})

@@ -13,34 +13,28 @@ const getAllAreasInController = async (_, res) => {
 }
 
 const createAreaInController = async (req, res) => {
-  const newArea = req.body
-  await createAreaInService(newArea)
-  res.json(newArea)
+  await createAreaInService(req.body)
+  res.json({ message: 'Area successfully created' })
 }
 
 const deleteAreaInController = async (req, res) => {
-  const id = req.params.id
-  await deleteAreaInService(id)
-  res.json({ message: `Area with id ${id} deleted` })
+  await deleteAreaInService(req.params.id)
+  res.json({ message: `Area with id ${req.params.id} deleted` })
 }
 
 const getAreaByIdInController = async (req, res) => {
-  const id = req.params.id
-  const area = await getAreaByIdInService(id)
+  const area = await getAreaByIdInService(req.params.id)
   res.json(area)
 }
 
 const getPageOfAreasInController = async (req, res) => {
-  const pageNumber = req.params.pageNumber
-  const areas = await getPageOfAreasInService(pageNumber)
+  const areas = await getPageOfAreasInService(req.params.pageNumber)
   res.json(areas)
 }
 
 const editAreaInController = async (req, res) => {
-  const id = req.params.id
-  const name = req.params.name
-  await editAreaInService(id, name)
-  res.json({ message: `Area with id ${id} updated` })
+  await editAreaInService(req.params.id, req.params.name)
+  res.json({ message: `Area with id ${req.params.id} updated` })
 }
 
 module.exports = {

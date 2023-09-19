@@ -15,7 +15,6 @@ const getPageOfAreasInService = pageNumber => {
 
 const createAreaInService = newArea => {
   area.create(newArea)
-  return newArea
 }
 
 const deleteAreaInService = id => {

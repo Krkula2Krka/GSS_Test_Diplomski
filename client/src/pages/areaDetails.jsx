@@ -29,7 +29,8 @@ export const AreaDetails = () => {
       id: -1,
       question_text: 'dummy',
       difficulty: 1,
-      importance: 1
+      importance: 1,
+      area_id: id
     })
 
   if (questionsWithDummyData.length === 0) return <NoQuestion />

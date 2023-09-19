@@ -6,28 +6,23 @@ const {
 } = require('../service/questionsService')
 
 const createQuestionInController = async (req, res) => {
-  const newQuestion = req.body
-  await createQuestionInService(newQuestion)
-  res.json(newQuestion)
+  await createQuestionInService(req.body)
+  res.json({ message: 'Question successfully created' })
 }
 
 const getQuestionsForAreaInController = async (req, res) => {
-  const area_id = req.params.area_id
-  const questions = await getQuestionsForAreaInService(area_id)
+  const questions = await getQuestionsForAreaInService(req.params.area_id)
   res.json(questions)
 }
 
 const deleteQuestionInController = async (req, res) => {
-  const id = req.params.id
-  await deleteQuestionInService(id)
-  res.json({ message: `Question with id ${id} deleted` })
+  await deleteQuestionInService(req.params.id)
+  res.json({ message: `Question with id ${req.params.id} deleted` })
 }
 
 const editQuestionInController = async (req, res) => {
-  const id = req.params.id
-  const data = req.body
-  await editQuestionInService(id, data)
-  res.json({ message: `Question with id ${id} updated` })
+  await editQuestionInService(req.params.id, req.body)
+  res.json({ message: `Question with id ${req.params.id} updated` })
 }
 
 module.exports = {

@@ -19,6 +19,7 @@ import { Home } from '../pages/home'
 import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '..//queries/areaQueries'
 import { questionsLoader } from '../queries/questionQueries'
+import { answersLoader } from '../queries/answerQueries'
 
 export const App = () => {
 
@@ -61,7 +62,7 @@ export const App = () => {
             const { QuestionDetails } = await import('../pages/questionDetails')
             return { Component: QuestionDetails }
           },
-          loader: questionsLoader(queryClient)
+          loader: answersLoader(queryClient)
         },
         {
           path: '/credentialsForTest',
