@@ -48,6 +48,7 @@ export const QuestionDetails = () => {
                       setEditState={() => setStateButton(answer.id)}
                       setDeleteState={() => setStateButton(100 + answer.id)}
                       answerText={answer.answer_text}
+                      correctness={answer.correctness}
                       answerId={answer.id}
                     />
                   ) : stateButton > 100 ? (

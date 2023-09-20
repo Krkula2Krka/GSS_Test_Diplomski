@@ -31,10 +31,20 @@ const logoutUserForTestingInService = id => {
   user.update({logged_in_for_testing: false}, {where: {id: id}})
 }
 
+const getAllNonadminUsersInService = () => {
+  const users = user.findAll({
+    where: {
+      admin: false
+    }
+  })
+  return users
+}
+
 module.exports = {
   createUserInService: createUserInService,
   checkIfUserExistsInService: checkIfUserExistsInService,
   loginUserForTestingInService: loginUserForTestingInService,
   logoutUserForTestingInService: logoutUserForTestingInService,
-  checkIfUserIsLoggedInForTestingInService: checkIfUserIsLoggedInForTestingInService
+  checkIfUserIsLoggedInForTestingInService: checkIfUserIsLoggedInForTestingInService,
+  getAllNonadminUsersInService: getAllNonadminUsersInService
 }

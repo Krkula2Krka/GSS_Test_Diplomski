@@ -17,7 +17,8 @@ import { Home } from '../pages/home'
 
 // queries
 import { loggedInLoader } from '../queries/userQueries'
-import { areasLoader } from '..//queries/areaQueries'
+import { areasLoader } from '../queries/areaQueries'
+import { usersLoader } from '../queries/userQueries'
 import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
 
@@ -47,6 +48,14 @@ export const App = () => {
             return { Component: GetAllAreas }
           },
           loader: areasLoader(queryClient)
+        },
+        {
+          path: '/getAllUsers',
+          lazy: async () => {
+            const { GetAllUsers } = await import('../pages/getAllUsers')
+            return { Component: GetAllUsers }
+          },
+          loader: usersLoader(queryClient)
         },
         {
           path: '/areaDetails/:id',

@@ -11,7 +11,14 @@ import '../../css/questionDetails.css'
 export const Answer = props => {
   return (
     <div className='answer'>
-      <h1 className='answerText'>{props.answerText}</h1>
+      <div className='answerTexts'>
+        <h1 className='answerText'>{props.answerText}</h1>
+        {props.correctness ? (
+          <h1 className='answerText trueAnswer'>Овај одговор је тачан.</h1>
+        ) : (
+          <h1 className='answerText falseAnswer'>Овај одговор је нетачан.</h1>
+        )}
+      </div>
       <div className='answernButtons'>
         <button onClick={props.setEditState} className='answerButton'>
           <AiFillEdit />

@@ -4,8 +4,11 @@ const {
   createUserInController,
   loginUserForTestingInController,
   checkIfUserIsLoggedInForTestingInController,
-  logoutUserForTestingInController
+  logoutUserForTestingInController,
+  getAllNonadminUsersInController
 } = require('../controllers/usersController')
+
+router.get('/', getAllNonadminUsersInController)
 
 router.post('/', createUserInController)
 

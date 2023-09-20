@@ -3,7 +3,8 @@ const {
   checkIfUserExistsInService,
   loginUserForTestingInService,
   logoutUserForTestingInService,
-  checkIfUserIsLoggedInForTestingInService
+  checkIfUserIsLoggedInForTestingInService,
+  getAllNonadminUsersInService
 } = require('../service/usersService')
 const bcrypt = require('bcrypt')
 
@@ -57,10 +58,16 @@ const logoutUserForTestingInController = async (req, res) => {
   res.json(`User with id ${id} logged out for testing!`)
 }
 
+const getAllNonadminUsersInController = async (_, res) => {
+  const users = await getAllNonadminUsersInService()
+  res.json(users)
+}
+
 module.exports = {
   createUserInController: createUserInController,
   loginUserForTestingInController: loginUserForTestingInController,
   checkIfUserIsLoggedInForTestingInController:
     checkIfUserIsLoggedInForTestingInController,
-  logoutUserForTestingInController: logoutUserForTestingInController
+  logoutUserForTestingInController: logoutUserForTestingInController,
+  getAllNonadminUsersInController: getAllNonadminUsersInController
 }
