@@ -19,6 +19,6 @@ router.post('/', createAreaInController)
 
 router.post('/delete/:id', deleteAreaInController)
 
-router.post('/edit/:id/:name', editAreaInController)
+router.post('/edit/:id', editAreaInController)
 
 module.exports = router

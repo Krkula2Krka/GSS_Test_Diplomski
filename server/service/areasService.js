@@ -25,9 +25,9 @@ const deleteAreaInService = id => {
   })
 }
 
-const editAreaInService = (id, name) => {
+const editAreaInService = (id, data) => {
   area.update(
-    { area_name: name },
+    { area_name: data.area_name },
     {
       where: {
         id: id

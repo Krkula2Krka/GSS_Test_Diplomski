@@ -16,8 +16,6 @@ import { RxCrossCircled } from 'react-icons/rx'
 
 export const EditArea = props => {
 
-  const id = props.id
-
   const queryClient = useQueryClient()
 
   const initialValues = {
@@ -31,7 +29,7 @@ export const EditArea = props => {
   const { mutateAsync: editArea } = useMutation(editAreaMutation(queryClient))
 
   const onSubmit = async data => {
-    const areaData = { id: id, name: data.area_name}
+    const areaData = { id: props.id, formData: data}
     await editArea(areaData)
     props.resetState()
   }

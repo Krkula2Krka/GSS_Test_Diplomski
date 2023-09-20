@@ -33,7 +33,7 @@ const getPageOfAreasInController = async (req, res) => {
 }
 
 const editAreaInController = async (req, res) => {
-  await editAreaInService(req.params.id, req.params.name)
+  await editAreaInService(req.params.id, req.body)
   res.json({ message: `Area with id ${req.params.id} updated` })
 }
 
