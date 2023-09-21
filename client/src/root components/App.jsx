@@ -10,6 +10,8 @@ import { LoginForm } from '../components/loginForm'
 import { Root } from './root'
 import { PageNotFound } from '../components/error/pageNotFound'
 import { WrongCredentials } from '../components/error/wrongCredentials'
+import { RegistrationForm } from '../components/registrationForm'
+import { UserAlreadyExists } from '../components/error/userAlreadyExists'
 
 // Pages
 import { TakeTest } from '../pages/takeTest'
@@ -75,29 +77,19 @@ export const App = () => {
         },
         {
           path: '/credentialsForTest',
-          element: (
-            <LoginForm
-              navigateToLocation='/takeTest'
-              mainHeaderContent='Унесите ваше податке да би сте наставили:'
-              isRegestration={false}
-              submitButtonContent='Настави'
-            />
-          )
+          element: <LoginForm navigateToLocation='/takeTest' />
         },
         {
           path: '/wrongCredentials',
           element: <WrongCredentials />
         },
         {
+          path: '/userAlreadyExists/:GSS_identification',
+          element: <UserAlreadyExists />
+        },
+        {
           path: '/registration',
-          element: (
-            <LoginForm
-              navigateToLocation='/'
-              mainHeaderContent='Регистрација:'
-              isRegestration={true}
-              submitButtonContent='Региструј се'
-            />
-          )
+          element: <RegistrationForm />
         }
       ]
     },

@@ -6,48 +6,26 @@ const {
   checkIfUserIsLoggedInForTestingInService,
   getAllNonadminUsersInService
 } = require('../service/usersService')
-const bcrypt = require('bcrypt')
 
 const createUserInController = async (req, res) => {
-  const newUser = req.body
-  await bcrypt.hash(newUser.GSS_identification, 10).then(hash => {
-    newUser.GSS_identification = hash
-  })
-  await createUserInService(newUser)
-  res.json('User created!')
+
+  const [user, created] = await createUserInService(req.body)
+  if (created) res.json({ userExists: false })
+  else
+    res.json({ GSS_identification: user.GSS_identification, userExists: true })
 }
 
 const loginUserForTestingInController = async (req, res) => {
-  const user = req.body
-  const users = await checkIfUserExistsInService(user)
-  if (users.length === 0) {
-    res.json({ loginSuccessful: false, message: 'User does not exist!', id: 0 })
-  }
-  for (let i = 0; i < users.length; i++) {
-    bcrypt
-      .compare(user.GSS_identification, users[i].GSS_identification)
-      .then(result => {
-        if (result) {
-          loginUserForTestingInService(users[i].id)
-          res.json({
-            loginSuccessful: true,
-            message: `User with id ${users[i].id} logged in for testing!`,
-            id: users[i].id
-          })
-        } else {
-          res.json({
-            loginSuccessful: false,
-            message: 'Wrong password!',
-            id: 0
-          })
-        }
-      })
+  const user = await checkIfUserExistsInService(req.params.GSS_identification)
+  if (user === null) res.json({ loginSuccessful: false })
+  else {
+    await loginUserForTestingInService(user.GSS_identification)
+    res.json({ loginSuccessful: true })
   }
 }
 
 const checkIfUserIsLoggedInForTestingInController = async (req, res) => {
-  const id = req.params.id
-  const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(id)
+  const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(req.params.id)
   if (userLoggedIn) res.json({ loggedIn: true })
   else res.json({ loggedIn: false })
 }

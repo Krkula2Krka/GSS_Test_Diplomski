@@ -1,34 +1,50 @@
 const { user } = require('../models')
 
 const createUserInService = newUser => {
-  user.create(newUser)
-}
-
-const checkIfUserExistsInService = checkUser => {
-  return user.findAll({
+  return user.findOrCreate({
     where: {
-      first_name: checkUser.first_name,
-      last_name: checkUser.last_name,
-      nickname: checkUser.nickname
+      GSS_identification: newUser.GSS_identification
+    },
+    defaults: {
+      GSS_identification: newUser.GSS_identification,
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      nickname: newUser.nickname,
+      logged_in_for_testing: false,
+      admin: false
     }
   })
 }
 
-const loginUserForTestingInService = id => {
-  user.update({logged_in_for_testing: true}, {where: {id: id}})
-}
-
-const checkIfUserIsLoggedInForTestingInService = id => {
+const checkIfUserExistsInService = GSS_identification => {
   return user.findOne({
     where: {
-      id: id,
+      GSS_identification: GSS_identification
+    }
+  })
+}
+
+const loginUserForTestingInService = GSS_identification => {
+  user.update(
+    { logged_in_for_testing: true },
+    { where: { GSS_identification: GSS_identification } }
+  )
+}
+
+const checkIfUserIsLoggedInForTestingInService = GSS_identification => {
+  return user.findOne({
+    where: {
+      GSS_identification: GSS_identification,
       logged_in_for_testing: true
     }
   })
 }
 
-const logoutUserForTestingInService = id => {
-  user.update({logged_in_for_testing: false}, {where: {id: id}})
+const logoutUserForTestingInService = GSS_identification => {
+  user.update(
+    { logged_in_for_testing: false },
+    { where: { GSS_identification: GSS_identification } }
+  )
 }
 
 const getAllNonadminUsersInService = () => {
@@ -45,6 +61,7 @@ module.exports = {
   checkIfUserExistsInService: checkIfUserExistsInService,
   loginUserForTestingInService: loginUserForTestingInService,
   logoutUserForTestingInService: logoutUserForTestingInService,
-  checkIfUserIsLoggedInForTestingInService: checkIfUserIsLoggedInForTestingInService,
+  checkIfUserIsLoggedInForTestingInService:
+    checkIfUserIsLoggedInForTestingInService,
   getAllNonadminUsersInService: getAllNonadminUsersInService
 }

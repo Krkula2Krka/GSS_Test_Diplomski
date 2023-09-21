@@ -1,44 +1,40 @@
+// libraries
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
-import { useNavigate, generatePath, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
+
+// css
 import '../css/loginForm.css'
 
-export const LoginForm = props => {
+// queries
+import { loginForTestingMutation } from '../queries/userQueries'
+
+export const LoginForm = () => {
 
   const navigate = useNavigate()
 
   const initialValues = {
-    first_name: '',
-    last_name: '',
-    nickname: '',
     GSS_identification: ''
   }
 
+  const { mutateAsync: loginForTesting } = useMutation(
+    loginForTestingMutation()
+  )
+
   const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required('Обавезно поље'),
-    last_name: Yup.string().required('Обавезно поље'),
-    nickname: Yup.string().required('Обавезно поље'),
-    GSS_identification: Yup.string().required('Обавезно поље')
+    GSS_identification: Yup.number()
+      .integer('Број мора бити цео')
+      .required('Обавезно поље')
+      .min(1, 'Број мора бити позитиван')
   })
 
-  const onSubmit = data => {
-    if (props.isRegestration)
-      axios
-        .post('http://localhost:3001/auth', data)
-        .then(() => navigate('/'))
-    else
-      axios.post('http://localhost:3001/auth/login', data).then(response => {
-        if (response.data.loginSuccessful) {
-          navigate('/')
-          window.open(
-            generatePath(`${props.navigateToLocation}/${response.data.id}`)
-          )
-        } else {
-          navigate('/wrongCredentials')
-        }
-      })
+  const onSubmit = async data => {
+    const res = await loginForTesting(data.GSS_identification)
+    if (res.data.loginSuccessful) navigate(`/takeTest/${data.GSS_identification}`)
+    else navigate('/wrongCredentials')
   }
 
   return (
@@ -48,45 +44,25 @@ export const LoginForm = props => {
       onSubmit={onSubmit}
     >
       <Form className='formContainer centered'>
-        <h1>{props.mainHeaderContent}</h1>
-        <label>Име: </label>
-        <ErrorMessage
-          name='first_name'
-          component='span'
-          className='errorMessage'
-        />
-        <Field name='first_name' />
-        <label>Презиме: </label>
-        <ErrorMessage
-          name='last_name'
-          component='span'
-          className='errorMessage'
-        />
-        <Field name='last_name' />
-        <label>Надимак: </label>
-        <ErrorMessage
-          name='nickname'
-          component='span'
-          className='errorMessage'
-        />
-        <Field name='nickname' />
-        <label>ГСС број: </label>
+        <h1>Унесите Ваш ГСС број да би сте наставили:</h1>
         <ErrorMessage
           name='GSS_identification'
           component='span'
           className='errorMessage'
         />
-        <Field name='GSS_identification' />
-        <button type='submit'>{props.submitButtonContent}</button>
-        {!props.isRegestration && (
-          <h1>
-            Уколико немате налог кликните да се{' '}
-            <Link to='/registration' className='link'>
-              овде
-            </Link>{' '}
-            региструјете!
-          </h1>
-        )}
+        <Field
+          type='number'
+          name='GSS_identification'
+          onWheel={e => e.target.blur()}
+        />
+        <button type='submit'>Настави</button>
+        <h1>
+          Уколико немате налог кликните да се{' '}
+          <Link to='/registration' className='link'>
+            овде
+          </Link>{' '}
+          региструјете!
+        </h1>
       </Form>
     </Formik>
   )

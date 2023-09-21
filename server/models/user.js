@@ -1,9 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const user = sequelize.define('user', {
-        id: {
+        GSS_identification: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true,
             allowNull: false
         },
         first_name: {
@@ -17,11 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         nickname: {
             type: DataTypes.STRING,
             allowNull: true
-        },
-        GSS_identification: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            unique: true
         },
         logged_in_for_testing: {
             type: DataTypes.BOOLEAN,

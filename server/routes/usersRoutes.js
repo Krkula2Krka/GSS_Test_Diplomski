@@ -12,7 +12,7 @@ router.get('/', getAllNonadminUsersInController)
 
 router.post('/', createUserInController)
 
-router.post('/login', loginUserForTestingInController)
+router.post('/loginForTesting/:GSS_identification', loginUserForTestingInController)
 
 router.get('/checkLoginForTesting/:id', checkIfUserIsLoggedInForTestingInController)
 
