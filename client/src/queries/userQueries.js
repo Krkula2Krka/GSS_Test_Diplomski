@@ -60,5 +60,5 @@ export const loginForTestingMutation = () => ({
 
 export const createUserMutation = () => ({
   mutationFn: data => axios.post('http://localhost:3001/users/', data),
-  onError: () => console.log('Error in loginForTesting mutation')
+  onError: () => console.log('Error in createUser mutation')
 })

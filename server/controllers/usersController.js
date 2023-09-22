@@ -17,10 +17,14 @@ const createUserInController = async (req, res) => {
 
 const loginUserForTestingInController = async (req, res) => {
   const user = await checkIfUserExistsInService(req.params.GSS_identification)
-  if (user === null) res.json({ loginSuccessful: false })
+  if (user === null) res.json({ loginSuccessful: false, alreadyLoggedIn: false })
   else {
-    await loginUserForTestingInService(user.GSS_identification)
-    res.json({ loginSuccessful: true })
+    const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(req.params.GSS_identification)
+    if (userLoggedIn) res.json({ loginSuccessful: false, alreadyLoggedIn: true })
+    else {
+      await loginUserForTestingInService(user.GSS_identification)
+      res.json({ loginSuccessful: true })
+    }
   }
 }
 

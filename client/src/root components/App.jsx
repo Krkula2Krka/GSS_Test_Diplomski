@@ -12,6 +12,7 @@ import { PageNotFound } from '../components/error/pageNotFound'
 import { WrongCredentials } from '../components/error/wrongCredentials'
 import { RegistrationForm } from '../components/registrationForm'
 import { UserAlreadyExists } from '../components/error/userAlreadyExists'
+import { UserAlreadyLoggedIn } from '../components/error/userAlreadyLoggedIn'
 
 // Pages
 import { TakeTest } from '../pages/takeTest'
@@ -86,6 +87,10 @@ export const App = () => {
         {
           path: '/userAlreadyExists/:GSS_identification',
           element: <UserAlreadyExists />
+        },
+        {
+          path: '/userAlreadyLoggedIn/:GSS_identification',
+          element: <UserAlreadyLoggedIn />
         },
         {
           path: '/registration',

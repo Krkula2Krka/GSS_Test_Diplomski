@@ -33,8 +33,12 @@ export const LoginForm = () => {
 
   const onSubmit = async data => {
     const res = await loginForTesting(data.GSS_identification)
-    if (res.data.loginSuccessful) navigate(`/takeTest/${data.GSS_identification}`)
-    else navigate('/wrongCredentials')
+    if (res.data.loginSuccessful)
+      navigate(`/takeTest/${data.GSS_identification}`)
+    else {
+      if (res.data.alreadyLoggedIn) navigate(`/userAlreadyLoggedIn/${data.GSS_identification}`)
+      else navigate('/wrongCredentials')
+    }
   }
 
   return (
