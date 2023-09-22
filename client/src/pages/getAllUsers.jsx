@@ -1,5 +1,5 @@
 // libraries
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTable } from 'react-table'
 import { useQuery } from '@tanstack/react-query'
 
@@ -9,7 +9,14 @@ import { getAllNonadminUsersQuery } from '../queries/userQueries'
 // css
 import '../css/getAllUsers.css'
 
+// icons
+import { AiFillEdit } from 'react-icons/ai'
+import { RiDeleteBin6Fill } from 'react-icons/ri'
+import { FaHandHoldingMedical } from 'react-icons/fa'
+
 export const GetAllUsers = () => {
+
+  const [stateButton, setStateButton] = useState(0)
 
   const { data: users } = useQuery(getAllNonadminUsersQuery())
 
@@ -31,6 +38,22 @@ export const GetAllUsers = () => {
       {
         Header: 'Надимак',
         accessor: 'nickname'
+      },
+      {
+        Header: 'Дугмићи',
+        Cell: () => (
+          <div className='userButtons'>
+            <button className='userButton'>
+              <AiFillEdit />
+            </button>
+            <button className='userButton'>
+              <RiDeleteBin6Fill />
+            </button>
+            <button className='userButton'>
+              <FaHandHoldingMedical />
+            </button>
+          </div>
+        )
       }
     ],
     []
@@ -40,7 +63,7 @@ export const GetAllUsers = () => {
     useTable({ columns: tableColumns, data: tableData })
 
   return (
-    <div className='centered'>
+    <div className='tableContainer centeredHorizontal'>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -57,7 +80,9 @@ export const GetAllUsers = () => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}> {cell.render('Cell')} </td>
+                  <td {...cell.getCellProps()} onClick={() => setStateButton(cell.row.id)}>
+                    {stateButton === cell.row.id ? <div></div> : cell.render('Cell')}
+                  </td>
                 ))}
               </tr>
             )
