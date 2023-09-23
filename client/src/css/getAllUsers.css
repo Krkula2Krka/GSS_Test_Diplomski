@@ -2,6 +2,11 @@
     padding-top: 2em;
 }
 
+thead {
+    position: sticky;
+    top: 0;
+}
+
 th, td {
     padding: 0.5rem;
     background-color: #060b26;
@@ -27,4 +32,47 @@ th, td {
 
 .test {
     padding: 1rem;
+}
+
+.editRow {
+    background-color: #060b26;
+    color: #f5f5f5;
+}
+
+.confirmDeleteOrEditUser {
+    display: flex;
+    flex-direction: column;
+    background-color: #060b26;
+    margin: 1rem;
+    padding: 1rem;
+    border: solid;
+    border-radius: 1rem;
+    justify-content: space-between;
+    width: 30rem;
+}
+
+.label {
+    color: #f5f5f5;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.confirmButtons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.userButton {
+    border: none;
+    padding-right: 1rem;
+    background-color: #060b26;
+    padding-bottom: 0.9rem;
+    color: #f5f5f5;
+}
+
+.confirmDeleteOrEditUser input:focus {
+    outline: none;
 }

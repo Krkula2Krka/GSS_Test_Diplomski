@@ -28,6 +28,5 @@ module.exports = function(sequelize, DataTypes) {
             foreignKey: 'question_id'
         })
     }
-
     return question
 }

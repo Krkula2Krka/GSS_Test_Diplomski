@@ -14,6 +14,9 @@ import { AiFillEdit } from 'react-icons/ai'
 import { RiDeleteBin6Fill } from 'react-icons/ri'
 import { FaHandHoldingMedical } from 'react-icons/fa'
 
+// components
+import { EditUser } from '../components/user/editUser'
+
 export const GetAllUsers = () => {
 
   const [stateButton, setStateButton] = useState(0)
@@ -40,10 +43,19 @@ export const GetAllUsers = () => {
         accessor: 'nickname'
       },
       {
+        Header: 'Администратор',
+        accessor: d => (d.admin ? <div>Да</div> : <div>Не</div>)
+      },
+      {
         Header: 'Дугмићи',
-        Cell: () => (
+        Cell: ({ cell }) => (
           <div className='userButtons'>
-            <button className='userButton'>
+            <button
+              className='userButton'
+              onClick={() =>
+                setStateButton(cell.row.original.GSS_identification)
+              }
+            >
               <AiFillEdit />
             </button>
             <button className='userButton'>
@@ -63,32 +75,41 @@ export const GetAllUsers = () => {
     useTable({ columns: tableColumns, data: tableData })
 
   return (
-    <div className='tableContainer centeredHorizontal'>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+    <div>
+      {stateButton === 0 ? (
+        <div className='tableContainer centeredHorizontal'>
+          <table {...getTableProps()}>
+            <thead>
+              {headerGroups.map(headerGroup => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map(column => (
+                    <th {...column.getHeaderProps()}>
+                      {column.render('Header')}
+                    </th>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()} onClick={() => setStateButton(cell.row.id)}>
-                    {stateButton === cell.row.id ? <div></div> : cell.render('Cell')}
-                  </td>
-                ))}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map(row => {
+                prepareRow(row)
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map(cell => (
+                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    ))}
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <EditUser
+          GSS_identification={stateButton}
+          resetState={() => setStateButton(0)}
+        />
+      )}
     </div>
   )
 }

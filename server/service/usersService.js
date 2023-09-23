@@ -47,13 +47,24 @@ const logoutUserForTestingInService = GSS_identification => {
   )
 }
 
-const getAllNonadminUsersInService = () => {
-  const users = user.findAll({
-    where: {
-      admin: false
+const getAllUsersInService = () => {
+  return user.findAll()
+}
+
+const editUserInService = (GSS_identification, data) => {
+  user.update(
+    {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      nickname: data.nickname,
+      admin: data.admin
+    },
+    {
+      where: {
+        GSS_identification: GSS_identification
+      }
     }
-  })
-  return users
+  )
 }
 
 module.exports = {
@@ -63,5 +74,6 @@ module.exports = {
   logoutUserForTestingInService: logoutUserForTestingInService,
   checkIfUserIsLoggedInForTestingInService:
     checkIfUserIsLoggedInForTestingInService,
-  getAllNonadminUsersInService: getAllNonadminUsersInService
+  getAllUsersInService: getAllUsersInService,
+  editUserInService: editUserInService
 }

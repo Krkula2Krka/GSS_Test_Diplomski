@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 // css
 import '../css/loginForm.css'
@@ -14,6 +15,8 @@ import { loginForTestingMutation } from '../queries/userQueries'
 
 export const LoginForm = () => {
 
+  const queryClient = useQueryClient()
+
   const navigate = useNavigate()
 
   const initialValues = {
@@ -21,7 +24,7 @@ export const LoginForm = () => {
   }
 
   const { mutateAsync: loginForTesting } = useMutation(
-    loginForTestingMutation()
+    loginForTestingMutation(queryClient)
   )
 
   const validationSchema = Yup.object().shape({

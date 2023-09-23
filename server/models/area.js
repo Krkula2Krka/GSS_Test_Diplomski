@@ -20,6 +20,5 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'area_id'
         })
     }
-
     return area
 }

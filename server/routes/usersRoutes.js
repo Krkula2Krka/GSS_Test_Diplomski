@@ -5,10 +5,11 @@ const {
   loginUserForTestingInController,
   checkIfUserIsLoggedInForTestingInController,
   logoutUserForTestingInController,
-  getAllNonadminUsersInController
+  getAllUsersInController,
+  editUserInController
 } = require('../controllers/usersController')
 
-router.get('/', getAllNonadminUsersInController)
+router.get('/', getAllUsersInController)
 
 router.post('/', createUserInController)
 
@@ -17,5 +18,7 @@ router.post('/loginForTesting/:GSS_identification', loginUserForTestingInControl
 router.get('/checkLoginForTesting/:id', checkIfUserIsLoggedInForTestingInController)
 
 router.post('/logoutForTesting/:id', logoutUserForTestingInController)
+
+router.post('/edit/:GSS_identification', editUserInController)
 
 module.exports = router
