@@ -1,6 +1,6 @@
 // libraries
 import React, { useMemo, useState } from 'react'
-import { useTable } from 'react-table'
+import { useTable, useSortBy } from 'react-table'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 
@@ -14,6 +14,7 @@ import '../css/getAllUsers.css'
 import { AiFillEdit } from 'react-icons/ai'
 import { RiDeleteBin6Fill } from 'react-icons/ri'
 import { FaHandHoldingMedical } from 'react-icons/fa'
+import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai'
 
 // components
 import { EditUser } from '../components/user/editUser'
@@ -21,7 +22,7 @@ import { DeleteUser } from '../components/user/deleteUser'
 import { NoUser } from '../components/user/noUser'
 
 export const GetAllUsers = () => {
-  
+
   const [stateButton, setStateButton] = useState(0)
 
   const { data: users } = useQuery(getAllUsersQuery())
@@ -87,7 +88,7 @@ export const GetAllUsers = () => {
   )
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns: tableColumns, data: tableData })
+    useTable({ columns: tableColumns, data: tableData }, useSortBy)
 
   if (usersArray.length === 0) return <NoUser />
 
@@ -98,7 +99,16 @@ export const GetAllUsers = () => {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  <span>
+                    {column.isSortedDesc ? (
+                      <AiOutlineSortDescending />
+                    ) : (
+                      <AiOutlineSortAscending />
+                    )}
+                  </span>
+                </th>
               ))}
             </tr>
           ))}
@@ -110,7 +120,10 @@ export const GetAllUsers = () => {
               <tr {...row.getRowProps()}>
                 {stateButton === row.original.GSS_identification ? (
                   <td colSpan={6}>
-                    <EditUser resetState={() => setStateButton(0)} />
+                    <EditUser
+                      GSS_identification={row.original.GSS_identification}
+                      resetState={() => setStateButton(0)}
+                    />
                   </td>
                 ) : stateButton - 1000000000 ===
                   row.original.GSS_identification ? (
