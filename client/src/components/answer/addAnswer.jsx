@@ -44,7 +44,7 @@ export const AddAnswer = props => {
 
   return (
     <div>
-      {props.buttonPressed === 200 ? (
+      {props.buttonPressed === 1000000200 ? (
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

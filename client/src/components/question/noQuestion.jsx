@@ -5,11 +5,12 @@ import React, { useState } from 'react'
 import { AddQuestion } from './addQuestion'
 
 export const NoQuestion = () => {
-
-  const [buttonClicked, setButtonClicked] = useState(false)
   
-  return <div className='centered'>
-    <h1>
+  const [buttonClicked, setButtonClicked] = useState(false)
+
+  return (
+    <div className='centered'>
+      <h1>
         У бази тренутно нема ниједно питање везано за ову област. Кликните{' '}
         <button onClick={() => setButtonClicked(true)} className='noAreaButton'>
           овде
@@ -26,5 +27,6 @@ export const NoQuestion = () => {
           <div></div>
         )}
       </div>
-  </div>
+    </div>
+  )
 }

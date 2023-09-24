@@ -67,6 +67,14 @@ const editUserInService = (GSS_identification, data) => {
   )
 }
 
+const deleteUserInService = GSS_identification => {
+  user.destroy({
+    where: {
+      GSS_identification: GSS_identification
+    }
+  })
+}
+
 module.exports = {
   createUserInService: createUserInService,
   checkIfUserExistsInService: checkIfUserExistsInService,
@@ -75,5 +83,6 @@ module.exports = {
   checkIfUserIsLoggedInForTestingInService:
     checkIfUserIsLoggedInForTestingInService,
   getAllUsersInService: getAllUsersInService,
-  editUserInService: editUserInService
+  editUserInService: editUserInService,
+  deleteUserInService: deleteUserInService
 }

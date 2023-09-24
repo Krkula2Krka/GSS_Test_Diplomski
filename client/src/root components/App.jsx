@@ -61,6 +61,14 @@ export const App = () => {
           loader: usersLoader(queryClient)
         },
         {
+          path: '/userResults/:GSS_identification',
+          lazy: async () => {
+            const { UserResults } = await import('../pages/userResults')
+            return { Component: UserResults }
+          },
+          loader: questionsLoader(queryClient)
+        },
+        {
           path: '/areaDetails/:id',
           lazy: async () => {
             const { AreaDetails } = await import('../pages/areaDetails')

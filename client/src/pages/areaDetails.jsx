@@ -43,15 +43,15 @@ export const AreaDetails = () => {
             return (
               <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
                 {key + 1 !== questionsWithDummyData.length ? (
-                  stateButton !== question.id + 100 &&
+                  stateButton !== question.id + 1000000000 &&
                   stateButton !== question.id ? (
                     <Question
                       setEditState={() => setStateButton(question.id)}
-                      setDeleteState={() => setStateButton(100 + question.id)}
+                      setDeleteState={() => setStateButton(1000000000 + question.id)}
                       questionText={question.question_text}
                       questionId={question.id}
                     />
-                  ) : stateButton > 100 ? (
+                  ) : stateButton > 1000000000 ? (
                     <DeleteQuestion
                       areaId={id}
                       questionId={question.id}
@@ -67,7 +67,7 @@ export const AreaDetails = () => {
                 ) : (
                   <AddQuestion
                     buttonPressed={stateButton}
-                    setAddNewQuestionState={() => setStateButton(200)}
+                    setAddNewQuestionState={() => setStateButton(1000000200)}
                     resetState={() => setStateButton(0)}
                   />
                 )}

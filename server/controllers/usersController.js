@@ -5,7 +5,8 @@ const {
   logoutUserForTestingInService,
   checkIfUserIsLoggedInForTestingInService,
   getAllUsersInService,
-  editUserInService
+  editUserInService,
+  deleteUserInService
 } = require('../service/usersService')
 
 const createUserInController = async (req, res) => {
@@ -30,24 +31,29 @@ const loginUserForTestingInController = async (req, res) => {
 }
 
 const checkIfUserIsLoggedInForTestingInController = async (req, res) => {
-  const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(req.params.id)
+  const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(req.params.GSS_identification)
   if (userLoggedIn) res.json({ loggedIn: true })
   else res.json({ loggedIn: false })
 }
 
 const logoutUserForTestingInController = async (req, res) => {
-  await logoutUserForTestingInService(req.params.id)
-  res.json(`User with id ${req.params.id} logged out for testing!`)
+  await logoutUserForTestingInService(req.params.GSS_identification)
+  res.json()
 }
 
 const getAllUsersInController = async (_, res) => {
-  const users = await getAllNonadminUsersInService()
+  const users = await getAllUsersInService()
   res.json(users)
 }
 
 const editUserInController = async (req, res) => {
   await editUserInService(req.params.GSS_identification, req.body)
-  res.json({ message: `Area with id ${req.params.GSS_identification} updated` })
+  res.json()
+}
+
+const deleteUserInController = async (req, res) => {
+  await deleteUserInService(req.params.GSS_identification)
+  res.json()
 }
 
 module.exports = {
@@ -57,5 +63,6 @@ module.exports = {
     checkIfUserIsLoggedInForTestingInController,
   logoutUserForTestingInController: logoutUserForTestingInController,
   getAllUsersInController: getAllUsersInController,
-  editUserInController: editUserInController
+  editUserInController: editUserInController,
+  deleteUserInController: deleteUserInController
 }

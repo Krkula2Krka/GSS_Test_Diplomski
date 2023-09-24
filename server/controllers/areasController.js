@@ -14,12 +14,12 @@ const getAllAreasInController = async (_, res) => {
 
 const createAreaInController = async (req, res) => {
   await createAreaInService(req.body)
-  res.json({ message: 'Area successfully created' })
+  res.json()
 }
 
 const deleteAreaInController = async (req, res) => {
   await deleteAreaInService(req.params.id)
-  res.json({ message: `Area with id ${req.params.id} deleted` })
+  res.json()
 }
 
 const getAreaByIdInController = async (req, res) => {
@@ -34,7 +34,7 @@ const getPageOfAreasInController = async (req, res) => {
 
 const editAreaInController = async (req, res) => {
   await editAreaInService(req.params.id, req.body)
-  res.json({ message: `Area with id ${req.params.id} updated` })
+  res.json()
 }
 
 module.exports = {

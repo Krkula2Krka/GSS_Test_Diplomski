@@ -2,9 +2,10 @@
 import React, { useMemo, useState } from 'react'
 import { useTable } from 'react-table'
 import { useQuery } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
 
 // queries
-import { getAllNonadminUsersQuery } from '../queries/userQueries'
+import { getAllUsersQuery } from '../queries/userQueries'
 
 // css
 import '../css/getAllUsers.css'
@@ -16,12 +17,16 @@ import { FaHandHoldingMedical } from 'react-icons/fa'
 
 // components
 import { EditUser } from '../components/user/editUser'
+import { DeleteUser } from '../components/user/deleteUser'
+import { NoUser } from '../components/user/noUser'
 
 export const GetAllUsers = () => {
-
+  
   const [stateButton, setStateButton] = useState(0)
 
-  const { data: users } = useQuery(getAllNonadminUsersQuery())
+  const { data: users } = useQuery(getAllUsersQuery())
+
+  const usersArray = [...users]
 
   const tableData = useMemo(() => users, [users])
   const tableColumns = useMemo(
@@ -58,12 +63,22 @@ export const GetAllUsers = () => {
             >
               <AiFillEdit />
             </button>
-            <button className='userButton'>
+            <button
+              className='userButton'
+              onClick={() =>
+                setStateButton(
+                  cell.row.original.GSS_identification + 1000000000
+                )
+              }
+            >
               <RiDeleteBin6Fill />
             </button>
-            <button className='userButton'>
+            <Link
+              to={`/userResults/${cell.row.original.GSS_identification}`}
+              className='userButton'
+            >
               <FaHandHoldingMedical />
-            </button>
+            </Link>
           </div>
         )
       }
@@ -74,42 +89,47 @@ export const GetAllUsers = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns: tableColumns, data: tableData })
 
+  if (usersArray.length === 0) return <NoUser />
+
   return (
-    <div>
-      {stateButton === 0 ? (
-        <div className='tableContainer centeredHorizontal'>
-          <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map(headerGroup => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps()}>
-                      {column.render('Header')}
-                    </th>
-                  ))}
-                </tr>
+    <div className='tableContainer centeredHorizontal'>
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map(row => {
-                prepareRow(row)
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map(cell => (
-                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    ))}
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <EditUser
-          GSS_identification={stateButton}
-          resetState={() => setStateButton(0)}
-        />
-      )}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map(row => {
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {stateButton === row.original.GSS_identification ? (
+                  <td colSpan={6}>
+                    <EditUser resetState={() => setStateButton(0)} />
+                  </td>
+                ) : stateButton - 1000000000 ===
+                  row.original.GSS_identification ? (
+                  <td colSpan={6}>
+                    <DeleteUser
+                      GSS_identification={row.original.GSS_identification}
+                      resetState={() => setStateButton(0)}
+                    />
+                  </td>
+                ) : (
+                  row.cells.map(cell => (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  ))
+                )}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }

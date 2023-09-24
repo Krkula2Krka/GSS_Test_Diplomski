@@ -7,7 +7,7 @@ const {
 
 const createAnswerInController = async (req, res) => {
   await createAnswerInService(req.body)
-  res.json({ message: 'Answer successfully created' })
+  res.json()
 }
 
 const getAnswersForQuestionInController = async (req, res) => {
@@ -17,12 +17,12 @@ const getAnswersForQuestionInController = async (req, res) => {
 
 const deleteAnswerInController = async (req, res) => {
   await deleteAnswerInService(req.params.id)
-  res.json({ message: `Answer with id ${req.params.id} deleted` })
+  res.json()
 }
 
 const editAnswerInController = async (req, res) => {
   await editAnswerInService(req.params.id, req.body)
-  res.json({ message: `Answer with id ${req.params.id} updated` })
+  res.json()
 }
 
 module.exports = {

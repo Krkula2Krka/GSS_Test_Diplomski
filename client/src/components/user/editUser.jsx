@@ -10,7 +10,7 @@ import { editUserMutation } from '../../queries/userQueries'
 // css
 import '../../css/getAllUsers.css'
 
-//icons
+// icons
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { RxCrossCircled } from 'react-icons/rx'
 
@@ -49,30 +49,29 @@ export const EditUser = props => {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <Form className='confirmDeleteOrEditUser centered'>
-        <label className='label'>ГСС број корисника: {props.GSS_identification}</label>
-        <label className='label'>Промени име корисника:</label>
+      <Form className='editUserForm'>
+        <label>Промени име корисника:</label>
         <ErrorMessage
           name='first_name'
           component='span'
           className='errorMessage'
         />
         <Field name='first_name' />
-        <label className='label'>Промени презиме корисника:</label>
+        <label>Промени презиме корисника:</label>
         <ErrorMessage
           name='last_name'
           component='span'
           className='errorMessage'
         />
         <Field name='last_name' />
-        <label className='label'>Промени надимак корисника:</label>
+        <label>Промени надимак корисника:</label>
         <ErrorMessage
           name='nickname'
           component='span'
           className='errorMessage'
         />
         <Field name='nickname' />
-        <label className='label'>
+        <label>
           Да ли је корисник администратор? <Field type='checkbox' name='admin' />
         </label>
         <div className='confirmButtons'>

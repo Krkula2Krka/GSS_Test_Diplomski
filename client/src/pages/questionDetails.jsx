@@ -42,16 +42,16 @@ export const QuestionDetails = () => {
             return (
               <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
                 {key + 1 !== answersWithDummyData.length ? (
-                  stateButton !== answer.id + 100 &&
+                  stateButton !== answer.id + 1000000000 &&
                   stateButton !== answer.id ? (
                     <Answer
                       setEditState={() => setStateButton(answer.id)}
-                      setDeleteState={() => setStateButton(100 + answer.id)}
+                      setDeleteState={() => setStateButton(1000000000 + answer.id)}
                       answerText={answer.answer_text}
                       correctness={answer.correctness}
                       answerId={answer.id}
                     />
-                  ) : stateButton > 100 ? (
+                  ) : stateButton > 1000000000 ? (
                     <DeleteAnswer
                       questionId={id}
                       answerId={answer.id}
@@ -67,7 +67,7 @@ export const QuestionDetails = () => {
                 ) : (
                   <AddAnswer
                     buttonPressed={stateButton}
-                    setAddNewQuestionState={() => setStateButton(200)}
+                    setAddNewQuestionState={() => setStateButton(1000000200)}
                     resetState={() => setStateButton(0)}
                   />
                 )}

@@ -35,14 +35,14 @@ export const GetAllAreas = () => {
             return (
               <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
                 {key + 1 !== areasWithDummyData.length ? (
-                  stateButton !== area.id + 100 && stateButton !== area.id ? (
+                  stateButton !== area.id + 1000000000 && stateButton !== area.id ? (
                     <Area
                       setEditState={() => setStateButton(area.id)}
-                      setDeleteState={() => setStateButton(100 + area.id)}
+                      setDeleteState={() => setStateButton(1000000000 + area.id)}
                       areaName={area.area_name}
                       id={area.id}
                     />
-                  ) : stateButton > 100 ? (
+                  ) : stateButton > 1000000000 ? (
                     <DeleteArea
                       id={area.id}
                       setDeleteState={() => setStateButton(0)}
@@ -56,7 +56,7 @@ export const GetAllAreas = () => {
                 ) : (
                   <AddArea
                     buttonPressed={stateButton}
-                    setAddNewAreaState={() => setStateButton(200)}
+                    setAddNewAreaState={() => setStateButton(1000000200)}
                     resetState={() => setStateButton(0)}
                   />
                 )}

@@ -35,7 +35,7 @@ export const logoutForTestingMutation = (id, queryClient) => ({
   onError: () => console.log('Error in logoutForTesting mutation')
 })
 
-export const getAllNonadminUsersQuery = () => ({
+export const getAllUsersQuery = () => ({
   queryKey: queryKeys.users,
   queryFn: async () => {
     const res = await fetch('http://localhost:3001/users')
@@ -47,7 +47,7 @@ export const getAllNonadminUsersQuery = () => ({
 })
 
 export const usersLoader = queryClient => async () => {
-  const query = getAllNonadminUsersQuery()
+  const query = getAllUsersQuery()
   return await queryClient.ensureQueryData({
     queryKey: query.queryKey,
     queryFn: query.queryFn
@@ -76,4 +76,10 @@ export const editUserMutation = queryClient => ({
     ),
   onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
   onError: () => console.log('Unsuccessful editUser mutation!')
+})
+
+export const deleteUserMutation = queryClient => ({
+  mutationFn: GSS_identification => axios.post(`http://localhost:3001/users/delete/${GSS_identification}`),
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
+  onError: () => console.log('Unsuccessful deleteUser mutation!')
 })
