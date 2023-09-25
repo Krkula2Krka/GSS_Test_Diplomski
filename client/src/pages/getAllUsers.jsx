@@ -1,6 +1,12 @@
 // libraries
 import React, { useMemo, useState } from 'react'
-import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
+import {
+  useTable,
+  useSortBy,
+  useGlobalFilter,
+  useFilters,
+  usePagination
+} from 'react-table'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 
@@ -100,7 +106,12 @@ export const GetAllUsers = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
     prepareRow,
     state,
     setGlobalFilter
@@ -108,10 +119,11 @@ export const GetAllUsers = () => {
     { columns: tableColumns, data: tableData, defaultColumn: filterColumn },
     useFilters,
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    usePagination
   )
 
-  const { globalFilter } = state
+  const { globalFilter, pageIndex } = state
 
   if (usersArray.length === 0) return <NoUser />
 
@@ -147,7 +159,7 @@ export const GetAllUsers = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, key) => {
+          {page.map((row, key) => {
             prepareRow(row)
             return (
               <tr key={key} {...row.getRowProps()}>
@@ -168,7 +180,9 @@ export const GetAllUsers = () => {
                   </td>
                 ) : (
                   row.cells.map((cell, key) => (
-                    <td key={key} {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    <td key={key} {...cell.getCellProps()}>
+                      {cell.render('Cell')}
+                    </td>
                   ))
                 )}
               </tr>
@@ -176,6 +190,17 @@ export const GetAllUsers = () => {
           })}
         </tbody>
       </table>
+      <div>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Previous
+        </button>
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          Next
+        </button>
+        <span>
+          {' '}Страна {pageIndex + 1} / {pageOptions.length}
+        </span>
+      </div>
     </div>
   )
 }
