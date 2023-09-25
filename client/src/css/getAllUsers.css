@@ -1,5 +1,5 @@
 .tableContainer {
-    padding-top: 2em;
+    padding-left: 15rem;
 }
 
 thead {
@@ -68,4 +68,23 @@ th, td {
     margin-bottom: auto;
     margin-right: 4rem;
     margin-left: 2rem;
+}
+
+th input:focus {
+    outline: none;
+}
+
+div.tableContainer input:focus {
+    outline: none;
+}
+
+.globalFilter {
+    background-color: #060b26;
+    color: #f5f5f5;
+    padding-left: 25rem;
+    padding-right: 25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
 }

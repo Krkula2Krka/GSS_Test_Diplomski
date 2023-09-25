@@ -1,6 +1,6 @@
 // libraries
 import React, { useMemo, useState } from 'react'
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 
@@ -20,6 +20,8 @@ import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai'
 import { EditUser } from '../components/user/editUser'
 import { DeleteUser } from '../components/user/deleteUser'
 import { NoUser } from '../components/user/noUser'
+import { GlobalFilter } from '../components/globalFilter'
+import { ColumnFilter } from '../components/columnFilter'
 
 export const GetAllUsers = () => {
 
@@ -30,6 +32,13 @@ export const GetAllUsers = () => {
   const usersArray = [...users]
 
   const tableData = useMemo(() => users, [users])
+
+  const filterColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter
+    }
+  }, [])
+
   const tableColumns = useMemo(
     () => [
       {
@@ -87,37 +96,61 @@ export const GetAllUsers = () => {
     []
   )
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns: tableColumns, data: tableData }, useSortBy)
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    setGlobalFilter
+  } = useTable(
+    { columns: tableColumns, data: tableData, defaultColumn: filterColumn },
+    useFilters,
+    useGlobalFilter,
+    useSortBy
+  )
+
+  const { globalFilter } = state
 
   if (usersArray.length === 0) return <NoUser />
 
   return (
-    <div className='tableContainer centeredHorizontal'>
+    <div className='tableContainer'>
+      <div className='globalFilter'>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+      </div>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  <span>
-                    {column.isSortedDesc ? (
-                      <AiOutlineSortDescending />
-                    ) : (
-                      <AiOutlineSortAscending />
-                    )}
-                  </span>
+              {headerGroup.headers.map((column, key) => (
+                <th key={key}>
+                  <div
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.render('Header')}
+                    {column.Header !== 'Дугмићи' ? (
+                      <span>
+                        {column.isSortedDesc ? (
+                          <AiOutlineSortDescending />
+                        ) : (
+                          <AiOutlineSortAscending />
+                        )}
+                      </span>
+                    ) : null}
+                  </div>
+                  <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
+          {rows.map((row, key) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <tr key={key} {...row.getRowProps()}>
                 {stateButton === row.original.GSS_identification ? (
                   <td colSpan={6}>
                     <EditUser
@@ -134,8 +167,8 @@ export const GetAllUsers = () => {
                     />
                   </td>
                 ) : (
-                  row.cells.map(cell => (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  row.cells.map((cell, key) => (
+                    <td key={key} {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   ))
                 )}
               </tr>
