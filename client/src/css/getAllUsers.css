@@ -24,6 +24,7 @@ th, td {
     padding: 0.5rem;
     background-color: #060b26;
     color: #f5f5f5;
+    outline: none;
 }
 
 .userButton:hover {
@@ -52,14 +53,6 @@ th, td {
     align-self: center;
 }
 
-.userButton {
-    border: none;
-    padding-right: 1rem;
-    background-color: #060b26;
-    padding-bottom: 0.9rem;
-    color: #f5f5f5;
-}
-
 .deleteUserContainer {
     display: flex;
 }
@@ -79,7 +72,8 @@ div.tableContainer input:focus {
     outline: none;
 }
 
-.globalFilter {
+.headerFooter {
+    display: flex;
     background-color: #060b26;
     color: #f5f5f5;
     padding-left: 25rem;

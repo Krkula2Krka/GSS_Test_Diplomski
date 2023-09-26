@@ -30,7 +30,7 @@ import { GlobalFilter } from '../components/globalFilter'
 import { ColumnFilter } from '../components/columnFilter'
 
 export const GetAllUsers = () => {
-
+  
   const [stateButton, setStateButton] = useState(0)
 
   const { data: users } = useQuery(getAllUsersQuery())
@@ -112,6 +112,8 @@ export const GetAllUsers = () => {
     canNextPage,
     canPreviousPage,
     pageOptions,
+    gotoPage,
+    setPageSize,
     prepareRow,
     state,
     setGlobalFilter
@@ -123,13 +125,13 @@ export const GetAllUsers = () => {
     usePagination
   )
 
-  const { globalFilter, pageIndex } = state
+  const { globalFilter, pageIndex, pageSize } = state
 
   if (usersArray.length === 0) return <NoUser />
 
   return (
     <div className='tableContainer'>
-      <div className='globalFilter'>
+      <div className='headerFooter'>
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       </div>
       <table {...getTableProps()}>
@@ -190,16 +192,41 @@ export const GetAllUsers = () => {
           })}
         </tbody>
       </table>
-      <div>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Previous
+      <div className='headerFooter'>
+        <button
+          className='userButton'
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+        >
+          Претходна
         </button>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next
+        <button
+          className='userButton'
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+        >
+          Следећа
         </button>
-        <span>
-          {' '}Страна {pageIndex + 1} / {pageOptions.length}
-        </span>
+        <select
+          className='userButton'
+          value={pageSize}
+          onChange={e => setPageSize(e.target.value)}
+        >
+          {[1, 10, 25, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Прикажи {pageSize}
+            </option>
+          ))}
+        </select>
+        {[...Array(pageOptions.length).keys()].map(page => (
+          <button
+            className='userButton'
+            style={{ color: pageIndex === page ? '#1a83ff' : '#f5f5f5' }}
+            onClick={() => gotoPage(page)}
+          >
+            {page + 1}
+          </button>
+        ))}
       </div>
     </div>
   )
