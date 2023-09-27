@@ -32,6 +32,15 @@ th, td {
     cursor: pointer;
 }
 
+.deleteButton {
+    font-size: 1.3rem;
+    padding: 0;
+}
+
+.addedMargin {
+    margin-right: 22rem;
+}
+
 .test {
     padding: 1rem;
 }

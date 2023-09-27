@@ -12,7 +12,7 @@ export const GlobalFilter = ({ filter, setFilter }) => {
 
   return (
     <div>
-      <span>
+      <div style={{ display: 'flex' }}>
         Претражи:{''}
         <input
           value={value || ''}
@@ -21,7 +21,7 @@ export const GlobalFilter = ({ filter, setFilter }) => {
             onChange(e.target.value)
           }}
         />
-      </span>
+      </div>
     </div>
   )
 }
