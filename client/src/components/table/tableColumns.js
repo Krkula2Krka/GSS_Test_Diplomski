@@ -1,13 +1,8 @@
-// libraries
-import { Link } from 'react-router-dom'
-
 // css
 import '../../css/getAllUsers.css'
 
 // icons
 import { AiFillEdit } from 'react-icons/ai'
-import { RiDeleteBin6Fill } from 'react-icons/ri'
-import { FaHandHoldingMedical } from 'react-icons/fa'
 
 export const TableColumns = [
   {
@@ -32,21 +27,10 @@ export const TableColumns = [
   },
   {
     Header: 'Дугмићи',
-    Cell: ({ cell }) => (
-      <div className='userButtons'>
-        <button className='userButton'>
-          <AiFillEdit />
-        </button>
-        <button className='userButton'>
-          <RiDeleteBin6Fill />
-        </button>
-        <Link
-          to={`/userResults/${cell.row.original.GSS_identification}`}
-          className='userButton'
-        >
-          <FaHandHoldingMedical />
-        </Link>
-      </div>
+    Cell: () => (
+      <button className='userButton'>
+        <AiFillEdit />
+      </button>
     )
   }
 ]

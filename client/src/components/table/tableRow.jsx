@@ -1,26 +1,43 @@
+// libraries
 import React from 'react'
-import { useState } from 'react'
+
+// css
+import '../../css/getAllUsers.css'
 
 export const TableRow = props => {
-    
-  const [selected, setSelected] = useState(false)
+  const itemExists = props.checkIfItemExists()
+  let startPress = null
 
   return (
     <tr
-      key={props.key}
       {...props.row.getRowProps({
-        onClick: () => setSelected(!selected)
+        onMouseDown: () => {
+          startPress = Date.now()
+        },
+        onMouseUp: () => {
+          if (Date.now() - startPress > 500) {
+            if (!itemExists) props.selectID()
+            else props.unselectID()
+          } else {
+            if (props.selectMode()) {
+              if (!itemExists) props.selectID()
+              else props.unselectID()
+            }
+          }
+        }
       })}
     >
-      {selected ? (
-        <div></div>
-      ) : (
-        props.row.cells.map((cell, key) => (
-          <td key={key} {...cell.getCellProps()}>
-            {cell.render('Cell')}
-          </td>
-        ))
-      )}
+      {itemExists
+        ? props.row.cells.map((cell, key) => (
+            <td className='selected' key={key} {...cell.getCellProps()}>
+              {cell.render('Cell')}
+            </td>
+          ))
+        : props.row.cells.map((cell, key) => (
+            <td key={key} {...cell.getCellProps()}>
+              {cell.render('Cell')}
+            </td>
+          ))}
     </tr>
   )
 }

@@ -18,7 +18,7 @@ export const TableHeader = props => {
       </div>
       <button
         className='userButton deleteButton'
-        // onClick={() => function for deleting selected rows}
+        onClick={props.deleteUsers}
       >
         <RiDeleteBin6Fill />
       </button>

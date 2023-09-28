@@ -83,3 +83,12 @@ export const deleteUserMutation = queryClient => ({
   onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
   onError: () => console.log('Unsuccessful deleteUser mutation!')
 })
+
+export const deleteUsersMutation = queryClient => ({
+  mutationFn: data => {
+    console.log(data)
+    axios.post('http://localhost:3001/users/delete/', data)
+  },
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
+  onError: () => console.log('Unsuccessful deleteUsers mutation!')
+})

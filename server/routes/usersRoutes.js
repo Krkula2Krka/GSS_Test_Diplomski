@@ -7,7 +7,8 @@ const {
   logoutUserForTestingInController,
   getAllUsersInController,
   editUserInController,
-  deleteUserInController
+  deleteUserInController,
+  deleteUsersInController
 } = require('../controllers/usersController')
 
 router.get('/', getAllUsersInController)
@@ -21,6 +22,8 @@ router.get('/checkLoginForTesting/:GSS_identification', checkIfUserIsLoggedInFor
 router.post('/logoutForTesting/:GSS_identification', logoutUserForTestingInController)
 
 router.post('/edit/:GSS_identification', editUserInController)
+
+router.post('/delete/', deleteUsersInController)
 
 router.post('/delete/:GSS_identification', deleteUserInController)
 

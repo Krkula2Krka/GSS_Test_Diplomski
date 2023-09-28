@@ -15,6 +15,10 @@ th, td {
     text-align: center;
 }
 
+.selected {
+    background-color: #1a83ff;
+}
+
 .userButtons {
     display: flex;
 }

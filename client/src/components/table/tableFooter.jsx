@@ -32,8 +32,9 @@ export const TableFooter = props => {
           </option>
         ))}
       </select>
-      {[...Array(props.pageLength).keys()].map(page => (
+      {[...Array(props.pageLength).keys()].map((page, key) => (
         <button
+          key={key}
           className='userButton'
           style={{ color: props.pageIndex === page ? '#1a83ff' : '#f5f5f5' }}
           onClick={() => props.gotoPage(page)}

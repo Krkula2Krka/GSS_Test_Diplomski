@@ -10,7 +10,6 @@ const {
 } = require('../service/usersService')
 
 const createUserInController = async (req, res) => {
-
   const [user, created] = await createUserInService(req.body)
   if (created) res.json({ userExists: false })
   else
@@ -19,10 +18,14 @@ const createUserInController = async (req, res) => {
 
 const loginUserForTestingInController = async (req, res) => {
   const user = await checkIfUserExistsInService(req.params.GSS_identification)
-  if (user === null) res.json({ loginSuccessful: false, alreadyLoggedIn: false })
+  if (user === null)
+    res.json({ loginSuccessful: false, alreadyLoggedIn: false })
   else {
-    const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(req.params.GSS_identification)
-    if (userLoggedIn) res.json({ loginSuccessful: false, alreadyLoggedIn: true })
+    const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(
+      req.params.GSS_identification
+    )
+    if (userLoggedIn)
+      res.json({ loginSuccessful: false, alreadyLoggedIn: true })
     else {
       await loginUserForTestingInService(user.GSS_identification)
       res.json({ loginSuccessful: true })
@@ -31,7 +34,9 @@ const loginUserForTestingInController = async (req, res) => {
 }
 
 const checkIfUserIsLoggedInForTestingInController = async (req, res) => {
-  const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(req.params.GSS_identification)
+  const userLoggedIn = await checkIfUserIsLoggedInForTestingInService(
+    req.params.GSS_identification
+  )
   if (userLoggedIn) res.json({ loggedIn: true })
   else res.json({ loggedIn: false })
 }
@@ -56,6 +61,12 @@ const deleteUserInController = async (req, res) => {
   res.json()
 }
 
+const deleteUsersInController = async (req, res) => {
+  for (GSS_identification in req.body["user_ids"])
+      await deleteUserInService(GSS_identification)
+  res.json(req.body["user_ids"])
+}
+
 module.exports = {
   createUserInController: createUserInController,
   loginUserForTestingInController: loginUserForTestingInController,
@@ -64,5 +75,6 @@ module.exports = {
   logoutUserForTestingInController: logoutUserForTestingInController,
   getAllUsersInController: getAllUsersInController,
   editUserInController: editUserInController,
-  deleteUserInController: deleteUserInController
+  deleteUserInController: deleteUserInController,
+  deleteUsersInController: deleteUsersInController
 }
