@@ -56,15 +56,11 @@ const editUserInController = async (req, res) => {
   res.json()
 }
 
-const deleteUserInController = async (req, res) => {
-  await deleteUserInService(req.params.GSS_identification)
+const deleteUsersInController = (req, res) => {
+  req.body.forEach(
+    async GSS_identification => await deleteUserInService(GSS_identification)
+  )
   res.json()
-}
-
-const deleteUsersInController = async (req, res) => {
-  for (GSS_identification in req.body["user_ids"])
-      await deleteUserInService(GSS_identification)
-  res.json(req.body["user_ids"])
 }
 
 module.exports = {
@@ -75,6 +71,5 @@ module.exports = {
   logoutUserForTestingInController: logoutUserForTestingInController,
   getAllUsersInController: getAllUsersInController,
   editUserInController: editUserInController,
-  deleteUserInController: deleteUserInController,
   deleteUsersInController: deleteUsersInController
 }

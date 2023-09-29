@@ -7,7 +7,6 @@ const {
   logoutUserForTestingInController,
   getAllUsersInController,
   editUserInController,
-  deleteUserInController,
   deleteUsersInController
 } = require('../controllers/usersController')
 
@@ -24,7 +23,5 @@ router.post('/logoutForTesting/:GSS_identification', logoutUserForTestingInContr
 router.post('/edit/:GSS_identification', editUserInController)
 
 router.post('/delete/', deleteUsersInController)
-
-router.post('/delete/:GSS_identification', deleteUserInController)
 
 module.exports = router

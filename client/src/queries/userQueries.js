@@ -78,12 +78,6 @@ export const editUserMutation = queryClient => ({
   onError: () => console.log('Unsuccessful editUser mutation!')
 })
 
-export const deleteUserMutation = queryClient => ({
-  mutationFn: GSS_identification => axios.post(`http://localhost:3001/users/delete/${GSS_identification}`),
-  onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
-  onError: () => console.log('Unsuccessful deleteUser mutation!')
-})
-
 export const deleteUsersMutation = queryClient => ({
   mutationFn: data => {
     console.log(data)
