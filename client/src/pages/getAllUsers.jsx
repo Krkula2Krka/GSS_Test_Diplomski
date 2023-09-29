@@ -26,6 +26,7 @@ import { TableHeader } from '../components/table/tableHeader'
 import { TableFooter } from '../components/table/tableFooter'
 
 export const GetAllUsers = () => {
+
   const [selectedItems, setSelectedItems] = useState(() => new Set())
 
   const queryClient = useQueryClient()
@@ -60,7 +61,8 @@ export const GetAllUsers = () => {
     setPageSize,
     prepareRow,
     state,
-    setGlobalFilter
+    setGlobalFilter,
+    allColumns
   } = useTable(
     { columns: tableColumns, data: tableData, defaultColumn: filterColumn },
     useFilters,
@@ -83,6 +85,7 @@ export const GetAllUsers = () => {
           deleteUsers(users)
           setSelectedItems(new Set())
         }}
+        allColumns={allColumns}
       />
       <table {...getTableProps()}>
         <thead>

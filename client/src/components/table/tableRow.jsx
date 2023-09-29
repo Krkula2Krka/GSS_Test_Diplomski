@@ -1,10 +1,14 @@
 // libraries
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // css
 import '../../css/getAllUsers.css'
 
 export const TableRow = props => {
+
+  const navigate = useNavigate()
+
   const itemExists = props.checkIfItemExists()
   let startPress = null
 
@@ -22,6 +26,8 @@ export const TableRow = props => {
             if (props.selectMode()) {
               if (!itemExists) props.selectID()
               else props.unselectID()
+            } else {
+              navigate(`/userResults/${props.row.original.GSS_identification}`)
             }
           }
         }

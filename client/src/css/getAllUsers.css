@@ -39,14 +39,25 @@ th, td {
 .deleteButton {
     font-size: 1.3rem;
     padding: 0;
+    margin-right: 1rem;
 }
 
 .addedMargin {
-    margin-right: 22rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 .test {
     padding: 1rem;
+}
+
+.visabilityToggler {
+    display: flex;
+    margin-right: 0.5rem;
+}
+
+.visabilityTogglerText {
+    margin-right: 0.5rem;
 }
 
 .editRow {
@@ -89,8 +100,6 @@ div.tableContainer input:focus {
     display: flex;
     background-color: #060b26;
     color: #f5f5f5;
-    padding-left: 25rem;
-    padding-right: 25rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: 1rem;
