@@ -1,9 +1,6 @@
 // libraries
 import React from 'react'
 
-// icons
-import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai'
-
 export const TableRowName = props => {
   return (
     <tr {...props.headerGroup.getHeaderGroupProps()}>
