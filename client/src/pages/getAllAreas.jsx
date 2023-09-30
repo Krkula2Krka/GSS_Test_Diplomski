@@ -65,6 +65,7 @@ export const GetAllAreas = () => {
           })}
         </div>
       </div>
+      <button onClick={() => { throw Error() }}>button that crashes</button>
     </div>
   )
 }

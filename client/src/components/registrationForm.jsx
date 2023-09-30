@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 // queries
 import { createUserMutation } from '../queries/userQueries'
@@ -40,7 +41,10 @@ export const RegistrationForm = () => {
 
   const onSubmit = async data => {
     const res = await createUser(data)
-    if (res.data.userExists) navigate(`/userAlreadyExists/${res.data.GSS_identification}`)
+    if (res.data.userExists) {
+      toast.remove()
+      toast.error(`Корисник са ГСС бројем ${data.GSS_identification} већ постоји.`)
+    }
     else navigate('/')
   }
   return (

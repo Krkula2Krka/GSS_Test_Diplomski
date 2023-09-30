@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 
 // css
 import '../css/loginForm.css'
@@ -39,8 +40,14 @@ export const LoginForm = () => {
     if (res.data.loginSuccessful)
       navigate(`/takeTest/${data.GSS_identification}`)
     else {
-      if (res.data.alreadyLoggedIn) navigate(`/userAlreadyLoggedIn/${data.GSS_identification}`)
-      else navigate('/wrongCredentials')
+      if (res.data.alreadyLoggedIn) {
+        toast.remove()
+        toast.error('Корисник је већ улогован.')
+      }
+      else {
+        toast.remove()
+        toast.error('Погрешни подаци. Покушајте поново.')
+      }
     }
   }
 

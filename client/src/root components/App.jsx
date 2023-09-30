@@ -2,17 +2,23 @@ import '../css/App.css'
 
 // Libraries
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+  QueryClient,
+  QueryClientProvider,
+  MutationCache,
+  QueryCache
+} from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ErrorBoundary } from 'react-error-boundary'
+import toast from 'react-hot-toast'
 
 // Components
 import { LoginForm } from '../components/loginForm'
 import { Root } from './root'
 import { PageNotFound } from '../components/error/pageNotFound'
-import { WrongCredentials } from '../components/error/wrongCredentials'
 import { RegistrationForm } from '../components/registrationForm'
-import { UserAlreadyExists } from '../components/error/userAlreadyExists'
-import { UserAlreadyLoggedIn } from '../components/error/userAlreadyLoggedIn'
+import { ErrorPage } from '../components/error/errorPage'
+import { Toaster } from 'react-hot-toast'
 
 // Pages
 import { TakeTest } from '../pages/takeTest'
@@ -32,7 +38,23 @@ export const App = () => {
       queries: {
         refetchOnWindowFocus: false
       }
-    }
+    },
+    queryCache: new QueryCache({
+      onError: error => {
+        if (error.message === 'Failed to fetch') {
+          toast.remove()
+          toast.error('Сервер је пао.')
+        }
+      }
+    }),
+    mutationCache: new MutationCache({
+      onError: error => {
+        if (error.message === 'Network Error') {
+          toast.remove()
+          toast.error('Сервер је пао.')
+        }
+      }
+    })
   })
 
   const router = createBrowserRouter([
@@ -50,7 +72,8 @@ export const App = () => {
             const { GetAllAreas } = await import('../pages/getAllAreas')
             return { Component: GetAllAreas }
           },
-          loader: areasLoader(queryClient)
+          loader: areasLoader(queryClient),
+          errorElement: <ErrorPage />
         },
         {
           path: '/getAllUsers',
@@ -58,7 +81,8 @@ export const App = () => {
             const { GetAllUsers } = await import('../pages/getAllUsers')
             return { Component: GetAllUsers }
           },
-          loader: usersLoader(queryClient)
+          loader: usersLoader(queryClient),
+          errorElement: <ErrorPage />
         },
         {
           path: '/userResults/:GSS_identification',
@@ -66,7 +90,8 @@ export const App = () => {
             const { UserResults } = await import('../pages/userResults')
             return { Component: UserResults }
           },
-          loader: questionsLoader(queryClient)
+          loader: questionsLoader(queryClient),
+          errorElement: <ErrorPage />
         },
         {
           path: '/areaDetails/:id',
@@ -74,7 +99,8 @@ export const App = () => {
             const { AreaDetails } = await import('../pages/areaDetails')
             return { Component: AreaDetails }
           },
-          loader: questionsLoader(queryClient)
+          loader: questionsLoader(queryClient),
+          errorElement: <ErrorPage />
         },
         {
           path: '/questionDetails/:id',
@@ -82,23 +108,12 @@ export const App = () => {
             const { QuestionDetails } = await import('../pages/questionDetails')
             return { Component: QuestionDetails }
           },
-          loader: answersLoader(queryClient)
+          loader: answersLoader(queryClient),
+          errorElement: <ErrorPage />
         },
         {
           path: '/credentialsForTest',
           element: <LoginForm navigateToLocation='/takeTest' />
-        },
-        {
-          path: '/wrongCredentials',
-          element: <WrongCredentials />
-        },
-        {
-          path: '/userAlreadyExists/:GSS_identification',
-          element: <UserAlreadyExists />
-        },
-        {
-          path: '/userAlreadyLoggedIn/:GSS_identification',
-          element: <UserAlreadyLoggedIn />
         },
         {
           path: '/registration',
@@ -109,7 +124,8 @@ export const App = () => {
     {
       path: '/takeTest/:id',
       element: <TakeTest />,
-      loader: loggedInLoader(queryClient)
+      loader: loggedInLoader(queryClient),
+      errorElement: <ErrorPage />
     },
     {
       path: '*',
@@ -118,9 +134,12 @@ export const App = () => {
   ])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Toaster />
+      </QueryClientProvider>
+    </ErrorBoundary>
   )
 }

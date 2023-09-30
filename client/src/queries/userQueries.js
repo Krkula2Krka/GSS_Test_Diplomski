@@ -31,8 +31,7 @@ export const loggedInLoader =
 export const logoutForTestingMutation = (id, queryClient) => ({
   mutationFn: () =>
     axios.post(`http://localhost:3001/users/logoutForTesting/${id}`),
-  onSuccess: () => queryClient.invalidateQueries(queryKeys.loggedIn(id)),
-  onError: () => console.log('Error in logoutForTesting mutation')
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.loggedIn(id))
 })
 
 export const getAllUsersQuery = () => ({
@@ -58,14 +57,12 @@ export const loginForTestingMutation = () => ({
   mutationFn: GSS_identification =>
     axios.post(
       `http://localhost:3001/users/loginForTesting/${GSS_identification}`
-    ),
-  onError: () => console.log('Error in loginForTesting mutation')
+    )
 })
 
 export const createUserMutation = queryClient => ({
-  mutationFn: data => axios.post('http://localhost:3001/users/', data),
-  onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
-  onError: () => console.log('Error in createUser mutation')
+  mutationFn: data => axios.post('http://localhost:3001/users/', data).catch(),
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.users)
 })
 
 export const editUserMutation = queryClient => ({
@@ -74,8 +71,7 @@ export const editUserMutation = queryClient => ({
       `http://localhost:3001/users/edit/${data.GSS_identification}`,
       data.formData
     ),
-  onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
-  onError: () => console.log('Unsuccessful editUser mutation!')
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.users)
 })
 
 export const deleteUsersMutation = queryClient => ({
@@ -83,6 +79,5 @@ export const deleteUsersMutation = queryClient => ({
     console.log(data)
     axios.post('http://localhost:3001/users/delete/', data)
   },
-  onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
-  onError: () => console.log('Unsuccessful deleteUsers mutation!')
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.users)
 })
