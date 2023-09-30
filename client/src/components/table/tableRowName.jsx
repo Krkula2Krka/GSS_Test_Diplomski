@@ -11,15 +11,6 @@ export const TableRowName = props => {
         <th key={key}>
           <div {...column.getHeaderProps(column.getSortByToggleProps())}>
             {column.render('Header')}
-            {column.Header !== 'Дугмићи' ? (
-              <span>
-                {column.isSortedDesc ? (
-                  <AiOutlineSortDescending />
-                ) : (
-                  <AiOutlineSortAscending />
-                )}
-              </span>
-            ) : null}
           </div>
           <div>{column.canFilter ? column.render('Filter') : null}</div>
         </th>

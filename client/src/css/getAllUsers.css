@@ -1,6 +1,5 @@
 .tableContainer {
-    padding-left: 16rem;
-    padding-right: 5rem;
+    padding-left: 15rem;
 }
 
 thead {
@@ -9,7 +8,7 @@ thead {
 }
 
 th, td {
-    padding: 0.5rem;
+    padding: 0.3rem;
     background-color: #060b26;
     color: #f5f5f5;
     text-align: center;

@@ -18,5 +18,9 @@ export const TableColumns = [
   {
     Header: 'Администратор',
     accessor: d => (d.admin ? <div>Да</div> : <div>Не</div>)
+  },
+  {
+    Header: 'Супер администратор',
+    accessor: d => (d.super_admin ? <div>Да</div> : <div>Не</div>)
   }
 ]
