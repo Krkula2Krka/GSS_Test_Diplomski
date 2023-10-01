@@ -12,7 +12,6 @@ import { getAllAreasPaginatedQuery } from '../queries/areaQueries'
 import { useParams } from 'react-router-dom'
 
 export const TakeTest = () => {
-  
   const { id } = useParams()
 
   const [modalOpen, setModalOpen] = useState(true)

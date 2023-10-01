@@ -26,7 +26,6 @@ import { TableHeader } from '../components/table/tableHeader'
 import { TableFooter } from '../components/table/tableFooter'
 
 export const GetAllUsers = () => {
-
   const [selectedItems, setSelectedItems] = useState(() => new Set())
 
   const queryClient = useQueryClient()

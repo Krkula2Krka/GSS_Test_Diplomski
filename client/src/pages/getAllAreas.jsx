@@ -16,7 +16,6 @@ import { DeleteArea } from '../components/area/deleteArea'
 import { NoArea } from '../components/area/noArea'
 
 export const GetAllAreas = () => {
-
   const [stateButton, setStateButton] = useState(0)
 
   const { data: areas } = useQuery(getAllAreasQuery())
@@ -35,10 +34,13 @@ export const GetAllAreas = () => {
             return (
               <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
                 {key + 1 !== areasWithDummyData.length ? (
-                  stateButton !== area.id + 1000000000 && stateButton !== area.id ? (
+                  stateButton !== area.id + 1000000000 &&
+                  stateButton !== area.id ? (
                     <Area
                       setEditState={() => setStateButton(area.id)}
-                      setDeleteState={() => setStateButton(1000000000 + area.id)}
+                      setDeleteState={() =>
+                        setStateButton(1000000000 + area.id)
+                      }
                       areaName={area.area_name}
                       id={area.id}
                     />
@@ -65,7 +67,6 @@ export const GetAllAreas = () => {
           })}
         </div>
       </div>
-      <button onClick={() => { throw Error() }}>button that crashes</button>
     </div>
   )
 }

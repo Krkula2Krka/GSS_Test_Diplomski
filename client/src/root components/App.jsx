@@ -9,7 +9,6 @@ import {
   QueryCache
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { ErrorBoundary } from 'react-error-boundary'
 import toast from 'react-hot-toast'
 
 // Components
@@ -17,8 +16,8 @@ import { LoginForm } from '../components/loginForm'
 import { Root } from './root'
 import { PageNotFound } from '../components/error/pageNotFound'
 import { RegistrationForm } from '../components/registrationForm'
-import { ErrorPage } from '../components/error/errorPage'
 import { Toaster } from 'react-hot-toast'
+import { ErrorPage } from '../components/error/errorPage'
 
 // Pages
 import { TakeTest } from '../pages/takeTest'
@@ -32,7 +31,6 @@ import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
 
 export const App = () => {
-
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -134,12 +132,10 @@ export const App = () => {
   ])
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorPage}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Toaster />
-      </QueryClientProvider>
-    </ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Toaster />
+    </QueryClientProvider>
   )
 }

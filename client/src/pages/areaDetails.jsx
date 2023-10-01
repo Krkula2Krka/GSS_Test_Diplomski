@@ -17,7 +17,6 @@ import { DeleteQuestion } from '../components/question/deleteQuestion'
 import { NoQuestion } from '../components/question/noQuestion'
 
 export const AreaDetails = () => {
-
   const [stateButton, setStateButton] = useState(0)
 
   const { id } = useParams()
@@ -47,7 +46,9 @@ export const AreaDetails = () => {
                   stateButton !== question.id ? (
                     <Question
                       setEditState={() => setStateButton(question.id)}
-                      setDeleteState={() => setStateButton(1000000000 + question.id)}
+                      setDeleteState={() =>
+                        setStateButton(1000000000 + question.id)
+                      }
                       questionText={question.question_text}
                       questionId={question.id}
                     />

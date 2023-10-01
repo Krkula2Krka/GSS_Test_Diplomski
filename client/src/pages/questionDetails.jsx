@@ -17,7 +17,6 @@ import { DeleteAnswer } from '../components/answer/deleteAnswer'
 import { EditAnswer } from '../components/answer/editAnswer'
 
 export const QuestionDetails = () => {
-
   const [stateButton, setStateButton] = useState(0)
 
   const { id } = useParams()
@@ -46,7 +45,9 @@ export const QuestionDetails = () => {
                   stateButton !== answer.id ? (
                     <Answer
                       setEditState={() => setStateButton(answer.id)}
-                      setDeleteState={() => setStateButton(1000000000 + answer.id)}
+                      setDeleteState={() =>
+                        setStateButton(1000000000 + answer.id)
+                      }
                       answerText={answer.answer_text}
                       correctness={answer.correctness}
                       answerId={answer.id}

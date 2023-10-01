@@ -7,6 +7,10 @@
   font-family: 'Lato', sans-serif;
 }
 
+iframe {
+  display: none;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
