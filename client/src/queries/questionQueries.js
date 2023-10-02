@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const queryKeys = {
-  questions: id => ['questions', id]
+  questions: id => ['questions', id],
+  test: ['test']
 }
 
 export const getQuestionsForAreaQuery = id => ({
@@ -42,4 +43,16 @@ export const editQuestionMutation = (queryClient, id) => ({
       data.formData
     ),
   onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id))
+})
+
+export const getTestQuestionsQuery = condition => ({
+  queryKey: queryKeys.test,
+  queryFn: async () => {
+    const res = await fetch('http://localhost:3001/questions/test')
+    const data = await res.json()
+    return data
+  },
+  enabled: condition,
+  staleTime: 1000 * 60 * 30,
+  cacheTime: 0
 })

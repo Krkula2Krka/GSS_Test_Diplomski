@@ -2,7 +2,6 @@ const {
   getAllAreasInService,
   createAreaInService,
   getAreaByIdInService,
-  getPageOfAreasInService,
   deleteAreaInService,
   editAreaInService
 } = require('../service/areasService')
@@ -27,11 +26,6 @@ const getAreaByIdInController = async (req, res) => {
   res.json(area)
 }
 
-const getPageOfAreasInController = async (req, res) => {
-  const areas = await getPageOfAreasInService(req.params.pageNumber)
-  res.json(areas)
-}
-
 const editAreaInController = async (req, res) => {
   await editAreaInService(req.params.id, req.body)
   res.json()
@@ -41,7 +35,6 @@ module.exports = {
   getAllAreasInController: getAllAreasInController,
   createAreaInController: createAreaInController,
   getAreaByIdInController: getAreaByIdInController,
-  getPageOfAreasInController: getPageOfAreasInController,
   deleteAreaInController: deleteAreaInController,
   editAreaInController: editAreaInController
 }

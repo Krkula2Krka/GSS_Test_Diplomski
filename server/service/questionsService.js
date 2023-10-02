@@ -1,3 +1,4 @@
+const { Sequelize } = require('sequelize')
 const { question } = require('../models')
 
 const createQuestionInService = newQuestion => {
@@ -20,6 +21,13 @@ const getQuestionsForAreaInService = area_id => {
   })
 }
 
+const getTestQuestionsInService = () => {
+  return question.findAll({
+    order: Sequelize.literal('rand()'),
+    limit: 30
+  })
+}
+
 const editQuestionInService = (id, data) => {
   question.update(
     {
@@ -39,5 +47,6 @@ module.exports = {
   createQuestionInService: createQuestionInService,
   getQuestionsForAreaInService: getQuestionsForAreaInService,
   deleteQuestionInService: deleteQuestionInService,
-  editQuestionInService: editQuestionInService
+  editQuestionInService: editQuestionInService,
+  getTestQuestionsInService: getTestQuestionsInService
 }

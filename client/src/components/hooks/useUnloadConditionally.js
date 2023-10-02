@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 
-const useUnloadConditionally = (callback, condition) => {
+export const useUnloadConditionally = (callback, condition) => {
   const callbackRef = useRef(callback)
   useEffect(() => {
     if (condition) {
@@ -10,5 +10,3 @@ const useUnloadConditionally = (callback, condition) => {
     }
   }, [callbackRef, condition])
 }
-
-export default useUnloadConditionally

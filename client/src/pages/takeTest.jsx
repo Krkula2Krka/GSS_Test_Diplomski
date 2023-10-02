@@ -1,29 +1,35 @@
+// libraries
 import React, { useState } from 'react'
-import { InfoModal } from '../components/infoModal'
-import useUnloadConditionally from '../components/hooks/useUnloadConditionally'
+import { useParams } from 'react-router-dom'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+
+// components
+import { InfoModal } from '../components/test/infoModal'
+import { useUnloadConditionally } from '../components/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../components/hooks/useOnWindowResizeConditionally'
-import useVisibilityChangeConditionally from '../components/hooks/useVisibilityChangeConditionally'
+import { useVisibilityChangeConditionally } from '../components/hooks/useVisibilityChangeConditionally'
+import { TestTable } from '../components/test/testTable'
+
+// queries
 import {
   logoutForTestingMutation,
   checkLoginForTestingQuery
 } from '../queries/userQueries'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getAllAreasPaginatedQuery } from '../queries/areaQueries'
-import { useParams } from 'react-router-dom'
+import { getTestQuestionsQuery } from '../queries/questionQueries'
 
 export const TakeTest = () => {
   const { id } = useParams()
 
   const [modalOpen, setModalOpen] = useState(true)
-  const [pageNumber, setPageNumber] = useState(1)
 
   const { data: loggedIn } = useQuery(checkLoginForTestingQuery(id))
   const queryClient = useQueryClient()
   const { mutateAsync: logoutForTesting } = useMutation(
     logoutForTestingMutation(id, queryClient)
   )
-  const { data: areas } = useQuery(
-    getAllAreasPaginatedQuery(pageNumber, loggedIn && !modalOpen)
+
+  const { data: questions } = useQuery(
+    getTestQuestionsQuery(loggedIn && !modalOpen)
   )
 
   useVisibilityChangeConditionally(async () => {
@@ -39,27 +45,7 @@ export const TakeTest = () => {
       {loggedIn ? (
         <div>
           {!modalOpen ? (
-            <div className='table centered'>
-              {areas?.map((area, key) => {
-                return (
-                  <div className='table-row' key={key}>
-                    <h1>{area.area_name}</h1>
-                  </div>
-                )
-              })}
-              <button
-                onClick={() => setPageNumber(pageNumber => pageNumber - 1)}
-                disabled={pageNumber === 1}
-              >
-                Previous
-              </button>
-              <button
-                onClick={() => setPageNumber(pageNumber => pageNumber + 1)}
-                disabled={pageNumber === 16}
-              >
-                Next
-              </button>
-            </div>
+            <TestTable questions={questions} />
           ) : (
             <InfoModal setOpenModal={setModalOpen} />
           )}

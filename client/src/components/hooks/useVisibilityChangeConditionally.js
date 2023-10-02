@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const useVisibilityChangeConditionally = (callback, condition) => {
+export const useVisibilityChangeConditionally = (callback, condition) => {
   const callbackRef = useRef(callback)
   useEffect(() => {
     if (condition) {
@@ -10,5 +10,3 @@ const useVisibilityChangeConditionally = (callback, condition) => {
     }
   }, [callback, condition])
 }
-
-export default useVisibilityChangeConditionally

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/infoModal.css'
+import '../../css/infoModal.css'
 import { memo } from 'react'
 
 export const InfoModal = memo(({ setOpenModal }) => {

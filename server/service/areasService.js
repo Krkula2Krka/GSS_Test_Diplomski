@@ -5,14 +5,6 @@ const getAllAreasInService = () => {
   return areas
 }
 
-const getPageOfAreasInService = pageNumber => {
-  const areas = area.findAll({
-    limit: 2,
-    offset: (pageNumber - 1) * 2
-  })
-  return areas
-}
-
 const createAreaInService = newArea => {
   area.create(newArea)
 }
@@ -45,7 +37,6 @@ module.exports = {
   getAllAreasInService: getAllAreasInService,
   createAreaInService: createAreaInService,
   getAreaByIdInService: getAreaByIdInService,
-  getPageOfAreasInService: getPageOfAreasInService,
   deleteAreaInService: deleteAreaInService,
   editAreaInService: editAreaInService
 }

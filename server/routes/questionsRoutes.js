@@ -4,8 +4,11 @@ const {
   createQuestionInController,
   getQuestionsForAreaInController,
   deleteQuestionInController,
-  editQuestionInController
+  editQuestionInController,
+  getTestQuestionsInController
 } = require('../controllers/questionsController')
+
+router.get('/test', getTestQuestionsInController)
 
 router.post('/', createQuestionInController)
 

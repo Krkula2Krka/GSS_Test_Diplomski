@@ -2,7 +2,8 @@ const {
   createQuestionInService,
   getQuestionsForAreaInService,
   deleteQuestionInService,
-  editQuestionInService
+  editQuestionInService,
+  getTestQuestionsInService
 } = require('../service/questionsService')
 
 const createQuestionInController = async (req, res) => {
@@ -20,14 +21,20 @@ const deleteQuestionInController = async (req, res) => {
   res.json()
 }
 
-const editQuestionInController = async (req, _) => {
+const editQuestionInController = async (req, res) => {
   await editQuestionInService(req.params.id, req.body)
   res.json()
+}
+
+const getTestQuestionsInController = async (req, res) => {
+  const questions = await getTestQuestionsInService()
+  res.json(questions)
 }
 
 module.exports = {
   createQuestionInController: createQuestionInController,
   getQuestionsForAreaInController: getQuestionsForAreaInController,
   deleteQuestionInController: deleteQuestionInController,
-  editQuestionInController: editQuestionInController
+  editQuestionInController: editQuestionInController,
+  getTestQuestionsInController: getTestQuestionsInController
 }
