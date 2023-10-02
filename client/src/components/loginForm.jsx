@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 
@@ -18,10 +17,9 @@ export const LoginForm = () => {
 
   const queryClient = useQueryClient()
 
-  const navigate = useNavigate()
-
   const initialValues = {
-    GSS_identification: ''
+    GSS_identification: '',
+    first_name: ''
   }
 
   const { mutateAsync: loginForTesting } = useMutation(
@@ -32,13 +30,14 @@ export const LoginForm = () => {
     GSS_identification: Yup.number()
       .integer('Број мора бити цео')
       .required('Обавезно поље')
-      .min(1, 'Број мора бити позитиван')
+      .min(1, 'Број мора бити позитиван'),
+    first_name: Yup.string().required('Обавезно поље')
   })
 
   const onSubmit = async data => {
-    const res = await loginForTesting(data.GSS_identification)
+    const res = await loginForTesting(data)
     if (res.data.loginSuccessful)
-      navigate(`/takeTest/${data.GSS_identification}`)
+      window.open(`http://localhost:3000/takeTest/${data.GSS_identification}`)
     else {
       if (res.data.alreadyLoggedIn) {
         toast.remove()
@@ -58,7 +57,7 @@ export const LoginForm = () => {
       onSubmit={onSubmit}
     >
       <Form className='formContainer centered'>
-        <h1>Унесите Ваш ГСС број да би сте наставили:</h1>
+        <label>ГСС број:</label>
         <ErrorMessage
           name='GSS_identification'
           component='span'
@@ -69,6 +68,13 @@ export const LoginForm = () => {
           name='GSS_identification'
           onWheel={e => e.target.blur()}
         />
+        <label>Име:</label>
+        <ErrorMessage
+          name='first_name'
+          component='span'
+          className='errorMessage'
+        />
+        <Field name='first_name' />
         <button type='submit'>Настави</button>
         <h1>
           Уколико немате налог кликните да се{' '}

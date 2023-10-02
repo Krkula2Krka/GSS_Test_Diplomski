@@ -16,18 +16,24 @@ const createUserInService = newUser => {
   })
 }
 
-const checkIfUserExistsInService = GSS_identification => {
+const checkIfUserExistsInService = data => {
   return user.findOne({
     where: {
-      GSS_identification: GSS_identification
+      GSS_identification: data.GSS_identification,
+      first_name: data.first_name,
     }
   })
 }
 
-const loginUserForTestingInService = GSS_identification => {
+const loginUserForTestingInService = data => {
   user.update(
     { logged_in_for_testing: true },
-    { where: { GSS_identification: GSS_identification } }
+    {
+      where: {
+        GSS_identification: data.GSS_identification,
+        first_name: data.first_name
+      }
+    }
   )
 }
 

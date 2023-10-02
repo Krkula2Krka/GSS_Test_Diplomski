@@ -54,14 +54,12 @@ export const usersLoader = queryClient => async () => {
 }
 
 export const loginForTestingMutation = () => ({
-  mutationFn: GSS_identification =>
-    axios.post(
-      `http://localhost:3001/users/loginForTesting/${GSS_identification}`
-    )
+  mutationFn: data =>
+    axios.post('http://localhost:3001/users/loginForTesting/', data)
 })
 
 export const createUserMutation = queryClient => ({
-  mutationFn: data => axios.post('http://localhost:3001/users/', data).catch(),
+  mutationFn: data => axios.post('http://localhost:3001/users/', data),
   onSuccess: () => queryClient.invalidateQueries(queryKeys.users)
 })
 

@@ -14,7 +14,7 @@ router.get('/', getAllUsersInController)
 
 router.post('/', createUserInController)
 
-router.post('/loginForTesting/:GSS_identification', loginUserForTestingInController)
+router.post('/loginForTesting/', loginUserForTestingInController)
 
 router.get('/checkLoginForTesting/:GSS_identification', checkIfUserIsLoggedInForTestingInController)
 
