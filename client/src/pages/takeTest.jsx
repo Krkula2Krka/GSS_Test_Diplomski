@@ -8,7 +8,7 @@ import { InfoModal } from '../components/test/infoModal'
 import { useUnloadConditionally } from '../components/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../components/hooks/useOnWindowResizeConditionally'
 import { useVisibilityChangeConditionally } from '../components/hooks/useVisibilityChangeConditionally'
-import { TestTable } from '../components/test/testTable'
+import { Quiz } from '../components/test/quiz'
 
 // queries
 import {
@@ -33,7 +33,7 @@ export const TakeTest = () => {
   )
 
   useVisibilityChangeConditionally(async () => {
-    //await logoutForTesting()
+    await logoutForTesting()
   }, loggedIn)
 
   useOnWindowResizeConditionally(async () => await logoutForTesting(), loggedIn)
@@ -45,7 +45,7 @@ export const TakeTest = () => {
       {loggedIn ? (
         <div>
           {!modalOpen ? (
-            <TestTable questions={questions} />
+            <Quiz questions={questions} />
           ) : (
             <InfoModal setOpenModal={setModalOpen} />
           )}
