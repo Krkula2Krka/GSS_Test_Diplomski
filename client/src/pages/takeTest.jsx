@@ -33,7 +33,7 @@ export const TakeTest = () => {
   )
 
   useVisibilityChangeConditionally(async () => {
-    await logoutForTesting()
+    //await logoutForTesting()
   }, loggedIn)
 
   useOnWindowResizeConditionally(async () => await logoutForTesting(), loggedIn)
