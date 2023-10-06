@@ -29,6 +29,7 @@ import { areasLoader } from '../queries/areaQueries'
 import { usersLoader } from '../queries/userQueries'
 import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
+import { testQuestionsLoader } from '../queries/questionQueries'
 
 export const App = () => {
   const queryClient = new QueryClient({
@@ -122,7 +123,13 @@ export const App = () => {
     {
       path: '/takeTest/:id',
       element: <TakeTest />,
-      loader: loggedInLoader(queryClient),
+      loader: async () => {
+        const isUserLoggedIn = await loggedInLoader(queryClient)
+        return await testQuestionsLoader(
+          queryClient,
+          isUserLoggedIn
+        )
+      },
       errorElement: <ErrorPage />
     },
     {

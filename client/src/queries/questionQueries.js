@@ -56,3 +56,13 @@ export const getTestQuestionsQuery = condition => ({
   staleTime: 1000 * 60 * 30,
   cacheTime: 0
 })
+
+export const testQuestionsLoader =
+  (queryClient, condition) =>
+  async () => {
+    const query = getTestQuestionsQuery(condition)
+    return await queryClient.ensureQueryData({
+      queryKey: query.queryKey,
+      queryFn: query.queryFn
+    })
+  }
