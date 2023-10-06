@@ -1,28 +1,23 @@
-import React, { useState } from 'react'
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa'
+// libraries
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+
+// components
 import { SidebarData } from './sidebar_data'
+
+// css
 import '../../css/sidebar.css'
-import { SidebarItem } from './sidebarItem'
 
 export const Sidebar = () => {
-   
-  const [sidebar, setSidebar] = useState(false)
-
   return (
-    <nav className={sidebar ? 'side-menu active' : 'side-menu'}>
+    <nav className='side-menu'>
       <ul className='side-menu-items'>
-        <li
-          className='sidebar-toggle close-menu'
-          onClick={() => setSidebar(!sidebar)}
-        >
-          <div className='toggle-sidebar-button'>
-            {sidebar ? <FaAngleDoubleLeft /> : <FaAngleDoubleRight />}
-          </div>
-        </li>
-        {SidebarData.map((item, index) => {
+        {SidebarData.map(item => {
           return (
-            <li key={index}>
-              <SidebarItem sidebarExtended={sidebar} item={item} />
+            <li key={item.id}>
+              <NavLink to={item.path} className='side-text'>
+                {item.icon}
+              </NavLink>
             </li>
           )
         })}

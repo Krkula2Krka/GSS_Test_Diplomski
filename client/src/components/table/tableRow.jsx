@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // css
-import '../../css/getAllUsers.css'
+import '../../css/table.css'
 
 export const TableRow = props => {
 

@@ -5,7 +5,7 @@ import React from 'react'
 import { RiDeleteBin6Fill } from 'react-icons/ri'
 
 // css
-import '../../css/getAllUsers.css'
+import '../../css/table.css'
 
 // components
 import { GlobalFilter } from './globalFilter'
@@ -19,17 +19,13 @@ export const TableHeader = props => {
           setFilter={props.setGlobalFilter}
         />
       </div>
-      <button className='userButton deleteButton' onClick={props.deleteUsers}>
+      <button className='userButton deleteButton' onClick={props.deleteItems}>
         <RiDeleteBin6Fill />
       </button>
       {props.allColumns.map(column => (
-        <label className='visabilityToggler'>
+        <label key={column.id} className='visabilityToggler'>
           <div className='visabilityTogglerText'>{column.Header}</div>
-          <input
-            key={column.id}
-            type='checkbox'
-            {...column.getToggleHiddenProps()}
-          />
+          <input type='checkbox' {...column.getToggleHiddenProps()} />
         </label>
       ))}
     </div>

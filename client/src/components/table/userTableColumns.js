@@ -1,4 +1,4 @@
-export const TableColumns = [
+export const UserTableColumns = [
   {
     Header: 'ГСС број',
     accessor: 'GSS_identification'

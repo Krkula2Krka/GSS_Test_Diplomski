@@ -2,7 +2,7 @@
 import React from 'react'
 
 // css
-import '../../css/getAllUsers.css'
+import '../../css/table.css'
 
 export const TableFooter = props => {
   return (
