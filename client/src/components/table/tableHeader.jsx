@@ -3,6 +3,7 @@ import React from 'react'
 
 // icons
 import { RiDeleteBin6Fill } from 'react-icons/ri'
+import { ImPlus } from 'react-icons/im'
 
 // css
 import '../../css/table.css'
@@ -21,6 +22,9 @@ export const TableHeader = props => {
       </div>
       <button className='userButton deleteButton' onClick={props.deleteItems}>
         <RiDeleteBin6Fill />
+      </button>
+      <button className='userButton deleteButton' onClick={props.openAddForm}>
+        <ImPlus />
       </button>
       {props.allColumns.map(column => (
         <label key={column.id} className='visabilityToggler'>

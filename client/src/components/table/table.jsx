@@ -60,6 +60,8 @@ export const Table = props => {
     <div className='tableContainer'>
       <TableHeader
         globalFilter={globalFilter}
+        openAddForm={props.openAddForm}
+        calledFrom={props.calledFrom}
         setGlobalFilter={setGlobalFilter}
         deleteItems={() => {
           const items = Array.from(selectedItems)
@@ -81,6 +83,11 @@ export const Table = props => {
               <TableRow
                 row={row}
                 key={row.id}
+                goto={
+                  props.calledFrom === 'users'
+                    ? `/userResults/${row.original.GSS_identification}`
+                    : `/questionDetails/${row.original.id}`
+                }
                 selectID={() =>
                   setSelectedItems(prev =>
                     new Set(prev).add(row.original.GSS_identification)

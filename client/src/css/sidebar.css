@@ -1,15 +1,3 @@
-.toggle-sidebar-button {
-  margin-left: 1rem;
-  font-size: 2rem;
-  background: none;
-}
-
-.toggle-sidebar-button:hover {
-  color: #1a83ff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .side-menu {
   background-color: #060b26;
   height: 100vh;
@@ -42,7 +30,7 @@
 }
 
 a.active.side-icon {
-  color: blueviolet;
+  color: #1a83ff;
 }
 
 a.active.side-icon:hover {

@@ -57,12 +57,16 @@ export const getTestQuestionsQuery = condition => ({
   cacheTime: 0
 })
 
-export const testQuestionsLoader =
-  (queryClient, condition) =>
-  async () => {
-    const query = getTestQuestionsQuery(condition)
-    return await queryClient.ensureQueryData({
-      queryKey: query.queryKey,
-      queryFn: query.queryFn
-    })
-  }
+export const testQuestionsLoader = (queryClient, condition) => async () => {
+  const query = getTestQuestionsQuery(condition)
+  return await queryClient.ensureQueryData({
+    queryKey: query.queryKey,
+    queryFn: query.queryFn
+  })
+}
+
+export const deleteQuestionsMutation = (queryClient, id) => ({
+  mutationFn: data =>
+    axios.post('http://localhost:3001/questions/delete/', data),
+  onSuccess: () => queryClient.invalidateQueries(queryKeys.questions(id))
+})

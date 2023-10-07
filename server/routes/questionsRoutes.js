@@ -3,7 +3,7 @@ const router = express.Router()
 const {
   createQuestionInController,
   getQuestionsForAreaInController,
-  deleteQuestionInController,
+  deleteQuestionsInController,
   editQuestionInController,
   getTestQuestionsInController
 } = require('../controllers/questionsController')
@@ -12,7 +12,7 @@ router.get('/test', getTestQuestionsInController)
 
 router.post('/', createQuestionInController)
 
-router.post('/delete/:id', deleteQuestionInController)
+router.post('/delete', deleteQuestionsInController)
 
 router.get('/:area_id', getQuestionsForAreaInController)
 

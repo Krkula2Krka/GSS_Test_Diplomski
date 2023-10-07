@@ -22,6 +22,6 @@ router.post('/logoutForTesting/:GSS_identification', logoutUserForTestingInContr
 
 router.post('/edit/:GSS_identification', editUserInController)
 
-router.post('/delete/', deleteUsersInController)
+router.post('/delete', deleteUsersInController)
 
 module.exports = router

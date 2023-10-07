@@ -19,7 +19,7 @@ export const TableRow = props => {
           startPress = Date.now()
         },
         onMouseUp: () => {
-          if (Date.now() - startPress > 500) {
+          if (Date.now() - startPress > 300) {
             if (!itemExists) props.selectID()
             else props.unselectID()
           } else {
@@ -27,7 +27,7 @@ export const TableRow = props => {
               if (!itemExists) props.selectID()
               else props.unselectID()
             } else {
-              navigate(`/userResults/${props.row.original.GSS_identification}`)
+              navigate(props.goto)
             }
           }
         }
