@@ -1,6 +1,7 @@
 // libraries
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 // components
 import { SidebarData } from './sidebar_data'
@@ -15,9 +16,18 @@ export const Sidebar = () => {
         {SidebarData.map(item => {
           return (
             <li key={item.id}>
-              <NavLink to={item.path} className='side-text'>
-                {item.icon}
-              </NavLink>
+              <OverlayTrigger
+                placement='right'
+                overlay={
+                  <Tooltip>
+                    <label>{item.title}</label>
+                  </Tooltip>
+                }
+              >
+                <NavLink className='side-icon' to={item.path}>
+                  {item.icon}
+                </NavLink>
+              </OverlayTrigger>
             </li>
           )
         })}

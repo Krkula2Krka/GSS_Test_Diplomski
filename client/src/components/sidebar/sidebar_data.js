@@ -5,21 +5,21 @@ import { HiUserGroup } from 'react-icons/hi'
 
 export const SidebarData = [
   {
-    id: 1,
+    id: 0,
     title: 'Почетна страна',
     path: '/',
     icon: <AiFillHome />,
     cName: 'side-text'
   },
   {
-    id: 2,
+    id: 1,
     title: 'Преглед свих области',
     path: '/getAllAreas',
     icon: <GiNotebook />,
     cName: 'side-text'
   },
   {
-    id: 3,
+    id: 2,
     title: 'Преглед свих корисника',
     path: '/getAllUsers',
     icon: <HiUserGroup />,
