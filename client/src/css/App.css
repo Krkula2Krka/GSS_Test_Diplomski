@@ -15,7 +15,6 @@ iframe {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 500px;
   height: auto;
   padding: 20px;
   border: 5px solid #060b26;

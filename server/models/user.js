@@ -22,15 +22,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             defaultValue: false
         },
-        admin: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true,
-            defaultValue: false
-        },
-        super_admin: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true,
-            defaultValue: false
+        user_type: {
+            type: DataTypes.ENUM('user', 'admin', 'superadmin'),
+            allowNull: true
         }
     }, {
         timestamps: false

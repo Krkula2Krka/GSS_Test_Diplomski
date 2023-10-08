@@ -40,7 +40,7 @@ export const Sidebar = () => {
                 placement='right'
                 overlay={
                   <Tooltip>
-                    <label>{item.title}</label>
+                    <label className='tooltip-label'>{item.title}</label>
                   </Tooltip>
                 }
               >

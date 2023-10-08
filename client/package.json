@@ -18,7 +18,6 @@
     "react-icons": "^4.10.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.9.0",
-    "react-router-prompt": "^0.5.4",
     "react-scripts": "5.0.1",
     "react-table": "^7.8.0",
     "yup": "^1.2.0"

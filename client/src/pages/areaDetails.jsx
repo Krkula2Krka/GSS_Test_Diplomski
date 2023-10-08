@@ -9,8 +9,8 @@ import { getQuestionsForAreaQuery } from '../queries/questionQueries'
 import { deleteQuestionsMutation } from '../queries/questionQueries'
 
 // components
-import { NoQuestion } from '../components/table/noQuestion'
-import { QuestionTableColumns } from '../components/table/questionTableColumns'
+import { NoQuestion } from '../components/table/noItem/noQuestion'
+import { QuestionTableColumns } from '../components/table/tableColumns/questionTableColumns'
 import { Table } from '../components/table/table'
 
 export const AreaDetails = () => {

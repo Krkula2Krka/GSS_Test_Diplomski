@@ -7,9 +7,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getAllUsersQuery, deleteUsersMutation } from '../queries/userQueries'
 
 // components
-import { NoUser } from '../components/table/noUser'
-import { UserTableColumns } from '../components/table/userTableColumns'
+import { NoUser } from '../components/table/noItem/noUser'
+import { UserTableColumns } from '../components/table/tableColumns/userTableColumns'
 import { Table } from '../components/table/table'
+import { AddUser } from '../components/table/addItem/addUser'
 
 export const GetAllUsers = () => {
   const [addForm, setAddForm] = useState(0)
@@ -35,7 +36,7 @@ export const GetAllUsers = () => {
           openAddForm={() => setAddForm(1)}
         />
       ) : (
-        <div></div>
+        <AddUser resetState={() => setAddForm(0)} />
       )}
     </div>
   )

@@ -11,7 +11,7 @@ const createUserInService = newUser => {
       last_name: newUser.last_name,
       nickname: newUser.nickname,
       logged_in_for_testing: false,
-      admin: false
+      user_type: newUser.user_type
     }
   })
 }

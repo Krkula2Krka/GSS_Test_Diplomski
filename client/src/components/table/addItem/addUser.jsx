@@ -3,21 +3,16 @@ import React from 'react'
 import * as Yup from 'yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 // queries
-import { createUserMutation } from '../queries/userQueries'
+import { createUserMutation } from '../../../queries/userQueries'
 
 // css
-import '../css/loginForm.css'
+import '../../../css/loginForm.css'
 
-export const RegistrationForm = () => {
-
-  const navigate = useNavigate()
-
+export const AddUser = props => {
   const queryClient = useQueryClient()
-
   const { mutateAsync: createUser } = useMutation(
     createUserMutation(queryClient)
   )
@@ -44,10 +39,12 @@ export const RegistrationForm = () => {
     const res = await createUser(data)
     if (res.data.userExists) {
       toast.remove()
-      toast.error(`Корисник са ГСС бројем ${data.GSS_identification} већ постоји.`)
-    }
-    else navigate('/credentialsForTest')
+      toast.error(
+        `Корисник са ГСС бројем ${data.GSS_identification} већ постоји.`
+      )
+    } else props.resetState()
   }
+
   return (
     <Formik
       initialValues={initialValues}
@@ -55,7 +52,6 @@ export const RegistrationForm = () => {
       onSubmit={onSubmit}
     >
       <Form className='formContainer centered'>
-        <h1>Регистрација:</h1>
         <label>ГСС број:</label>
         <ErrorMessage
           name='GSS_identification'
@@ -88,7 +84,22 @@ export const RegistrationForm = () => {
           className='errorMessage'
         />
         <Field name='nickname' />
-        <button type='submit'>Настави</button>
+        <label>Тип корисника:</label>
+        <Field as='select' name='user_type'>
+          <option value='user'>
+            <label>корисник</label>
+          </option>
+          <option value='admin'>
+            <label>администратор</label>
+          </option>
+          <option value='superadmin'>
+            <label>супер администратор</label>
+          </option>
+        </Field>
+        <div className='registration-buttons'>
+          <button onClick={props.resetState}>Назад</button>
+          <button type='submit'>Настави</button>
+        </div>
       </Form>
     </Formik>
   )
