@@ -8,10 +8,10 @@ import { useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 
 // css
-import '../css/loginForm.css'
+import '../../css/form.css'
 
 // queries
-import { loginForTestingMutation } from '../queries/userQueries'
+import { loginForTestingMutation } from '../../queries/userQueries'
 
 export const LoginForm = () => {
 

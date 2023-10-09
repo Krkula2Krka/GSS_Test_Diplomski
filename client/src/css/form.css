@@ -1,0 +1,258 @@
+.link {
+    text-decoration: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    height: auto;
+    background-color: #060b26;
+    opacity: 0.85;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    color: #f5f5f5;
+}
+
+button {
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    height: auto;
+    color: #f5f5f5;
+    background-color: #060b26;
+    border: none;
+}
+
+.registration-buttons {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    color: #1a83ff;
+}
+
+.formContainer {
+    width: 100%;
+}
+
+button {
+    width: 4rem;
+    font-size: 1rem;
+}
+
+body {
+    background-image: url(./images/getAllUsers/getAllUsers_640.jpeg)
+}
+
+@media (min-width: 641px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_800.jpeg)
+    }
+
+    .formContainer {
+        width: 22rem;
+    }
+
+    button {
+        width: 4rem;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 801px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1024.jpeg)
+    }
+
+    .formContainer {
+        width: 34rem;
+    }
+
+    button {
+        width: 6rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1280.jpeg)
+    }
+
+    .formContainer {
+        width: 36rem;
+    }
+
+    button {
+        width: 8rem;
+        font-size: 1.3rem;
+    }
+}
+
+@media (min-width: 1281px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1366.jpeg)
+    }
+
+    .formContainer {
+        width: 38rem;
+    }
+
+    button {
+        width: 10rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1367px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1440.jpeg)
+    }
+
+    .formContainer {
+        width: 40rem;
+    }
+
+    button {
+        width: 10rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1441px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1536.jpeg)
+    }
+
+    .formContainer {
+        width: 40rem;
+    }
+
+    button {
+        width: 10rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1537px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1600.jpeg)
+    }
+
+    .formContainer {
+        width: 42rem;
+    }
+
+    button {
+        width: 12rem;
+        font-size: 1.7rem;
+    }
+}
+
+@media (min-width: 1601px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1680.jpeg)
+    }
+
+    .formContainer {
+        width: 42rem;
+    }
+
+    button {
+        width: 12rem;
+        font-size: 1.7rem;
+    }
+}
+
+@media (min-width: 1681px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_1920.jpg)
+    }
+
+    .formContainer {
+        width: 45rem;
+    }
+
+    button {
+        width: 15rem;
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1921px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_2048.jpeg)
+    }
+
+    .formContainer {
+        width: 45rem;
+    }
+
+    button {
+        width: 15rem;
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 2049px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_2560.jpeg)
+    }
+
+    .formContainer {
+        width: 48rem;
+    }
+
+    button {
+        width: 18rem;
+        font-size: 2.3rem;
+    }
+}
+
+@media (min-width: 2561px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_3440.jpeg)
+    }
+
+    .formContainer {
+        width: 50rem;
+    }
+
+    button {
+        width: 20rem;
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 3441px) {
+    body {
+        background-image: url(./images/getAllUsers/getAllUsers_3840.jpeg)
+    }
+
+    .formContainer {
+        width: 52rem;
+    }
+
+    button {
+        width: 22rem;
+        font-size: 2.7rem;
+    }
+}

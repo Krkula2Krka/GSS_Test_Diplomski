@@ -12,10 +12,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import toast from 'react-hot-toast'
 
 // Components
-import { LoginForm } from '../components/loginForm'
+import { LoginForm } from '../components/form/loginForm'
 import { Root } from './root'
 import { PageNotFound } from '../components/error/pageNotFound'
-import { RegistrationForm } from '../components/registrationForm'
+import { RegistrationForm } from '../components/form/registrationForm'
 import { Toaster } from 'react-hot-toast'
 import { ErrorPage } from '../components/error/errorPage'
 

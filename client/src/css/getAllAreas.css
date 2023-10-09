@@ -1,11 +1,10 @@
 .areas {
-    padding-left: 14rem;
+    padding-left: 6rem;
 }
 
 .area {
     display: flex;
     background-color: #060b26;
-    margin: 1rem;
     padding: 1rem;
     border: solid;
     border-radius: 1rem;

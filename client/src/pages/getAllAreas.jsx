@@ -28,45 +28,36 @@ export const GetAllAreas = () => {
 
   return (
     <div className='areas'>
-      <div className='container'>
-        <div className='row'>
-          {areasWithDummyData.map((area, key) => {
-            return (
-              <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
-                {key + 1 !== areasWithDummyData.length ? (
-                  stateButton !== area.id + 1000000000 &&
-                  stateButton !== area.id ? (
-                    <Area
-                      setEditState={() => setStateButton(area.id)}
-                      setDeleteState={() =>
-                        setStateButton(1000000000 + area.id)
-                      }
-                      areaName={area.area_name}
-                      id={area.id}
-                    />
-                  ) : stateButton > 1000000000 ? (
-                    <DeleteArea
-                      id={area.id}
-                      setDeleteState={() => setStateButton(0)}
-                    />
-                  ) : (
-                    <EditArea
-                      id={area.id}
-                      resetState={() => setStateButton(0)}
-                    />
-                  )
-                ) : (
-                  <AddArea
-                    buttonPressed={stateButton}
-                    setAddNewAreaState={() => setStateButton(1000000200)}
-                    resetState={() => setStateButton(0)}
-                  />
-                )}
-              </div>
-            )
-          })}
-        </div>
-      </div>
+      {areasWithDummyData.map((area, key) => {
+        return (
+          <div key={key}>
+            {key + 1 !== areasWithDummyData.length ? (
+              stateButton !== area.id + 1000000000 &&
+              stateButton !== area.id ? (
+                <Area
+                  setEditState={() => setStateButton(area.id)}
+                  setDeleteState={() => setStateButton(1000000000 + area.id)}
+                  areaName={area.area_name}
+                  id={area.id}
+                />
+              ) : stateButton > 1000000000 ? (
+                <DeleteArea
+                  id={area.id}
+                  setDeleteState={() => setStateButton(0)}
+                />
+              ) : (
+                <EditArea id={area.id} resetState={() => setStateButton(0)} />
+              )
+            ) : (
+              <AddArea
+                buttonPressed={stateButton}
+                setAddNewAreaState={() => setStateButton(1000000200)}
+                resetState={() => setStateButton(0)}
+              />
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }

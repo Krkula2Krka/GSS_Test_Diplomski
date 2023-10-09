@@ -11,16 +11,6 @@ iframe {
   display: none;
 }
 
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: auto;
-  padding: 20px;
-  border: 5px solid #060b26;
-  border-radius: 5px;
-}
-
 .centered {
   position: absolute;
   left: 50%;

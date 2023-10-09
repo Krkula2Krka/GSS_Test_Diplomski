@@ -9,7 +9,7 @@ import toast from 'react-hot-toast'
 import { createUserMutation } from '../../../queries/userQueries'
 
 // css
-import '../../../css/loginForm.css'
+import '../../../css/form.css'
 
 export const AddUser = props => {
   const queryClient = useQueryClient()

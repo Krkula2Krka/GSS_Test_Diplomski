@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 // queries
-import { createUserMutation } from '../queries/userQueries'
+import { createUserMutation } from '../../queries/userQueries'
 
 // css
-import '../css/loginForm.css'
+import '../../css/form.css'
 
 export const RegistrationForm = () => {
 

@@ -32,7 +32,7 @@ export const Sidebar = () => {
   const { pathname } = useLocation()
   return (
     <nav className='side-menu'>
-      <ul className='side-menu-items'>
+      <ul>
         {SidebarData.map(item => {
           return (
             <li key={item.id}>

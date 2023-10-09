@@ -5,12 +5,13 @@ import { ErrorBoundary } from 'react-error-boundary'
 // components
 import { ErrorPage } from '../components/error/errorPage'
 import { Sidebar } from '../components/sidebar/sidebar'
+import { RetractableSidebar } from '../components/sidebar/retractableSidebar'
 
 export const Root = () => {
-  const location =  useLocation()
+  const location = useLocation()
   return (
     <ErrorBoundary key={location.pathname} FallbackComponent={ErrorPage}>
-      <Sidebar />
+      {window.innerWidth > 640 ? <Sidebar /> : <RetractableSidebar />}
       <Outlet />
     </ErrorBoundary>
   )

@@ -4,8 +4,7 @@
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 0;
-  width: 80px;
+  width: auto;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -20,7 +19,29 @@
   display: flex;
   align-items: center;
   margin-left: 1.5rem;
+  margin-right: 1.5rem;
   margin-top: 2rem;
+}
+
+.side-icon-mobile {
+  text-decoration: none;
+  background-color: #060b26;
+  color: #f5f5f5;
+  font-size: 1.5rem;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.side-text {
+  color: #f5f5f5;
+  font-size: 1.5rem;
+}
+
+a:link {
+  text-decoration: none;
 }
 
 .side-icon:hover {
@@ -37,11 +58,39 @@ a.active.side-icon:hover {
   color: #1a83ff;
 }
 
-.side-menu-items {
-  width: 100%;
-}
-
 .tooltip-label {
   background-color: #060b26;
   color: #f5f5f5;
+}
+
+.hamburger-button {
+  background-color: transparent;
+  color: #060b26;
+  font-size: 2.3rem;
+}
+
+.open-hamburger-button {
+  color: #f5f5f5;
+  background-color: #060b26;
+  width: 100%;
+  margin-top: 0;
+  margin-left: 0;
+  padding-top: 2rem;
+}
+
+.full-witdh {
+  width: 100%;
+  z-index: 1;
+}
+
+.open-mobile-sidebar-element {
+  margin-top: 4rem;
+  display: flex;
+}
+
+.open-mobile-sidebar-element:hover .side-text,
+.open-mobile-sidebar-element:hover .side-icon-mobile {
+  color: #1a83ff;
+  border-radius: 4px;
+  cursor: pointer;
 }
