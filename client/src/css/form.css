@@ -59,12 +59,12 @@ button {
 }
 
 body {
-    background-image: url(./images/getAllUsers/getAllUsers_640.jpeg)
+    background-image: url(../../../server/images/getAllUsers/getAllUsers_640.jpeg)
 }
 
 @media (min-width: 641px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_800.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_800.jpeg)
     }
 
     .formContainer {
@@ -79,7 +79,7 @@ body {
 
 @media (min-width: 801px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1024.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1024.jpeg)
     }
 
     .formContainer {
@@ -94,7 +94,7 @@ body {
 
 @media (min-width: 1025px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1280.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1280.jpeg)
     }
 
     .formContainer {
@@ -109,7 +109,7 @@ body {
 
 @media (min-width: 1281px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1366.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1366.jpeg)
     }
 
     .formContainer {
@@ -124,7 +124,7 @@ body {
 
 @media (min-width: 1367px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1440.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1440.jpeg)
     }
 
     .formContainer {
@@ -139,7 +139,7 @@ body {
 
 @media (min-width: 1441px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1536.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1536.jpeg)
     }
 
     .formContainer {
@@ -154,7 +154,7 @@ body {
 
 @media (min-width: 1537px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1600.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1600.jpeg)
     }
 
     .formContainer {
@@ -169,7 +169,7 @@ body {
 
 @media (min-width: 1601px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1680.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1680.jpeg)
     }
 
     .formContainer {
@@ -184,7 +184,7 @@ body {
 
 @media (min-width: 1681px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_1920.jpg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_1920.jpg)
     }
 
     .formContainer {
@@ -199,7 +199,7 @@ body {
 
 @media (min-width: 1921px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_2048.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_2048.jpeg)
     }
 
     .formContainer {
@@ -214,7 +214,7 @@ body {
 
 @media (min-width: 2049px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_2560.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_2560.jpeg)
     }
 
     .formContainer {
@@ -229,7 +229,7 @@ body {
 
 @media (min-width: 2561px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_3440.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_3440.jpeg)
     }
 
     .formContainer {
@@ -244,7 +244,7 @@ body {
 
 @media (min-width: 3441px) {
     body {
-        background-image: url(./images/getAllUsers/getAllUsers_3840.jpeg)
+        background-image: url(../../../server/images/getAllUsers/getAllUsers_3840.jpeg)
     }
 
     .formContainer {
