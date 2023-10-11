@@ -9,14 +9,13 @@ import {
   QueryCache
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import toast from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 
 // Components
 import { LoginForm } from '../components/form/loginForm'
 import { Root } from './root'
 import { PageNotFound } from '../components/error/pageNotFound'
 import { RegistrationForm } from '../components/form/registrationForm'
-import { Toaster } from 'react-hot-toast'
 import { ErrorPage } from '../components/error/errorPage'
 
 // Pages
@@ -30,7 +29,6 @@ import { usersLoader } from '../queries/userQueries'
 import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
-
 export const App = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
