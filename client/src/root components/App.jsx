@@ -1,3 +1,4 @@
+// css
 import '../css/App.css'
 
 // Libraries
@@ -25,10 +26,10 @@ import { Home } from '../pages/home'
 // queries
 import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
-import { usersLoader } from '../queries/userQueries'
 import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
+
 export const App = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -60,10 +61,6 @@ export const App = () => {
       element: <Root />,
       children: [
         {
-          index: true,
-          element: <Home />
-        },
-        {
           path: '/getAllAreas',
           lazy: async () => {
             const { GetAllAreas } = await import('../pages/getAllAreas')
@@ -74,11 +71,11 @@ export const App = () => {
         },
         {
           path: '/getAllUsers',
-          lazy: async () => {
-            const { GetAllUsers } = await import('../pages/getAllUsers')
-            return { Component: GetAllUsers }
+          async loader() {
+            let { usersLoader } = await import('../queries/userQueries');
+            return usersLoader(queryClient);
           },
-          loader: usersLoader(queryClient),
+          lazy: () => import('../pages/getAllUsers'),
           errorElement: <ErrorPage />
         },
         {
@@ -117,6 +114,10 @@ export const App = () => {
           element: <RegistrationForm />
         }
       ]
+    },
+    {
+      index: true,
+      element: <Home />
     },
     {
       path: '/takeTest/:id',
