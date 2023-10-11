@@ -86,15 +86,9 @@ export const AddUser = props => {
         <Field name='nickname' />
         <label>Тип корисника:</label>
         <Field as='select' name='user_type'>
-          <option value='user'>
-            <label>корисник</label>
-          </option>
-          <option value='admin'>
-            <label>администратор</label>
-          </option>
-          <option value='superadmin'>
-            <label>супер администратор</label>
-          </option>
+          <option value='user'>корисник</option>
+          <option value='admin'>администратор</option>
+          <option value='superadmin'>супер администратор</option>
         </Field>
         <div className='registration-buttons'>
           <button onClick={props.resetState}>Назад</button>

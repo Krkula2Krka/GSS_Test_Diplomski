@@ -1,11 +1,10 @@
-.link {
-    text-decoration: none;
+body {
+    background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-600/getAllUsers.webp);
+    background-repeat: no-repeat;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.link {
+    text-decoration: none;
 }
 
 .column {
@@ -58,13 +57,9 @@ button {
     font-size: 1rem;
 }
 
-body {
-    background-image: url(../../../server/images/getAllUsers/getAllUsers_640.jpeg)
-}
-
 @media (min-width: 641px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_800.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-800/getAllUsers.webp);
     }
 
     .formContainer {
@@ -79,7 +74,7 @@ body {
 
 @media (min-width: 801px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1024.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1024/getAllUsers.webp);
     }
 
     .formContainer {
@@ -94,7 +89,7 @@ body {
 
 @media (min-width: 1025px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1280.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1280/getAllUsers.webp);
     }
 
     .formContainer {
@@ -109,7 +104,7 @@ body {
 
 @media (min-width: 1281px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1366.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1366/getAllUsers.webp);
     }
 
     .formContainer {
@@ -124,7 +119,7 @@ body {
 
 @media (min-width: 1367px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1440.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1440/getAllUsers.webp);
     }
 
     .formContainer {
@@ -139,7 +134,7 @@ body {
 
 @media (min-width: 1441px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1536.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1536/getAllUsers.webp);
     }
 
     .formContainer {
@@ -154,7 +149,7 @@ body {
 
 @media (min-width: 1537px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1600.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1600/getAllUsers.webp);
     }
 
     .formContainer {
@@ -169,7 +164,7 @@ body {
 
 @media (min-width: 1601px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1680.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1680/getAllUsers.webp);
     }
 
     .formContainer {
@@ -184,7 +179,7 @@ body {
 
 @media (min-width: 1681px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_1920.jpg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1920/getAllUsers.webp);
     }
 
     .formContainer {
@@ -199,7 +194,7 @@ body {
 
 @media (min-width: 1921px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_2048.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-2048/getAllUsers.webp);
     }
 
     .formContainer {
@@ -214,7 +209,7 @@ body {
 
 @media (min-width: 2049px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_2560.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-2560/getAllUsers.webp);
     }
 
     .formContainer {
@@ -229,7 +224,7 @@ body {
 
 @media (min-width: 2561px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_3440.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-3440/getAllUsers.webp);
     }
 
     .formContainer {
@@ -244,7 +239,7 @@ body {
 
 @media (min-width: 3441px) {
     body {
-        background-image: url(../../../server/images/getAllUsers/getAllUsers_3840.jpeg)
+        background-image: url(https://ik.imagekit.io/sryl9mezx/getAllUsers.webp);
     }
 
     .formContainer {
