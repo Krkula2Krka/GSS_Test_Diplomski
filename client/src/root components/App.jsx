@@ -29,6 +29,7 @@ import { areasLoader } from '../queries/areaQueries'
 import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
+import { usersLoader } from '../queries/userQueries'
 
 export const App = () => {
   const queryClient = new QueryClient({
@@ -71,11 +72,11 @@ export const App = () => {
         },
         {
           path: '/getAllUsers',
-          async loader() {
-            let { usersLoader } = await import('../queries/userQueries');
-            return usersLoader(queryClient);
+          lazy: async () => {
+            const { GetAllUsers } = await import('../pages/getAllUsers')
+            return { Component: GetAllUsers }
           },
-          lazy: () => import('../pages/getAllUsers'),
+          loader: usersLoader(queryClient),
           errorElement: <ErrorPage />
         },
         {
@@ -104,14 +105,6 @@ export const App = () => {
           },
           loader: answersLoader(queryClient),
           errorElement: <ErrorPage />
-        },
-        {
-          path: '/credentialsForTest',
-          element: <LoginForm navigateToLocation='/takeTest' />
-        },
-        {
-          path: '/registration',
-          element: <RegistrationForm />
         }
       ]
     },
@@ -120,14 +113,19 @@ export const App = () => {
       element: <Home />
     },
     {
+      path: '/credentialsForTest',
+      element: <LoginForm navigateToLocation='/takeTest' />
+    },
+    {
+      path: '/registration',
+      element: <RegistrationForm />
+    },
+    {
       path: '/takeTest/:id',
       element: <TakeTest />,
       loader: async () => {
         const isUserLoggedIn = await loggedInLoader(queryClient)
-        return await testQuestionsLoader(
-          queryClient,
-          isUserLoggedIn
-        )
+        return await testQuestionsLoader(queryClient, isUserLoggedIn)
       },
       errorElement: <ErrorPage />
     },

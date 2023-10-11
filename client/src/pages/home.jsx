@@ -9,7 +9,7 @@ export const Home = () => {
         Полажи тест
       </Link>
       <Link className='homeLink'>Вежбање</Link>
-      <Link className='homeLink'>Рад са базом</Link>
+      <Link to='/getAllAreas' className='homeLink'>Рад са базом</Link>
     </div>
   )
 }
