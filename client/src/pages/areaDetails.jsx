@@ -12,6 +12,7 @@ import { deleteQuestionsMutation } from '../queries/questionQueries'
 import { NoQuestion } from '../components/table/noItem/noQuestion'
 import { QuestionTableColumns } from '../components/table/tableColumns/questionTableColumns'
 import { Table } from '../components/table/table'
+import { AddQuestion } from '../components/table/addItem/addQuestion'
 
 export const AreaDetails = () => {
   const [addForm, setAddForm] = useState(0)
@@ -38,7 +39,7 @@ export const AreaDetails = () => {
           openAddForm={() => setAddForm(1)}
         />
       ) : (
-        <div></div>
+        <AddQuestion resetState={() => setAddForm(0)} areaId={id} />
       )}
     </div>
   )

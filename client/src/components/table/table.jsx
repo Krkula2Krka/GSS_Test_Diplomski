@@ -90,18 +90,30 @@ export const Table = props => {
                 }
                 selectID={() =>
                   setSelectedItems(prev =>
-                    new Set(prev).add(row.original.GSS_identification)
+                    new Set(prev).add(
+                      props.calledFrom === 'users'
+                        ? row.original.GSS_identification
+                        : row.original.id
+                    )
                   )
                 }
                 unselectID={() =>
                   setSelectedItems(prev => {
                     const next = new Set(prev)
-                    next.delete(row.original.GSS_identification)
+                    next.delete(
+                      props.calledFrom === 'users'
+                        ? row.original.GSS_identification
+                        : row.original.id
+                    )
                     return next
                   })
                 }
                 checkIfItemExists={() =>
-                  selectedItems.has(row.original.GSS_identification)
+                  selectedItems.has(
+                    props.calledFrom === 'users'
+                      ? row.original.GSS_identification
+                      : row.original.id
+                  )
                 }
                 selectMode={() => selectedItems.size !== 0}
               />

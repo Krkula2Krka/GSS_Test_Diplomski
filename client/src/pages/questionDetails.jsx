@@ -7,76 +7,34 @@ import { useQuery } from '@tanstack/react-query'
 import { getAnswersForQuestionQuery } from '../queries/answerQueries'
 
 // css
-import '../css/questionDetails.css'
+import '../css/table.css'
 
 // components
-import { NoAnswer } from '../components/answer/noAnswer'
-import { AddAnswer } from '../components/answer/addAnswer'
-import { Answer } from '../components/answer/answer'
-import { DeleteAnswer } from '../components/answer/deleteAnswer'
-import { EditAnswer } from '../components/answer/editAnswer'
+import { NoAnswer } from '../components/table/noItem/noAnswer'
+import { Table } from '../components/table/table'
+import { AnswerTableColumns } from '../components/table/tableColumns/answerTableColumns'
 
 export const QuestionDetails = () => {
-  const [stateButton, setStateButton] = useState(0)
-
+  const [addForm, setAddForm] = useState(0)
   const { id } = useParams()
 
   const { data: answers } = useQuery(getAnswersForQuestionQuery(id))
-  const answersWithDummyData = [...answers]
-  if (answers.length !== 0)
-    answersWithDummyData.push({
-      id: -1,
-      answer_text: 'dummy',
-      correctness: false,
-      question_id: id
-    })
 
-  if (answersWithDummyData.length === 0) return <NoAnswer />
+  if (answers.length === 0) return <NoAnswer />
 
   return (
-    <div className='areas'>
-      <div className='container'>
-        <div className='row'>
-          {answersWithDummyData.map((answer, key) => {
-            return (
-              <div className='col-sm-12 col-md-6 col-lg-4' key={key}>
-                {key + 1 !== answersWithDummyData.length ? (
-                  stateButton !== answer.id + 1000000000 &&
-                  stateButton !== answer.id ? (
-                    <Answer
-                      setEditState={() => setStateButton(answer.id)}
-                      setDeleteState={() =>
-                        setStateButton(1000000000 + answer.id)
-                      }
-                      answerText={answer.answer_text}
-                      correctness={answer.correctness}
-                      answerId={answer.id}
-                    />
-                  ) : stateButton > 1000000000 ? (
-                    <DeleteAnswer
-                      questionId={id}
-                      answerId={answer.id}
-                      setDeleteState={() => setStateButton(0)}
-                    />
-                  ) : (
-                    <EditAnswer
-                      questionId={id}
-                      answerId={answer.id}
-                      resetState={() => setStateButton(0)}
-                    />
-                  )
-                ) : (
-                  <AddAnswer
-                    buttonPressed={stateButton}
-                    setAddNewQuestionState={() => setStateButton(1000000200)}
-                    resetState={() => setStateButton(0)}
-                  />
-                )}
-              </div>
-            )
-          })}
-        </div>
-      </div>
+    <div>
+      {addForm === 0 ? (
+        <Table
+          tableData={answers}
+          tableColumns={AnswerTableColumns}
+          calledFrom={'answers'}
+          //deleteItems={questions => deleteQuestions(questions)}
+          openAddForm={() => setAddForm(1)}
+        />
+      ) : (
+        <div />
+      )}
     </div>
   )
 }

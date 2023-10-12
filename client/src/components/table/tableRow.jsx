@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import '../../css/table.css'
 
 export const TableRow = props => {
-
   const navigate = useNavigate()
 
   const itemExists = props.checkIfItemExists()
@@ -15,9 +14,7 @@ export const TableRow = props => {
   return (
     <tr
       {...props.row.getRowProps({
-        onMouseDown: () => {
-          startPress = Date.now()
-        },
+        onMouseDown: () => (startPress = Date.now()),
         onMouseUp: () => {
           if (Date.now() - startPress > 300) {
             if (!itemExists) props.selectID()
