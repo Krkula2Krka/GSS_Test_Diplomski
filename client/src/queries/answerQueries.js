@@ -30,16 +30,13 @@ export const addAnswerMutation = (queryClient, id) => ({
   onSuccess: () => queryClient.invalidateQueries(queryKeys.answers(id))
 })
 
-export const deleteAnswerMutation = (queryClient, id) => ({
-  mutationFn: id => axios.post(`http://localhost:3001/answers/delete/${id}`),
+export const deleteAnswersMutation = (queryClient, id) => ({
+  mutationFn: data => axios.post('http://localhost:3001/answers/delete', data),
   onSuccess: () => queryClient.invalidateQueries(queryKeys.answers(id))
 })
 
 export const editAnswerMutation = (queryClient, id) => ({
   mutationFn: data =>
-    axios.post(
-      `http://localhost:3001/answers/edit/${data.id}`,
-      data.formData
-    ),
+    axios.post(`http://localhost:3001/answers/edit/${data.id}`, data.formData),
   onSuccess: () => queryClient.invalidateQueries(queryKeys.answers(id))
 })

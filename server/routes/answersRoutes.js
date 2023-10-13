@@ -3,13 +3,13 @@ const router = express.Router()
 const {
   createAnswerInController,
   getAnswersForQuestionInController,
-  deleteAnswerInController,
+  deleteAnswersInController,
   editAnswerInController
 } = require('../controllers/answersController')
 
 router.post('/', createAnswerInController)
 
-router.post('/delete/:id', deleteAnswerInController)
+router.post('/delete', deleteAnswersInController)
 
 router.get('/:question_id', getAnswersForQuestionInController)
 

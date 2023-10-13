@@ -1,5 +1,5 @@
 // libraries
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useTable, usePagination } from 'react-table'
 
 // css
@@ -29,16 +29,13 @@ export const Quiz = props => {
     previousPage,
     canNextPage,
     canPreviousPage,
-    setPageSize,
     prepareRow
-  } = useTable({ columns: tableColumns, data: tableData }, usePagination)
-
-  useEffect(() => setPageSize(1), [setPageSize])
+  } = useTable({ columns: tableColumns, data: tableData, initialState: { pageSize: 1 } }, usePagination)
 
   if (props.questions.length === 0) return <NoTestQuestion />
 
   return (
-    <table {...getTableProps()}>
+    <table pageSize={1} {...getTableProps()}>
       <tbody {...getTableBodyProps()}>
         {page.map(row => {
           prepareRow(row)

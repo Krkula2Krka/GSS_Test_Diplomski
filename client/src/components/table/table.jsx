@@ -86,7 +86,9 @@ export const Table = props => {
                 goto={
                   props.calledFrom === 'users'
                     ? `/userResults/${row.original.GSS_identification}`
-                    : `/questionDetails/${row.original.id}`
+                    : props.calledFrom === 'questions'
+                    ? `/questionDetails/${row.original.id}`
+                    : null
                 }
                 selectID={() =>
                   setSelectedItems(prev =>

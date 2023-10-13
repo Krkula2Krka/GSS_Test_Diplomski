@@ -15,19 +15,19 @@ const getAnswersForQuestionInController = async (req, res) => {
   res.json(questions)
 }
 
-const deleteAnswerInController = async (req, res) => {
-  await deleteAnswerInService(req.params.id)
+const editAnswerInController = async (req, res) => {
+  await editAnswerInService(req.params.id, req.body)
   res.json()
 }
 
-const editAnswerInController = async (req, res) => {
-  await editAnswerInService(req.params.id, req.body)
+const deleteAnswersInController = (req, res) => {
+  req.body.forEach(async id => await deleteAnswerInService(id))
   res.json()
 }
 
 module.exports = {
     createAnswerInController: createAnswerInController,
     getAnswersForQuestionInController: getAnswersForQuestionInController,
-    deleteAnswerInController: deleteAnswerInController,
+    deleteAnswersInController: deleteAnswersInController,
     editAnswerInController: editAnswerInController
 }

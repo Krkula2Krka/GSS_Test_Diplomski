@@ -39,7 +39,7 @@ export const AddQuestion = props => {
       onSubmit={onSubmit}
     >
       <Form className='formContainer centered'>
-        <label>Текст пирања:</label>
+        <label>Текст питања:</label>
         <ErrorMessage
           name='question_text'
           component='span'
