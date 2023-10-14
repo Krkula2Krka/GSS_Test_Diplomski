@@ -4,6 +4,7 @@ import React from 'react'
 // icons
 import { RiDeleteBin6Fill } from 'react-icons/ri'
 import { ImPlus } from 'react-icons/im'
+import { AiFillEdit } from 'react-icons/ai'
 
 // css
 import '../../css/table.css'
@@ -20,11 +21,14 @@ export const TableHeader = props => {
           setFilter={props.setGlobalFilter}
         />
       </div>
-      <button className='userButton deleteButton' onClick={props.deleteItems}>
+      <button className='userButton' onClick={props.deleteItems}>
         <RiDeleteBin6Fill />
       </button>
-      <button className='userButton deleteButton' onClick={props.openAddForm}>
+      <button className='userButton' onClick={props.openAddForm}>
         <ImPlus />
+      </button>
+      <button className='userButton' onClick={props.openEditForm}>
+        <AiFillEdit />
       </button>
       {props.allColumns.map(column => (
         <label key={column.id} className='visabilityToggler'>

@@ -19,7 +19,7 @@ import { AnswerTableColumns } from '../components/table/tableColumns/answerTable
 import { AddAnswer } from '../components/table/addItem/addAnswer'
 
 export const QuestionDetails = () => {
-  const [addForm, setAddForm] = useState(0)
+  const [form, setForm] = useState(0)
   const { id } = useParams()
 
   const { data: answers } = useQuery(getAnswersForQuestionQuery(id))
@@ -34,16 +34,19 @@ export const QuestionDetails = () => {
 
   return (
     <div>
-      {addForm === 0 ? (
+      {form === 0 ? (
         <Table
           tableData={answers}
           tableColumns={AnswerTableColumns}
           calledFrom={'answers'}
           deleteItems={answers => deleteAnswers(answers)}
-          openAddForm={() => setAddForm(1)}
+          openAddForm={() => setForm(1)}
+          openEditForm={() => setForm(2)}
         />
+      ) : form === 1 ? (
+        <AddAnswer resetState={() => setForm(0)} questionId={id} />
       ) : (
-        <AddAnswer resetState={() => setAddForm(0)} questionId={id} />
+        <div />
       )}
     </div>
   )

@@ -13,7 +13,6 @@ import { ColumnFilter } from './columnFilter'
 import { TableRow } from './tableRow'
 import { TableRowName } from './tableRowName'
 import { TableHeader } from './tableHeader'
-import { TableFooter } from './tableFooter'
 
 // css
 import '../../css/table.css'
@@ -34,14 +33,7 @@ export const Table = props => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    gotoPage,
-    setPageSize,
+    rows,
     prepareRow,
     state,
     setGlobalFilter,
@@ -54,13 +46,14 @@ export const Table = props => {
     usePagination
   )
 
-  const { globalFilter, pageIndex, pageSize } = state
+  const { globalFilter } = state
 
   return (
     <div className='tableContainer'>
       <TableHeader
         globalFilter={globalFilter}
         openAddForm={props.openAddForm}
+        openEditForm={props.openEditForm}
         calledFrom={props.calledFrom}
         setGlobalFilter={setGlobalFilter}
         deleteItems={() => {
@@ -77,7 +70,7 @@ export const Table = props => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map(row => {
+          {rows.map(row => {
             prepareRow(row)
             return (
               <TableRow
@@ -123,17 +116,6 @@ export const Table = props => {
           })}
         </tbody>
       </table>
-      <TableFooter
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        pageLength={pageOptions.length}
-        pageIndex={pageIndex}
-        canNextPage={canNextPage}
-        canPreviousPage={canPreviousPage}
-        nextPage={() => nextPage()}
-        previousPage={() => previousPage()}
-        gotoPage={page => gotoPage(page)}
-      />
     </div>
   )
 }

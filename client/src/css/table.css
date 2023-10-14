@@ -24,7 +24,6 @@ th, td {
 
 .userButton {
     border: none;
-    padding: 0.5rem;
     background-color: #060b26;
     color: #f5f5f5;
     outline: none;
@@ -33,12 +32,6 @@ th, td {
 .userButton:hover {
     color: #1a83ff;
     cursor: pointer;
-}
-
-.deleteButton {
-    font-size: 1.3rem;
-    padding: 0;
-    margin-right: 1rem;
 }
 
 .addedMargin {

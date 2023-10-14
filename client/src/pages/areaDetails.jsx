@@ -15,7 +15,7 @@ import { Table } from '../components/table/table'
 import { AddQuestion } from '../components/table/addItem/addQuestion'
 
 export const AreaDetails = () => {
-  const [addForm, setAddForm] = useState(0)
+  const [form, setForm] = useState(0)
   const { id } = useParams()
 
   const queryClient = useQueryClient()
@@ -30,16 +30,19 @@ export const AreaDetails = () => {
 
   return (
     <div>
-      {addForm === 0 ? (
+      {form === 0 ? (
         <Table
           tableData={questions}
           tableColumns={QuestionTableColumns}
           calledFrom={'questions'}
           deleteItems={questions => deleteQuestions(questions)}
-          openAddForm={() => setAddForm(1)}
+          openAddForm={() => setForm(1)}
+          openEditForm={() => setForm(2)}
         />
+      ) : form === 1 ? (
+        <AddQuestion resetState={() => setForm(0)} areaId={id} />
       ) : (
-        <AddQuestion resetState={() => setAddForm(0)} areaId={id} />
+        <div />
       )}
     </div>
   )
