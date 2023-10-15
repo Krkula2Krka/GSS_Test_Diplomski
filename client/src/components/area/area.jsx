@@ -21,7 +21,7 @@ export const Area = props => {
         <button onClick={props.setDeleteState} className='areaButton'>
           <RiDeleteBin6Fill />
         </button>
-        <Link to={`/areaDetails/${props.id}`} className='areaButton'>
+        <Link to={`/areaDetails/${props.id}`} state={{ areaName: props.areaName }} className='areaButton'>
           <FaQuestion />
         </Link>
       </div>

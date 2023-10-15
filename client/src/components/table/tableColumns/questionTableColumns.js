@@ -5,10 +5,24 @@ export const QuestionTableColumns = [
   },
   {
     Header: 'Тежина питања',
-    accessor: 'difficulty'
+    accessor: d =>
+      d.difficulty === 'tesko' ? (
+        <div>Тешко</div>
+      ) : d.difficulty === 'srednje' ? (
+        <div>Средње</div>
+      ) : (
+        <div>Лако</div>
+      )
   },
   {
     Header: 'Важност питања',
-    accessor: 'importance'
+    accessor: d =>
+      d.importance === 'bitno' ? (
+        <div>Битно</div>
+      ) : d.importance === 'srednje' ? (
+        <div>Средње</div>
+      ) : (
+        <div>Мање</div>
+      )
   }
 ]

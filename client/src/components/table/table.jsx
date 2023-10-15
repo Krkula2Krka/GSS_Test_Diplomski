@@ -111,6 +111,8 @@ export const Table = props => {
                   )
                 }
                 selectMode={() => selectedItems.size !== 0}
+                calledFrom={props.calledFrom}
+                editAnswerForm={props.editAnswerForm}
               />
             )
           })}

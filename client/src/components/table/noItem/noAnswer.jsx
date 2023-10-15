@@ -1,9 +1,14 @@
 import React from 'react'
+import { AddAnswer } from '../addItem/addAnswer'
 
-export const NoAnswer = () => {
+export const NoAnswer = props => {
   return (
-    <div className='centered'>
-      <h1>У бази тренутно нема ниједан одговор на ово пирање.</h1>
+    <div>
+      <h1 className='centeredHorizontal'>
+        У бази тренутно нема ниједан одговор на ово питање. Додајте први
+        одговор.
+      </h1>
+      <AddAnswer resetState={props.resetState} questionId={props.questionId} />
     </div>
   )
 }

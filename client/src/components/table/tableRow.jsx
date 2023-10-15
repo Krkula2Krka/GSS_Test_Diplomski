@@ -24,7 +24,9 @@ export const TableRow = props => {
               if (!itemExists) props.selectID()
               else props.unselectID()
             } else {
-              navigate(props.goto)
+              if (props.calledFrom === 'answers')
+                props.editAnswerForm(props.row.original.id)
+              else navigate(props.goto)
             }
           }
         }

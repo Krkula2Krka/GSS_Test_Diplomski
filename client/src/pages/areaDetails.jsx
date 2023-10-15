@@ -1,6 +1,6 @@
 // libraries
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
@@ -18,6 +18,9 @@ export const AreaDetails = () => {
   const [form, setForm] = useState(0)
   const { id } = useParams()
 
+  const location = useLocation()
+  const { areaName } = location.state
+
   const queryClient = useQueryClient()
 
   const { mutateAsync: deleteQuestions } = useMutation(
@@ -31,18 +34,18 @@ export const AreaDetails = () => {
   return (
     <div>
       {form === 0 ? (
-        <Table
-          tableData={questions}
-          tableColumns={QuestionTableColumns}
-          calledFrom={'questions'}
-          deleteItems={questions => deleteQuestions(questions)}
-          openAddForm={() => setForm(1)}
-          openEditForm={() => setForm(2)}
-        />
-      ) : form === 1 ? (
-        <AddQuestion resetState={() => setForm(0)} areaId={id} />
+        <div>
+          <h1 className='centeredHorizontal'>{areaName}</h1>
+          <Table
+            tableData={questions}
+            tableColumns={QuestionTableColumns}
+            calledFrom={'questions'}
+            deleteItems={questions => deleteQuestions(questions)}
+            openAddForm={() => setForm(1)}
+          />
+        </div>
       ) : (
-        <div />
+        <AddQuestion resetState={() => setForm(0)} areaId={id} />
       )}
     </div>
   )
