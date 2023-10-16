@@ -13,6 +13,7 @@ import { NoQuestion } from '../components/table/noItem/noQuestion'
 import { QuestionTableColumns } from '../components/table/tableColumns/questionTableColumns'
 import { Table } from '../components/table/table'
 import { AddQuestion } from '../components/table/addItem/addQuestion'
+import { EditQuestion } from '../components/table/editItem/editQuestion'
 
 export const AreaDetails = () => {
   const [form, setForm] = useState(0)
@@ -29,23 +30,32 @@ export const AreaDetails = () => {
 
   const { data: questions } = useQuery(getQuestionsForAreaQuery(id))
 
-  if (questions.length === 0) return <NoQuestion />
+  if (questions.length === 0) return <NoQuestion resetState={() => setForm(0)} areaId={id} />
 
   return (
     <div>
       {form === 0 ? (
         <div>
-          <h1 className='centeredHorizontal'>{areaName}</h1>
+          <div className='infoContainer'>
+            <h2>{areaName}</h2>
+          </div>
           <Table
             tableData={questions}
             tableColumns={QuestionTableColumns}
             calledFrom={'questions'}
             deleteItems={questions => deleteQuestions(questions)}
             openAddForm={() => setForm(1)}
+            openEditForm={questionId => setForm(questionId + 2)}
           />
         </div>
-      ) : (
+      ) : form === 1 ? (
         <AddQuestion resetState={() => setForm(0)} areaId={id} />
+      ) : (
+        <EditQuestion
+          resetState={() => setForm(0)}
+          areaId={id}
+          questionId={form - 2}
+        />
       )}
     </div>
   )

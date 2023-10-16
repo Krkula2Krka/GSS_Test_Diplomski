@@ -7,6 +7,7 @@ import {
   useFilters,
   usePagination
 } from 'react-table'
+import toast from 'react-hot-toast'
 
 // components
 import { ColumnFilter } from './columnFilter'
@@ -53,7 +54,13 @@ export const Table = props => {
       <TableHeader
         globalFilter={globalFilter}
         openAddForm={props.openAddForm}
-        openEditForm={props.openEditForm}
+        openEditForm={() => {
+          const items = Array.from(selectedItems)
+          if (items.length !== 1) {
+            toast.remove()
+            toast.error('Један ред мора бити изабран за опцију ажурирања.')
+          } else props.openEditForm(items[0])
+        }}
         calledFrom={props.calledFrom}
         setGlobalFilter={setGlobalFilter}
         deleteItems={() => {
@@ -112,7 +119,6 @@ export const Table = props => {
                 }
                 selectMode={() => selectedItems.size !== 0}
                 calledFrom={props.calledFrom}
-                editAnswerForm={props.editAnswerForm}
               />
             )
           })}

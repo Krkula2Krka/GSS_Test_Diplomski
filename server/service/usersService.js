@@ -63,7 +63,7 @@ const editUserInService = (GSS_identification, data) => {
       first_name: data.first_name,
       last_name: data.last_name,
       nickname: data.nickname,
-      admin: data.admin
+      user_type: data.user_type
     },
     {
       where: {

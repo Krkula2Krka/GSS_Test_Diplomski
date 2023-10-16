@@ -27,11 +27,9 @@ export const TableHeader = props => {
       <button className='userButton' onClick={props.openAddForm}>
         <ImPlus />
       </button>
-      {props.calledFrom !== 'questions' && props.calledFrom !== 'users' ? (
-        <button className='userButton' onClick={props.openEditForm}>
-          <AiFillEdit />
-        </button>
-      ) : null}
+      <button className='userButton' onClick={props.openEditForm}>
+        <AiFillEdit />
+      </button>
       {props.allColumns.map(column => (
         <label key={column.id} className='visabilityToggler'>
           <div className='visabilityTogglerText'>{column.Header}</div>

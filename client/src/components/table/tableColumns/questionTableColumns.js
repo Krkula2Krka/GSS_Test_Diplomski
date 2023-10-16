@@ -1,28 +1,28 @@
 export const QuestionTableColumns = [
   {
-    Header: 'Питање',
+    Header: 'питање',
     accessor: 'question_text'
   },
   {
-    Header: 'Тежина питања',
+    Header: 'тежина питања',
     accessor: d =>
       d.difficulty === 'tesko' ? (
-        <div>Тешко</div>
+        <div>тешко</div>
       ) : d.difficulty === 'srednje' ? (
-        <div>Средње</div>
+        <div>средње</div>
       ) : (
-        <div>Лако</div>
+        <div>лако</div>
       )
   },
   {
-    Header: 'Важност питања',
+    Header: 'важност питања',
     accessor: d =>
       d.importance === 'bitno' ? (
-        <div>Битно</div>
+        <div>битно</div>
       ) : d.importance === 'srednje' ? (
-        <div>Средње</div>
+        <div>средње</div>
       ) : (
-        <div>Мање</div>
+        <div>мање</div>
       )
   }
 ]

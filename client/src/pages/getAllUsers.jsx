@@ -11,9 +11,10 @@ import { NoUser } from '../components/table/noItem/noUser'
 import { UserTableColumns } from '../components/table/tableColumns/userTableColumns'
 import { Table } from '../components/table/table'
 import { AddUser } from '../components/table/addItem/addUser'
+import { EditUser } from '../components/table/editItem/editUser'
 
 export const GetAllUsers = () => {
-  const [addForm, setAddForm] = useState(0)
+  const [form, setForm] = useState(0)
 
   const queryClient = useQueryClient()
 
@@ -27,16 +28,19 @@ export const GetAllUsers = () => {
 
   return (
     <div>
-      {addForm === 0 ? (
+      {form === 0 ? (
         <Table
           tableData={users}
           calledFrom={'users'}
           tableColumns={UserTableColumns}
           deleteItems={users => deleteUsers(users)}
-          openAddForm={() => setAddForm(1)}
+          openAddForm={() => setForm(1)}
+          openEditForm={userId => setForm(userId + 2)}
         />
+      ) : form === 1 ? (
+        <AddUser resetState={() => setForm(0)} />
       ) : (
-        <AddUser resetState={() => setAddForm(0)} />
+        <EditUser resetState={() => setForm(0)} GSS_identification={form - 2} />
       )}
     </div>
   )

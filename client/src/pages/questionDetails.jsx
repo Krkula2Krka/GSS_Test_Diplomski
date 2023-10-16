@@ -1,6 +1,6 @@
 // libraries
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useMemo, useState } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 // queries
@@ -17,16 +17,34 @@ import { NoAnswer } from '../components/table/noItem/noAnswer'
 import { Table } from '../components/table/table'
 import { AnswerTableColumns } from '../components/table/tableColumns/answerTableColumns'
 import { AddAnswer } from '../components/table/addItem/addAnswer'
-import { EditQuestion } from '../components/table/editItem/editQuestion'
 import { EditAnswer } from '../components/table/editItem/editAnswer'
 
-export const QuestionDetails = ({route}) => {
+export const QuestionDetails = () => {
   const [form, setForm] = useState(0)
   const { id } = useParams()
 
   const { data: answers } = useQuery(getAnswersForQuestionQuery(id))
 
   const queryClient = useQueryClient()
+
+  const location = useLocation()
+  const { questionText, difficulty, importance } = location.state
+
+  const difficultyString = useMemo(() => {
+    return difficulty === 'tesko'
+      ? 'Питање је тешко.'
+      : difficulty === 'srednje'
+      ? 'Питање је средње тешко.'
+      : 'Питање је лако.'
+  }, [difficulty])
+
+  const importanceString = useMemo(() => {
+    return importance === 'bitno'
+      ? 'Питање је битно.'
+      : importance === 'srednje'
+      ? 'Питање је средње битно.'
+      : 'Питање је мање битно.'
+  }, [importance])
 
   const { mutateAsync: deleteAnswers } = useMutation(
     deleteAnswersMutation(queryClient, id)
@@ -39,30 +57,27 @@ export const QuestionDetails = ({route}) => {
     <div>
       {form === 0 ? (
         <div>
-          <h1 className='centeredHorizontal'>some placeholder text</h1>
+          <div className='infoContainer'>
+            <h2>{questionText}</h2>
+            <h2>{difficultyString}</h2>
+            <h2>{importanceString}</h2>
+          </div>
           <Table
             tableData={answers}
             tableColumns={AnswerTableColumns}
             calledFrom={'answers'}
             deleteItems={answers => deleteAnswers(answers)}
             openAddForm={() => setForm(1)}
-            openEditForm={() => setForm(2)}
-            editAnswerForm={answerId => setForm(answerId + 3)}
+            openEditForm={answerId => setForm(answerId + 2)}
           />
         </div>
       ) : form === 1 ? (
         <AddAnswer resetState={() => setForm(0)} questionId={id} />
-      ) : form === 2 ? (
-        <EditQuestion
-          resetState={() => setForm(0)}
-          areaId={id}
-          questionId={id}
-        />
       ) : (
         <EditAnswer
           resetState={() => setForm(0)}
           questionId={id}
-          answerId={form - 3}
+          answerId={form - 2}
         />
       )}
     </div>

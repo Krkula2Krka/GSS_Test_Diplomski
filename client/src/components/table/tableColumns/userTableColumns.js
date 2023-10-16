@@ -4,23 +4,26 @@ export const UserTableColumns = [
     accessor: 'GSS_identification'
   },
   {
-    Header: 'Име',
+    Header: 'име',
     accessor: 'first_name'
   },
   {
-    Header: 'Презиме',
+    Header: 'презиме',
     accessor: 'last_name'
   },
   {
-    Header: 'Надимак',
+    Header: 'надимак',
     accessor: 'nickname'
   },
   {
-    Header: 'Администратор',
-    accessor: d => (d.admin ? <div>Да</div> : <div>Не</div>)
-  },
-  {
-    Header: 'Супер администратор',
-    accessor: d => (d.super_admin ? <div>Да</div> : <div>Не</div>)
+    Header: 'тип корисника',
+    accessor: d =>
+      d.user_type === 'user' ? (
+        <div>корисник</div>
+      ) : d.user_type === 'admin' ? (
+        <div>администратор</div>
+      ) : (
+        <div>супер администартор</div>
+      )
   }
 ]

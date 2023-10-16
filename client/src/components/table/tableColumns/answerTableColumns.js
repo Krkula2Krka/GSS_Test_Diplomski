@@ -1,10 +1,10 @@
 export const AnswerTableColumns = [
   {
-    Header: 'Одговор',
+    Header: 'одговор',
     accessor: 'answer_text'
   },
   {
-    Header: 'Тачност одговора',
-    accessor: d => d.correctness === true ? <div>Да</div> : <div>Не</div>
+    Header: 'тачност одговора',
+    accessor: d => d.correctness === true ? <div>да</div> : <div>не</div>
   }
 ]
