@@ -7,6 +7,18 @@
   font-family: 'Lato', sans-serif;
 }
 
+.App {
+  width: 100%;
+  height: 100vh;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  position: absolute;
+}
+
 iframe {
   display: none;
 }
@@ -28,30 +40,6 @@ iframe {
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);
-}
-
-.table {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 700px;
-  height: auto;
-  padding: 20px;
-  border: 5px solid #060b26;
-  background-color: #060b26;
-  border-radius: 5px;
-}
-
-.table-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  height: auto;
-  padding: 20px;
-  border: 5px solid #060b26;
-  background-color: white;
-  border-radius: 5px;
 }
 
 .errorMessage {

@@ -7,12 +7,13 @@ import { ErrorPage } from '../components/error/errorPage'
 import { Sidebar } from '../components/sidebar/sidebar'
 import { RetractableSidebar } from '../components/sidebar/retractableSidebar'
 
-export const Root = () => {
+export const Root = props => {
   const location = useLocation()
+  const setImageSource = props.setImageSource
   return (
     <ErrorBoundary key={location.pathname} FallbackComponent={ErrorPage}>
       {window.innerWidth > 640 ? <Sidebar /> : <RetractableSidebar />}
-      <Outlet />
+      <Outlet context={[setImageSource]} />
     </ErrorBoundary>
   )
 }

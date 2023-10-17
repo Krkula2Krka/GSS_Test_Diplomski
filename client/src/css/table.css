@@ -1,6 +1,5 @@
 .tableContainer {
-    padding-left: 10rem;
-    padding-right: 10rem;
+    opacity: 0.85;
 }
 
 thead {
@@ -9,11 +8,9 @@ thead {
 }
 
 th, td {
-    padding: 0.3rem;
     background-color: #060b26;
     color: #f5f5f5;
     text-align: center;
-    width: 40rem;
 }
 
 .selected {
@@ -25,11 +22,9 @@ th, td {
 }
 
 .infoContainer {
-    padding-bottom: 1rem;
-    margin-left: 10rem;
-    margin-right: 10rem;
     background-color: #060b26;
     color: #f5f5f5;
+    opacity: 0.85;
 }
 
 .userButton {
@@ -47,10 +42,6 @@ th, td {
 .addedMargin {
     margin-right: 2rem;
     margin-left: 2rem;
-}
-
-.test {
-    padding: 1rem;
 }
 
 .visabilityToggler {
@@ -98,7 +89,7 @@ div.tableContainer input:focus {
     outline: none;
 }
 
-.headerFooter {
+.header {
     display: flex;
     background-color: #060b26;
     color: #f5f5f5;
@@ -106,4 +97,27 @@ div.tableContainer input:focus {
     padding-bottom: 0.5rem;
     font-size: 1rem;
     font-weight: bold;
+}
+
+@media (min-width: 1367px) {
+    .tableContainer {
+        padding-left: 10rem;
+        padding-right: 6rem;
+    }
+
+    .infoContainer {
+        padding-bottom: 1rem;
+        margin-left: 10rem;
+        margin-right: 10rem;
+    }
+
+    th, td {
+        padding: 0.3rem;
+        width: 40rem;
+    }
+
+    .addedMargin {
+        margin-right: 2rem;
+        margin-left: 2rem;
+    }
 }

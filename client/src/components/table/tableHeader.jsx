@@ -14,7 +14,7 @@ import { GlobalFilter } from './globalFilter'
 
 export const TableHeader = props => {
   return (
-    <div className='headerFooter'>
+    <div className='header'>
       <div className='addedMargin'>
         <GlobalFilter
           filter={props.globalFilter}

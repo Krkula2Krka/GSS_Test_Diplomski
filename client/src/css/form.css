@@ -1,8 +1,3 @@
-body {
-    background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-600/getAllUsers.webp);
-    background-repeat: no-repeat;
-}
-
 .link {
     text-decoration: none;
 }
@@ -58,10 +53,6 @@ button {
 }
 
 @media (min-width: 641px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-800/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 22rem;
     }
@@ -73,10 +64,6 @@ button {
 }
 
 @media (min-width: 801px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1024/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 34rem;
     }
@@ -88,25 +75,17 @@ button {
 }
 
 @media (min-width: 1025px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1280/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 36rem;
     }
 
-    button {
+    .background {
         width: 8rem;
         font-size: 1.3rem;
     }
 }
 
 @media (min-width: 1281px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1366/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 38rem;
     }
@@ -118,10 +97,6 @@ button {
 }
 
 @media (min-width: 1367px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1440/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 40rem;
     }
@@ -133,10 +108,6 @@ button {
 }
 
 @media (min-width: 1441px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1536/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 40rem;
     }
@@ -148,10 +119,6 @@ button {
 }
 
 @media (min-width: 1537px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1600/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 42rem;
     }
@@ -163,10 +130,6 @@ button {
 }
 
 @media (min-width: 1601px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1680/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 42rem;
     }
@@ -178,10 +141,6 @@ button {
 }
 
 @media (min-width: 1681px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-1920/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 45rem;
     }
@@ -193,10 +152,6 @@ button {
 }
 
 @media (min-width: 1921px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-2048/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 45rem;
     }
@@ -208,10 +163,6 @@ button {
 }
 
 @media (min-width: 2049px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-2560/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 48rem;
     }
@@ -223,10 +174,6 @@ button {
 }
 
 @media (min-width: 2561px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/tr:w-3440/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 50rem;
     }
@@ -238,10 +185,6 @@ button {
 }
 
 @media (min-width: 3441px) {
-    body {
-        background-image: url(https://ik.imagekit.io/sryl9mezx/getAllUsers.webp);
-    }
-
     .formContainer {
         width: 52rem;
     }

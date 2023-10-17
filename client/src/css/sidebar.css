@@ -5,8 +5,9 @@
   justify-content: center;
   position: fixed;
   width: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
+  z-index: 1;
 }
 
 .side-icon {

@@ -30,8 +30,10 @@ import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
 import { usersLoader } from '../queries/userQueries'
+import { useState } from 'react'
 
 export const App = () => {
+  const [imageSource, setImageSource] = useState('')
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -59,7 +61,7 @@ export const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Root />,
+      element: <Root setImageSource={imgSrc => setImageSource(imgSrc)}/>,
       children: [
         {
           path: '/getAllAreas',
@@ -136,10 +138,13 @@ export const App = () => {
   ])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Toaster />
-    </QueryClientProvider>
+    <div className='App'>
+      <img src={imageSource} alt='background' />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Toaster />
+      </QueryClientProvider>
+    </div>
   )
 }

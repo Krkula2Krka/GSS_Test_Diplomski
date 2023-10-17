@@ -1,7 +1,8 @@
 // libraries
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useOutletContext } from 'react-router-dom'
 
 // queries
 import { getAllUsersQuery, deleteUsersMutation } from '../queries/userQueries'
@@ -15,12 +16,17 @@ import { EditUser } from '../components/table/editItem/editUser'
 
 export const GetAllUsers = () => {
   const [form, setForm] = useState(0)
+  const [setImageSource] = useOutletContext()
 
   const queryClient = useQueryClient()
 
   const { mutateAsync: deleteUsers } = useMutation(
     deleteUsersMutation(queryClient)
   )
+
+  useEffect(() => {
+    setImageSource('https://ik.imagekit.io/sryl9mezx/getAllUsers.webp')
+  }, [setImageSource])
 
   const { data: users } = useQuery(getAllUsersQuery())
 
