@@ -12,7 +12,7 @@ export const Root = props => {
   const setImageSource = props.setImageSource
   return (
     <ErrorBoundary key={location.pathname} FallbackComponent={ErrorPage}>
-      {window.innerWidth > 640 ? <Sidebar /> : <RetractableSidebar />}
+      {window.innerWidth > 891 ? <Sidebar /> : <RetractableSidebar />}
       <Outlet context={[setImageSource]} />
     </ErrorBoundary>
   )

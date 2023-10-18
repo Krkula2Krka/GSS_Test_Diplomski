@@ -11,14 +11,12 @@ th, td {
     background-color: #060b26;
     color: #f5f5f5;
     text-align: center;
+    width: 40rem;
+    padding: 0.3rem;
 }
 
 .selected {
     background-color: #1a83ff;
-}
-
-.userButtons {
-    display: flex;
 }
 
 .infoContainer {
@@ -39,46 +37,15 @@ th, td {
     cursor: pointer;
 }
 
-.addedMargin {
-    margin-right: 2rem;
-    margin-left: 2rem;
-}
-
 .visabilityToggler {
     display: flex;
     margin-right: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .visabilityTogglerText {
     margin-right: 0.5rem;
-}
-
-.editRow {
-    background-color: #060b26;
-    color: #f5f5f5;
-}
-
-.editUserForm {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10rem;
-    padding-right: 10rem;
-}
-
-.confirmButtons {
-    display: flex;
-    align-self: center;
-}
-
-.deleteUserContainer {
-    display: flex;
-}
-
-.deleteUserLabel {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 4rem;
-    margin-left: 2rem;
+    margin-left: 0.5rem;
 }
 
 th input:focus {
@@ -95,11 +62,20 @@ div.tableContainer input:focus {
     color: #f5f5f5;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    font-size: 1rem;
     font-weight: bold;
 }
 
-@media (min-width: 1367px) {
+@media (min-width: 892px) {
+    .tableContainer {
+        padding-left: 4.6rem;
+    }
+
+    .infoContainer {
+        padding-bottom: 1rem;
+    }
+}
+
+@media (min-width: 1025px) {
     .tableContainer {
         padding-left: 10rem;
         padding-right: 6rem;
@@ -108,16 +84,6 @@ div.tableContainer input:focus {
     .infoContainer {
         padding-bottom: 1rem;
         margin-left: 10rem;
-        margin-right: 10rem;
-    }
-
-    th, td {
-        padding: 0.3rem;
-        width: 40rem;
-    }
-
-    .addedMargin {
-        margin-right: 2rem;
-        margin-left: 2rem;
+        margin-right: 6rem;
     }
 }

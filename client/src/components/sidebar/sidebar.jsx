@@ -1,7 +1,6 @@
 // libraries
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 
 // components
@@ -36,21 +35,12 @@ export const Sidebar = () => {
         {SidebarData.map(item => {
           return (
             <li key={item.id}>
-              <OverlayTrigger
-                placement='right'
-                overlay={
-                  <Tooltip>
-                    <label className='tooltip-label'>{item.title}</label>
-                  </Tooltip>
-                }
+              <NavLink
+                className={setNavLinkClasses(pathname, item.id)}
+                to={item.path}
               >
-                <NavLink
-                  className={setNavLinkClasses(pathname, item.id)}
-                  to={item.path}
-                >
-                  {item.icon}
-                </NavLink>
-              </OverlayTrigger>
+                {item.icon}
+              </NavLink>
             </li>
           )
         })}

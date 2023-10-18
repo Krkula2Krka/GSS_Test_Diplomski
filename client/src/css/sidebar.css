@@ -5,8 +5,6 @@
   justify-content: center;
   position: fixed;
   width: auto;
-  overflow-y: hidden;
-  overflow-x: hidden;
   z-index: 1;
 }
 
@@ -15,7 +13,6 @@
   background-color: #060b26;
   color: #f5f5f5;
   font-size: 1.5rem;
-  width: 95%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -59,11 +56,6 @@ a.active.side-icon:hover {
   color: #1a83ff;
 }
 
-.tooltip-label {
-  background-color: #060b26;
-  color: #f5f5f5;
-}
-
 .hamburger-button {
   background-color: transparent;
   color: #060b26;
@@ -74,9 +66,6 @@ a.active.side-icon:hover {
   color: #f5f5f5;
   background-color: #060b26;
   width: 100%;
-  margin-top: 0;
-  margin-left: 0;
-  padding-top: 2rem;
 }
 
 .full-witdh {

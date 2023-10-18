@@ -17,30 +17,30 @@ export const RetractableSidebar = () => {
   return (
     <div>
       {open === 1 ? (
-        <div>
-          <button
-            className='hamburger-button open-hamburger-button'
-            onClick={() => setOpen(0)}
-          >
-            <ImCross />
-          </button>
-          <nav className='side-menu full-witdh'>
-            <ul>
-              {SidebarData.map(item => {
-                return (
-                  <li key={item.id}>
-                    <NavLink onClick={() => setOpen(0)} to={item.path}>
-                      <div className='open-mobile-sidebar-element'>
-                        <div className='side-icon-mobile'>{item.icon}</div>
-                        <div className='side-text'>{item.title}</div>
-                      </div>
-                    </NavLink>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
-        </div>
+        <nav className='side-menu full-witdh'>
+          <ul>
+            <li>
+              <button
+                className='hamburger-button open-hamburger-button'
+                onClick={() => setOpen(0)}
+              >
+                <ImCross />
+              </button>
+            </li>
+            {SidebarData.map(item => {
+              return (
+                <li key={item.id}>
+                  <NavLink onClick={() => setOpen(0)} to={item.path}>
+                    <div className='open-mobile-sidebar-element'>
+                      <div className='side-icon-mobile'>{item.icon}</div>
+                      <div className='side-text'>{item.title}</div>
+                    </div>
+                  </NavLink>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
       ) : (
         <button className='hamburger-button' onClick={() => setOpen(1)}>
           <GiHamburgerMenu />

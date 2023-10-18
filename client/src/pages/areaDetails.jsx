@@ -15,6 +15,9 @@ import { Table } from '../components/table/table'
 import { AddQuestion } from '../components/table/addItem/addQuestion'
 import { EditQuestion } from '../components/table/editItem/editQuestion'
 
+// css
+import '../css/table.css'
+
 export const AreaDetails = () => {
   const [form, setForm] = useState(0)
   const { id } = useParams()

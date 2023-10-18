@@ -3,7 +3,6 @@ import React, { useMemo, useState } from 'react'
 import {
   useTable,
   useSortBy,
-  useGlobalFilter,
   useFilters,
   usePagination
 } from 'react-table'
@@ -37,12 +36,10 @@ export const Table = props => {
     rows,
     prepareRow,
     state,
-    setGlobalFilter,
     allColumns
   } = useTable(
     { columns: tableColumns, data: tableData, defaultColumn: filterColumn },
     useFilters,
-    useGlobalFilter,
     useSortBy,
     usePagination
   )
@@ -62,7 +59,6 @@ export const Table = props => {
           } else props.openEditForm(items[0])
         }}
         calledFrom={props.calledFrom}
-        setGlobalFilter={setGlobalFilter}
         deleteItems={() => {
           const items = Array.from(selectedItems)
           props.deleteItems(items)

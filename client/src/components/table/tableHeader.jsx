@@ -9,18 +9,9 @@ import { AiFillEdit } from 'react-icons/ai'
 // css
 import '../../css/table.css'
 
-// components
-import { GlobalFilter } from './globalFilter'
-
 export const TableHeader = props => {
   return (
-    <div className='header'>
-      <div className='addedMargin'>
-        <GlobalFilter
-          filter={props.globalFilter}
-          setFilter={props.setGlobalFilter}
-        />
-      </div>
+    <div className='header' style={{ minWidth: props.calledFrom === 'users' ? 824 : null }}>
       <button className='userButton' onClick={props.deleteItems}>
         <RiDeleteBin6Fill />
       </button>
