@@ -20,7 +20,7 @@ const checkIfUserExistsInService = data => {
   return user.findOne({
     where: {
       GSS_identification: data.GSS_identification,
-      first_name: data.first_name,
+      first_name: data.first_name
     }
   })
 }
@@ -53,8 +53,11 @@ const logoutUserForTestingInService = GSS_identification => {
   )
 }
 
-const getAllUsersInService = () => {
-  return user.findAll()
+const getUsersBatchInService = page => {
+  return user.findAll({
+    offset: (page-1) * 30,
+    limit: 30
+  })
 }
 
 const editUserInService = (GSS_identification, data) => {
@@ -82,13 +85,12 @@ const deleteUserInService = GSS_identification => {
 }
 
 module.exports = {
-  createUserInService: createUserInService,
-  checkIfUserExistsInService: checkIfUserExistsInService,
-  loginUserForTestingInService: loginUserForTestingInService,
-  logoutUserForTestingInService: logoutUserForTestingInService,
-  checkIfUserIsLoggedInForTestingInService:
-    checkIfUserIsLoggedInForTestingInService,
-  getAllUsersInService: getAllUsersInService,
-  editUserInService: editUserInService,
-  deleteUserInService: deleteUserInService
+  createUserInService,
+  checkIfUserExistsInService,
+  loginUserForTestingInService,
+  logoutUserForTestingInService,
+  checkIfUserIsLoggedInForTestingInService,
+  getUsersBatchInService,
+  editUserInService,
+  deleteUserInService
 }

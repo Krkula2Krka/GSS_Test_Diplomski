@@ -5,12 +5,12 @@ const {
   loginUserForTestingInController,
   checkIfUserIsLoggedInForTestingInController,
   logoutUserForTestingInController,
-  getAllUsersInController,
+  getUsersBatchInController,
   editUserInController,
   deleteUsersInController
 } = require('../controllers/usersController')
 
-router.get('/', getAllUsersInController)
+router.get('/page=:page', getUsersBatchInController)
 
 router.post('/', createUserInController)
 

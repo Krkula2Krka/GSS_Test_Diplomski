@@ -4,7 +4,7 @@ const {
   loginUserForTestingInService,
   logoutUserForTestingInService,
   checkIfUserIsLoggedInForTestingInService,
-  getAllUsersInService,
+  getUsersBatchInService,
   editUserInService,
   deleteUserInService
 } = require('../service/usersService')
@@ -46,8 +46,8 @@ const logoutUserForTestingInController = async (req, res) => {
   res.json()
 }
 
-const getAllUsersInController = async (_, res) => {
-  const users = await getAllUsersInService()
+const getUsersBatchInController = async (req, res) => {
+  const users = await getUsersBatchInService(req.params.page)
   res.json(users)
 }
 
@@ -64,12 +64,11 @@ const deleteUsersInController = (req, res) => {
 }
 
 module.exports = {
-  createUserInController: createUserInController,
-  loginUserForTestingInController: loginUserForTestingInController,
-  checkIfUserIsLoggedInForTestingInController:
-    checkIfUserIsLoggedInForTestingInController,
-  logoutUserForTestingInController: logoutUserForTestingInController,
-  getAllUsersInController: getAllUsersInController,
-  editUserInController: editUserInController,
-  deleteUsersInController: deleteUsersInController
+  createUserInController,
+  loginUserForTestingInController,
+  checkIfUserIsLoggedInForTestingInController,
+  logoutUserForTestingInController,
+  getUsersBatchInController,
+  editUserInController,
+  deleteUsersInController
 }

@@ -34,19 +34,22 @@ export const logoutForTestingMutation = (id, queryClient) => ({
   onSuccess: () => queryClient.invalidateQueries(queryKeys.loggedIn(id))
 })
 
-export const getAllUsersQuery = () => ({
+export const getUsersBatchQuery = page => ({
   queryKey: queryKeys.users,
   queryFn: async () => {
-    const res = await fetch('http://localhost:3001/users')
+    const res = await fetch(`http://localhost:3001/users/page=${page}`)
     const data = await res.json()
     return data
+  },
+  getNextPageParam: (_, pages) => {
+    return pages.length + 1
   },
   staleTime: 1000 * 60 * 30,
   cacheTime: 1000 * 60 * 30
 })
 
 export const usersLoader = queryClient => async () => {
-  const query = getAllUsersQuery()
+  const query = getUsersBatchQuery(1)
   return await queryClient.ensureQueryData({
     queryKey: query.queryKey,
     queryFn: query.queryFn

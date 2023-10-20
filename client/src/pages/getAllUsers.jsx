@@ -1,9 +1,9 @@
 // libraries
 import React, { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 // queries
-import { getAllUsersQuery, deleteUsersMutation } from '../queries/userQueries'
+import { getUsersBatchQuery, deleteUsersMutation } from '../queries/userQueries'
 
 // components
 import { NoUser } from '../components/table/noItem/noUser'
@@ -21,7 +21,11 @@ export const GetAllUsers = () => {
     deleteUsersMutation(queryClient)
   )
 
-  const { data: users } = useQuery(getAllUsersQuery())
+  const {
+    data: users,
+    fetchNextPage,
+    isFetchingNextPage
+  } = useInfiniteQuery(getUsersBatchQuery(1))
 
   if (users.length === 0) return <NoUser />
 
