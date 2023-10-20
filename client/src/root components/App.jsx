@@ -136,12 +136,10 @@ export const App = () => {
   ])
 
   return (
-    <div className='App'>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Toaster />
-      </QueryClientProvider>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Toaster />
+    </QueryClientProvider>
   )
 }

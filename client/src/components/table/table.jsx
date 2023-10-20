@@ -1,15 +1,9 @@
 // libraries
 import React, { useMemo, useState } from 'react'
-import {
-  useTable,
-  useSortBy,
-  useFilters,
-  usePagination
-} from 'react-table'
+import { useTable, useSortBy, useFilters, usePagination } from 'react-table'
 import toast from 'react-hot-toast'
 
 // components
-import { ColumnFilter } from './columnFilter'
 import { TableRow } from './tableRow'
 import { TableRowName } from './tableRowName'
 import { TableHeader } from './tableHeader'
@@ -21,12 +15,6 @@ export const Table = props => {
   const [selectedItems, setSelectedItems] = useState(() => new Set())
   const tableData = useMemo(() => props.tableData, [props.tableData])
 
-  const filterColumn = useMemo(() => {
-    return {
-      Filter: ColumnFilter
-    }
-  }, [])
-
   const tableColumns = useMemo(() => props.tableColumns, [props.tableColumns])
 
   const {
@@ -35,21 +23,17 @@ export const Table = props => {
     headerGroups,
     rows,
     prepareRow,
-    state,
     allColumns
   } = useTable(
-    { columns: tableColumns, data: tableData, defaultColumn: filterColumn },
+    { columns: tableColumns, data: tableData },
     useFilters,
     useSortBy,
     usePagination
   )
 
-  const { globalFilter } = state
-
   return (
     <div className='tableContainer'>
       <TableHeader
-        globalFilter={globalFilter}
         openAddForm={props.openAddForm}
         openEditForm={() => {
           const items = Array.from(selectedItems)
@@ -61,8 +45,15 @@ export const Table = props => {
         calledFrom={props.calledFrom}
         deleteItems={() => {
           const items = Array.from(selectedItems)
-          props.deleteItems(items)
-          setSelectedItems(new Set())
+          if (items.length === 0) {
+            toast.remove()
+            toast.error(
+              'Један или више редова мора бити изабрано за опцију брисања.'
+            )
+          } else {
+            props.deleteItems(items)
+            setSelectedItems(new Set())
+          }
         }}
         allColumns={allColumns}
       />

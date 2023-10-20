@@ -12,6 +12,14 @@ th, td {
     color: #f5f5f5;
     text-align: center;
     width: 40rem;
+}
+
+th {
+    padding: 0.7rem;
+    font-size: 1.2rem;
+}
+
+td {
     padding: 0.3rem;
 }
 
@@ -30,6 +38,7 @@ th, td {
     background-color: #060b26;
     color: #f5f5f5;
     outline: none;
+    margin: 0;
 }
 
 .userButton:hover {
@@ -37,15 +46,30 @@ th, td {
     cursor: pointer;
 }
 
-.visabilityToggler {
+.search-parameter {
     display: flex;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
 }
 
-.visabilityTogglerText {
+.search-parameter-text {
     margin-right: 0.5rem;
     margin-left: 0.5rem;
+}
+
+.search {
+    display: flex;
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+}
+
+.search-label {
+    margin: 0;
+}
+
+.search-input {
+    height: 1.3rem;
+    margin: 0;
 }
 
 th input:focus {

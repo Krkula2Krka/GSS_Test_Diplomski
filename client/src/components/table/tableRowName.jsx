@@ -9,7 +9,6 @@ export const TableRowName = props => {
           <div {...column.getHeaderProps(column.getSortByToggleProps())}>
             {column.render('Header')}
           </div>
-          <div>{column.canFilter ? column.render('Filter') : null}</div>
         </th>
       ))}
     </tr>

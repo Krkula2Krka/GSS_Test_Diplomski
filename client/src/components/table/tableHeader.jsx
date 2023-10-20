@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useState } from 'react'
 
 // icons
 import { RiDeleteBin6Fill } from 'react-icons/ri'
@@ -9,9 +9,17 @@ import { AiFillEdit } from 'react-icons/ai'
 // css
 import '../../css/table.css'
 
+// components
+import { Search } from './search'
+
 export const TableHeader = props => {
+  const [selectedItems, setSelectedItems] = useState(() => new Set())
   return (
-    <div className='header' style={{ minWidth: props.calledFrom === 'users' ? 824 : null }}>
+    <div
+      className='header'
+      style={{ minWidth: props.calledFrom === 'users' ? 824 : null }}
+    >
+      <Search selectedItems={selectedItems} />
       <button className='userButton' onClick={props.deleteItems}>
         <RiDeleteBin6Fill />
       </button>
@@ -22,9 +30,21 @@ export const TableHeader = props => {
         <AiFillEdit />
       </button>
       {props.allColumns.map(column => (
-        <label key={column.id} className='visabilityToggler'>
-          <div className='visabilityTogglerText'>{column.Header}</div>
-          <input type='checkbox' {...column.getToggleHiddenProps()} />
+        <label key={column.id} className='search-parameter'>
+          <div className='search-parameter-text'>{column.Header}</div>
+          <input
+            type='checkbox'
+            onChange={e => {
+              if (e.target.checked)
+                setSelectedItems(prev => new Set(prev).add(column.id))
+              else
+                setSelectedItems(prev => {
+                  const next = new Set(prev)
+                  next.delete(column.id)
+                  return next
+                })
+            }}
+          />
         </label>
       ))}
     </div>

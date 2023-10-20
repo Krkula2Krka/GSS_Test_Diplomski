@@ -38,6 +38,7 @@ export const Sidebar = () => {
               <NavLink
                 className={setNavLinkClasses(pathname, item.id)}
                 to={item.path}
+                title={item.title}
               >
                 {item.icon}
               </NavLink>

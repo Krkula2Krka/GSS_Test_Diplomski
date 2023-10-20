@@ -17,6 +17,7 @@ export const UserTableColumns = [
   },
   {
     Header: 'тип корисника',
+    id: 'user_type',
     accessor: d =>
       d.user_type === 'user' ? (
         <div>корисник</div>
