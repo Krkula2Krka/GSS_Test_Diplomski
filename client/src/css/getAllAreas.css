@@ -26,7 +26,7 @@
 }
 
 .noAreaButton:hover {
-    color: #1a83ff;
+    color: #008080;
 }
 
 .confirmDeleteOrEditArea {
@@ -95,6 +95,6 @@
 }
 
 .areaButton:hover {
-    color: #1a83ff;
+    color: #008080;
     cursor: pointer;
 }

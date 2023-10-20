@@ -1,5 +1,5 @@
 .tableContainer {
-    opacity: 0.85;
+    padding-top: 1rem;
 }
 
 thead {
@@ -16,7 +16,7 @@ th, td {
 }
 
 .selected {
-    background-color: #1a83ff;
+    background-color: #008080;
 }
 
 .infoContainer {
@@ -33,7 +33,7 @@ th, td {
 }
 
 .userButton:hover {
-    color: #1a83ff;
+    color: #008080;
     cursor: pointer;
 }
 

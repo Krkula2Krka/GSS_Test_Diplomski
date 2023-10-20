@@ -14,7 +14,6 @@
     padding: 2rem;
     height: auto;
     background-color: #060b26;
-    opacity: 0.85;
 }
 
 label {
@@ -40,7 +39,7 @@ button {
 }
 
 button:hover {
-    color: #1a83ff;
+    color: #008080;
 }
 
 .formContainer {
