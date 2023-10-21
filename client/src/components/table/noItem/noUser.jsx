@@ -1,11 +1,11 @@
 import React from 'react'
 import { AddUser } from '../addItem/addUser'
 
-export const NoUser = props => {
+export const NoUser = () => {
   return (
-    <div className='centered'>
-      <h1>У бази тренутно нема корисника.</h1>
-      <AddUser resetState={props.resetState} />
+    <div>
+      <h1 className='centeredHorizontal errorPageMessage'>У бази тренутно нема корисника.</h1>
+      <AddUser noBackButton={true} />
     </div>
   )
 }

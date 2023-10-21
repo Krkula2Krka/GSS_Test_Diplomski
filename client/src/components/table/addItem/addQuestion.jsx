@@ -59,7 +59,9 @@ export const AddQuestion = props => {
           <option value='bitno'>битно</option>
         </Field>
         <div className='registration-buttons'>
-          <button onClick={props.resetState}>Назад</button>
+          {props.noBackButton !== true ? (
+            <button onClick={props.resetState}>Назад</button>
+          ) : null}
           <button type='submit'>Настави</button>
         </div>
       </Form>

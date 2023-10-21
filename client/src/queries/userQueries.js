@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const queryKeys = {
   users: ['users'],
+  nextBatch: ['nextBatch'],
   loggedIn: id => ['loggedIn', id]
 }
 
@@ -34,22 +35,19 @@ export const logoutForTestingMutation = (id, queryClient) => ({
   onSuccess: () => queryClient.invalidateQueries(queryKeys.loggedIn(id))
 })
 
-export const getUsersBatchQuery = page => ({
+export const getUsersBatchQuery = ({ pageParam }) => ({
   queryKey: queryKeys.users,
   queryFn: async () => {
-    const res = await fetch(`http://localhost:3001/users/page=${page}`)
+    const res = await fetch(`http://localhost:3001/users/page=${pageParam}`)
     const data = await res.json()
     return data
-  },
-  getNextPageParam: (_, pages) => {
-    return pages.length + 1
   },
   staleTime: 1000 * 60 * 30,
   cacheTime: 1000 * 60 * 30
 })
 
 export const usersLoader = queryClient => async () => {
-  const query = getUsersBatchQuery(1)
+  const query = getUsersBatchQuery(0)
   return await queryClient.ensureQueryData({
     queryKey: query.queryKey,
     queryFn: query.queryFn

@@ -1,6 +1,6 @@
 .homeLink {
     background-color: #060b26;
-    color: white;
+    color: #f5f5f5;
     padding: 14px 20px;
     margin: 8px 0px;
     border: none;
@@ -16,4 +16,8 @@
     margin-right: auto;
     text-decoration: none;
     text-align: center;
+}
+
+.homeLink:hover {
+    color: #008080;
 }
