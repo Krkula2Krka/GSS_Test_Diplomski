@@ -37,7 +37,7 @@ export const Table = props => {
       <InfiniteScroll
         dataLength={rows.length}
         next={props.update}
-        hasMore={true}
+        hasMore={props.hasMore}
         loader={<h4>Loading more items...</h4>}
       >
         <TableHeader

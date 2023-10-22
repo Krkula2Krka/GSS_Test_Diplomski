@@ -47,7 +47,7 @@ const logoutUserForTestingInController = async (req, res) => {
 }
 
 const getUsersBatchInController = async (req, res) => {
-  const users = await getUsersBatchInService(req.params.page)
+  const users = await getUsersBatchInService(Number(req.params.page))
   res.json(users)
 }
 

@@ -1,7 +1,10 @@
 // libraries
 import React, { useState } from 'react'
-import { useInfiniteQuery } from '@tanstack/react-query'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import {
+  useMutation,
+  useQueryClient,
+  useInfiniteQuery
+} from '@tanstack/react-query'
 
 // queries
 import { getUsersBatchQuery, deleteUsersMutation } from '../queries/userQueries'
@@ -24,38 +27,32 @@ export const GetAllUsers = () => {
 
   const {
     data,
-    error,
     fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status
-  } = useInfiniteQuery(getUsersBatchQuery(), {
-    getNextPageParam: (_, pages) => pages.length
-  })
+    isFetching,
+    hasNextPage
+  } = useInfiniteQuery(getUsersBatchQuery())
 
-  //if (users.length === 0) return <NoUser />
+  const users = data ? (data.pages ? data.pages.flat(1) : data) : []
+  console.log(users)
+
+  if (users.length === 0) return <NoUser />
 
   return (
     <div>
       {form === 0 ? (
-        status === 'pending' ? (
-          <p>Loading...</p>
-        ) : status === 'error' ? (
-          <p>Error: {error.message}</p>
-        ) : (
+        <div>
           <Table
-            tableData={data}
+            tableData={users}
             calledFrom={'users'}
             tableColumns={UserTableColumns}
             deleteItems={users => deleteUsers(users)}
             openAddForm={() => setForm(1)}
             openEditForm={userId => setForm(userId + 2)}
-            update={() => {
-              if (hasNextPage && !isFetchingNextPage) fetchNextPage()
-              else return
-            }}
+            update={() => fetchNextPage()}
+            hasMore={hasNextPage}
           />
-        )
+          <div>{isFetching ? 'Fetching...' : null}</div>
+        </div>
       ) : form === 1 ? (
         <AddUser resetState={() => setForm(0)} />
       ) : (

@@ -24,7 +24,7 @@ import { TakeTest } from '../pages/takeTest'
 import { Home } from '../pages/home'
 
 // queries
-import { loggedInLoader } from '../queries/userQueries'
+import { getUsersBatchQuery, loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
 import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
@@ -55,6 +55,8 @@ export const App = () => {
       }
     })
   })
+
+  queryClient.prefetchInfiniteQuery(getUsersBatchQuery())
 
   const router = createBrowserRouter([
     {

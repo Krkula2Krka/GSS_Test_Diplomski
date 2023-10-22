@@ -10,7 +10,7 @@ const {
   deleteUsersInController
 } = require('../controllers/usersController')
 
-router.get('/page=:page', getUsersBatchInController)
+router.get('/:page', getUsersBatchInController)
 
 router.post('/', createUserInController)
 
