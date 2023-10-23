@@ -44,16 +44,8 @@ export const getUsersBatchQuery = () => ({
   staleTime: 1000 * 60 * 30,
   cacheTime: 1000 * 60 * 30,
   getNextPageParam: (lastPage, pages) =>
-    lastPage.length !== 0 ? pages.length : undefined
+    lastPage.length === 30 ? pages.length : undefined
 })
-
-export const usersLoader = queryClient => async () => {
-  const query = getUsersBatchQuery()
-  return await queryClient.ensureQueryData({
-    queryKey: query.queryKey,
-    queryFn: query.queryFn
-  })
-}
 
 export const loginForTestingMutation = () => ({
   mutationFn: data =>

@@ -29,7 +29,6 @@ import { areasLoader } from '../queries/areaQueries'
 import { questionsLoader } from '../queries/questionQueries'
 import { answersLoader } from '../queries/answerQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
-import { usersLoader } from '../queries/userQueries'
 
 export const App = () => {
   const queryClient = new QueryClient({
@@ -78,7 +77,6 @@ export const App = () => {
             const { GetAllUsers } = await import('../pages/getAllUsers')
             return { Component: GetAllUsers }
           },
-          loader: usersLoader(queryClient),
           errorElement: <ErrorPage />
         },
         {

@@ -32,8 +32,7 @@ export const GetAllUsers = () => {
     hasNextPage
   } = useInfiniteQuery(getUsersBatchQuery())
 
-  const users = data ? (data.pages ? data.pages.flat(1) : data) : []
-  console.log(users)
+  const users = data.pages.flat(1)
 
   if (users.length === 0) return <NoUser />
 
