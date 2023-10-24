@@ -15,7 +15,6 @@ import '../../css/table.css'
 export const Table = props => {
   const [selectedItems, setSelectedItems] = useState(() => new Set())
   const tableData = useMemo(() => props.tableData, [props.tableData])
-
   const tableColumns = useMemo(() => props.tableColumns, [props.tableColumns])
 
   const {

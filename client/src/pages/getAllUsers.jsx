@@ -1,5 +1,5 @@
 // libraries
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import {
   useMutation,
   useQueryClient,
@@ -25,33 +25,27 @@ export const GetAllUsers = () => {
     deleteUsersMutation(queryClient)
   )
 
-  const {
-    data,
-    fetchNextPage,
-    isFetching,
-    hasNextPage
-  } = useInfiniteQuery(getUsersBatchQuery())
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    getUsersBatchQuery()
+  )
 
-  const users = data.pages.flat(1)
+  const users = useMemo(() => data.pages.flat(1), [data])
 
   if (users.length === 0) return <NoUser />
 
   return (
     <div>
       {form === 0 ? (
-        <div>
-          <Table
-            tableData={users}
-            calledFrom={'users'}
-            tableColumns={UserTableColumns}
-            deleteItems={users => deleteUsers(users)}
-            openAddForm={() => setForm(1)}
-            openEditForm={userId => setForm(userId + 2)}
-            update={() => fetchNextPage()}
-            hasMore={hasNextPage}
-          />
-          <div>{isFetching ? 'Fetching...' : null}</div>
-        </div>
+        <Table
+          tableData={users}
+          calledFrom={'users'}
+          tableColumns={UserTableColumns}
+          deleteItems={users => deleteUsers(users)}
+          openAddForm={() => setForm(1)}
+          openEditForm={userId => setForm(userId + 2)}
+          update={() => fetchNextPage()}
+          hasMore={hasNextPage}
+        />
       ) : form === 1 ? (
         <AddUser resetState={() => setForm(0)} />
       ) : (
