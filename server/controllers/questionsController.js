@@ -1,6 +1,6 @@
 const {
   createQuestionInService,
-  getQuestionsForAreaInService,
+  getQuestionsBatchInService,
   deleteQuestionInService,
   editQuestionInService,
   getTestQuestionsInService
@@ -11,8 +11,11 @@ const createQuestionInController = async (req, res) => {
   res.json()
 }
 
-const getQuestionsForAreaInController = async (req, res) => {
-  const questions = await getQuestionsForAreaInService(req.params.area_id)
+const getQuestionsBatchInController = async (req, res) => {
+  const questions = await getQuestionsBatchInService(
+    req.params.area_id,
+    req.params.page
+  )
   res.json(questions)
 }
 
@@ -32,9 +35,9 @@ const deleteQuestionsInController = (req, res) => {
 }
 
 module.exports = {
-  createQuestionInController: createQuestionInController,
-  getQuestionsForAreaInController: getQuestionsForAreaInController,
-  deleteQuestionsInController: deleteQuestionsInController,
-  editQuestionInController: editQuestionInController,
-  getTestQuestionsInController: getTestQuestionsInController
+  createQuestionInController,
+  getQuestionsBatchInController,
+  deleteQuestionsInController,
+  editQuestionInController,
+  getTestQuestionsInController
 }

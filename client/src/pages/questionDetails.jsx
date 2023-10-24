@@ -1,12 +1,16 @@
 // libraries
 import React, { useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  useMutation,
+  useInfiniteQuery,
+  useQueryClient
+} from '@tanstack/react-query'
 
 // queries
 import {
   deleteAnswersMutation,
-  getAnswersForQuestionQuery
+  getAnswersBatchQuery
 } from '../queries/answerQueries'
 
 // css
@@ -22,10 +26,11 @@ import { EditAnswer } from '../components/table/editItem/editAnswer'
 export const QuestionDetails = () => {
   const [form, setForm] = useState(0)
   const { id } = useParams()
-
-  const { data: answers } = useQuery(getAnswersForQuestionQuery(id))
-
   const queryClient = useQueryClient()
+
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(getAnswersBatchQuery(id))
+
+  const answers = useMemo(() => data ? data.pages.flat(1) : [], [data])
 
   const location = useLocation()
   const { questionText, difficulty, importance } = location.state
@@ -69,6 +74,8 @@ export const QuestionDetails = () => {
             deleteItems={answers => deleteAnswers(answers)}
             openAddForm={() => setForm(1)}
             openEditForm={answerId => setForm(answerId + 2)}
+            update={() => fetchNextPage()}
+            hasMore={hasNextPage}
           />
         </div>
       ) : form === 1 ? (

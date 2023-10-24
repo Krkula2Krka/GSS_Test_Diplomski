@@ -4,26 +4,18 @@ const queryKeys = {
   answers: id => ['answers', id]
 }
 
-export const getAnswersForQuestionQuery = id => ({
+export const getAnswersBatchQuery = id => ({
   queryKey: queryKeys.answers(id),
-  queryFn: async () => {
-    const res = await fetch(`http://localhost:3001/answers/${id}`)
+  queryFn: async ({ pageParam = 0 }) => {
+    const res = await fetch(`http://localhost:3001/answers/${id}/${pageParam}`)
     const data = await res.json()
     return data
   },
   staleTime: 1000 * 60 * 30,
-  cacheTime: 1000 * 60 * 30
+  cacheTime: 1000 * 60 * 30,
+  getNextPageParam: (lastPage, pages) =>
+    lastPage.length === 30 ? pages.length : undefined
 })
-
-export const answersLoader =
-  queryClient =>
-  async ({ params }) => {
-    const query = getAnswersForQuestionQuery(params.id)
-    return await queryClient.ensureQueryData({
-      queryKey: query.queryKey,
-      queryFn: query.queryFn
-    })
-  }
 
 export const addAnswerMutation = (queryClient, id) => ({
   mutationFn: data => axios.post('http://localhost:3001/answers', data),

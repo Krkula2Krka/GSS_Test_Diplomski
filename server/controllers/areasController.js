@@ -32,9 +32,9 @@ const editAreaInController = async (req, res) => {
 }
 
 module.exports = {
-  getAllAreasInController: getAllAreasInController,
-  createAreaInController: createAreaInController,
-  getAreaByIdInController: getAreaByIdInController,
-  deleteAreaInController: deleteAreaInController,
-  editAreaInController: editAreaInController
+  getAllAreasInController,
+  createAreaInController,
+  getAreaByIdInController,
+  deleteAreaInController,
+  editAreaInController
 }

@@ -5,26 +5,18 @@ const queryKeys = {
   test: ['test']
 }
 
-export const getQuestionsForAreaQuery = id => ({
+export const getQuestionsBatchQuery = id => ({
   queryKey: queryKeys.questions(id),
-  queryFn: async () => {
-    const res = await fetch(`http://localhost:3001/questions/${id}`)
+  queryFn: async ({ pageParam = 0 }) => {
+    const res = await fetch(`http://localhost:3001/questions/${id}/${pageParam}`)
     const data = await res.json()
     return data
   },
-  staleTime: 1000 * 60 * 30,
-  cacheTime: 1000 * 60 * 30
+  staleTime: 1000 * 60 * 30,    
+  cacheTime: 1000 * 60 * 30,
+  getNextPageParam: (lastPage, pages) =>
+    lastPage.length === 30 ? pages.length : undefined
 })
-
-export const questionsLoader =
-  queryClient =>
-  async ({ params }) => {
-    const query = getQuestionsForAreaQuery(params.id)
-    return await queryClient.ensureQueryData({
-      queryKey: query.queryKey,
-      queryFn: query.queryFn
-    })
-  }
 
 export const deleteQuestionMutation = (queryClient, id) => ({
   mutationFn: id => axios.post(`http://localhost:3001/questions/delete/${id}`),

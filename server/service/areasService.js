@@ -34,9 +34,9 @@ const getAreaByIdInService = id => {
 }
 
 module.exports = {
-  getAllAreasInService: getAllAreasInService,
-  createAreaInService: createAreaInService,
-  getAreaByIdInService: getAreaByIdInService,
-  deleteAreaInService: deleteAreaInService,
-  editAreaInService: editAreaInService
+  getAllAreasInService,
+  createAreaInService,
+  getAreaByIdInService,
+  deleteAreaInService,
+  editAreaInService
 }

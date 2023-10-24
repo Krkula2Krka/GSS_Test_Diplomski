@@ -26,8 +26,6 @@ import { Home } from '../pages/home'
 // queries
 import { getUsersBatchQuery, loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
-import { questionsLoader } from '../queries/questionQueries'
-import { answersLoader } from '../queries/answerQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
 
 export const App = () => {
@@ -38,19 +36,15 @@ export const App = () => {
       }
     },
     queryCache: new QueryCache({
-      onError: error => {
-        if (error.message === 'Failed to fetch') {
-          toast.remove()
-          toast.error('Сервер је пао.')
-        }
+      onError: () => {
+        toast.remove()
+        toast.error('Сервер је пао.')
       }
     }),
     mutationCache: new MutationCache({
-      onError: error => {
-        if (error.message === 'Network Error') {
-          toast.remove()
-          toast.error('Сервер је пао.')
-        }
+      onError: () => {
+        toast.remove()
+        toast.error('Сервер је пао.')
       }
     })
   })
@@ -85,7 +79,6 @@ export const App = () => {
             const { UserResults } = await import('../pages/userResults')
             return { Component: UserResults }
           },
-          loader: questionsLoader(queryClient),
           errorElement: <ErrorPage />
         },
         {
@@ -94,7 +87,6 @@ export const App = () => {
             const { AreaDetails } = await import('../pages/areaDetails')
             return { Component: AreaDetails }
           },
-          loader: questionsLoader(queryClient),
           errorElement: <ErrorPage />
         },
         {
@@ -103,7 +95,6 @@ export const App = () => {
             const { QuestionDetails } = await import('../pages/questionDetails')
             return { Component: QuestionDetails }
           },
-          loader: answersLoader(queryClient),
           errorElement: <ErrorPage />
         }
       ]

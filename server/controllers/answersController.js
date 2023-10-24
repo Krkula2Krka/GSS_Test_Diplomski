@@ -1,6 +1,6 @@
 const {
   createAnswerInService,
-  getAnswersForQuestionInService,
+  getAnswersBatchInService,
   deleteAnswerInService,
   editAnswerInService
 } = require('../service/answersService')
@@ -10,8 +10,11 @@ const createAnswerInController = async (req, res) => {
   res.json()
 }
 
-const getAnswersForQuestionInController = async (req, res) => {
-  const questions = await getAnswersForQuestionInService(req.params.question_id)
+const getAnswersBatchInController = async (req, res) => {
+  const questions = await getAnswersBatchInService(
+    req.params.question_id,
+    req.params.page
+  )
   res.json(questions)
 }
 
@@ -26,8 +29,8 @@ const deleteAnswersInController = (req, res) => {
 }
 
 module.exports = {
-    createAnswerInController: createAnswerInController,
-    getAnswersForQuestionInController: getAnswersForQuestionInController,
-    deleteAnswersInController: deleteAnswersInController,
-    editAnswerInController: editAnswerInController
+  createAnswerInController,
+  getAnswersBatchInController,
+  deleteAnswersInController,
+  editAnswerInController
 }

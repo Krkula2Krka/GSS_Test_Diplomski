@@ -1,11 +1,11 @@
 // libraries
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 // queries
-import { getQuestionsForAreaQuery } from '../queries/questionQueries'
+import { getQuestionsBatchQuery } from '../queries/questionQueries'
 import { deleteQuestionsMutation } from '../queries/questionQueries'
 
 // components
@@ -22,18 +22,23 @@ export const AreaDetails = () => {
   const [form, setForm] = useState(0)
   const { id } = useParams()
 
+  const queryClient = useQueryClient()
+
   const location = useLocation()
   const { areaName } = location.state
-
-  const queryClient = useQueryClient()
 
   const { mutateAsync: deleteQuestions } = useMutation(
     deleteQuestionsMutation(queryClient, id)
   )
 
-  const { data: questions } = useQuery(getQuestionsForAreaQuery(id))
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    getQuestionsBatchQuery(id)
+  )
 
-  if (questions.length === 0) return <NoQuestion resetState={() => setForm(0)} areaId={id} />
+  const questions = useMemo(() => data ? data.pages.flat(1) : [], [data])
+
+  if (questions.length === 0)
+    return <NoQuestion resetState={() => setForm(0)} areaId={id} />
 
   return (
     <div>
@@ -49,6 +54,8 @@ export const AreaDetails = () => {
             deleteItems={questions => deleteQuestions(questions)}
             openAddForm={() => setForm(1)}
             openEditForm={questionId => setForm(questionId + 2)}
+            update={() => fetchNextPage()}
+            hasMore={hasNextPage}
           />
         </div>
       ) : form === 1 ? (

@@ -4,11 +4,13 @@ const createAnswerInService = newAnswer => {
   answer.create(newAnswer)
 }
 
-const getAnswersForQuestionInService = question_id => {
+const getAnswersBatchInService = (question_id, page) => {
   return answer.findAll({
     where: {
       question_id: question_id
-    }
+    },
+    offset: page * 30,
+    limit: 30
   })
 }
 
@@ -35,8 +37,8 @@ const editAnswerInService = (id, data) => {
 }
 
 module.exports = {
-  createAnswerInService: createAnswerInService,
-  getAnswersForQuestionInService: getAnswersForQuestionInService,
-  deleteAnswerInService: deleteAnswerInService,
-  editAnswerInService: editAnswerInService
+  createAnswerInService,
+  getAnswersBatchInService,
+  deleteAnswerInService,
+  editAnswerInService
 }

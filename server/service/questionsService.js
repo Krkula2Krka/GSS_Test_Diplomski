@@ -13,11 +13,13 @@ const deleteQuestionInService = id => {
   })
 }
 
-const getQuestionsForAreaInService = area_id => {
+const getQuestionsBatchInService = (area_id, page) => {
   return question.findAll({
     where: {
       area_id: area_id
-    }
+    },
+    offset: page * 30,
+    limit: 30
   })
 }
 
@@ -44,9 +46,9 @@ const editQuestionInService = (id, data) => {
 }
 
 module.exports = {
-  createQuestionInService: createQuestionInService,
-  getQuestionsForAreaInService: getQuestionsForAreaInService,
-  deleteQuestionInService: deleteQuestionInService,
-  editQuestionInService: editQuestionInService,
-  getTestQuestionsInService: getTestQuestionsInService
+  createQuestionInService,
+  getQuestionsBatchInService,
+  deleteQuestionInService,
+  editQuestionInService,
+  getTestQuestionsInService
 }
