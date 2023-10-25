@@ -61,7 +61,7 @@ export const QuestionDetails = () => {
   return (
     <div>
       {form === 0 ? (
-        <div>
+        <div className='cointainer'>
           <div className='infoContainer'>
             <h2>{questionText}</h2>
             <h2>{difficultyString}</h2>

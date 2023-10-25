@@ -14,8 +14,12 @@ export const TableRow = props => {
   return (
     <tr
       {...props.row.getRowProps({
-        onMouseDown: () => (startPress = Date.now()),
-        onMouseUp: () => {
+        onMouseDown: e => {
+          if (e.nativeEvent.button !== 0) return
+          startPress = Date.now()
+        },
+        onMouseUp: e => {
+          if (e.nativeEvent.button !== 0) return
           if (Date.now() - startPress > 300) {
             if (!itemExists) props.selectID()
             else props.unselectID()

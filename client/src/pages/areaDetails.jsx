@@ -43,7 +43,7 @@ export const AreaDetails = () => {
   return (
     <div>
       {form === 0 ? (
-        <div>
+        <div className='cointainer'>
           <div className='infoContainer'>
             <h2>{areaName}</h2>
           </div>
