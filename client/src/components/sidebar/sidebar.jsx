@@ -2,6 +2,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { Tooltip } from 'react-tooltip'
 
 // components
 import { SidebarData } from './sidebar_data'
@@ -34,14 +35,22 @@ export const Sidebar = () => {
       <ul>
         {SidebarData.map(item => {
           return (
-            <li key={item.id}>
+            <li
+              key={item.id}
+              data-tooltip-id='my-tooltip'
+              data-tooltip-content={item.title}
+            >
               <NavLink
                 className={setNavLinkClasses(pathname, item.id)}
                 to={item.path}
-                title={item.title}
               >
                 {item.icon}
               </NavLink>
+              <Tooltip
+                id='my-tooltip'
+                style={{ backgroundColor: '#008080', color: '#f5f5f5' }}
+                place='right'
+              />
             </li>
           )
         })}

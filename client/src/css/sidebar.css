@@ -84,3 +84,8 @@ a.active.side-icon:hover {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.tooltip {
+  color: #f5f5f5;
+  background-color: #008080;
+}

@@ -29,7 +29,7 @@ export const GetAllUsers = () => {
     getUsersBatchQuery()
   )
 
-  const users = useMemo(() => data.pages.flat(1), [data])
+  const users = useMemo(() => data ? data.pages.flat(1) : [], [data])
 
   if (users.length === 0) return <NoUser />
 
