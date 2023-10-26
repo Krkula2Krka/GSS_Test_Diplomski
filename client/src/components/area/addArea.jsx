@@ -61,8 +61,8 @@ export const AddArea = props => {
           </Form>
         </Formik>
       ) : (
-        <div className='area'>
-          <button onClick={props.setAddNewAreaState} className='areaButton centeredAreaButton'>
+        <div className='area centeredAreaButton'>
+          <button onClick={props.setAddNewAreaState} className='areaButton single-area-button'>
             <BsPlusCircleFill />
           </button>
         </div>

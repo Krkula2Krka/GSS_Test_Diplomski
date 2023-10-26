@@ -8,6 +8,11 @@ body {
   overflow: hidden;
 }
 
+.content {
+  padding: 1rem;
+  padding-left: 6rem;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -49,4 +54,36 @@ iframe {
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+.loading-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a83ff;
+}
+
+.loading-wrapper .loading {
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid rgba(0, 0, 0, .2);
+  border-radius: 50%;
+  border-top-color: rgba(0, 0, 0, .4);
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }

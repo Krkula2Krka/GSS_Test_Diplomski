@@ -63,8 +63,8 @@ export const Table = props => {
           }}
           allColumns={allColumns}
         />
-        <div className="table-main-wrapper">
-          <table className="table-main" {...getTableProps()}>
+        <div className='table-main-wrapper'>
+          <table className='table-main' {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup, key) => (
                 <TableRowName headerGroup={headerGroup} key={key} />

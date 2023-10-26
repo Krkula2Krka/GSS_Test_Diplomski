@@ -18,7 +18,7 @@ import { NoArea } from '../components/area/noArea'
 export const GetAllAreas = () => {
   const [stateButton, setStateButton] = useState(0)
 
-  const { data: areas } = useQuery(getAllAreasQuery())
+  const { data: areas, isLoading, isError } = useQuery(getAllAreasQuery())
 
   const areasWithDummyData = [...areas]
   if (areas.length !== 0)

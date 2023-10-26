@@ -27,6 +27,7 @@ import { Home } from '../pages/home'
 import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
+import { useEffect } from 'react'
 
 export const App = () => {
   const queryClient = new QueryClient({
@@ -123,6 +124,11 @@ export const App = () => {
       element: <PageNotFound />
     }
   ])
+
+  useEffect(() => {
+    const loader = document.querySelector('.loading-wrapper')
+    loader?.classList?.remove('loading-wrapper')
+  }, [])
 
   return (
     <QueryClientProvider client={queryClient}>

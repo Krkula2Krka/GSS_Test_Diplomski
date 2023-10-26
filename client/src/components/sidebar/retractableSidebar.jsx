@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 
 // components
 import { SidebarData } from './sidebar_data'
+
+// Hooks
 import { useStopScrolling } from '../hooks/useStopScrolling'
 
 // css
