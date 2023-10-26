@@ -28,9 +28,10 @@ export const QuestionDetails = () => {
   const { id } = useParams()
   const queryClient = useQueryClient()
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(getAnswersBatchQuery(id))
+  const { data, fetchNextPage, hasNextPage, isError, isLoading, isFetching } =
+    useInfiniteQuery(getAnswersBatchQuery(id))
 
-  const answers = useMemo(() => data ? data.pages.flat(1) : [], [data])
+  const answers = useMemo(() => (data ? data.pages.flat(1) : []), [data])
 
   const location = useLocation()
   const { questionText, difficulty, importance } = location.state
@@ -54,6 +55,10 @@ export const QuestionDetails = () => {
   const { mutateAsync: deleteAnswers } = useMutation(
     deleteAnswersMutation(queryClient, id)
   )
+
+  if (isLoading || isFetching) return <div>Подаци се учитавају...</div>
+
+  if (isError) return <div>Неуспешно учитавање података</div>
 
   if (answers.length === 0)
     return <NoAnswer resetState={() => setForm(0)} questionId={id} />

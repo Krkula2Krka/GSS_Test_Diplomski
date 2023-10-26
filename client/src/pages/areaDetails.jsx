@@ -31,11 +31,14 @@ export const AreaDetails = () => {
     deleteQuestionsMutation(queryClient, id)
   )
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    getQuestionsBatchQuery(id)
-  )
+  const { data, fetchNextPage, hasNextPage, isError, isLoading, isFetching } =
+    useInfiniteQuery(getQuestionsBatchQuery(id))
 
-  const questions = useMemo(() => data ? data.pages.flat(1) : [], [data])
+  const questions = useMemo(() => (data ? data.pages.flat(1) : []), [data])
+
+  if (isLoading || isFetching) return <div>Подаци се учитавају...</div>
+
+  if (isError) return <div>Неуспешно учитавање података</div>
 
   if (questions.length === 0)
     return <NoQuestion resetState={() => setForm(0)} areaId={id} />

@@ -25,11 +25,14 @@ export const GetAllUsers = () => {
     deleteUsersMutation(queryClient)
   )
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    getUsersBatchQuery()
-  )
+  const { data, fetchNextPage, hasNextPage, isLoading, isError, isFetching } =
+    useInfiniteQuery(getUsersBatchQuery())
 
-  const users = useMemo(() => data ? data.pages.flat(1) : [], [data])
+  const users = useMemo(() => (data ? data.pages.flat(1) : []), [data])
+
+  if (isLoading || isFetching) return <div>Подаци се учитавају...</div>
+
+  if (isError) return <div>Неуспешно учитавање података</div>
 
   if (users.length === 0) return <NoUser />
 

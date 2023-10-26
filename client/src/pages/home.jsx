@@ -4,7 +4,7 @@ import '../css/home.css'
 
 export const Home = () => {
   return (
-    <div className='centered'>
+    <div className='home-buttons'>
       <Link to='/credentialsForTest' className='homeLink'>
         Полажи тест
       </Link>

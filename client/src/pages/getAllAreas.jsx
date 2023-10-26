@@ -18,11 +18,20 @@ import { NoArea } from '../components/area/noArea'
 export const GetAllAreas = () => {
   const [stateButton, setStateButton] = useState(0)
 
-  const { data: areas, isLoading, isError } = useQuery(getAllAreasQuery())
+  const {
+    data: areas,
+    isLoading,
+    isError,
+    isFetching
+  } = useQuery(getAllAreasQuery())
 
   const areasWithDummyData = [...areas]
   if (areas.length !== 0)
     areasWithDummyData.push({ id: -1, area_name: 'dummy' })
+
+  if (isLoading || isFetching) return <div>Подаци се учитавају...</div>
+
+  if (isError) return <div>Неуспешно учитавање података</div>
 
   if (areasWithDummyData.length === 0) return <NoArea />
 
@@ -31,16 +40,18 @@ export const GetAllAreas = () => {
       {areasWithDummyData.map((area, key) => {
         return (
           <div key={key}>
-            {key + 1 !== areasWithDummyData.length ? (
-              stateButton !== area.id + 1000000000 &&
+            {area.id > 0 ? (
+              stateButton !== area.id + areasWithDummyData.length &&
               stateButton !== area.id ? (
                 <Area
                   setEditState={() => setStateButton(area.id)}
-                  setDeleteState={() => setStateButton(1000000000 + area.id)}
+                  setDeleteState={() =>
+                    setStateButton(areasWithDummyData.length + area.id)
+                  }
                   areaName={area.area_name}
                   id={area.id}
                 />
-              ) : stateButton > 1000000000 ? (
+              ) : stateButton > areasWithDummyData.length ? (
                 <DeleteArea
                   id={area.id}
                   setDeleteState={() => setStateButton(0)}
@@ -51,7 +62,7 @@ export const GetAllAreas = () => {
             ) : (
               <AddArea
                 buttonPressed={stateButton}
-                setAddNewAreaState={() => setStateButton(1000000200)}
+                setAddNewAreaState={() => setStateButton(-1)}
                 resetState={() => setStateButton(0)}
               />
             )}

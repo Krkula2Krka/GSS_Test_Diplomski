@@ -36,7 +36,7 @@ export const AddArea = props => {
 
   return (
     <div>
-      {props.buttonPressed === 1000000200 ? (
+      {props.buttonPressed === -1 ? (
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
