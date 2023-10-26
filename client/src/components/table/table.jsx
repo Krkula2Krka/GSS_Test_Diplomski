@@ -63,60 +63,62 @@ export const Table = props => {
           }}
           allColumns={allColumns}
         />
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup, key) => (
-              <TableRowName headerGroup={headerGroup} key={key} />
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map(row => {
-              prepareRow(row)
-              return (
-                <TableRow
-                  row={row}
-                  key={row.id}
-                  goto={
-                    props.calledFrom === 'users'
-                      ? `/userResults/${row.original.GSS_identification}`
-                      : props.calledFrom === 'questions'
-                      ? `/questionDetails/${row.original.id}`
-                      : null
-                  }
-                  selectID={() =>
-                    setSelectedItems(prev =>
-                      new Set(prev).add(
-                        props.calledFrom === 'users'
-                          ? row.original.GSS_identification
-                          : row.original.id
-                      )
-                    )
-                  }
-                  unselectID={() =>
-                    setSelectedItems(prev => {
-                      const next = new Set(prev)
-                      next.delete(
-                        props.calledFrom === 'users'
-                          ? row.original.GSS_identification
-                          : row.original.id
-                      )
-                      return next
-                    })
-                  }
-                  checkIfItemExists={() =>
-                    selectedItems.has(
+        <div className="table-main-wrapper">
+          <table className="table-main" {...getTableProps()}>
+            <thead>
+              {headerGroups.map((headerGroup, key) => (
+                <TableRowName headerGroup={headerGroup} key={key} />
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map(row => {
+                prepareRow(row)
+                return (
+                  <TableRow
+                    row={row}
+                    key={row.id}
+                    goto={
                       props.calledFrom === 'users'
-                        ? row.original.GSS_identification
-                        : row.original.id
-                    )
-                  }
-                  selectMode={() => selectedItems.size !== 0}
-                  calledFrom={props.calledFrom}
-                />
-              )
-            })}
-          </tbody>
-        </table>
+                        ? `/userResults/${row.original.GSS_identification}`
+                        : props.calledFrom === 'questions'
+                        ? `/questionDetails/${row.original.id}`
+                        : null
+                    }
+                    selectID={() =>
+                      setSelectedItems(prev =>
+                        new Set(prev).add(
+                          props.calledFrom === 'users'
+                            ? row.original.GSS_identification
+                            : row.original.id
+                        )
+                      )
+                    }
+                    unselectID={() =>
+                      setSelectedItems(prev => {
+                        const next = new Set(prev)
+                        next.delete(
+                          props.calledFrom === 'users'
+                            ? row.original.GSS_identification
+                            : row.original.id
+                        )
+                        return next
+                      })
+                    }
+                    checkIfItemExists={() =>
+                      selectedItems.has(
+                        props.calledFrom === 'users'
+                          ? row.original.GSS_identification
+                          : row.original.id
+                      )
+                    }
+                    selectMode={() => selectedItems.size !== 0}
+                    calledFrom={props.calledFrom}
+                  />
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       </InfiniteScroll>
     </div>
   )

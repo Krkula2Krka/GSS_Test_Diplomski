@@ -4,6 +4,10 @@ body {
   background-color: #1a83ff;
 }
 
+.stop-scrolling {
+  overflow: hidden;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

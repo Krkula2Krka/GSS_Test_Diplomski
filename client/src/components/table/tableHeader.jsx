@@ -15,10 +15,7 @@ import { Search } from './search'
 export const TableHeader = props => {
   const [selectedItems, setSelectedItems] = useState(() => new Set())
   return (
-    <div
-      className='header'
-      style={{ minWidth: props.calledFrom === 'users' ? 824 : null }}
-    >
+    <div className='header'>
       <Search selectedItems={selectedItems} />
       <button className='userButton' onClick={props.deleteItems}>
         <RiDeleteBin6Fill />

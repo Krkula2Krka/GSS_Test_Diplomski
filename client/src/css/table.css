@@ -2,6 +2,14 @@
     padding-top: 1rem;
 }
 
+.table-main-wrapper {
+    overflow: auto;
+}
+
+.table-main {
+    min-width: 30rem;
+}
+
 thead {
     position: sticky;
     top: 0;
@@ -81,6 +89,7 @@ div.tableContainer input:focus {
 
 .header {
     display: flex;
+    flex-wrap: wrap;
     background-color: #060b26;
     color: #f5f5f5;
     padding-top: 0.5rem;

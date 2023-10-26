@@ -1,5 +1,9 @@
 .areas {
+    padding: 1.5rem;
     padding-left: 6rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1rem;
 }
 
 .area {
@@ -9,8 +13,6 @@
     border: solid;
     border-radius: 1rem;
     justify-content: space-between;
-    width: 20rem;
-    height: 10rem;
 }
 
 .centeredAreaButton {

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 // components
 import { SidebarData } from './sidebar_data'
+import { useStopScrolling } from '../hooks/useStopScrolling'
 
 // css
 import '../../css/sidebar.css'
@@ -14,6 +15,7 @@ import { ImCross } from 'react-icons/im'
 
 export const RetractableSidebar = () => {
   const [open, setOpen] = useState(0)
+  useStopScrolling(open)
   return (
     <div>
       {open === 1 ? (
