@@ -4,10 +4,10 @@ import '../css/App.css'
 // Libraries
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import {
-  QueryClient,
-  QueryClientProvider,
-  MutationCache,
-  QueryCache
+    QueryClient,
+    QueryClientProvider,
+    MutationCache,
+    QueryCache
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import toast, { Toaster } from 'react-hot-toast'
@@ -30,111 +30,121 @@ import { testQuestionsLoader } from '../queries/questionQueries'
 import { useEffect } from 'react'
 
 export const App = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false
-      }
-    },
-    queryCache: new QueryCache({
-      onError: () => {
-        toast.remove()
-        toast.error('Сервер је пао.')
-      }
-    }),
-    mutationCache: new MutationCache({
-      onError: () => {
-        toast.remove()
-        toast.error('Сервер је пао.')
-      }
+    const queryClient = new QueryClient({
+        defaultOptions: {
+            queries: {
+                refetchOnWindowFocus: false
+            }
+        },
+        queryCache: new QueryCache({
+            onError: () => {
+                toast.remove()
+                toast.error('Сервер је пао.')
+            }
+        }),
+        mutationCache: new MutationCache({
+            onError: () => {
+                toast.remove()
+                toast.error('Сервер је пао.')
+            }
+        })
     })
-  })
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Root />,
-      children: [
+    const router = createBrowserRouter([
         {
-          path: '/getAllAreas',
-          lazy: async () => {
-            const { GetAllAreas } = await import('../pages/getAllAreas')
-            return { Component: GetAllAreas }
-          },
-          loader: areasLoader(queryClient),
-          errorElement: <ErrorPage />
+            path: '/',
+            element: <Root />,
+            children: [
+                {
+                    path: '/getAllAreas',
+                    lazy: async () => {
+                        const { GetAllAreas } = await import(
+                            '../pages/getAllAreas'
+                        )
+                        return { Component: GetAllAreas }
+                    },
+                    loader: areasLoader(queryClient),
+                    errorElement: <ErrorPage />
+                },
+                {
+                    path: '/getAllUsers',
+                    lazy: async () => {
+                        const { GetAllUsers } = await import(
+                            '../pages/getAllUsers'
+                        )
+                        return { Component: GetAllUsers }
+                    },
+                    errorElement: <ErrorPage />
+                },
+                {
+                    path: '/userResults/:GSS_identification',
+                    lazy: async () => {
+                        const { UserResults } = await import(
+                            '../pages/userResults'
+                        )
+                        return { Component: UserResults }
+                    },
+                    errorElement: <ErrorPage />
+                },
+                {
+                    path: '/areaDetails/:id',
+                    lazy: async () => {
+                        const { AreaDetails } = await import(
+                            '../pages/areaDetails'
+                        )
+                        return { Component: AreaDetails }
+                    },
+                    errorElement: <ErrorPage />
+                },
+                {
+                    path: '/questionDetails/:id',
+                    lazy: async () => {
+                        const { QuestionDetails } = await import(
+                            '../pages/questionDetails'
+                        )
+                        return { Component: QuestionDetails }
+                    },
+                    errorElement: <ErrorPage />
+                }
+            ]
         },
         {
-          path: '/getAllUsers',
-          lazy: async () => {
-            const { GetAllUsers } = await import('../pages/getAllUsers')
-            return { Component: GetAllUsers }
-          },
-          errorElement: <ErrorPage />
+            index: true,
+            element: <Home />
         },
         {
-          path: '/userResults/:GSS_identification',
-          lazy: async () => {
-            const { UserResults } = await import('../pages/userResults')
-            return { Component: UserResults }
-          },
-          errorElement: <ErrorPage />
+            path: '/credentialsForTest',
+            element: <LoginForm navigateToLocation="/takeTest" />
         },
         {
-          path: '/areaDetails/:id',
-          lazy: async () => {
-            const { AreaDetails } = await import('../pages/areaDetails')
-            return { Component: AreaDetails }
-          },
-          errorElement: <ErrorPage />
+            path: '/registration',
+            element: <RegistrationForm />
         },
         {
-          path: '/questionDetails/:id',
-          lazy: async () => {
-            const { QuestionDetails } = await import('../pages/questionDetails')
-            return { Component: QuestionDetails }
-          },
-          errorElement: <ErrorPage />
+            path: '/takeTest/:id',
+            element: <TakeTest />,
+            loader: async () => {
+                const isUserLoggedIn = await loggedInLoader(queryClient)
+                return await testQuestionsLoader(queryClient, isUserLoggedIn)
+            },
+            errorElement: <ErrorPage />
+        },
+        {
+            path: '*',
+            element: <PageNotFound />
         }
-      ]
-    },
-    {
-      index: true,
-      element: <Home />
-    },
-    {
-      path: '/credentialsForTest',
-      element: <LoginForm navigateToLocation='/takeTest' />
-    },
-    {
-      path: '/registration',
-      element: <RegistrationForm />
-    },
-    {
-      path: '/takeTest/:id',
-      element: <TakeTest />,
-      loader: async () => {
-        const isUserLoggedIn = await loggedInLoader(queryClient)
-        return await testQuestionsLoader(queryClient, isUserLoggedIn)
-      },
-      errorElement: <ErrorPage />
-    },
-    {
-      path: '*',
-      element: <PageNotFound />
-    }
-  ])
+    ])
 
-  useEffect(() => {
-    const loader = document.querySelector('.loading-wrapper')
-    loader?.classList?.remove('loading-wrapper')
-  }, [])
+    useEffect(() => {
+        const loader = document.querySelector('.loading-wrapper')
+        loader?.classList?.remove('loading-wrapper')
+    }, [])
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Toaster />
-    </QueryClientProvider>
-  )
+    return (
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+            <Toaster />
+        </QueryClientProvider>
+    )
 }

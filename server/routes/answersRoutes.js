@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const {
-  createAnswerInController,
-  getAnswersBatchInController,
-  deleteAnswersInController,
-  editAnswerInController
+    createAnswerInController,
+    getAnswersBatchInController,
+    deleteAnswersInController,
+    editAnswerInController
 } = require('../controllers/answersController')
 
 router.post('/', createAnswerInController)

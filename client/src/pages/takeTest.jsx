@@ -12,49 +12,52 @@ import { Quiz } from '../components/test/quiz'
 
 // queries
 import {
-  logoutForTestingMutation,
-  checkLoginForTestingQuery
+    logoutForTestingMutation,
+    checkLoginForTestingQuery
 } from '../queries/userQueries'
 import { getTestQuestionsQuery } from '../queries/questionQueries'
 
 export const TakeTest = () => {
-  const { id } = useParams()
+    const { id } = useParams()
 
-  const [modalOpen, setModalOpen] = useState(true)
+    const [modalOpen, setModalOpen] = useState(true)
 
-  const { data: loggedIn } = useQuery(checkLoginForTestingQuery(id))
-  const queryClient = useQueryClient()
-  const { mutateAsync: logoutForTesting } = useMutation(
-    logoutForTestingMutation(id, queryClient)
-  )
+    const { data: loggedIn } = useQuery(checkLoginForTestingQuery(id))
+    const queryClient = useQueryClient()
+    const { mutateAsync: logoutForTesting } = useMutation(
+        logoutForTestingMutation(id, queryClient)
+    )
 
-  const { data: questions } = useQuery(
-    getTestQuestionsQuery(loggedIn && !modalOpen)
-  )
+    const { data: questions } = useQuery(
+        getTestQuestionsQuery(loggedIn && !modalOpen)
+    )
 
-  useVisibilityChangeConditionally(async () => {
-    await logoutForTesting()
-  }, loggedIn)
+    useVisibilityChangeConditionally(async () => {
+        await logoutForTesting()
+    }, loggedIn)
 
-  useOnWindowResizeConditionally(async () => await logoutForTesting(), loggedIn)
+    useOnWindowResizeConditionally(
+        async () => await logoutForTesting(),
+        loggedIn
+    )
 
-  useUnloadConditionally(async () => await logoutForTesting(), loggedIn)
+    useUnloadConditionally(async () => await logoutForTesting(), loggedIn)
 
-  return (
-    <div>
-      {loggedIn ? (
+    return (
         <div>
-          {!modalOpen ? (
-            <Quiz questions={questions} />
-          ) : (
-            <InfoModal setOpenModal={setModalOpen} />
-          )}
+            {loggedIn ? (
+                <div>
+                    {!modalOpen ? (
+                        <Quiz questions={questions} />
+                    ) : (
+                        <InfoModal setOpenModal={setModalOpen} />
+                    )}
+                </div>
+            ) : (
+                <div>
+                    <h1>Нисте улоговани</h1>
+                </div>
+            )}
         </div>
-      ) : (
-        <div>
-          <h1>Нисте улоговани</h1>
-        </div>
-      )}
-    </div>
-  )
+    )
 }

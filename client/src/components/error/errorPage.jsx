@@ -1,11 +1,9 @@
 import React from 'react'
 
 export const ErrorPage = () => {
-  return (
-    <div className='centered'>
-      <h1 className='errorPageMessage'>
-        Десила се неочекивана грешка. Молимо покушајте да освежите страницу.
-      </h1>
-    </div>
-  )
+    return (
+        <h1 className="centered errorPageMessage">
+            Десила се неочекивана грешка. Молимо покушајте да освежите страницу.
+        </h1>
+    )
 }

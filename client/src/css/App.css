@@ -69,9 +69,9 @@ ul {
   display: inline-block;
   width: 5rem;
   height: 5rem;
-  border: 2px solid rgba(0, 0, 0, .2);
+  border: 2px solid #060b26;
   border-radius: 50%;
-  border-top-color: rgba(0, 0, 0, .4);
+  border-top-color: #060b26;
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
 }

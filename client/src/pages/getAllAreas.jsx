@@ -14,61 +14,68 @@ import { EditArea } from '../components/area/editArea'
 import { Area } from '../components/area/area'
 import { DeleteArea } from '../components/area/deleteArea'
 import { NoArea } from '../components/area/noArea'
+import { ErrorData } from '../components/error/errorData'
+import { LoadingData } from '../components/loadingData'
 
 export const GetAllAreas = () => {
-  const [stateButton, setStateButton] = useState(0)
+    const [stateButton, setStateButton] = useState(0)
 
-  const {
-    data: areas,
-    isLoading,
-    isError,
-    isFetching
-  } = useQuery(getAllAreasQuery())
+    const {
+        data: areas,
+        isLoading,
+        isError,
+        isFetching
+    } = useQuery(getAllAreasQuery())
 
-  const areasWithDummyData = [...areas]
-  if (areas.length !== 0)
-    areasWithDummyData.push({ id: -1, area_name: 'dummy' })
+    const areasWithDummyData = [...areas]
+    if (areas.length !== 0)
+        areasWithDummyData.push({ id: -1, area_name: 'dummy' })
 
-  if (isLoading || isFetching) return <div>Подаци се учитавају...</div>
+    if (isLoading || isFetching) return <LoadingData />
+    if (isError) return <ErrorData />
 
-  if (isError) return <div>Неуспешно учитавање података</div>
+    if (areasWithDummyData.length === 0) return <NoArea />
 
-  if (areasWithDummyData.length === 0) return <NoArea />
-
-  return (
-    <div className='areas'>
-      {areasWithDummyData.map((area, key) => {
-        return (
-          <div key={key}>
-            {area.id > 0 ? (
-              stateButton !== area.id + areasWithDummyData.length &&
-              stateButton !== area.id ? (
-                <Area
-                  setEditState={() => setStateButton(area.id)}
-                  setDeleteState={() =>
-                    setStateButton(areasWithDummyData.length + area.id)
-                  }
-                  areaName={area.area_name}
-                  id={area.id}
-                />
-              ) : stateButton > areasWithDummyData.length ? (
-                <DeleteArea
-                  id={area.id}
-                  setDeleteState={() => setStateButton(0)}
-                />
-              ) : (
-                <EditArea id={area.id} resetState={() => setStateButton(0)} />
-              )
-            ) : (
-              <AddArea
-                buttonPressed={stateButton}
-                setAddNewAreaState={() => setStateButton(-1)}
-                resetState={() => setStateButton(0)}
-              />
-            )}
-          </div>
-        )
-      })}
-    </div>
-  )
+    return (
+        <div className="areas">
+            {areasWithDummyData.map((area, key) => {
+                return (
+                    <div key={key}>
+                        {area.id > 0 ? (
+                            stateButton !==
+                                area.id + areasWithDummyData.length &&
+                            stateButton !== area.id ? (
+                                <Area
+                                    setEditState={() => setStateButton(area.id)}
+                                    setDeleteState={() =>
+                                        setStateButton(
+                                            areasWithDummyData.length + area.id
+                                        )
+                                    }
+                                    areaName={area.area_name}
+                                    id={area.id}
+                                />
+                            ) : stateButton > areasWithDummyData.length ? (
+                                <DeleteArea
+                                    id={area.id}
+                                    setDeleteState={() => setStateButton(0)}
+                                />
+                            ) : (
+                                <EditArea
+                                    id={area.id}
+                                    resetState={() => setStateButton(0)}
+                                />
+                            )
+                        ) : (
+                            <AddArea
+                                buttonPressed={stateButton}
+                                setAddNewAreaState={() => setStateButton(-1)}
+                                resetState={() => setStateButton(0)}
+                            />
+                        )}
+                    </div>
+                )
+            })}
+        </div>
+    )
 }

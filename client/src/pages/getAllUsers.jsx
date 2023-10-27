@@ -1,9 +1,9 @@
 // libraries
 import React, { useMemo, useState } from 'react'
 import {
-  useMutation,
-  useQueryClient,
-  useInfiniteQuery
+    useMutation,
+    useQueryClient,
+    useInfiniteQuery
 } from '@tanstack/react-query'
 
 // queries
@@ -15,45 +15,50 @@ import { UserTableColumns } from '../components/table/tableColumns/userTableColu
 import { Table } from '../components/table/table'
 import { AddUser } from '../components/table/addItem/addUser'
 import { EditUser } from '../components/table/editItem/editUser'
+import { ErrorData } from '../components/error/errorData'
+import { LoadingData } from '../components/loadingData'
 
 export const GetAllUsers = () => {
-  const [form, setForm] = useState(0)
+    const [form, setForm] = useState(0)
 
-  const queryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
-  const { mutateAsync: deleteUsers } = useMutation(
-    deleteUsersMutation(queryClient)
-  )
+    const { mutateAsync: deleteUsers } = useMutation(
+        deleteUsersMutation(queryClient)
+    )
 
-  const { data, fetchNextPage, hasNextPage, isLoading, isError, isFetching } =
-    useInfiniteQuery(getUsersBatchQuery())
+    const { data, fetchNextPage, hasNextPage, isLoading, isError } =
+        useInfiniteQuery(getUsersBatchQuery())
 
-  const users = useMemo(() => (data ? data.pages.flat(1) : []), [data])
+    const users = useMemo(() => (data ? data.pages.flat(1) : []), [data])
 
-  if (isLoading || isFetching) return <div>Подаци се учитавају...</div>
+    if (isLoading) return <LoadingData />
 
-  if (isError) return <div>Неуспешно учитавање података</div>
+    if (isError) return <ErrorData />
 
-  if (users.length === 0) return <NoUser />
+    if (users.length === 0) return <NoUser />
 
-  return (
-    <div>
-      {form === 0 ? (
-        <Table
-          tableData={users}
-          calledFrom={'users'}
-          tableColumns={UserTableColumns}
-          deleteItems={users => deleteUsers(users)}
-          openAddForm={() => setForm(1)}
-          openEditForm={userId => setForm(userId + 2)}
-          update={() => fetchNextPage()}
-          hasMore={hasNextPage}
-        />
-      ) : form === 1 ? (
-        <AddUser resetState={() => setForm(0)} />
-      ) : (
-        <EditUser resetState={() => setForm(0)} GSS_identification={form - 2} />
-      )}
-    </div>
-  )
+    return (
+        <div>
+            {form === 0 ? (
+                <Table
+                    tableData={users}
+                    calledFrom={'users'}
+                    tableColumns={UserTableColumns}
+                    deleteItems={(users) => deleteUsers(users)}
+                    openAddForm={() => setForm(1)}
+                    openEditForm={(userId) => setForm(userId + 2)}
+                    update={() => fetchNextPage()}
+                    hasMore={hasNextPage}
+                />
+            ) : form === 1 ? (
+                <AddUser resetState={() => setForm(0)} />
+            ) : (
+                <EditUser
+                    resetState={() => setForm(0)}
+                    GSS_identification={form - 2}
+                />
+            )}
+        </div>
+    )
 }

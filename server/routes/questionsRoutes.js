@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const {
-  createQuestionInController,
-  getQuestionsBatchInController,
-  deleteQuestionsInController,
-  editQuestionInController,
-  getTestQuestionsInController
+    createQuestionInController,
+    getQuestionsBatchInController,
+    deleteQuestionsInController,
+    editQuestionInController,
+    getTestQuestionsInController
 } = require('../controllers/questionsController')
 
 router.get('/test', getTestQuestionsInController)

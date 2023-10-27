@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const {
-  getAllAreasInController,
-  createAreaInController,
-  getAreaByIdInController,
-  deleteAreaInController,
-  editAreaInController
+    getAllAreasInController,
+    createAreaInController,
+    getAreaByIdInController,
+    deleteAreaInController,
+    editAreaInController
 } = require('../controllers/areasController')
 
 router.get('/', getAllAreasInController)

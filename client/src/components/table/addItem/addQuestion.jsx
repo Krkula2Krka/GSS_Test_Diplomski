@@ -10,61 +10,61 @@ import { addQuestionMutation } from '../../../queries/questionQueries'
 // css
 import '../../../css/form.css'
 
-export const AddQuestion = props => {
-  const queryClient = useQueryClient()
-  const { mutateAsync: addQuestion } = useMutation(
-    addQuestionMutation(queryClient, props.areaId)
-  )
+export const AddQuestion = (props) => {
+    const queryClient = useQueryClient()
+    const { mutateAsync: addQuestion } = useMutation(
+        addQuestionMutation(queryClient, props.areaId)
+    )
 
-  const initialValues = {
-    question_text: '',
-    difficulty: 'lako',
-    importance: 'manje',
-    area_id: props.areaId
-  }
+    const initialValues = {
+        question_text: '',
+        difficulty: 'lako',
+        importance: 'manje',
+        area_id: props.areaId
+    }
 
-  const validationSchema = Yup.object().shape({
-    question_text: Yup.string().required('Обавезно поље')
-  })
+    const validationSchema = Yup.object().shape({
+        question_text: Yup.string().required('Обавезно поље')
+    })
 
-  const onSubmit = async data => {
-    await addQuestion(data)
-    props.resetState()
-  }
+    const onSubmit = async (data) => {
+        await addQuestion(data)
+        props.resetState()
+    }
 
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      <Form className='formContainer centered'>
-        <label>Текст питања:</label>
-        <ErrorMessage
-          name='question_text'
-          component='span'
-          className='errorMessage'
-        />
-        <Field name='question_text' />
-        <label>Тежина питања:</label>
-        <Field as='select' name='difficulty'>
-          <option value='lako'>лако</option>
-          <option value='srednje'>средње</option>
-          <option value='tesko'>тешко</option>
-        </Field>
-        <label>Важност питања:</label>
-        <Field as='select' name='importance'>
-          <option value='manje'>мање</option>
-          <option value='srednje'>средње</option>
-          <option value='bitno'>битно</option>
-        </Field>
-        <div className='registration-buttons'>
-          {props.noBackButton !== true ? (
-            <button onClick={props.resetState}>Назад</button>
-          ) : null}
-          <button type='submit'>Настави</button>
-        </div>
-      </Form>
-    </Formik>
-  )
+    return (
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+        >
+            <Form className="formContainer centered">
+                <label>Текст питања:</label>
+                <ErrorMessage
+                    name="question_text"
+                    component="span"
+                    className="errorMessage"
+                />
+                <Field name="question_text" />
+                <label>Тежина питања:</label>
+                <Field as="select" name="difficulty">
+                    <option value="lako">лако</option>
+                    <option value="srednje">средње</option>
+                    <option value="tesko">тешко</option>
+                </Field>
+                <label>Важност питања:</label>
+                <Field as="select" name="importance">
+                    <option value="manje">мање</option>
+                    <option value="srednje">средње</option>
+                    <option value="bitno">битно</option>
+                </Field>
+                <div className="registration-buttons">
+                    {props.noBackButton !== true ? (
+                        <button onClick={props.resetState}>Назад</button>
+                    ) : null}
+                    <button type="submit">Настави</button>
+                </div>
+            </Form>
+        </Formik>
+    )
 }

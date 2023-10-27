@@ -14,62 +14,64 @@ import { QuestionTableColumns } from '../components/table/tableColumns/questionT
 import { Table } from '../components/table/table'
 import { AddQuestion } from '../components/table/addItem/addQuestion'
 import { EditQuestion } from '../components/table/editItem/editQuestion'
+import { ErrorData } from '../components/error/errorData'
+import { LoadingData } from '../components/loadingData'
 
 // css
 import '../css/table.css'
 
 export const AreaDetails = () => {
-  const [form, setForm] = useState(0)
-  const { id } = useParams()
+    const [form, setForm] = useState(0)
+    const { id } = useParams()
 
-  const queryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
-  const location = useLocation()
-  const { areaName } = location.state
+    const location = useLocation()
+    const { areaName } = location.state
 
-  const { mutateAsync: deleteQuestions } = useMutation(
-    deleteQuestionsMutation(queryClient, id)
-  )
+    const { mutateAsync: deleteQuestions } = useMutation(
+        deleteQuestionsMutation(queryClient, id)
+    )
 
-  const { data, fetchNextPage, hasNextPage, isError, isLoading, isFetching } =
-    useInfiniteQuery(getQuestionsBatchQuery(id))
+    const { data, fetchNextPage, hasNextPage, isError, isLoading } =
+        useInfiniteQuery(getQuestionsBatchQuery(id))
 
-  const questions = useMemo(() => (data ? data.pages.flat(1) : []), [data])
+    const questions = useMemo(() => (data ? data.pages.flat(1) : []), [data])
 
-  if (isLoading || isFetching) return <div>Подаци се учитавају...</div>
+    if (isLoading) return <LoadingData />
 
-  if (isError) return <div>Неуспешно учитавање података</div>
+    if (isError) return <ErrorData />
 
-  if (questions.length === 0)
-    return <NoQuestion resetState={() => setForm(0)} areaId={id} />
+    if (questions.length === 0)
+        return <NoQuestion resetState={() => setForm(0)} areaId={id} />
 
-  return (
-    <div>
-      {form === 0 ? (
-        <div className='cointainer'>
-          <div className='infoContainer'>
-            <h2>{areaName}</h2>
-          </div>
-          <Table
-            tableData={questions}
-            tableColumns={QuestionTableColumns}
-            calledFrom={'questions'}
-            deleteItems={questions => deleteQuestions(questions)}
-            openAddForm={() => setForm(1)}
-            openEditForm={questionId => setForm(questionId + 2)}
-            update={() => fetchNextPage()}
-            hasMore={hasNextPage}
-          />
+    return (
+        <div>
+            {form === 0 ? (
+                <div className="cointainer">
+                    <div className="infoContainer">
+                        <h2>{areaName}</h2>
+                    </div>
+                    <Table
+                        tableData={questions}
+                        tableColumns={QuestionTableColumns}
+                        calledFrom={'questions'}
+                        deleteItems={(questions) => deleteQuestions(questions)}
+                        openAddForm={() => setForm(1)}
+                        openEditForm={(questionId) => setForm(questionId + 2)}
+                        update={() => fetchNextPage()}
+                        hasMore={hasNextPage}
+                    />
+                </div>
+            ) : form === 1 ? (
+                <AddQuestion resetState={() => setForm(0)} areaId={id} />
+            ) : (
+                <EditQuestion
+                    resetState={() => setForm(0)}
+                    areaId={id}
+                    questionId={form - 2}
+                />
+            )}
         </div>
-      ) : form === 1 ? (
-        <AddQuestion resetState={() => setForm(0)} areaId={id} />
-      ) : (
-        <EditQuestion
-          resetState={() => setForm(0)}
-          areaId={id}
-          questionId={form - 2}
-        />
-      )}
-    </div>
-  )
+    )
 }

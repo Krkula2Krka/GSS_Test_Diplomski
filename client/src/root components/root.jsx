@@ -8,13 +8,13 @@ import { Sidebar } from '../components/sidebar/sidebar'
 import { RetractableSidebar } from '../components/sidebar/retractableSidebar'
 
 export const Root = () => {
-  const location = useLocation()
-  return (
-    <ErrorBoundary key={location.pathname} FallbackComponent={ErrorPage}>
-      {window.innerWidth > 891 ? <Sidebar /> : <RetractableSidebar />}
-      <div className='content'>
-        <Outlet />
-      </div>
-    </ErrorBoundary>
-  )
+    const location = useLocation()
+    return (
+        <ErrorBoundary key={location.pathname} FallbackComponent={ErrorPage}>
+            {window.innerWidth > 891 ? <Sidebar /> : <RetractableSidebar />}
+            <div className="content">
+                <Outlet />
+            </div>
+        </ErrorBoundary>
+    )
 }
