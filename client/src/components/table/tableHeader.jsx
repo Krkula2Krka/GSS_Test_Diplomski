@@ -20,7 +20,7 @@ export const TableHeader = (props) => {
                 selectedItems={selectedItems}
                 searchItems={(input) => {
                     const items = Array.from(selectedItems)
-                    searchData = {
+                    const searchData = {
                         input: input,
                         filters: items
                     }
