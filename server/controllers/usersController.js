@@ -6,7 +6,7 @@ const {
     checkIfUserIsLoggedInForTestingInService,
     getUsersBatchInService,
     editUserInService,
-    deleteUserInService
+    deleteUsersInService
 } = require('../service/usersService')
 
 const createUserInController = async (req, res) => {
@@ -59,11 +59,8 @@ const editUserInController = async (req, res) => {
     res.json()
 }
 
-const deleteUsersInController = (req, res) => {
-    req.body.forEach(
-        async (GSS_identification) =>
-            await deleteUserInService(GSS_identification)
-    )
+const deleteUsersInController = async (req, res) => {
+    await deleteUsersInService(req.body)
     res.json()
 }
 

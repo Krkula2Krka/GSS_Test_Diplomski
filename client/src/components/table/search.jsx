@@ -6,7 +6,7 @@ export const Search = (props) => {
             <label className="search-label">Претражи: </label>
             <input
                 className="search-input"
-                onChange={(e) => console.log(e.target.value)}
+                onChange={(e) => props.searchItems(e.target.value)}
             />
         </div>
     )

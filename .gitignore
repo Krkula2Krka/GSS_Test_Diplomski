@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 server/config/config.json
-.vscode/launch.json
+.vscode/

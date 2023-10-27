@@ -46,6 +46,7 @@ export const GetAllUsers = () => {
                     calledFrom={'users'}
                     tableColumns={UserTableColumns}
                     deleteItems={(users) => deleteUsers(users)}
+                    //searchItems={}
                     openAddForm={() => setForm(1)}
                     openEditForm={(userId) => setForm(userId + 2)}
                     update={() => fetchNextPage()}

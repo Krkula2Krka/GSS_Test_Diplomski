@@ -16,7 +16,17 @@ export const TableHeader = (props) => {
     const [selectedItems, setSelectedItems] = useState(() => new Set())
     return (
         <div className="header">
-            <Search selectedItems={selectedItems} />
+            <Search
+                selectedItems={selectedItems}
+                searchItems={(input) => {
+                    const items = Array.from(selectedItems)
+                    searchData = {
+                        input: input,
+                        filters: items
+                    }
+                    props.searchItems(searchData)
+                }}
+            />
             <button className="userButton" onClick={props.deleteItems}>
                 <RiDeleteBin6Fill />
             </button>

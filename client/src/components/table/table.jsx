@@ -63,6 +63,7 @@ export const Table = (props) => {
                             setSelectedItems(new Set())
                         }
                     }}
+                    searchItems={props.searchItems}
                     allColumns={allColumns}
                 />
                 <div className="table-main-wrapper">
