@@ -7,7 +7,7 @@ const {
 
 const createAnswerInController = async (req, res) => {
     await createAnswerInService(req.body)
-    res.json()
+    res.sendStatus(200)
 }
 
 const getAnswersBatchInController = async (req, res) => {
@@ -20,12 +20,12 @@ const getAnswersBatchInController = async (req, res) => {
 
 const editAnswerInController = async (req, res) => {
     await editAnswerInService(req.params.id, req.body)
-    res.json()
+    res.sendStatus(200)
 }
 
 const deleteAnswersInController = (req, res) => {
     req.body.forEach(async (id) => await deleteAnswerInService(id))
-    res.json()
+    res.sendStatus(200)
 }
 
 module.exports = {

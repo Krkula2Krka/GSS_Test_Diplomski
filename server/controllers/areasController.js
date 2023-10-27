@@ -13,12 +13,12 @@ const getAllAreasInController = async (_, res) => {
 
 const createAreaInController = async (req, res) => {
     await createAreaInService(req.body)
-    res.json()
+    res.sendStatus(200)
 }
 
 const deleteAreaInController = async (req, res) => {
     await deleteAreaInService(req.params.id)
-    res.json()
+    res.sendStatus(200)
 }
 
 const getAreaByIdInController = async (req, res) => {
@@ -28,7 +28,7 @@ const getAreaByIdInController = async (req, res) => {
 
 const editAreaInController = async (req, res) => {
     await editAreaInService(req.params.id, req.body)
-    res.json()
+    res.sendStatus(200)
 }
 
 module.exports = {

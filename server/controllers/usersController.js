@@ -61,7 +61,7 @@ const editUserInController = async (req, res) => {
 
 const deleteUsersInController = async (req, res) => {
     await deleteUsersInService(req.body)
-    res.json()
+    res.sendStatus(200)
 }
 
 module.exports = {
