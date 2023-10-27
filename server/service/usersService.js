@@ -96,5 +96,6 @@ module.exports = {
     checkIfUserIsLoggedInForTestingInService,
     getUsersBatchInService,
     editUserInService,
-    deleteUsersInService
+    deleteUsersInService,
+    searchUsersInService
 }

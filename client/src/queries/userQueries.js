@@ -92,3 +92,13 @@ export const deleteUsersMutation = (queryClient) => ({
         toast.error('Неуспешно брисање корисника.')
     }
 })
+
+export const searchUsersMutation = (queryClient) => ({
+    mutationFn: (data) =>
+        axios.post('http://localhost:3001/users/search/', data),
+    onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
+    onError: () => {
+        toast.remove()
+        toast.error('Неуспешна претрага корисника.')
+    }
+})

@@ -7,7 +7,11 @@ import {
 } from '@tanstack/react-query'
 
 // queries
-import { getUsersBatchQuery, deleteUsersMutation } from '../queries/userQueries'
+import {
+    getUsersBatchQuery,
+    deleteUsersMutation,
+    searchUsersMutation
+} from '../queries/userQueries'
 
 // components
 import { NoUser } from '../components/table/noItem/noUser'
@@ -25,6 +29,10 @@ export const GetAllUsers = () => {
 
     const { mutateAsync: deleteUsers } = useMutation(
         deleteUsersMutation(queryClient)
+    )
+
+    const { mutateAsync: searchUsers } = useMutation(
+        searchUsersMutation(queryClient)
     )
 
     const { data, fetchNextPage, hasNextPage, isLoading, isError } =
@@ -46,7 +54,7 @@ export const GetAllUsers = () => {
                     calledFrom={'users'}
                     tableColumns={UserTableColumns}
                     deleteItems={(users) => deleteUsers(users)}
-                    //searchItems={}
+                    searchItems={(data) => searchUsers(data)}
                     openAddForm={() => setForm(1)}
                     openEditForm={(userId) => setForm(userId + 2)}
                     update={() => fetchNextPage()}
