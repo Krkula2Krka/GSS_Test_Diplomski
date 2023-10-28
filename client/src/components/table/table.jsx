@@ -32,7 +32,7 @@ export const Table = (props) => {
     )
 
     return (
-        <div className="tableContainer">
+        <div className='tableContainer'>
             <InfiniteScroll
                 dataLength={rows.length}
                 next={props.update}
@@ -63,11 +63,11 @@ export const Table = (props) => {
                             setSelectedItems(new Set())
                         }
                     }}
-                    searchItems={props.searchItems}
+                    setSearchObject={props.setSearchObject}
                     allColumns={allColumns}
                 />
-                <div className="table-main-wrapper">
-                    <table className="table-main" {...getTableProps()}>
+                <div className='table-main-wrapper'>
+                    <table className='table-main' {...getTableProps()}>
                         <thead>
                             {headerGroups.map((headerGroup, key) => (
                                 <TableRowName

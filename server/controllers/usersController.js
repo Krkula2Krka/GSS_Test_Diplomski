@@ -7,7 +7,7 @@ const {
     getUsersBatchInService,
     editUserInService,
     deleteUsersInService,
-    searchUsersInService
+    getUsersSearchBatchInService
 } = require('../service/usersService')
 
 const createUserInController = async (req, res) => {
@@ -51,13 +51,8 @@ const logoutUserForTestingInController = async (req, res) => {
 }
 
 const getUsersBatchInController = async (req, res) => {
+    console.log(req.body)
     const users = await getUsersBatchInService(Number(req.params.page))
-    res.json(users)
-}
-
-const searchUsersInController = async (req, res) => {
-    const data = req.body
-    const users = await searchUsersInService([])
     res.json(users)
 }
 
@@ -78,6 +73,5 @@ module.exports = {
     logoutUserForTestingInController,
     getUsersBatchInController,
     editUserInController,
-    deleteUsersInController,
-    searchUsersInController
+    deleteUsersInController
 }

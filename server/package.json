@@ -22,6 +22,7 @@
         "semi": false,
         "singleQuote": true,
         "trailingComma": "none",
-        "tabWidth": 4
+        "tabWidth": 4,
+        "jsxSingleQuote": true
     }
 }

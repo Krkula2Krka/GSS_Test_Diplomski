@@ -3,14 +3,16 @@ import React, { useMemo, useState } from 'react'
 import {
     useMutation,
     useQueryClient,
-    useInfiniteQuery
+    useInfiniteQuery,
+    useQuery
 } from '@tanstack/react-query'
 
 // queries
 import {
     getUsersBatchQuery,
     deleteUsersMutation,
-    searchUsersMutation
+    searchUsersQuery,
+    getUsersSearchBatchQuery
 } from '../queries/userQueries'
 
 // components
@@ -24,6 +26,7 @@ import { LoadingData } from '../components/loadingData'
 
 export const GetAllUsers = () => {
     const [form, setForm] = useState(0)
+    const [search, setSearch] = useState({})
 
     const queryClient = useQueryClient()
 
@@ -31,12 +34,8 @@ export const GetAllUsers = () => {
         deleteUsersMutation(queryClient)
     )
 
-    const { mutateAsync: searchUsers } = useMutation(
-        searchUsersMutation(queryClient)
-    )
-
     const { data, fetchNextPage, hasNextPage, isLoading, isError } =
-        useInfiniteQuery(getUsersBatchQuery())
+        useInfiniteQuery(getUsersBatchQuery(search))
 
     const users = useMemo(() => (data ? data.pages.flat(1) : []), [data])
 
@@ -47,14 +46,14 @@ export const GetAllUsers = () => {
     if (users.length === 0) return <NoUser />
 
     return (
-        <div>
+        <>
             {form === 0 ? (
                 <Table
                     tableData={users}
                     calledFrom={'users'}
                     tableColumns={UserTableColumns}
                     deleteItems={(users) => deleteUsers(users)}
-                    searchItems={(data) => searchUsers(data)}
+                    setSearchObject={(object) => setSearch(object)}
                     openAddForm={() => setForm(1)}
                     openEditForm={(userId) => setForm(userId + 2)}
                     update={() => fetchNextPage()}
@@ -68,6 +67,6 @@ export const GetAllUsers = () => {
                     GSS_identification={form - 2}
                 />
             )}
-        </div>
+        </>
     )
 }

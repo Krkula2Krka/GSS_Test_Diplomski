@@ -1,5 +1,6 @@
 // libraries
 import React, { useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 
 // icons
 import { RiDeleteBin6Fill } from 'react-icons/ri'
@@ -14,33 +15,40 @@ import { Search } from './search'
 
 export const TableHeader = (props) => {
     const [selectedItems, setSelectedItems] = useState(() => new Set())
+    const queryClient = useQueryClient()
     return (
-        <div className="header">
+        <div className='header'>
             <Search
-                selectedItems={selectedItems}
+                selectedItems={Array.from(selectedItems)}
                 searchItems={(input) => {
                     const items = Array.from(selectedItems)
                     const searchData = {
                         input: input,
                         filters: items
                     }
-                    props.searchItems(searchData)
+                    if (input.replace(/\s/g, '').length === 0 || input === '')
+                        props.setSearchObject({})
+                    else props.setSearchObject(searchData)
+                    queryClient.resetQueries({
+                        queryKey: ['users'],
+                        exact: true
+                    })
                 }}
             />
-            <button className="userButton" onClick={props.deleteItems}>
+            <button className='userButton' onClick={props.deleteItems}>
                 <RiDeleteBin6Fill />
             </button>
-            <button className="userButton" onClick={props.openAddForm}>
+            <button className='userButton' onClick={props.openAddForm}>
                 <ImPlus />
             </button>
-            <button className="userButton" onClick={props.openEditForm}>
+            <button className='userButton' onClick={props.openEditForm}>
                 <AiFillEdit />
             </button>
             {props.allColumns.map((column) => (
-                <label key={column.id} className="search-parameter">
-                    <div className="search-parameter-text">{column.Header}</div>
+                <label key={column.id} className='search-parameter'>
+                    <div className='search-parameter-text'>{column.Header}</div>
                     <input
-                        type="checkbox"
+                        type='checkbox'
                         onChange={(e) => {
                             if (e.target.checked)
                                 setSelectedItems((prev) =>

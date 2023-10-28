@@ -84,7 +84,7 @@ const deleteUsersInService = (GSS_identifications) => {
     })
 }
 
-const searchUsersInService = (GSS_identifications) => {
+const getUsersSearchBatchInService = (GSS_identifications) => {
     user.destroy({ where: { columnName: { $like: '%awe%' } } })
 }
 
@@ -97,5 +97,5 @@ module.exports = {
     getUsersBatchInService,
     editUserInService,
     deleteUsersInService,
-    searchUsersInService
+    getUsersSearchBatchInService
 }
