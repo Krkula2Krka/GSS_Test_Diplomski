@@ -1,6 +1,5 @@
 // libraries
 import React, { useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
 
 // icons
 import { RiDeleteBin6Fill } from 'react-icons/ri'
@@ -15,26 +14,9 @@ import { Search } from './search'
 
 export const TableHeader = (props) => {
     const [selectedItems, setSelectedItems] = useState(() => new Set())
-    const queryClient = useQueryClient()
     return (
         <div className='header'>
-            <Search
-                selectedItems={Array.from(selectedItems)}
-                searchItems={(input) => {
-                    const items = Array.from(selectedItems)
-                    const searchData = {
-                        input: input,
-                        filters: items
-                    }
-                    if (input.replace(/\s/g, '').length === 0 || input === '')
-                        props.setSearchObject({})
-                    else props.setSearchObject(searchData)
-                    queryClient.resetQueries({
-                        queryKey: ['users'],
-                        exact: true
-                    })
-                }}
-            />
+            <Search selectedItems={Array.from(selectedItems)} />
             <button className='userButton' onClick={props.deleteItems}>
                 <RiDeleteBin6Fill />
             </button>

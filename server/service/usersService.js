@@ -55,8 +55,8 @@ const logoutUserForTestingInService = (GSS_identification) => {
 
 const getUsersBatchInService = (page) => {
     return user.findAll({
-        offset: page * 30,
-        limit: 30
+        offset: page * 5,
+        limit: 5
     })
 }
 
