@@ -8,14 +8,6 @@
     padding: 0.5rem;
 }
 
-.table-main-wrapper {
-    overflow-x: auto;
-}
-
-.table-main {
-    min-width: 30rem;
-}
-
 .header {
     display: flex;
     flex-wrap: wrap;
@@ -25,27 +17,6 @@
     padding-bottom: 0.5rem;
     font-weight: bold;
     border-radius: 0.5rem;
-}
-
-th, td {
-    background-color: #060b26;
-    color: #f5f5f5;
-    text-align: center;
-    width: 40rem;
-    border-radius: 0.5rem;
-}
-
-th {
-    padding: 0.7rem;
-    font-size: 1.2rem;
-}
-
-td {
-    padding: 0.3rem;
-}
-
-.selected {
-    background-color: #008080;
 }
 
 .infoContainer {
@@ -67,41 +38,6 @@ td {
 .userButton:hover {
     color: #008080;
     cursor: pointer;
-}
-
-.search-parameter {
-    display: flex;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-}
-
-.search-parameter-text {
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-}
-
-.search {
-    display: flex;
-    padding-top: 1rem;
-    padding-left: 0.5rem;
-}
-
-.search-label {
-    margin: 0;
-}
-
-.search-input {
-    height: 1.3rem;
-    margin: 0;
-    border-radius: 1rem;
-}
-
-th input:focus {
-    outline: none;
-}
-
-div.tableContainer input:focus {
-    outline: none;
 }
 
 @media (min-width: 892px) {
