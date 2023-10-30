@@ -26,6 +26,7 @@ import { Home } from '../pages/home'
 // queries
 import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
+import { usersLoader } from '../queries/userQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
 import { useEffect } from 'react'
 
@@ -74,6 +75,7 @@ export const App = () => {
                         )
                         return { Component: GetAllUsers }
                     },
+                    loader: usersLoader(queryClient),
                     errorElement: <ErrorPage />
                 },
                 {
@@ -114,7 +116,7 @@ export const App = () => {
         },
         {
             path: '/credentialsForTest',
-            element: <LoginForm navigateToLocation="/takeTest" />
+            element: <LoginForm navigateToLocation='/takeTest' />
         },
         {
             path: '/registration',

@@ -90,3 +90,11 @@ export const getUsersBatchQuery = (page) => ({
     staleTime: 1000 * 60 * 30,
     cacheTime: 1000 * 60 * 30
 })
+
+export const usersLoader = (queryClient) => async () => {
+    const query = getUsersBatchQuery(0)
+    return await queryClient.ensureQueryData({
+        queryKey: query.queryKey,
+        queryFn: query.queryFn
+    })
+}
