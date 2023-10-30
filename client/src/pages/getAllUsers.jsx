@@ -7,10 +7,7 @@ import { getUsersBatchQuery, deleteUsersMutation } from '../queries/userQueries'
 
 // components
 import { NoUser } from '../components/table/noItem/noUser'
-import {
-    UserTableColumns,
-    UserTableColumnsAgGrid
-} from '../components/table/tableColumns/userTableColumns'
+import { UserTableColumns } from '../components/table/tableColumns/userTableColumns'
 import { Table } from '../components/table/table'
 import { AddUser } from '../components/table/addItem/addUser'
 import { EditUser } from '../components/table/editItem/editUser'
@@ -19,7 +16,6 @@ import { LoadingData } from '../components/loadingData'
 
 export const GetAllUsers = () => {
     const [form, setForm] = useState(0)
-    const [page, setPage] = useState(0)
 
     const queryClient = useQueryClient()
 
@@ -32,7 +28,7 @@ export const GetAllUsers = () => {
         isFetching,
         isLoading,
         isError
-    } = useQuery(getUsersBatchQuery(page))
+    } = useQuery(getUsersBatchQuery(0))
 
     if (isLoading || isFetching) return <LoadingData />
 
@@ -47,13 +43,9 @@ export const GetAllUsers = () => {
                     tableData={users}
                     calledFrom={'users'}
                     tableColumns={UserTableColumns}
-                    tableColumnsAgGrid={UserTableColumnsAgGrid}
                     deleteItems={(users) => deleteUsers(users)}
                     openAddForm={() => setForm(1)}
                     openEditForm={(userId) => setForm(userId + 2)}
-                    nextPage={() => setPage(page + 1)}
-                    previousPage={() => setPage(page - 1)}
-                    specificPage={(page) => setPage(page)}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />
