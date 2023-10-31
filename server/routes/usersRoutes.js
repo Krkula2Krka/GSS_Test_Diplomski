@@ -7,8 +7,11 @@ const {
     logoutUserForTestingInController,
     getUsersBatchInController,
     editUserInController,
-    deleteUsersInController
+    deleteUsersInController,
+    getUsersCountInController
 } = require('../controllers/usersController')
+
+router.get('/count', getUsersCountInController)
 
 router.get('/:page', getUsersBatchInController)
 

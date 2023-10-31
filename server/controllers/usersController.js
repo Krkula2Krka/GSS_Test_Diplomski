@@ -7,7 +7,7 @@ const {
     getUsersBatchInService,
     editUserInService,
     deleteUsersInService,
-    getUsersSearchBatchInService
+    getUsersCountInService
 } = require('../service/usersService')
 
 const createUserInController = async (req, res) => {
@@ -55,6 +55,11 @@ const getUsersBatchInController = async (req, res) => {
     res.json(users)
 }
 
+const getUsersCountInController = async (_, res) => {
+    const usersCount = await getUsersCountInService()
+    res.json(usersCount)
+}
+
 const editUserInController = async (req, res) => {
     await editUserInService(req.params.GSS_identification, req.body)
     res.sendStatus(200)
@@ -72,5 +77,6 @@ module.exports = {
     logoutUserForTestingInController,
     getUsersBatchInController,
     editUserInController,
-    deleteUsersInController
+    deleteUsersInController,
+    getUsersCountInController
 }

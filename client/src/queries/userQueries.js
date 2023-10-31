@@ -2,8 +2,8 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 const queryKeys = {
-    users: ['users'],
-    nextBatch: ['nextBatch'],
+    users: (page) => ['users', page],
+    count: ['count'],
     loggedIn: (id) => ['loggedIn', id]
 }
 
@@ -81,14 +81,24 @@ export const deleteUsersMutation = (queryClient) => ({
     }
 })
 
+export const getUsersCountQuery = () => ({
+    queryKey: queryKeys.count,
+    queryFn: async () => {
+        const res = await fetch('http://localhost:3001/users/count')
+        return res.json()
+    },
+    staleTime: Infinity,
+    cacheTime: Infinity
+})
+
 export const getUsersBatchQuery = (page) => ({
-    queryKey: queryKeys.users,
+    queryKey: queryKeys.users(page),
     queryFn: async () => {
         const res = await fetch(`http://localhost:3001/users/${page}`)
         return res.json()
     },
-    staleTime: 1000 * 60 * 30,
-    cacheTime: 1000 * 60 * 30
+    staleTime: Infinity,
+    cacheTime: Infinity
 })
 
 export const usersLoader = (queryClient) => async () => {

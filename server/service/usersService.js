@@ -1,4 +1,5 @@
 const { user } = require('../models')
+const sequelize = require('sequelize')
 
 const createUserInService = (newUser) => {
     return user.findOrCreate({
@@ -60,6 +61,10 @@ const getUsersBatchInService = (page) => {
     })
 }
 
+const getUsersCountInService = () => {
+    return user.count()
+}
+
 const editUserInService = (GSS_identification, data) => {
     user.update(
         {
@@ -97,5 +102,6 @@ module.exports = {
     getUsersBatchInService,
     editUserInService,
     deleteUsersInService,
-    getUsersSearchBatchInService
+    getUsersSearchBatchInService,
+    getUsersCountInService
 }
