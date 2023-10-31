@@ -19,6 +19,7 @@ import { ErrorData } from '../components/error/errorData'
 export const GetAllUsers = () => {
     const [form, setForm] = useState(0)
     const [page, setPage] = useState(0)
+    const [filters, setFilters] = useState({})
 
     const queryClient = useQueryClient()
 
@@ -49,6 +50,7 @@ export const GetAllUsers = () => {
                     setPage={setPage}
                     page={page}
                     usersCount={usersCount}
+                    setFilters={setFilters}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />

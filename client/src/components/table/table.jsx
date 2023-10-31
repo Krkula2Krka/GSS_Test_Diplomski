@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { AgGridReact } from 'ag-grid-react'
+import { useQueryClient } from '@tanstack/react-query'
 
 // css
 import '../../css/table.css'
@@ -20,6 +21,7 @@ export const Table = (props) => {
     const tableData = useMemo(() => props.tableData, [props.tableData])
     const tableColumns = useMemo(() => props.tableColumns, [props.tableColumns])
     const [api, setApi] = useState(null)
+    const queryClient = useQueryClient()
 
     const navigate = useNavigate()
 
@@ -109,8 +111,13 @@ export const Table = (props) => {
                     defaultColDef={defaultColumn}
                     animateRows={true}
                     rowData={tableData}
+                    onFilterChanged={() => {
+                        queryClient.invalidateQueries({ queryKey: ['users'] })
+                        queryClient.invalidateQueries({ queryKey: ['count'] })
+                        props.setFilters(api.getFilterModel())
+                        props.setPage(0)
+                    }}
                     onGridReady={(e) => {
-                        console.log(e)
                         setApi(e.api)
                     }}
                     onCellClicked={(e) => {
