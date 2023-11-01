@@ -1,5 +1,14 @@
+.ag-root, .ag-header {
+    background-color: #060b26 !important;
+    --ag-header-foreground-color: #f5f5f5;
+}
+
 .table-data {
     color: #060b26;
+}
+
+.table-checkbox-label {
+    margin-left: 0.5rem;
 }
 
 .table-string-filter {
@@ -16,7 +25,10 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-weight: bold;
-    border-radius: 0.5rem;
+}
+
+.header input, .header .search-label {
+    margin-left: 0.5rem;
 }
 
 .infoContainer {

@@ -1,3 +1,6 @@
+let search = ''
+const filters = []
+
 const {
     createUserInService,
     checkIfUserExistsInService,
@@ -7,7 +10,9 @@ const {
     getUsersBatchInService,
     editUserInService,
     deleteUsersInService,
-    getUsersCountInService
+    getUsersCountInService,
+    getFilteredUsersCountInService,
+    getFilteredUsersBatchInService
 } = require('../service/usersService')
 
 const createUserInController = async (req, res) => {
@@ -51,12 +56,21 @@ const logoutUserForTestingInController = async (req, res) => {
 }
 
 const getUsersBatchInController = async (req, res) => {
-    const users = await getUsersBatchInService(Number(req.params.page))
+    const users =
+        search === ''
+            ? await getUsersBatchInService(Number(req.params.page))
+            : await getFilteredUsersBatchInService(
+                  Number(req.params.page),
+                  search
+              )
     res.json(users)
 }
 
 const getUsersCountInController = async (_, res) => {
-    const usersCount = await getUsersCountInService()
+    const usersCount =
+        search === ''
+            ? await getUsersCountInService()
+            : await getFilteredUsersCountInService(search)
     res.json(usersCount)
 }
 
@@ -70,6 +84,11 @@ const deleteUsersInController = async (req, res) => {
     res.sendStatus(200)
 }
 
+const setSearchInController = async (req, res) => {
+    search = req.body.search
+    res.sendStatus(200)
+}
+
 module.exports = {
     createUserInController,
     loginUserForTestingInController,
@@ -78,5 +97,6 @@ module.exports = {
     getUsersBatchInController,
     editUserInController,
     deleteUsersInController,
-    getUsersCountInController
+    getUsersCountInController,
+    setSearchInController
 }

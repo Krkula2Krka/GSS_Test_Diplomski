@@ -1,5 +1,6 @@
 const { user } = require('../models')
-const sequelize = require('sequelize')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 const createUserInService = (newUser) => {
     return user.findOrCreate({
@@ -54,6 +55,22 @@ const logoutUserForTestingInService = (GSS_identification) => {
     )
 }
 
+const getFilteredUsersBatchInService = (page, search) => {
+    return user.findAll({
+        offset: page * 5,
+        limit: 5,
+        where: {
+            [Op.or]: [
+                { GSS_identification: { [Op.like]: search } },
+                { first_name: { [Op.like]: search } },
+                { last_name: { [Op.like]: search } },
+                { nickname: { [Op.like]: search } },
+                { user_type: { [Op.like]: search } }
+            ]
+        }
+    })
+}
+
 const getUsersBatchInService = (page) => {
     return user.findAll({
         offset: page * 5,
@@ -63,6 +80,20 @@ const getUsersBatchInService = (page) => {
 
 const getUsersCountInService = () => {
     return user.count()
+}
+
+const getFilteredUsersCountInService = (search) => {
+    return user.count({
+        where: {
+            [Op.or]: [
+                { GSS_identification: { [Op.like]: search } },
+                { first_name: { [Op.like]: search } },
+                { last_name: { [Op.like]: search } },
+                { nickname: { [Op.like]: search } },
+                { user_type: { [Op.like]: search } }
+            ]
+        }
+    })
 }
 
 const editUserInService = (GSS_identification, data) => {
@@ -89,10 +120,6 @@ const deleteUsersInService = (GSS_identifications) => {
     })
 }
 
-const getUsersSearchBatchInService = (GSS_identifications) => {
-    user.destroy({ where: { columnName: { $like: '%awe%' } } })
-}
-
 module.exports = {
     createUserInService,
     checkIfUserExistsInService,
@@ -102,6 +129,7 @@ module.exports = {
     getUsersBatchInService,
     editUserInService,
     deleteUsersInService,
-    getUsersSearchBatchInService,
-    getUsersCountInService
+    getUsersCountInService,
+    getFilteredUsersCountInService,
+    getFilteredUsersBatchInService
 }

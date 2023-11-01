@@ -2,13 +2,12 @@
 import React, { useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { AgGridReact } from 'ag-grid-react'
-import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 
 // css
 import '../../css/table.css'
 import 'ag-grid-community/styles//ag-grid.css'
 import 'ag-grid-community/styles//ag-theme-alpine.css'
-import { useNavigate } from 'react-router-dom'
 
 // icons
 import { RiDeleteBin6Fill } from 'react-icons/ri'
@@ -21,7 +20,8 @@ export const Table = (props) => {
     const tableData = useMemo(() => props.tableData, [props.tableData])
     const tableColumns = useMemo(() => props.tableColumns, [props.tableColumns])
     const [api, setApi] = useState(null)
-    const queryClient = useQueryClient()
+    const [filters, setFilters] = useState([])
+    const [filterNames, setFilterNames] = useState([])
 
     const navigate = useNavigate()
 
@@ -29,9 +29,6 @@ export const Table = (props) => {
         () => ({
             flex: 1,
             sortable: true,
-            suppressFiltersToolPanel: true,
-            filter: true,
-            floatingFilter: true,
             cellStyle: { color: '#F5F5F5', backgroundColor: '#060B26' }
         }),
         []
@@ -67,13 +64,18 @@ export const Table = (props) => {
                 <button
                     className='userButton'
                     onClick={() => {
-                        const items = []
-                        if (items.length !== 1) {
+                        const selectedItems =
+                            props.calledFrom === 'users'
+                                ? api
+                                      .getSelectedRows()
+                                      .map((row) => row.GSS_identification)
+                                : api.getSelectedRows().map((row) => row.id)
+                        if (selectedItems.length !== 1) {
                             toast.remove()
                             toast.error(
                                 'Један ред мора бити изабран за опцију ажурирања.'
                             )
-                        } else props.openEditForm(items[0])
+                        } else props.openEditForm(selectedItems[0])
                     }}
                 >
                     <AiFillEdit />
@@ -103,6 +105,25 @@ export const Table = (props) => {
                     <BiChevronsRight />
                 </button>
             </div>
+            <div className='header'>
+                <div className='search-label'>Претражи:</div>
+                <input
+                    onChange={(e) => {
+                        props.setPage(0)
+                        props.setSearch({ search: e.target.value.trim() })
+                    }}
+                />
+                {filters.map((filter, index) => {
+                    return (
+                        <div key={index}>
+                            <input type='checkbox' />
+                            <label className='table-checkbox-label'>
+                                {filterNames[index]}
+                            </label>{' '}
+                        </div>
+                    )
+                })}
+            </div>
             <div className='ag-theme-alpine'>
                 <AgGridReact
                     columnDefs={tableColumns}
@@ -111,14 +132,19 @@ export const Table = (props) => {
                     defaultColDef={defaultColumn}
                     animateRows={true}
                     rowData={tableData}
-                    onFilterChanged={() => {
-                        queryClient.invalidateQueries({ queryKey: ['users'] })
-                        queryClient.invalidateQueries({ queryKey: ['count'] })
-                        props.setFilters(api.getFilterModel())
-                        props.setPage(0)
-                    }}
                     onGridReady={(e) => {
+                        setFilters(
+                            e.columnApi.columnModel.displayedColumns.map(
+                                (column) => column.colId
+                            )
+                        )
+                        setFilterNames(
+                            e.columnApi.columnModel.displayedColumns.map(
+                                (column) => column.userProvidedColDef.headerName
+                            )
+                        )
                         setApi(e.api)
+                        props.setSearch({ search: '' })
                     }}
                     onCellClicked={(e) => {
                         const location =

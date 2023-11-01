@@ -6,7 +6,8 @@ import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 import {
     getUsersBatchQuery,
     deleteUsersMutation,
-    getUsersCountQuery
+    getUsersCountQuery,
+    setSearchMutation
 } from '../queries/userQueries'
 
 // components
@@ -19,12 +20,15 @@ import { ErrorData } from '../components/error/errorData'
 export const GetAllUsers = () => {
     const [form, setForm] = useState(0)
     const [page, setPage] = useState(0)
-    const [filters, setFilters] = useState({})
 
     const queryClient = useQueryClient()
 
     const { mutateAsync: deleteUsers } = useMutation(
         deleteUsersMutation(queryClient)
+    )
+
+    const { mutateAsync: setSearch } = useMutation(
+        setSearchMutation(queryClient)
     )
 
     const { data: users, isError: usersError } = useQuery(
@@ -50,7 +54,7 @@ export const GetAllUsers = () => {
                     setPage={setPage}
                     page={page}
                     usersCount={usersCount}
-                    setFilters={setFilters}
+                    setSearch={(search) => setSearch(search)}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />

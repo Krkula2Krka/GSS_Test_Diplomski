@@ -8,12 +8,15 @@ const {
     getUsersBatchInController,
     editUserInController,
     deleteUsersInController,
-    getUsersCountInController
+    getUsersCountInController,
+    setSearchInController
 } = require('../controllers/usersController')
 
 router.get('/count', getUsersCountInController)
 
 router.get('/:page', getUsersBatchInController)
+
+router.post('/setSearch', setSearchInController)
 
 router.post('/', createUserInController)
 
