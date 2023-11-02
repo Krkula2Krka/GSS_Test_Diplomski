@@ -55,43 +55,74 @@ const logoutUserForTestingInService = (GSS_identification) => {
     )
 }
 
-const getFilteredUsersBatchInService = (page, search) => {
+const getFilteredUsersBatchInService = (
+    page,
+    searchInput,
+    searchFilters,
+    pageSize,
+    startId
+) => {
     return user.findAll({
-        offset: page * 5,
-        limit: 5,
+        offset: page * pageSize,
+        limit: pageSize,
         where: {
-            [Op.or]: [
-                { GSS_identification: { [Op.like]: search } },
-                { first_name: { [Op.like]: search } },
-                { last_name: { [Op.like]: search } },
-                { nickname: { [Op.like]: search } },
-                { user_type: { [Op.like]: search } }
-            ]
+            [Op.and]: {
+                [Op.or]: [
+                    { first_name: { [Op.like]: searchInput } },
+                    { last_name: { [Op.like]: searchInput } },
+                    { nickname: { [Op.like]: searchInput } }
+                ],
+                user_type: { [Op.in]: searchFilters },
+                GSS_identification: {
+                    [Op.gte]: startId
+                }
+            }
         }
     })
 }
 
-const getUsersBatchInService = (page) => {
+const getUsersBatchInService = (page, searchFilters, pageSize, startId) => {
     return user.findAll({
-        offset: page * 5,
-        limit: 5
+        offset: page * pageSize,
+        limit: pageSize,
+        where: {
+            user_type: { [Op.in]: searchFilters },
+            GSS_identification: {
+                [Op.gte]: startId
+            }
+        }
     })
 }
 
-const getUsersCountInService = () => {
-    return user.count()
-}
-
-const getFilteredUsersCountInService = (search) => {
+const getUsersCountInService = (searchFilters, startId) => {
     return user.count({
         where: {
-            [Op.or]: [
-                { GSS_identification: { [Op.like]: search } },
-                { first_name: { [Op.like]: search } },
-                { last_name: { [Op.like]: search } },
-                { nickname: { [Op.like]: search } },
-                { user_type: { [Op.like]: search } }
-            ]
+            user_type: { [Op.in]: searchFilters },
+            GSS_identification: {
+                [Op.gte]: startId
+            }
+        }
+    })
+}
+
+const getFilteredUsersCountInService = (
+    searchInput,
+    searchFilters,
+    startId
+) => {
+    return user.count({
+        where: {
+            [Op.and]: {
+                [Op.or]: [
+                    { first_name: { [Op.like]: searchInput } },
+                    { last_name: { [Op.like]: searchInput } },
+                    { nickname: { [Op.like]: searchInput } }
+                ],
+                user_type: { [Op.in]: searchFilters },
+                GSS_identification: {
+                    [Op.gte]: startId
+                }
+            }
         }
     })
 }

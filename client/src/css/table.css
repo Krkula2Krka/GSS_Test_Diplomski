@@ -7,8 +7,14 @@
     color: #060b26;
 }
 
+.table-select {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
 .table-checkbox-label {
     margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .table-string-filter {

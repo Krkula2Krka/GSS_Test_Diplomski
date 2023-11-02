@@ -1,5 +1,5 @@
 // libraries
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { AgGridReact } from 'ag-grid-react'
 import { useNavigate } from 'react-router-dom'
@@ -20,8 +20,6 @@ export const Table = (props) => {
     const tableData = useMemo(() => props.tableData, [props.tableData])
     const tableColumns = useMemo(() => props.tableColumns, [props.tableColumns])
     const [api, setApi] = useState(null)
-    const [filters, setFilters] = useState([])
-    const [filterNames, setFilterNames] = useState([])
 
     const navigate = useNavigate()
 
@@ -33,6 +31,16 @@ export const Table = (props) => {
         }),
         []
     )
+
+    useEffect(() => {
+        return () => {
+            props.setSearchInput({ search: '' })
+            props.setSearchFilters({ search: '' })
+            props.setPageSize({ pageSize: 30 })
+            props.setStartId({ startId: '1' })
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className='tableContainer'>
@@ -80,11 +88,20 @@ export const Table = (props) => {
                 >
                     <AiFillEdit />
                 </button>
-                <select>
-                    <option value='1'>1</option>
-                    <option value='5'>5</option>
-                    <option value='20'>20</option>
+                <select
+                    onChange={(e) => {
+                        props.setPage(0)
+                        props.setPageSize({
+                            pageSize: Number(e.target.value)
+                        })
+                    }}
+                >
                     <option value='30'>30</option>
+                    <option value='25'>25</option>
+                    <option value='20'>20</option>
+                    <option value='15'>15</option>
+                    <option value='10'>10</option>
+                    <option value='1'>1</option>
                 </select>
                 <button
                     className='userButton'
@@ -100,7 +117,9 @@ export const Table = (props) => {
                     onClick={() => {
                         props.setPage(props.page + 1)
                     }}
-                    disabled={(props.page + 1) * 5 >= props.usersCount}
+                    disabled={
+                        (props.page + 1) * props.pageSize >= props.usersCount
+                    }
                 >
                     <BiChevronsRight />
                 </button>
@@ -110,18 +129,51 @@ export const Table = (props) => {
                 <input
                     onChange={(e) => {
                         props.setPage(0)
-                        props.setSearch({ search: e.target.value.trim() })
+                        props.setSearchInput({ search: e.target.value.trim() })
                     }}
                 />
-                {filters.map((filter, index) => {
-                    return (
-                        <div key={index}>
-                            <input type='checkbox' />
-                            <label className='table-checkbox-label'>
-                                {filterNames[index]}
-                            </label>{' '}
-                        </div>
-                    )
+                {props.searchFields.map((searchField, index) => {
+                    return searchField.type === 'enum' ? (
+                        <select
+                            className='table-select'
+                            key={index}
+                            onChange={(e) => {
+                                props.setPage(0)
+                                props.setSearchFilters({
+                                    search: e.target.value
+                                })
+                            }}
+                        >
+                            <option value='сви'>сви</option>
+                            {searchField.values.map((value, index) => {
+                                return (
+                                    <option key={index} value={value}>
+                                        {value}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                    ) : searchField.type === 'int' ? (
+                        <>
+                            <div className='search-label'>
+                                Претражи по идентификатору:
+                            </div>
+                            <input
+                                type='number'
+                                min='1'
+                                onChange={(e) => {
+                                    props.setPage(0)
+                                    props.setStartId({
+                                        startId: e.target.value
+                                    })
+                                }}
+                            />
+                            <select className='table-select'>
+                                <option value='gte'>веће или једнако</option>
+                                <option value='lte'>мање или једнако</option>
+                            </select>
+                        </>
+                    ) : null
                 })}
             </div>
             <div className='ag-theme-alpine'>
@@ -132,20 +184,7 @@ export const Table = (props) => {
                     defaultColDef={defaultColumn}
                     animateRows={true}
                     rowData={tableData}
-                    onGridReady={(e) => {
-                        setFilters(
-                            e.columnApi.columnModel.displayedColumns.map(
-                                (column) => column.colId
-                            )
-                        )
-                        setFilterNames(
-                            e.columnApi.columnModel.displayedColumns.map(
-                                (column) => column.userProvidedColDef.headerName
-                            )
-                        )
-                        setApi(e.api)
-                        props.setSearch({ search: '' })
-                    }}
+                    onGridReady={(e) => setApi(e.api)}
                     onCellClicked={(e) => {
                         const location =
                             props.calledFrom === 'users'

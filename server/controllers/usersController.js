@@ -1,6 +1,3 @@
-let search = ''
-const filters = []
-
 const {
     createUserInService,
     checkIfUserExistsInService,
@@ -14,6 +11,56 @@ const {
     getFilteredUsersCountInService,
     getFilteredUsersBatchInService
 } = require('../service/usersService')
+
+const searchParameters = {
+    searchInput: '',
+    searchFilters: ['корисник', 'администратор', 'супер администратор'],
+    pageSize: 30,
+    operator: 'gte',
+    startId: 1
+}
+
+const setSearchInputInController = async (req, res) => {
+    searchParameters.searchInput = req.body.search
+    res.sendStatus(200)
+}
+
+const setSearchFiltersInController = async (req, res) => {
+    if (req.body.search === 'сви')
+        searchParameters.searchFilters = [
+            'корисник',
+            'администратор',
+            'супер администратор'
+        ]
+    else if (req.body.search === 'корисник')
+        searchParameters.searchFilters = ['корисник']
+    else if (req.body.search === 'администратор')
+        searchParameters.searchFilters = ['администратор']
+    else if (req.body.search === 'супер администратор')
+        searchParameters.searchFilters = ['супер администратор']
+    res.sendStatus(200)
+}
+
+const setPageSizeInController = async (req, res) => {
+    searchParameters.pageSize = req.body.pageSize
+    res.sendStatus(200)
+}
+
+const getPageSizeInController = async (_, res) => {
+    res.json(searchParameters.pageSize)
+}
+
+const setStartIdInController = async (req, res) => {
+    if (
+        req.body.startId.includes('+') ||
+        req.body.startId.includes('-') ||
+        req.body.startId.includes('.') ||
+        req.body.startId.length === 0
+    )
+        searchParameters.startId = 1
+    else searchParameters.startId = Math.floor(Number(req.body.startId))
+    res.sendStatus(200)
+}
 
 const createUserInController = async (req, res) => {
     const [user, created] = await createUserInService(req.body)
@@ -57,20 +104,36 @@ const logoutUserForTestingInController = async (req, res) => {
 
 const getUsersBatchInController = async (req, res) => {
     const users =
-        search === ''
-            ? await getUsersBatchInService(Number(req.params.page))
+        searchParameters.searchInput === ''
+            ? await getUsersBatchInService(
+                  Number(req.params.page),
+                  searchParameters.searchFilters,
+                  searchParameters.pageSize,
+                  searchParameters.startId
+              )
             : await getFilteredUsersBatchInService(
                   Number(req.params.page),
-                  search
+                  searchParameters.searchInput,
+                  searchParameters.searchFilters,
+                  searchParameters.pageSize,
+                  searchParameters.startId
               )
     res.json(users)
 }
 
 const getUsersCountInController = async (_, res) => {
     const usersCount =
-        search === ''
-            ? await getUsersCountInService()
-            : await getFilteredUsersCountInService(search)
+        searchParameters.searchInput === ''
+            ? await getUsersCountInService(
+                  searchParameters.searchFilters,
+                  searchParameters.startId
+              )
+            : await getFilteredUsersCountInService(
+                  searchParameters.searchInput,
+                  searchParameters.searchFilters,
+                  searchParameters.searchInputFilters,
+                  searchParameters.startId
+              )
     res.json(usersCount)
 }
 
@@ -84,11 +147,6 @@ const deleteUsersInController = async (req, res) => {
     res.sendStatus(200)
 }
 
-const setSearchInController = async (req, res) => {
-    search = req.body.search
-    res.sendStatus(200)
-}
-
 module.exports = {
     createUserInController,
     loginUserForTestingInController,
@@ -98,5 +156,9 @@ module.exports = {
     editUserInController,
     deleteUsersInController,
     getUsersCountInController,
-    setSearchInController
+    setSearchInputInController,
+    setSearchFiltersInController,
+    setPageSizeInController,
+    getPageSizeInController,
+    setStartIdInController
 }

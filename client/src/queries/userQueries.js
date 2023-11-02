@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 const queryKeys = {
     users: (page) => ['users', page],
     count: ['count'],
+    size: ['size'],
     loggedIn: (id) => ['loggedIn', id]
 }
 
@@ -81,9 +82,9 @@ export const deleteUsersMutation = (queryClient) => ({
     }
 })
 
-export const setSearchMutation = (queryClient) => ({
+export const setSearchInputMutation = (queryClient) => ({
     mutationFn: (search) =>
-        axios.post('http://localhost:3001/users/setSearch/', search),
+        axios.post('http://localhost:3001/users/setSearchInput', search),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['users'] })
         queryClient.invalidateQueries(queryKeys.count)
@@ -92,6 +93,56 @@ export const setSearchMutation = (queryClient) => ({
         toast.remove()
         toast.error('Неуспешно ажурирање параметра за претраживање.')
     }
+})
+
+export const setSearchFiltersMutation = (queryClient) => ({
+    mutationFn: (search) =>
+        axios.post('http://localhost:3001/users/setSearchFilters', search),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['users'] })
+        queryClient.invalidateQueries(queryKeys.count)
+    },
+    onError: () => {
+        toast.remove()
+        toast.error('Неуспешно ажурирање параметра за претраживање.')
+    }
+})
+
+export const setStartIdMutation = (queryClient) => ({
+    mutationFn: (search) =>
+        axios.post('http://localhost:3001/users/setStartId', search),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['users'] })
+        queryClient.invalidateQueries(queryKeys.count)
+    },
+    onError: () => {
+        toast.remove()
+        toast.error('Неуспешно ажурирање параметра за претраживање.')
+    }
+})
+
+export const setPageSizeMutation = (queryClient) => ({
+    mutationFn: (pageSize) =>
+        axios.post('http://localhost:3001/users/setPageSize', pageSize),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['users'] })
+        queryClient.invalidateQueries(queryKeys.count)
+        queryClient.invalidateQueries(queryKeys.size)
+    },
+    onError: () => {
+        toast.remove()
+        toast.error('Неуспешно ажурирање величине странице.')
+    }
+})
+
+export const getPageSizeQuery = () => ({
+    queryKey: queryKeys.size,
+    queryFn: async () => {
+        const res = await fetch('http://localhost:3001/users/pageSize')
+        return res.json()
+    },
+    staleTime: Infinity,
+    cacheTime: Infinity
 })
 
 export const getUsersCountQuery = () => ({

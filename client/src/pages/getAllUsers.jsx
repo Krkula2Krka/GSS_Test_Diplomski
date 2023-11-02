@@ -1,5 +1,5 @@
 // libraries
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 
 // queries
@@ -7,7 +7,11 @@ import {
     getUsersBatchQuery,
     deleteUsersMutation,
     getUsersCountQuery,
-    setSearchMutation
+    setSearchInputMutation,
+    setSearchFiltersMutation,
+    setPageSizeMutation,
+    getPageSizeQuery,
+    setStartIdMutation
 } from '../queries/userQueries'
 
 // components
@@ -27,8 +31,20 @@ export const GetAllUsers = () => {
         deleteUsersMutation(queryClient)
     )
 
-    const { mutateAsync: setSearch } = useMutation(
-        setSearchMutation(queryClient)
+    const { mutateAsync: setSearchInput } = useMutation(
+        setSearchInputMutation(queryClient)
+    )
+
+    const { mutateAsync: setStartId } = useMutation(
+        setStartIdMutation(queryClient)
+    )
+
+    const { mutateAsync: setSearchFilters } = useMutation(
+        setSearchFiltersMutation(queryClient)
+    )
+
+    const { mutateAsync: setPageSize } = useMutation(
+        setPageSizeMutation(queryClient)
     )
 
     const { data: users, isError: usersError } = useQuery(
@@ -39,7 +55,28 @@ export const GetAllUsers = () => {
         getUsersCountQuery()
     )
 
-    if (usersError || usersCountError) return <ErrorData />
+    const { data: pageSize, isError: pageSizeError } = useQuery(
+        getPageSizeQuery()
+    )
+
+    const searchFields = useMemo(
+        () => [
+            {
+                key: 'user_type',
+                display: 'тип корисника',
+                type: 'enum',
+                values: ['корисник', 'администратор', 'супер администратор']
+            },
+            {
+                key: 'GSS_identification',
+                display: 'ГСС број',
+                type: 'int'
+            }
+        ],
+        []
+    )
+
+    if (usersError || usersCountError || pageSizeError) return <ErrorData />
 
     return (
         <>
@@ -54,7 +91,12 @@ export const GetAllUsers = () => {
                     setPage={setPage}
                     page={page}
                     usersCount={usersCount}
-                    setSearch={(search) => setSearch(search)}
+                    setSearchInput={(search) => setSearchInput(search)}
+                    setSearchFilters={(search) => setSearchFilters(search)}
+                    searchFields={searchFields}
+                    setPageSize={(pageSize) => setPageSize(pageSize)}
+                    pageSize={pageSize}
+                    setStartId={(search) => setStartId(search)}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />
