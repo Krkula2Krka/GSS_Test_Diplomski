@@ -62,6 +62,11 @@ const setStartIdInController = async (req, res) => {
     res.sendStatus(200)
 }
 
+const setOperatorInController = async (req, res) => {
+    searchParameters.operator = req.body.operator
+    res.sendStatus(200)
+}
+
 const createUserInController = async (req, res) => {
     const [user, created] = await createUserInService(req.body)
     if (created) res.json({ userExists: false })
@@ -109,14 +114,16 @@ const getUsersBatchInController = async (req, res) => {
                   Number(req.params.page),
                   searchParameters.searchFilters,
                   searchParameters.pageSize,
-                  searchParameters.startId
+                  searchParameters.startId,
+                  searchParameters.operator
               )
             : await getFilteredUsersBatchInService(
                   Number(req.params.page),
                   searchParameters.searchInput,
                   searchParameters.searchFilters,
                   searchParameters.pageSize,
-                  searchParameters.startId
+                  searchParameters.startId,
+                  searchParameters.operator
               )
     res.json(users)
 }
@@ -126,19 +133,21 @@ const getUsersCountInController = async (_, res) => {
         searchParameters.searchInput === ''
             ? await getUsersCountInService(
                   searchParameters.searchFilters,
-                  searchParameters.startId
+                  searchParameters.startId,
+                  searchParameters.operator
               )
             : await getFilteredUsersCountInService(
                   searchParameters.searchInput,
                   searchParameters.searchFilters,
                   searchParameters.searchInputFilters,
-                  searchParameters.startId
+                  searchParameters.startId,
+                  searchParameters.operator
               )
     res.json(usersCount)
 }
 
 const editUserInController = async (req, res) => {
-    await editUserInService(req.params.GSS_identification, req.body)
+    await editUserInService(Number(req.params.GSS_identification), req.body)
     res.sendStatus(200)
 }
 
@@ -160,5 +169,6 @@ module.exports = {
     setSearchFiltersInController,
     setPageSizeInController,
     getPageSizeInController,
-    setStartIdInController
+    setStartIdInController,
+    setOperatorInController
 }

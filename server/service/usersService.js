@@ -60,7 +60,8 @@ const getFilteredUsersBatchInService = (
     searchInput,
     searchFilters,
     pageSize,
-    startId
+    startId,
+    operator
 ) => {
     return user.findAll({
         offset: page * pageSize,
@@ -74,32 +75,38 @@ const getFilteredUsersBatchInService = (
                 ],
                 user_type: { [Op.in]: searchFilters },
                 GSS_identification: {
-                    [Op.gte]: startId
+                    [Op[operator]]: startId
                 }
             }
         }
     })
 }
 
-const getUsersBatchInService = (page, searchFilters, pageSize, startId) => {
+const getUsersBatchInService = (
+    page,
+    searchFilters,
+    pageSize,
+    startId,
+    operator
+) => {
     return user.findAll({
         offset: page * pageSize,
         limit: pageSize,
         where: {
             user_type: { [Op.in]: searchFilters },
             GSS_identification: {
-                [Op.gte]: startId
+                [Op[operator]]: startId
             }
         }
     })
 }
 
-const getUsersCountInService = (searchFilters, startId) => {
+const getUsersCountInService = (searchFilters, startId, operator) => {
     return user.count({
         where: {
             user_type: { [Op.in]: searchFilters },
             GSS_identification: {
-                [Op.gte]: startId
+                [Op[operator]]: startId
             }
         }
     })
@@ -108,7 +115,8 @@ const getUsersCountInService = (searchFilters, startId) => {
 const getFilteredUsersCountInService = (
     searchInput,
     searchFilters,
-    startId
+    startId,
+    operator
 ) => {
     return user.count({
         where: {
@@ -120,7 +128,7 @@ const getFilteredUsersCountInService = (
                 ],
                 user_type: { [Op.in]: searchFilters },
                 GSS_identification: {
-                    [Op.gte]: startId
+                    [Op[operator]]: startId
                 }
             }
         }

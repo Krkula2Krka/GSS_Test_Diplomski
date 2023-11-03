@@ -11,7 +11,8 @@ import {
     setSearchFiltersMutation,
     setPageSizeMutation,
     getPageSizeQuery,
-    setStartIdMutation
+    setStartIdMutation,
+    setOperatorMutation
 } from '../queries/userQueries'
 
 // components
@@ -37,6 +38,10 @@ export const GetAllUsers = () => {
 
     const { mutateAsync: setStartId } = useMutation(
         setStartIdMutation(queryClient)
+    )
+
+    const { mutateAsync: setOperator } = useMutation(
+        setOperatorMutation(queryClient)
     )
 
     const { mutateAsync: setSearchFilters } = useMutation(
@@ -97,6 +102,7 @@ export const GetAllUsers = () => {
                     setPageSize={(pageSize) => setPageSize(pageSize)}
                     pageSize={pageSize}
                     setStartId={(search) => setStartId(search)}
+                    setOperator={(operator) => setOperator(operator)}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />

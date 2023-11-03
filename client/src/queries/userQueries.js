@@ -135,6 +135,19 @@ export const setPageSizeMutation = (queryClient) => ({
     }
 })
 
+export const setOperatorMutation = (queryClient) => ({
+    mutationFn: (operator) =>
+        axios.post('http://localhost:3001/users/operator', operator),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['users'] })
+        queryClient.invalidateQueries(queryKeys.count)
+    },
+    onError: () => {
+        toast.remove()
+        toast.error('Неуспешно ажурирање параметра за претраживање.')
+    }
+})
+
 export const getPageSizeQuery = () => ({
     queryKey: queryKeys.size,
     queryFn: async () => {
