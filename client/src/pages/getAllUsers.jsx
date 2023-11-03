@@ -21,6 +21,7 @@ import { Table } from '../components/table/table'
 import { AddUser } from '../components/table/addItem/addUser'
 import { EditUser } from '../components/table/editItem/editUser'
 import { ErrorData } from '../components/error/errorData'
+import { LoadingData } from '../components/loadingData'
 
 export const GetAllUsers = () => {
     const [form, setForm] = useState(0)
@@ -60,9 +61,11 @@ export const GetAllUsers = () => {
         getUsersCountQuery()
     )
 
-    const { data: pageSize, isError: pageSizeError } = useQuery(
-        getPageSizeQuery()
-    )
+    const {
+        data: pageSize,
+        isError: pageSizeError,
+        isLoading
+    } = useQuery(getPageSizeQuery())
 
     const searchFields = useMemo(
         () => [
@@ -80,6 +83,8 @@ export const GetAllUsers = () => {
         ],
         []
     )
+
+    if (isLoading) return <LoadingData />
 
     if (usersError || usersCountError || pageSizeError) return <ErrorData />
 
@@ -103,6 +108,7 @@ export const GetAllUsers = () => {
                     pageSize={pageSize}
                     setStartId={(search) => setStartId(search)}
                     setOperator={(operator) => setOperator(operator)}
+                    noRowsMessage={'Тренутно нема корисника у бази'}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />

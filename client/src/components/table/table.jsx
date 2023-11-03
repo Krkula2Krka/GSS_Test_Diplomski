@@ -67,6 +67,7 @@ export const Table = (props) => {
                     rowSelection='multiple'
                     defaultColDef={defaultColumn}
                     animateRows={true}
+                    overlayNoRowsTemplate={`<label style ="font-size:1.1rem">${props.noRowsMessage}</label>`}
                     rowData={tableData}
                     onGridReady={(e) => setApi(e.api)}
                     onCellClicked={(e) => {

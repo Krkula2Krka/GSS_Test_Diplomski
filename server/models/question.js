@@ -13,11 +13,11 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: true
             },
             difficulty: {
-                type: DataTypes.ENUM('lako', 'srednje', 'tesko'),
+                type: DataTypes.ENUM('лако', 'средње', 'мање'),
                 allowNull: true
             },
             importance: {
-                type: DataTypes.ENUM('manje', 'srednje', 'bitno'),
+                type: DataTypes.ENUM('мање', 'средње', 'битно'),
                 allowNull: true
             }
         },

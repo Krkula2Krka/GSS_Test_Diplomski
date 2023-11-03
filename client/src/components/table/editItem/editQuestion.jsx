@@ -15,8 +15,8 @@ export const EditQuestion = (props) => {
 
     const initialValues = {
         question_text: '',
-        difficulty: 'lako',
-        importance: 'manje',
+        difficulty: 'лако',
+        importance: 'мање',
         area_id: props.areaId
     }
 
@@ -39,29 +39,29 @@ export const EditQuestion = (props) => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            <Form className="formContainer centered">
+            <Form className='formContainer centered'>
                 <label>Текст питања:</label>
                 <ErrorMessage
-                    name="question_text"
-                    component="span"
-                    className="errorMessage"
+                    name='question_text'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="question_text" />
+                <Field name='question_text' />
                 <label>Тежина питања:</label>
-                <Field as="select" name="difficulty">
-                    <option value="lako">лако</option>
-                    <option value="srednje">средње</option>
-                    <option value="tesko">тешко</option>
+                <Field as='select' name='difficulty'>
+                    <option value='лако'>лако</option>
+                    <option value='средње'>средње</option>
+                    <option value='тешко'>тешко</option>
                 </Field>
                 <label>Важност питања:</label>
-                <Field as="select" name="importance">
-                    <option value="manje">мање</option>
-                    <option value="srednje">средње</option>
-                    <option value="bitno">битно</option>
+                <Field as='select' name='importance'>
+                    <option value='мање'>мање</option>
+                    <option value='средње'>средње</option>
+                    <option value='битно'>битно</option>
                 </Field>
-                <div className="registration-buttons">
+                <div className='registration-buttons'>
                     <button onClick={props.resetState}>Назад</button>
-                    <button type="submit">Настави</button>
+                    <button type='submit'>Настави</button>
                 </div>
             </Form>
         </Formik>

@@ -1,7 +1,7 @@
 // libraries
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 // queries
@@ -9,7 +9,6 @@ import { getQuestionsBatchQuery } from '../queries/questionQueries'
 import { deleteQuestionsMutation } from '../queries/questionQueries'
 
 // components
-import { NoQuestion } from '../components/table/noItem/noQuestion'
 import { QuestionTableColumns } from '../components/table/tableColumns/questionTableColumns'
 import { Table } from '../components/table/table'
 import { AddQuestion } from '../components/table/addItem/addQuestion'
@@ -34,18 +33,15 @@ export const AreaDetails = () => {
         deleteQuestionsMutation(queryClient, id)
     )
 
-    const { data, isError, isLoading } = useInfiniteQuery(
-        getQuestionsBatchQuery(id)
-    )
-
-    const questions = useMemo(() => (data ? data.pages.flat(1) : []), [data])
+    const {
+        data: questions,
+        isError: questionsError,
+        isLoading
+    } = useQuery(getQuestionsBatchQuery(page))
 
     if (isLoading) return <LoadingData />
 
-    if (isError) return <ErrorData />
-
-    if (questions.length === 0)
-        return <NoQuestion resetState={() => setForm(0)} areaId={id} />
+    if (questionsError) return <ErrorData />
 
     return (
         <div>
