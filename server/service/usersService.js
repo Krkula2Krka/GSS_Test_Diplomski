@@ -135,7 +135,7 @@ const getFilteredUsersCountInService = (
     })
 }
 
-const editUserInService = (GSS_identification, data) => {
+const editUserInService = (data) => {
     user.update(
         {
             first_name: data.first_name,
@@ -145,7 +145,7 @@ const editUserInService = (GSS_identification, data) => {
         },
         {
             where: {
-                GSS_identification: GSS_identification
+                GSS_identification: data.GSS_identification
             }
         }
     )

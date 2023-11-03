@@ -47,7 +47,7 @@ router.post(
     logoutUserForTestingInController
 )
 
-router.post('/edit/:GSS_identification', editUserInController)
+router.post('/edit', editUserInController)
 
 router.post('/delete', deleteUsersInController)
 

@@ -43,7 +43,7 @@ export const logoutForTestingMutation = (id, queryClient) => ({
 
 export const loginForTestingMutation = () => ({
     mutationFn: (data) =>
-        axios.post('http://localhost:3001/users/loginForTesting/', data),
+        axios.post('http://localhost:3001/users/loginForTesting', data),
     onError: () => {
         toast.remove()
         toast.error('Неуспешно пријављивање корисника.')
@@ -51,31 +51,36 @@ export const loginForTestingMutation = () => ({
 })
 
 export const createUserMutation = (queryClient) => ({
-    mutationFn: (data) => axios.post('http://localhost:3001/users/', data),
-    onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
+    mutationFn: (data) => axios.post('http://localhost:3001/users', data),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['users'] })
+        queryClient.invalidateQueries(queryKeys.count)
+    },
     onError: () => {
         toast.remove()
         toast.error('Неуспешно додавање корисника.')
     }
 })
 
-export const editUserMutation = (queryClient) => ({
-    mutationFn: (data) =>
-        axios.post(
-            `http://localhost:3001/users/edit/${data.GSS_identification}`,
-            data.formData
-        ),
-    onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
+export const editUserMutation = (queryClient, page) => ({
+    mutationFn: (data) => axios.post('http://localhost:3001/users/edit', data),
+    onSuccess: () => queryClient.invalidateQueries(queryKeys.users(page)),
     onError: () => {
         toast.remove()
         toast.error('Неуспешно ажурирање корисника.')
     }
 })
 
-export const deleteUsersMutation = (queryClient) => ({
+export const deleteUsersMutation = (queryClient, page) => ({
     mutationFn: (data) =>
-        axios.post('http://localhost:3001/users/delete/', data),
-    onSuccess: () => queryClient.invalidateQueries(queryKeys.users),
+        axios.post('http://localhost:3001/users/delete', data),
+    onSuccess: () => {
+        queryClient.invalidateQueries({
+            predicate: (query) =>
+                query.queryKey[0] === 'users' && query.queryKey[1] >= page
+        })
+        queryClient.invalidateQueries(queryKeys.count)
+    },
     onError: () => {
         toast.remove()
         toast.error('Неуспешно брисање корисника.')

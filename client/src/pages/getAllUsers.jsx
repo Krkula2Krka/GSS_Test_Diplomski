@@ -29,7 +29,7 @@ export const GetAllUsers = () => {
     const queryClient = useQueryClient()
 
     const { mutateAsync: deleteUsers } = useMutation(
-        deleteUsersMutation(queryClient)
+        deleteUsersMutation(queryClient, page)
     )
 
     const { mutateAsync: setSearchInput } = useMutation(
@@ -110,6 +110,7 @@ export const GetAllUsers = () => {
                 <EditUser
                     resetState={() => setForm(0)}
                     GSS_identification={form - 2}
+                    page={page}
                 />
             )}
         </>

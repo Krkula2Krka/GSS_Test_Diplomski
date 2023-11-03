@@ -12,7 +12,9 @@ import '../../../css/form.css'
 
 export const EditUser = (props) => {
     const queryClient = useQueryClient()
-    const { mutateAsync: editUser } = useMutation(editUserMutation(queryClient))
+    const { mutateAsync: editUser } = useMutation(
+        editUserMutation(queryClient, props.page)
+    )
 
     const initialValues = {
         GSS_identification: props.GSS_identification,
@@ -29,11 +31,7 @@ export const EditUser = (props) => {
     })
 
     const onSubmit = async (data) => {
-        const userData = {
-            GSS_identification: props.GSS_identification,
-            formData: data
-        }
-        await editUser(userData)
+        await editUser(data)
         props.resetState()
     }
 

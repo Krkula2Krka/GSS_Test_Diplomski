@@ -5,6 +5,10 @@
     --ag-header-foreground-color: #f5f5f5;
 }
 
+.ag-header-cell-text {
+    font-size: 1.1rem;
+}
+
 .table-data {
     color: #060b26;
 }

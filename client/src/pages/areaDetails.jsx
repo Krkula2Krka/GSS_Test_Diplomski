@@ -22,6 +22,7 @@ import '../css/table.css'
 
 export const AreaDetails = () => {
     const [form, setForm] = useState(0)
+    const [page, setPage] = useState(0)
     const { id } = useParams()
 
     const queryClient = useQueryClient()
@@ -33,8 +34,9 @@ export const AreaDetails = () => {
         deleteQuestionsMutation(queryClient, id)
     )
 
-    const { data, fetchNextPage, hasNextPage, isError, isLoading } =
-        useInfiniteQuery(getQuestionsBatchQuery(id))
+    const { data, isError, isLoading } = useInfiniteQuery(
+        getQuestionsBatchQuery(id)
+    )
 
     const questions = useMemo(() => (data ? data.pages.flat(1) : []), [data])
 
@@ -48,8 +50,8 @@ export const AreaDetails = () => {
     return (
         <div>
             {form === 0 ? (
-                <div className="cointainer">
-                    <div className="infoContainer">
+                <div className='cointainer'>
+                    <div className='infoContainer'>
                         <h2>{areaName}</h2>
                     </div>
                     <Table
@@ -59,8 +61,6 @@ export const AreaDetails = () => {
                         deleteItems={(questions) => deleteQuestions(questions)}
                         openAddForm={() => setForm(1)}
                         openEditForm={(questionId) => setForm(questionId + 2)}
-                        update={() => fetchNextPage()}
-                        hasMore={hasNextPage}
                     />
                 </div>
             ) : form === 1 ? (

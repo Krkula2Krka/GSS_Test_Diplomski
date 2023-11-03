@@ -82,6 +82,10 @@ export const PaginationHeader = (props) => {
             >
                 <BiChevronsLeft />
             </button>
+            {props.page +
+                1 +
+                ' / ' +
+                Math.ceil(props.usersCount / props.pageSize)}
             <button
                 className='userButton'
                 onClick={() => {

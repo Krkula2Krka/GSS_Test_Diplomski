@@ -147,7 +147,7 @@ const getUsersCountInController = async (_, res) => {
 }
 
 const editUserInController = async (req, res) => {
-    await editUserInService(Number(req.params.GSS_identification), req.body)
+    await editUserInService(req.body)
     res.sendStatus(200)
 }
 
