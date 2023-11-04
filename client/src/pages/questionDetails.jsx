@@ -17,7 +17,6 @@ import {
 import '../css/table.css'
 
 // components
-import { NoAnswer } from '../components/table/noItem/noAnswer'
 import { Table } from '../components/table/table'
 import { AnswerTableColumns } from '../components/table/tableColumns/answerTableColumns'
 import { AddAnswer } from '../components/table/addItem/addAnswer'
