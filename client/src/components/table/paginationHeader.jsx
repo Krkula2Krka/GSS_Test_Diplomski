@@ -85,13 +85,13 @@ export const PaginationHeader = (props) => {
             {props.page +
                 1 +
                 ' / ' +
-                Math.ceil(props.usersCount / props.pageSize)}
+                Math.ceil(props.itemsCount / props.pageSize)}
             <button
                 className='userButton'
                 onClick={() => {
                     props.setPage(props.page + 1)
                 }}
-                disabled={(props.page + 1) * props.pageSize >= props.usersCount}
+                disabled={(props.page + 1) * props.pageSize >= props.itemsCount}
             >
                 <BiChevronsRight />
             </button>

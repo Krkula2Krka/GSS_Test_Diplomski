@@ -8,20 +8,17 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false
             },
             first_name: {
-                type: DataTypes.STRING,
-                allowNull: true
+                type: DataTypes.STRING
             },
             last_name: {
-                type: DataTypes.STRING,
-                allowNull: true
+                type: DataTypes.STRING
             },
             nickname: {
-                type: DataTypes.STRING,
-                allowNull: true
+                type: DataTypes.STRING
             },
             logged_in_for_testing: {
                 type: DataTypes.BOOLEAN,
-                allowNull: true,
+                allowNull: false,
                 defaultValue: false
             },
             user_type: {
@@ -30,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
                     'администратор',
                     'супер администратор'
                 ),
-                allowNull: true
+                defaultValue: 'корисник',
+                allowNull: false
             }
         },
         {

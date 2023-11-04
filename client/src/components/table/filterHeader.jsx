@@ -16,25 +16,27 @@ export const FilterHeader = (props) => {
             />
             {props.searchFields.map((searchField, index) => {
                 return searchField.type === 'enum' ? (
-                    <select
-                        className='table-select'
-                        key={index}
-                        onChange={(e) => {
-                            props.setPage(0)
-                            props.setSearchFilters({
-                                search: e.target.value
-                            })
-                        }}
-                    >
-                        <option value='сви'>сви</option>
-                        {searchField.values.map((value, index) => {
-                            return (
-                                <option key={index} value={value}>
-                                    {value}
-                                </option>
-                            )
-                        })}
-                    </select>
+                    <Fragment key={index}>
+                        <div className='search-label'>
+                            {searchField.display}
+                        </div>
+                        <select
+                            className='table-select'
+                            onChange={(e) => {
+                                props.setPage(0)
+                                searchField.filters(e.target.value)
+                            }}
+                        >
+                            <option value='све'>све</option>
+                            {searchField.values.map((value, index) => {
+                                return (
+                                    <option key={index} value={value}>
+                                        {value}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                    </Fragment>
                 ) : searchField.type === 'int' ? (
                     <Fragment key={index}>
                         <div className='search-label'>

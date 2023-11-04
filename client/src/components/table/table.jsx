@@ -30,10 +30,15 @@ export const Table = (props) => {
     useEffect(() => {
         return () => {
             props.setSearchInput({ search: '' })
-            props.setSearchFilters({ search: '' })
             props.setPageSize({ pageSize: 30 })
             props.setStartId({ startId: '1' })
             props.setOperator({ operator: 'gte' })
+            if (props.calledFrom === 'users')
+                props.setSearchFilters({ search: '' })
+            else if (props.calledFrom === 'questions') {
+                props.setDifficultyFilters({ search: '' })
+                props.setImportanceFilters({ search: '' })
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -50,13 +55,15 @@ export const Table = (props) => {
                 setPageSize={props.setPageSize}
                 page={props.page}
                 pageSize={props.pageSize}
-                usersCount={props.usersCount}
+                itemsCount={props.itemsCount}
             />
             <FilterHeader
                 setPage={props.setPage}
                 setSearchInput={props.setSearchInput}
                 searchFields={props.searchFields}
                 setSearchFilters={props.setSearchFilters}
+                setDifficultyFilters={props.setDifficultyFilters}
+                setImportanceFilters={props.setDifficultyFilters}
                 setStartId={props.setStartId}
                 setOperator={props.setOperator}
             />
@@ -67,25 +74,26 @@ export const Table = (props) => {
                     rowSelection='multiple'
                     defaultColDef={defaultColumn}
                     animateRows={true}
-                    overlayNoRowsTemplate={`<label style ="font-size:1.1rem">${props.noRowsMessage}</label>`}
+                    overlayNoRowsTemplate={`<label style='font-size:1.1rem'>${props.noRowsMessage}</label>`}
                     rowData={tableData}
                     onGridReady={(e) => setApi(e.api)}
                     onCellClicked={(e) => {
+                        const state =
+                            props.calledFrom === 'questions'
+                                ? {
+                                      questionText: e.data.question_text,
+                                      difficulty: e.data.difficulty,
+                                      importance: e.data.importance
+                                  }
+                                : null
                         const location =
                             props.calledFrom === 'users'
                                 ? `/userResults/${e.data.GSS_identification}`
                                 : props.calledFrom === 'questions'
                                 ? `/questionDetails/${e.data.id}`
                                 : null
-                        if (location !== null) {
-                            navigate(location, {
-                                state: {
-                                    questionText: e.data.question_text,
-                                    difficulty: e.data.difficulty,
-                                    importance: e.data.importance
-                                }
-                            })
-                        }
+                        if (location !== null)
+                            navigate(location, { state: state })
                     }}
                 />
             </div>

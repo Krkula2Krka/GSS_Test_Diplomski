@@ -26,7 +26,7 @@ const setSearchInputInController = async (req, res) => {
 }
 
 const setSearchFiltersInController = async (req, res) => {
-    if (req.body.search === 'сви')
+    if (req.body.search === 'све')
         searchParameters.searchFilters = [
             'корисник',
             'администратор',
@@ -139,7 +139,6 @@ const getUsersCountInController = async (_, res) => {
             : await getFilteredUsersCountInService(
                   searchParameters.searchInput,
                   searchParameters.searchFilters,
-                  searchParameters.searchInputFilters,
                   searchParameters.startId,
                   searchParameters.operator
               )

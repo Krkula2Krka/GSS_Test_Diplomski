@@ -10,7 +10,7 @@ import { editQuestionMutation } from '../../../queries/questionQueries'
 export const EditQuestion = (props) => {
     const queryClient = useQueryClient()
     const { mutateAsync: editQuestion } = useMutation(
-        editQuestionMutation(queryClient, props.areaId)
+        editQuestionMutation(queryClient, props.areaId, props.page)
     )
 
     const initialValues = {

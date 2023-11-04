@@ -53,27 +53,35 @@ export const GetAllUsers = () => {
         setPageSizeMutation(queryClient)
     )
 
-    const { data: users, isError: usersError } = useQuery(
-        getUsersBatchQuery(page)
-    )
+    const {
+        data: users,
+        isError: usersError,
+        isLoading: usersLoading
+    } = useQuery(getUsersBatchQuery(page))
 
-    const { data: usersCount, isError: usersCountError } = useQuery(
-        getUsersCountQuery()
-    )
+    const {
+        data: usersCount,
+        isError: usersCountError,
+        isLoading: usersCountLoading
+    } = useQuery(getUsersCountQuery())
 
     const {
         data: pageSize,
         isError: pageSizeError,
-        isLoading
+        isLoading: pageSizeLoading
     } = useQuery(getPageSizeQuery())
 
     const searchFields = useMemo(
         () => [
             {
                 key: 'user_type',
-                display: 'тип корисника',
+                display: 'Тип корисника:',
                 type: 'enum',
-                values: ['корисник', 'администратор', 'супер администратор']
+                values: ['корисник', 'администратор', 'супер администратор'],
+                filters: (search) =>
+                    setSearchFilters({
+                        search: search
+                    })
             },
             {
                 key: 'GSS_identification',
@@ -84,7 +92,8 @@ export const GetAllUsers = () => {
         []
     )
 
-    if (isLoading) return <LoadingData />
+    if (pageSizeLoading || usersCountLoading || usersLoading)
+        return <LoadingData />
 
     if (usersError || usersCountError || pageSizeError) return <ErrorData />
 
@@ -93,14 +102,14 @@ export const GetAllUsers = () => {
             {form === 0 ? (
                 <Table
                     tableData={users}
-                    calledFrom={'users'}
+                    calledFrom='users'
                     tableColumns={UserTableColumns}
                     deleteItems={(users) => deleteUsers(users)}
                     openAddForm={() => setForm(1)}
                     openEditForm={(userId) => setForm(userId + 2)}
                     setPage={setPage}
                     page={page}
-                    usersCount={usersCount}
+                    itemsCount={usersCount}
                     setSearchInput={(search) => setSearchInput(search)}
                     setSearchFilters={(search) => setSearchFilters(search)}
                     searchFields={searchFields}
@@ -108,7 +117,7 @@ export const GetAllUsers = () => {
                     pageSize={pageSize}
                     setStartId={(search) => setStartId(search)}
                     setOperator={(operator) => setOperator(operator)}
-                    noRowsMessage={'Тренутно нема корисника у бази'}
+                    noRowsMessage='Тренутно нема корисника у бази.'
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />

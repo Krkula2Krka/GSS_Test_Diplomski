@@ -9,16 +9,17 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             question_text: {
-                type: DataTypes.STRING,
-                allowNull: true
+                type: DataTypes.STRING
             },
             difficulty: {
-                type: DataTypes.ENUM('лако', 'средње', 'мање'),
-                allowNull: true
+                type: DataTypes.ENUM('лако', 'средње', 'тешко'),
+                defaultValue: 'лако',
+                allowNull: false
             },
             importance: {
                 type: DataTypes.ENUM('мање', 'средње', 'битно'),
-                allowNull: true
+                defaultValue: 'мање',
+                allowNull: false
             }
         },
         {

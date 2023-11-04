@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize')
 const { question } = require('../models')
+const Op = Sequelize.Op
 
 const createQuestionInService = (newQuestion) => {
     question.create(newQuestion)
@@ -13,13 +14,83 @@ const deleteQuestionInService = (id) => {
     })
 }
 
-const getQuestionsBatchInService = (area_id, page) => {
+const getQuestionsBatchInService = (
+    area_id,
+    page,
+    difficultyFilters,
+    importanceFilters,
+    pageSize,
+    startId,
+    operator
+) => {
     return question.findAll({
         where: {
-            area_id: area_id
+            area_id: area_id,
+            difficulty: { [Op.in]: difficultyFilters },
+            importance: { [Op.in]: importanceFilters },
+            id: { [Op[operator]]: startId }
         },
-        offset: page * 30,
-        limit: 30
+        offset: page * pageSize,
+        limit: pageSize
+    })
+}
+
+const getFilteredQuestionsBatchInService = (
+    area_id,
+    page,
+    searchInput,
+    difficultyFilters,
+    importanceFilters,
+    pageSize,
+    startId,
+    operator
+) => {
+    return question.findAll({
+        offset: page * pageSize,
+        limit: pageSize,
+        where: {
+            question_text: { [Op.like]: searchInput },
+            area_id: area_id,
+            difficulty: { [Op.in]: difficultyFilters },
+            importance: { [Op.in]: importanceFilters },
+            id: { [Op[operator]]: startId }
+        }
+    })
+}
+
+const getQuestionsCountInService = (
+    area_id,
+    difficultyFilters,
+    importanceFilters,
+    startId,
+    operator
+) => {
+    return question.count({
+        where: {
+            area_id: area_id,
+            difficulty: { [Op.in]: difficultyFilters },
+            importance: { [Op.in]: importanceFilters },
+            id: { [Op[operator]]: startId }
+        }
+    })
+}
+
+const getFilteredQuestionsCountInService = (
+    searchInput,
+    area_id,
+    difficultyFilters,
+    importanceFilters,
+    startId,
+    operator
+) => {
+    return question.count({
+        where: {
+            question_text: { [Op.like]: searchInput },
+            area_id: area_id,
+            difficulty: { [Op.in]: difficultyFilters },
+            importance: { [Op.in]: importanceFilters },
+            id: { [Op[operator]]: startId }
+        }
     })
 }
 
@@ -50,5 +121,8 @@ module.exports = {
     getQuestionsBatchInService,
     deleteQuestionInService,
     editQuestionInService,
-    getTestQuestionsInService
+    getTestQuestionsInService,
+    getFilteredQuestionsBatchInService,
+    getQuestionsCountInService,
+    getFilteredQuestionsCountInService
 }

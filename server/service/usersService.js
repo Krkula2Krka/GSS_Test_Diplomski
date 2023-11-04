@@ -67,16 +67,14 @@ const getFilteredUsersBatchInService = (
         offset: page * pageSize,
         limit: pageSize,
         where: {
-            [Op.and]: {
-                [Op.or]: [
-                    { first_name: { [Op.like]: searchInput } },
-                    { last_name: { [Op.like]: searchInput } },
-                    { nickname: { [Op.like]: searchInput } }
-                ],
-                user_type: { [Op.in]: searchFilters },
-                GSS_identification: {
-                    [Op[operator]]: startId
-                }
+            [Op.or]: [
+                { first_name: { [Op.like]: searchInput } },
+                { last_name: { [Op.like]: searchInput } },
+                { nickname: { [Op.like]: searchInput } }
+            ],
+            user_type: { [Op.in]: searchFilters },
+            GSS_identification: {
+                [Op[operator]]: startId
             }
         }
     })
@@ -120,16 +118,14 @@ const getFilteredUsersCountInService = (
 ) => {
     return user.count({
         where: {
-            [Op.and]: {
-                [Op.or]: [
-                    { first_name: { [Op.like]: searchInput } },
-                    { last_name: { [Op.like]: searchInput } },
-                    { nickname: { [Op.like]: searchInput } }
-                ],
-                user_type: { [Op.in]: searchFilters },
-                GSS_identification: {
-                    [Op[operator]]: startId
-                }
+            [Op.or]: [
+                { first_name: { [Op.like]: searchInput } },
+                { last_name: { [Op.like]: searchInput } },
+                { nickname: { [Op.like]: searchInput } }
+            ],
+            user_type: { [Op.in]: searchFilters },
+            GSS_identification: {
+                [Op[operator]]: startId
             }
         }
     })
