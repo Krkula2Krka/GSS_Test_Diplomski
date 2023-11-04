@@ -1,11 +1,15 @@
 export const AnswerTableColumns = [
     {
-        Header: 'одговор',
-        accessor: 'answer_text'
+        field: 'id',
+        headerName: 'идентификатор',
+        checkboxSelection: true
     },
     {
-        Header: 'тачност одговора',
-        accessor: (d) =>
-            d.correctness === true ? <div>да</div> : <div>не</div>
+        field: 'answer_text',
+        headerName: 'одговор'
+    },
+    {
+        field: 'correctness',
+        headerName: 'тачност одговора'
     }
 ]

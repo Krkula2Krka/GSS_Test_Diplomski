@@ -5,20 +5,27 @@ module.exports = (sequelize, DataTypes) => {
             GSS_identification: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                allowNull: false
+                autoIncrement: true,
+                allowNull: true
             },
             first_name: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: '',
+                allowNull: true
             },
             last_name: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: '',
+                allowNull: true
             },
             nickname: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: '',
+                allowNull: true
             },
             logged_in_for_testing: {
                 type: DataTypes.BOOLEAN,
-                allowNull: false,
+                allowNull: true,
                 defaultValue: false
             },
             user_type: {
@@ -28,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
                     'супер администратор'
                 ),
                 defaultValue: 'корисник',
-                allowNull: false
+                allowNull: true
             }
         },
         {

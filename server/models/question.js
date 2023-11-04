@@ -5,21 +5,19 @@ module.exports = function (sequelize, DataTypes) {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
+                autoIncrement: true
             },
             question_text: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
             difficulty: {
                 type: DataTypes.ENUM('лако', 'средње', 'тешко'),
-                defaultValue: 'лако',
-                allowNull: false
+                defaultValue: 'лако'
             },
             importance: {
                 type: DataTypes.ENUM('мање', 'средње', 'битно'),
-                defaultValue: 'мање',
-                allowNull: false
+                defaultValue: 'мање'
             }
         },
         {

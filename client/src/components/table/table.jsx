@@ -61,9 +61,6 @@ export const Table = (props) => {
                 setPage={props.setPage}
                 setSearchInput={props.setSearchInput}
                 searchFields={props.searchFields}
-                setSearchFilters={props.setSearchFilters}
-                setDifficultyFilters={props.setDifficultyFilters}
-                setImportanceFilters={props.setDifficultyFilters}
                 setStartId={props.setStartId}
                 setOperator={props.setOperator}
             />

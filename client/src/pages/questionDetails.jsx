@@ -62,14 +62,11 @@ export const QuestionDetails = () => {
 
     if (isError) return <ErrorData />
 
-    if (answers.length === 0)
-        return <NoAnswer resetState={() => setForm(0)} questionId={id} />
-
     return (
         <div>
             {form === 0 ? (
-                <div className="cointainer">
-                    <div className="infoContainer">
+                <div className='cointainer'>
+                    <div className='infoContainer'>
                         <h2>{questionText}</h2>
                         <h2>{difficultyString}</h2>
                         <h2>{importanceString}</h2>

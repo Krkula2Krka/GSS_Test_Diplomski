@@ -5,12 +5,11 @@ module.exports = function (sequelize, DataTypes) {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
+                autoIncrement: true
             },
             points_acquired: {
                 type: DataTypes.INTEGER,
-                allowNull: true,
+                defaultValue: 0,
                 validate: {
                     min: 0,
                     max: 30
@@ -18,15 +17,14 @@ module.exports = function (sequelize, DataTypes) {
             },
             test_passed: {
                 type: DataTypes.BOOLEAN,
-                allowNull: true
+                defaultValue: false
             },
             questions_answers: {
-                type: DataTypes.JSON,
-                allowNull: true
+                type: DataTypes.JSON
             },
             date_of_application: {
-                type: DataTypes.DATE,
-                allowNull: true
+                type: DataTypes.DATEONLY,
+                defaultValue: sequelize.NOW
             }
         },
         {

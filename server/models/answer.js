@@ -5,16 +5,15 @@ module.exports = function (sequelize, DataTypes) {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
+                autoIncrement: true
             },
             answer_text: {
                 type: DataTypes.STRING,
-                allowNull: true
+                defaultValue: ''
             },
             correctness: {
                 type: DataTypes.BOOLEAN,
-                allowNull: true
+                defaultValue: false
             }
         },
         {

@@ -141,17 +141,11 @@ export const AreaDetails = () => {
                         pageSize={pageSize}
                         page={page}
                         setSearchInput={(search) => setSearchInput(search)}
-                        setDifficultyFilters={(search) =>
-                            setDifficultyFilters(search)
-                        }
-                        setImportanceFilters={(search) =>
-                            setImportanceFilters(search)
-                        }
                         setPageSize={(pageSize) => setPageSize(pageSize)}
                         setStartId={(search) => setStartId(search)}
                         setOperator={(operator) => setOperator(operator)}
                         setPage={setPage}
-                        noRowsMessage='Тренутно нема питања за ову област у бази.'
+                        noRowsMessage='Нема питања'
                     />
                 </div>
             ) : form === 1 ? (

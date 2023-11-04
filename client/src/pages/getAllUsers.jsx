@@ -111,13 +111,12 @@ export const GetAllUsers = () => {
                     page={page}
                     itemsCount={usersCount}
                     setSearchInput={(search) => setSearchInput(search)}
-                    setSearchFilters={(search) => setSearchFilters(search)}
                     searchFields={searchFields}
                     setPageSize={(pageSize) => setPageSize(pageSize)}
                     pageSize={pageSize}
                     setStartId={(search) => setStartId(search)}
                     setOperator={(operator) => setOperator(operator)}
-                    noRowsMessage='Тренутно нема корисника у бази.'
+                    noRowsMessage='Нема корисника'
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />
