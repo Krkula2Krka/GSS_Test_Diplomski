@@ -89,7 +89,7 @@ export const GetAllUsers = () => {
                 type: 'int'
             }
         ],
-        []
+        [setSearchFilters]
     )
 
     if (pageSizeLoading || usersCountLoading || usersLoading)

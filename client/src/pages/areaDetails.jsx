@@ -113,7 +113,7 @@ export const AreaDetails = () => {
                 type: 'int'
             }
         ],
-        []
+        [setDifficultyFilters, setImportanceFilters]
     )
 
     if (questionsLoading || questionsCountLoading || pageSizeLoading)
