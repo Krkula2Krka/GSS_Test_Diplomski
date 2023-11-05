@@ -8,7 +8,7 @@ const queryKeys = {
 }
 
 export const getAnswersBatchQuery = (id, page) => ({
-    queryKey: queryKeys.answers(id),
+    queryKey: queryKeys.answers(id, page),
     queryFn: async () => {
         const res = await fetch(`http://localhost:3001/answers/${id}/${page}`)
         return res.json()
