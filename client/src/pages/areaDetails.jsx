@@ -146,6 +146,12 @@ export const AreaDetails = () => {
                         setOperator={(operator) => setOperator(operator)}
                         setPage={setPage}
                         noRowsMessage='Нема питања'
+                        setDifficultyFilters={(search) =>
+                            setDifficultyFilters(search)
+                        }
+                        setImportanceFilters={(search) =>
+                            setImportanceFilters(search)
+                        }
                     />
                 </div>
             ) : form === 1 ? (

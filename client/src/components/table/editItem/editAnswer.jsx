@@ -13,7 +13,7 @@ import '../../../css/form.css'
 export const EditAnswer = (props) => {
     const queryClient = useQueryClient()
     const { mutateAsync: editAnswer } = useMutation(
-        editAnswerMutation(queryClient, props.questionId)
+        editAnswerMutation(queryClient, props.questionId, props.page)
     )
 
     const initialValues = {
@@ -41,21 +41,21 @@ export const EditAnswer = (props) => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            <Form className="formContainer centered">
+            <Form className='formContainer centered'>
                 <label>Текст одговора:</label>
                 <ErrorMessage
-                    name="answer_text"
-                    component="span"
-                    className="errorMessage"
+                    name='answer_text'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="answer_text" />
+                <Field name='answer_text' />
                 <label>
                     Тачност одговора:
-                    <Field type="checkbox" name="correctness" />
+                    <Field type='checkbox' name='correctness' />
                 </label>
-                <div className="registration-buttons">
+                <div className='registration-buttons'>
                     <button onClick={props.resetState}>Назад</button>
-                    <button type="submit">Настави</button>
+                    <button type='submit'>Настави</button>
                 </div>
             </Form>
         </Formik>

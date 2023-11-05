@@ -1,7 +1,10 @@
 // libraries
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { AgGridReact } from 'ag-grid-react'
 import { useNavigate } from 'react-router-dom'
+
+// hooks
+import { useUnloadConditionally } from '../hooks/useUnloadConditionally'
 
 // components
 import { FilterHeader } from './filterHeader'
@@ -27,21 +30,19 @@ export const Table = (props) => {
         []
     )
 
-    useEffect(() => {
-        return () => {
-            props.setSearchInput({ search: '' })
-            props.setPageSize({ pageSize: 30 })
-            props.setStartId({ startId: '1' })
-            props.setOperator({ operator: 'gte' })
-            if (props.calledFrom === 'users')
-                props.setSearchFilters({ search: '' })
-            else if (props.calledFrom === 'questions') {
-                props.setDifficultyFilters({ search: '' })
-                props.setImportanceFilters({ search: '' })
-            }
+    useUnloadConditionally(() => {
+        props.setSearchInput({ search: '' })
+        props.setPageSize({ pageSize: 30 })
+        props.setStartId({ startId: '1' })
+        props.setOperator({ operator: 'gte' })
+        if (props.calledFrom === 'users') props.setSearchFilters({ search: '' })
+        else if (props.calledFrom === 'questions') {
+            props.setDifficultyFilters({ search: 'све' })
+            props.setImportanceFilters({ search: 'све' })
+        } else if (props.calledFrom === 'answers') {
+            props.setCorrectnessFilters({ correctness: 'оба' })
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, true)
 
     return (
         <>
@@ -69,6 +70,7 @@ export const Table = (props) => {
                     columnDefs={tableColumns}
                     domLayout='autoHeight'
                     rowSelection='multiple'
+                    suppressRowClickSelection={true}
                     defaultColDef={defaultColumn}
                     animateRows={true}
                     overlayNoRowsTemplate={`<label style='font-size:1.1rem'>${props.noRowsMessage}</label>`}

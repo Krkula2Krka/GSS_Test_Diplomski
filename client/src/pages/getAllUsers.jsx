@@ -117,6 +117,7 @@ export const GetAllUsers = () => {
                     setStartId={(search) => setStartId(search)}
                     setOperator={(operator) => setOperator(operator)}
                     noRowsMessage='Нема корисника'
+                    setSearchFilters={(pageSize) => setSearchFilters(pageSize)}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />

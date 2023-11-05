@@ -3,9 +3,9 @@ import toast from 'react-hot-toast'
 
 const queryKeys = {
     users: (page) => ['users', page],
-    count: ['count'],
-    size: ['size'],
-    loggedIn: (id) => ['loggedIn', id]
+    count: ['usersCount'],
+    size: ['usersSize'],
+    loggedIn: (id) => ['usersLoggedIn', id]
 }
 
 export const checkLoginForTestingQuery = (id) => ({

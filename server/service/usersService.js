@@ -68,9 +68,9 @@ const getFilteredUsersBatchInService = (
         limit: pageSize,
         where: {
             [Op.or]: [
-                { first_name: { [Op.like]: searchInput } },
-                { last_name: { [Op.like]: searchInput } },
-                { nickname: { [Op.like]: searchInput } }
+                { first_name: { [Op.substring]: searchInput } },
+                { last_name: { [Op.substring]: searchInput } },
+                { nickname: { [Op.substring]: searchInput } }
             ],
             user_type: { [Op.in]: searchFilters },
             GSS_identification: {

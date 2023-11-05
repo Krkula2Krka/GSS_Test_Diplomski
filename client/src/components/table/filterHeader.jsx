@@ -37,6 +37,28 @@ export const FilterHeader = (props) => {
                             })}
                         </select>
                     </Fragment>
+                ) : searchField.type === 'bool' ? (
+                    <Fragment key={index}>
+                        <div className='search-label'>
+                            {searchField.display}
+                        </div>
+                        <select
+                            className='table-select'
+                            onChange={(e) => {
+                                props.setPage(0)
+                                searchField.filters(e.target.value)
+                            }}
+                        >
+                            <option value='оба'>оба</option>
+                            {searchField.values.map((value, index) => {
+                                return (
+                                    <option key={index} value={value}>
+                                        {value === true ? <>да</> : <>не</>}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                    </Fragment>
                 ) : searchField.type === 'int' ? (
                     <Fragment key={index}>
                         <div className='search-label'>

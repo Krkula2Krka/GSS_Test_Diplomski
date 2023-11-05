@@ -58,6 +58,9 @@
     color: #f5f5f5;
     outline: none;
     margin: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: auto;
 }
 
 .userButton:hover {

@@ -3,9 +3,9 @@ import toast from 'react-hot-toast'
 
 const queryKeys = {
     questions: (id, page) => ['questions', id, page],
-    count: (id) => ['count', id],
-    size: ['size'],
-    test: ['test']
+    count: (id) => ['questionsCount', id],
+    size: ['questionsSize'],
+    test: ['questionsTest']
 }
 
 export const getQuestionsBatchQuery = (id, page) => ({

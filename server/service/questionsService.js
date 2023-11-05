@@ -49,7 +49,7 @@ const getFilteredQuestionsBatchInService = (
         offset: page * pageSize,
         limit: pageSize,
         where: {
-            question_text: { [Op.like]: searchInput },
+            question_text: { [Op.substring]: searchInput },
             area_id: area_id,
             difficulty: { [Op.in]: difficultyFilters },
             importance: { [Op.in]: importanceFilters },

@@ -10,6 +10,6 @@ export const AnswerTableColumns = [
     },
     {
         field: 'correctness',
-        headerName: 'тачност одговора'
+        headerName: 'одговор је тачан'
     }
 ]

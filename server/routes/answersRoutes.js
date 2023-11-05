@@ -4,14 +4,35 @@ const {
     createAnswerInController,
     getAnswersBatchInController,
     deleteAnswersInController,
-    editAnswerInController
+    editAnswerInController,
+    getAnswersCountInController,
+    setSearchInputInController,
+    setCorrectnessInController,
+    setPageSizeInController,
+    getPageSizeInController,
+    setStartIdInController,
+    setOperatorInController
 } = require('../controllers/answersController')
+
+router.get('/pageSize', getPageSizeInController)
+
+router.get('/count/:question_id', getAnswersCountInController)
+
+router.get('/:question_id/:page', getAnswersBatchInController)
 
 router.post('/', createAnswerInController)
 
-router.post('/delete', deleteAnswersInController)
+router.post('/setSearchInput', setSearchInputInController)
 
-router.get('/:question_id/:page', getAnswersBatchInController)
+router.post('/setCorrectnessFilters', setCorrectnessInController)
+
+router.post('/setStartId', setStartIdInController)
+
+router.post('/setPageSize', setPageSizeInController)
+
+router.post('/operator', setOperatorInController)
+
+router.post('/delete', deleteAnswersInController)
 
 router.post('/edit/:id', editAnswerInController)
 
