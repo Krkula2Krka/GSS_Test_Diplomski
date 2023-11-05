@@ -1,5 +1,5 @@
 // libraries
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 
@@ -9,6 +9,7 @@ import {
     getAnswersBatchQuery,
     getAnswersCountQuery,
     getPageSizeQuery,
+    resetMutation,
     setCorrectnessFiltersMutation,
     setOperatorMutation,
     setPageSizeMutation,
@@ -25,13 +26,14 @@ import { AnswerTableColumns } from '../components/table/tableColumns/answerTable
 import { AddAnswer } from '../components/table/addItem/addAnswer'
 import { EditAnswer } from '../components/table/editItem/editAnswer'
 import { ErrorData } from '../components/error/errorData'
-import { LoadingData } from '../components/loadingData'
 
 export const QuestionDetails = () => {
     const [form, setForm] = useState(0)
     const [page, setPage] = useState(0)
     const { id } = useParams()
     const queryClient = useQueryClient()
+
+    const { mutateAsync: reset } = useMutation(resetMutation(queryClient))
 
     const { mutateAsync: deleteAnswers } = useMutation(
         deleteAnswersMutation(queryClient, id, page)
@@ -57,25 +59,24 @@ export const QuestionDetails = () => {
         setPageSizeMutation(queryClient, id)
     )
 
-    const {
-        data: answers,
-        isError: answersError,
-        isLoading: answersLoading
-    } = useQuery(getAnswersBatchQuery(id, page))
+    const { data: answers, isError: answersError } = useQuery(
+        getAnswersBatchQuery(id, page)
+    )
 
-    const {
-        data: answersCount,
-        isError: answersCountError,
-        isLoading: answersCountLoading
-    } = useQuery(getAnswersCountQuery(id))
+    const { data: answersCount, isError: answersCountError } = useQuery(
+        getAnswersCountQuery(id)
+    )
 
-    const {
-        data: pageSize,
-        isError: pageSizeError,
-        isLoading: pageSizeLoading
-    } = useQuery(getPageSizeQuery())
+    const { data: pageSize, isError: pageSizeError } = useQuery(
+        getPageSizeQuery()
+    )
 
     const location = useLocation()
+
+    useEffect(() => {
+        return () => reset()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const searchFields = useMemo(
         () => [
@@ -97,9 +98,6 @@ export const QuestionDetails = () => {
         ],
         [setCorrectnessFilters]
     )
-
-    if (answersLoading || answersCountLoading || pageSizeLoading)
-        return <LoadingData />
 
     if (answersError || answersCountError || pageSizeError) return <ErrorData />
 

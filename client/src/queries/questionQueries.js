@@ -51,6 +51,19 @@ export const setOperatorMutation = (queryClient, area_id) => ({
     }
 })
 
+export const resetMutation = (queryClient) => ({
+    mutationFn: () => axios.post('http://localhost:3001/questions/reset'),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['questions'] })
+        queryClient.invalidateQueries({ queryKey: ['questionsCount'] })
+        queryClient.invalidateQueries(queryKeys.size)
+    },
+    onError: () => {
+        toast.remove()
+        toast.error('Неуспешно ресетовање параметра за претраживање.')
+    }
+})
+
 export const setPageSizeMutation = (queryClient, area_id) => ({
     mutationFn: (pageSize) =>
         axios.post('http://localhost:3001/questions/setPageSize', pageSize),

@@ -3,9 +3,6 @@ import React, { useMemo, useState } from 'react'
 import { AgGridReact } from 'ag-grid-react'
 import { useNavigate } from 'react-router-dom'
 
-// hooks
-import { useUnloadConditionally } from '../hooks/useUnloadConditionally'
-
 // components
 import { FilterHeader } from './filterHeader'
 import { PaginationHeader } from './paginationHeader'
@@ -29,20 +26,6 @@ export const Table = (props) => {
         }),
         []
     )
-
-    useUnloadConditionally(() => {
-        props.setSearchInput({ search: '' })
-        props.setPageSize({ pageSize: 30 })
-        props.setStartId({ startId: '1' })
-        props.setOperator({ operator: 'gte' })
-        if (props.calledFrom === 'users') props.setSearchFilters({ search: '' })
-        else if (props.calledFrom === 'questions') {
-            props.setDifficultyFilters({ search: 'све' })
-            props.setImportanceFilters({ search: 'све' })
-        } else if (props.calledFrom === 'answers') {
-            props.setCorrectnessFilters({ correctness: 'оба' })
-        }
-    }, true)
 
     return (
         <>

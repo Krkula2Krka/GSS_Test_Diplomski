@@ -14,7 +14,8 @@ const {
     setPageSizeInController,
     getPageSizeInController,
     setStartIdInController,
-    setOperatorInController
+    setOperatorInController,
+    resetSearchParametersInController
 } = require('../controllers/usersController')
 
 router.get('/count', getUsersCountInController)
@@ -30,6 +31,8 @@ router.post('/setSearchFilters', setSearchFiltersInController)
 router.post('/setStartId', setStartIdInController)
 
 router.post('/setPageSize', setPageSizeInController)
+
+router.post('/reset', resetSearchParametersInController)
 
 router.post('/operator', setOperatorInController)
 

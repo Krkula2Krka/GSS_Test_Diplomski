@@ -13,7 +13,8 @@ const {
     setPageSizeInController,
     getPageSizeInController,
     setStartIdInController,
-    setOperatorInController
+    setOperatorInController,
+    resetSearchParametersInController
 } = require('../controllers/questionsController')
 
 router.get('/test', getTestQuestionsInController)
@@ -27,6 +28,8 @@ router.get('/:area_id/:page', getQuestionsBatchInController)
 router.post('/', createQuestionInController)
 
 router.post('/delete', deleteQuestionsInController)
+
+router.post('/reset', resetSearchParametersInController)
 
 router.post('/setSearchInput', setSearchInputInController)
 

@@ -11,7 +11,8 @@ const {
     setPageSizeInController,
     getPageSizeInController,
     setStartIdInController,
-    setOperatorInController
+    setOperatorInController,
+    resetSearchParametersInController
 } = require('../controllers/answersController')
 
 router.get('/pageSize', getPageSizeInController)
@@ -29,6 +30,8 @@ router.post('/setCorrectnessFilters', setCorrectnessInController)
 router.post('/setStartId', setStartIdInController)
 
 router.post('/setPageSize', setPageSizeInController)
+
+router.post('/reset', resetSearchParametersInController)
 
 router.post('/operator', setOperatorInController)
 

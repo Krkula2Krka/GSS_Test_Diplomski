@@ -18,6 +18,16 @@ const searchParameters = {
     startId: 1
 }
 
+const resetSearchParametersInController = async (_, res) => {
+    searchParameters.searchInput = ''
+    searchParameters.difficultyFilters = ['лако', 'средње', 'тешко']
+    searchParameters.importanceFilters = ['мање', 'средње', 'битно']
+    searchParameters.pageSize = 30
+    searchParameters.operator = 'gte'
+    searchParameters.startId = 1
+    res.sendStatus(200)
+}
+
 const setSearchInputInController = async (req, res) => {
     searchParameters.searchInput = req.body.search
     res.sendStatus(200)
@@ -152,5 +162,6 @@ module.exports = {
     setPageSizeInController,
     getPageSizeInController,
     setStartIdInController,
-    setOperatorInController
+    setOperatorInController,
+    resetSearchParametersInController
 }

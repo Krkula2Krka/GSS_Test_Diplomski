@@ -1,5 +1,5 @@
 // libraries
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 
 // queries
@@ -12,7 +12,8 @@ import {
     setPageSizeMutation,
     getPageSizeQuery,
     setStartIdMutation,
-    setOperatorMutation
+    setOperatorMutation,
+    resetMutation
 } from '../queries/userQueries'
 
 // components
@@ -21,7 +22,9 @@ import { Table } from '../components/table/table'
 import { AddUser } from '../components/table/addItem/addUser'
 import { EditUser } from '../components/table/editItem/editUser'
 import { ErrorData } from '../components/error/errorData'
-import { LoadingData } from '../components/loadingData'
+
+// hooks
+import { useUnloadConditionally } from '../components/hooks/useUnloadConditionally'
 
 export const GetAllUsers = () => {
     const [form, setForm] = useState(0)
@@ -32,6 +35,8 @@ export const GetAllUsers = () => {
     const { mutateAsync: deleteUsers } = useMutation(
         deleteUsersMutation(queryClient, page)
     )
+
+    const { mutateAsync: reset } = useMutation(resetMutation(queryClient))
 
     const { mutateAsync: setSearchInput } = useMutation(
         setSearchInputMutation(queryClient)
@@ -53,23 +58,24 @@ export const GetAllUsers = () => {
         setPageSizeMutation(queryClient)
     )
 
-    const {
-        data: users,
-        isError: usersError,
-        isLoading: usersLoading
-    } = useQuery(getUsersBatchQuery(page))
+    const { data: users, isError: usersError } = useQuery(
+        getUsersBatchQuery(page)
+    )
 
-    const {
-        data: usersCount,
-        isError: usersCountError,
-        isLoading: usersCountLoading
-    } = useQuery(getUsersCountQuery())
+    const { data: usersCount, isError: usersCountError } = useQuery(
+        getUsersCountQuery()
+    )
 
-    const {
-        data: pageSize,
-        isError: pageSizeError,
-        isLoading: pageSizeLoading
-    } = useQuery(getPageSizeQuery())
+    const { data: pageSize, isError: pageSizeError } = useQuery(
+        getPageSizeQuery()
+    )
+
+    useUnloadConditionally(() => reset(), true)
+
+    useEffect(() => {
+        return () => reset()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const searchFields = useMemo(
         () => [
@@ -91,9 +97,6 @@ export const GetAllUsers = () => {
         ],
         [setSearchFilters]
     )
-
-    if (pageSizeLoading || usersCountLoading || usersLoading)
-        return <LoadingData />
 
     if (usersError || usersCountError || pageSizeError) return <ErrorData />
 

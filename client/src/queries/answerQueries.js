@@ -17,6 +17,19 @@ export const getAnswersBatchQuery = (id, page) => ({
     cacheTime: Infinity
 })
 
+export const resetMutation = (queryClient) => ({
+    mutationFn: () => axios.post('http://localhost:3001/answers/reset'),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['answers'] })
+        queryClient.invalidateQueries({ queryKey: ['answersCount'] })
+        queryClient.invalidateQueries(queryKeys.size)
+    },
+    onError: () => {
+        toast.remove()
+        toast.error('Неуспешно ресетовање параметра за претраживање.')
+    }
+})
+
 export const getAnswersCountQuery = (id) => ({
     queryKey: queryKeys.count(id),
     queryFn: async () => {
