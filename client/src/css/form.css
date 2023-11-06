@@ -2,9 +2,30 @@
     text-decoration: none;
 }
 
-.column {
+.credentials-form-field {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+}
+
+.credentials-form-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.credentials-form-button {
+    margin: 0;
+    width: auto;
+    margin-left: 0.5rem;
+}
+
+.credentials-form-label {
+    padding: 0;
+    font-size: 1rem;
+}
+
+.credentials-form-input {
+    border: none;
+    height: 2rem;
 }
 
 .formContainer {
@@ -14,11 +35,11 @@
     padding: 2rem;
     height: auto;
     background-color: #060b26;
+    width: 30rem;
 }
 
 label {
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
+    margin-right: 0.5rem;
     color: #f5f5f5;
 }
 
@@ -30,6 +51,7 @@ button {
     color: #f5f5f5;
     background-color: #060b26;
     border: none;
+    font-size: 1.5rem;
 }
 
 .registration-buttons {
@@ -40,46 +62,4 @@ button {
 
 button:hover {
     color: #008080;
-}
-
-.formContainer {
-    width: 100%;
-}
-
-button {
-    width: 4rem;
-    font-size: 1rem;
-}
-
-@media (min-width: 641px) {
-    .formContainer {
-        width: 22rem;
-    }
-
-    button {
-        width: 4rem;
-        font-size: 1rem;
-    }
-}
-
-@media (min-width: 801px) {
-    .formContainer {
-        width: 34rem;
-    }
-
-    button {
-        width: 6rem;
-        font-size: 1.1rem;
-    }
-}
-
-@media (min-width: 1025px) {
-    .formContainer {
-        width: 40rem;
-    }
-
-    button {
-        width: 10rem;
-        font-size: 1.5rem;
-    }
 }

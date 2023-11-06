@@ -29,6 +29,7 @@ import { areasLoader } from '../queries/areaQueries'
 import { usersLoader } from '../queries/userQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
 import { useEffect } from 'react'
+import { DbForm } from '../components/form/dbForm'
 
 export const App = () => {
     const queryClient = new QueryClient({
@@ -117,6 +118,10 @@ export const App = () => {
         {
             path: '/credentialsForTest',
             element: <LoginForm navigateToLocation='/takeTest' />
+        },
+        {
+            path: '/credentialsForDb',
+            element: <DbForm navigateToLocation='/getAllAreas' />
         },
         {
             path: '/registration',

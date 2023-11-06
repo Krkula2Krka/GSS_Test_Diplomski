@@ -4,12 +4,11 @@ import '../css/home.css'
 
 export const Home = () => {
     return (
-        <div className="home-buttons">
-            <Link to="/credentialsForTest" className="homeLink">
+        <div className='home-buttons'>
+            <Link to='/credentialsForTest' className='homeLink'>
                 Полажи тест
             </Link>
-            <Link className="homeLink">Вежбање</Link>
-            <Link to="/getAllAreas" className="homeLink">
+            <Link to='/credentialsForDb' className='homeLink'>
                 Рад са базом
             </Link>
         </div>

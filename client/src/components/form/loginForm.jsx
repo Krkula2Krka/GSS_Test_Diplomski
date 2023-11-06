@@ -56,29 +56,29 @@ export const LoginForm = () => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            <Form className="formContainer centered">
+            <Form className='formContainer centered'>
                 <label>ГСС број:</label>
                 <ErrorMessage
-                    name="GSS_identification"
-                    component="span"
-                    className="errorMessage"
+                    name='GSS_identification'
+                    component='span'
+                    className='errorMessage'
                 />
                 <Field
-                    type="number"
-                    name="GSS_identification"
+                    type='number'
+                    name='GSS_identification'
                     onWheel={(e) => e.target.blur()}
                 />
                 <label>Име:</label>
                 <ErrorMessage
-                    name="first_name"
-                    component="span"
-                    className="errorMessage"
+                    name='first_name'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="first_name" />
-                <button type="submit">Настави</button>
+                <Field name='first_name' />
+                <button type='submit'>Настави</button>
                 <h1>
                     Уколико немате налог кликните да се{' '}
-                    <Link to="/registration" className="link">
+                    <Link to='/registration' className='link'>
                         овде
                     </Link>{' '}
                     региструјете!
