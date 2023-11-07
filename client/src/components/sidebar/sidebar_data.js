@@ -2,6 +2,7 @@ import React from 'react'
 import { AiFillHome } from 'react-icons/ai'
 import { GiNotebook } from 'react-icons/gi'
 import { HiUserGroup } from 'react-icons/hi'
+import { IoMdInformationCircle } from 'react-icons/io'
 
 export const SidebarData = [
     {
@@ -23,6 +24,13 @@ export const SidebarData = [
         title: 'Преглед свих корисника',
         path: '/getAllUsers',
         icon: <HiUserGroup />,
+        cName: 'side-text'
+    },
+    {
+        id: 3,
+        title: 'Подешавања',
+        path: '/getAllUsers',
+        icon: <IoMdInformationCircle />,
         cName: 'side-text'
     }
 ]
