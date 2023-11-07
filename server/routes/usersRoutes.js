@@ -10,7 +10,6 @@ const {
     deleteUsersInController,
     getUsersCountInController,
     setSearchInputInController,
-    setSearchFiltersInController,
     setPageSizeInController,
     getPageSizeInController,
     setStartIdInController,
@@ -25,8 +24,6 @@ router.get('/pageSize', getPageSizeInController)
 router.get('/:page', getUsersBatchInController)
 
 router.post('/setSearchInput', setSearchInputInController)
-
-router.post('/setSearchFilters', setSearchFiltersInController)
 
 router.post('/setStartId', setStartIdInController)
 

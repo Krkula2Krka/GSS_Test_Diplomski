@@ -21,8 +21,7 @@ export const AddUser = (props) => {
         GSS_identification: '',
         first_name: '',
         last_name: '',
-        nickname: '',
-        user_type: 'корисник'
+        nickname: ''
     }
 
     const validationSchema = Yup.object().shape({
@@ -50,9 +49,10 @@ export const AddUser = (props) => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
         >
             <Form className='formContainer centered'>
-                <label>ГСС број:</label>
                 <ErrorMessage
                     name='GSS_identification'
                     component='span'
@@ -62,41 +62,31 @@ export const AddUser = (props) => {
                     type='number'
                     name='GSS_identification'
                     onWheel={(e) => e.target.blur()}
+                    placeholder='ГСС број'
                 />
-                <label>Име:</label>
                 <ErrorMessage
                     name='first_name'
                     component='span'
                     className='errorMessage'
                 />
-                <Field name='first_name' />
-                <label>Презиме:</label>
+                <Field name='first_name' placeholder='име' />
                 <ErrorMessage
                     name='last_name'
                     component='span'
                     className='errorMessage'
                 />
-                <Field name='last_name' />
-                <label>Надимак:</label>
+                <Field name='last_name' placeholder='презиме' />
                 <ErrorMessage
                     name='nickname'
                     component='span'
                     className='errorMessage'
                 />
-                <Field name='nickname' />
-                <label>Тип корисника:</label>
-                <Field as='select' name='user_type'>
-                    <option value='корисник'>корисник</option>
-                    <option value='администратор'>администратор</option>
-                    <option value='супер администратор'>
-                        супер администратор
-                    </option>
-                </Field>
+                <Field name='nickname' placeholder='надимак' />
                 <div className='registration-buttons'>
                     {props.noBackButton !== true ? (
-                        <button onClick={props.resetState}>Назад</button>
+                        <button onClick={props.resetState}>назад</button>
                     ) : null}
-                    <button type='submit'>Настави</button>
+                    <button type='submit'>настави</button>
                 </div>
             </Form>
         </Formik>

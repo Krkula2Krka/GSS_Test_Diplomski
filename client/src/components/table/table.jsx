@@ -56,7 +56,7 @@ export const Table = (props) => {
                     suppressRowClickSelection={true}
                     defaultColDef={defaultColumn}
                     animateRows={true}
-                    overlayNoRowsTemplate={`<label style='font-size:1.1rem'>${props.noRowsMessage}</label>`}
+                    overlayNoRowsTemplate={`<label>${props.noRowsMessage}</label>`}
                     rowData={tableData}
                     onGridReady={(e) => setApi(e.api)}
                     onCellClicked={(e) => {

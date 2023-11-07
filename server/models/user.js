@@ -27,15 +27,6 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.BOOLEAN,
                 allowNull: true,
                 defaultValue: false
-            },
-            user_type: {
-                type: DataTypes.ENUM(
-                    'корисник',
-                    'администратор',
-                    'супер администратор'
-                ),
-                defaultValue: 'корисник',
-                allowNull: true
             }
         },
         {

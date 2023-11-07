@@ -85,7 +85,11 @@ export const PaginationHeader = (props) => {
             {props.page +
                 1 +
                 ' / ' +
-                Math.ceil(props.itemsCount / props.pageSize)}
+                Math.ceil(
+                    props.itemsCount / props.pageSize !== 0
+                        ? props.itemsCount / props.pageSize
+                        : 1
+                )}
             <button
                 className='userButton'
                 onClick={() => {

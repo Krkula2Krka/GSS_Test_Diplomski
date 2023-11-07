@@ -14,7 +14,6 @@ const {
 
 const searchParameters = {
     searchInput: '',
-    searchFilters: ['корисник', 'администратор', 'супер администратор'],
     pageSize: 30,
     operator: 'gte',
     startId: 1
@@ -22,11 +21,6 @@ const searchParameters = {
 
 const resetSearchParametersInController = async (_, res) => {
     searchParameters.searchInput = ''
-    searchParameters.searchFilters = [
-        'корисник',
-        'администратор',
-        'супер администратор'
-    ]
     searchParameters.pageSize = 30
     searchParameters.operator = 'gte'
     searchParameters.startId = 1
@@ -35,22 +29,6 @@ const resetSearchParametersInController = async (_, res) => {
 
 const setSearchInputInController = async (req, res) => {
     searchParameters.searchInput = req.body.search
-    res.sendStatus(200)
-}
-
-const setSearchFiltersInController = async (req, res) => {
-    if (req.body.search === 'све')
-        searchParameters.searchFilters = [
-            'корисник',
-            'администратор',
-            'супер администратор'
-        ]
-    else if (req.body.search === 'корисник')
-        searchParameters.searchFilters = ['корисник']
-    else if (req.body.search === 'администратор')
-        searchParameters.searchFilters = ['администратор']
-    else if (req.body.search === 'супер администратор')
-        searchParameters.searchFilters = ['супер администратор']
     res.sendStatus(200)
 }
 
@@ -125,7 +103,6 @@ const getUsersBatchInController = async (req, res) => {
         searchParameters.searchInput === ''
             ? await getUsersBatchInService(
                   Number(req.params.page),
-                  searchParameters.searchFilters,
                   searchParameters.pageSize,
                   searchParameters.startId,
                   searchParameters.operator
@@ -133,7 +110,6 @@ const getUsersBatchInController = async (req, res) => {
             : await getFilteredUsersBatchInService(
                   Number(req.params.page),
                   searchParameters.searchInput,
-                  searchParameters.searchFilters,
                   searchParameters.pageSize,
                   searchParameters.startId,
                   searchParameters.operator
@@ -145,13 +121,11 @@ const getUsersCountInController = async (_, res) => {
     const usersCount =
         searchParameters.searchInput === ''
             ? await getUsersCountInService(
-                  searchParameters.searchFilters,
                   searchParameters.startId,
                   searchParameters.operator
               )
             : await getFilteredUsersCountInService(
                   searchParameters.searchInput,
-                  searchParameters.searchFilters,
                   searchParameters.startId,
                   searchParameters.operator
               )
@@ -178,7 +152,6 @@ module.exports = {
     deleteUsersInController,
     getUsersCountInController,
     setSearchInputInController,
-    setSearchFiltersInController,
     setPageSizeInController,
     getPageSizeInController,
     setStartIdInController,

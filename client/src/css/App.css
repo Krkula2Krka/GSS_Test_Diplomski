@@ -56,6 +56,11 @@ ul {
   padding: 0;
 }
 
+label {
+  color: #F5F5F5;
+  font-size: 1.1rem;
+}
+
 .loading-wrapper {
   width: 100vw;
   height: 100vh;

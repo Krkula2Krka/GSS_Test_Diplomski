@@ -1,6 +1,6 @@
 // libraries
 import React, { useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useMutation } from '@tanstack/react-query'
 import { useQueryClient } from '@tanstack/react-query'
@@ -34,26 +34,18 @@ export const DbForm = () => {
         >
             <Form className='formContainer centered'>
                 <div className='credentials-form-field'>
-                    <label className='credentials-form-label'>шифра: </label>
-                    <div className='credentials-form-input'>
-                        <Field
-                            type={showPassword ? 'text' : 'password'}
-                            name='password'
-                        />
-                    </div>
+                    <Field
+                        className='credentials-form-input'
+                        type={showPassword ? 'text' : 'password'}
+                        name='password'
+                        placeholder='шифра'
+                    />
                     <button
                         className='credentials-form-button'
                         onClick={() => setShowPassword(!showPassword)}
                     >
                         {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
                     </button>
-                </div>
-                <div className='credentials-form-field'>
-                    <ErrorMessage
-                        name='password'
-                        component='span'
-                        className='errorMessage'
-                    />
                 </div>
                 <div className='credentials-form-buttons'>
                     <button onClick={() => navigate('/')}>назад</button>

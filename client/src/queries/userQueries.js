@@ -113,19 +113,6 @@ export const resetMutation = (queryClient) => ({
     }
 })
 
-export const setSearchFiltersMutation = (queryClient) => ({
-    mutationFn: (search) =>
-        axios.post('http://localhost:3001/users/setSearchFilters', search),
-    onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['users'] })
-        queryClient.invalidateQueries(queryKeys.count)
-    },
-    onError: () => {
-        toast.remove()
-        toast.error('Неуспешно ажурирање параметра за претраживање.')
-    }
-})
-
 export const setStartIdMutation = (queryClient) => ({
     mutationFn: (search) =>
         axios.post('http://localhost:3001/users/setStartId', search),

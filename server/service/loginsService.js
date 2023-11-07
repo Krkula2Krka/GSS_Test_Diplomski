@@ -1,15 +1,19 @@
 const { login } = require('../models')
 
-const createLoginInService = (login) => {
-    return user.findOrCreate({
+const createLoginInService = (info) => {
+    return login.findOrCreate({
         where: {
             id: 1
         },
         defaults: {
             id: 1,
-            admin_password: login.admin_password,
-            logged_in_db: false,
-            save_results: false
+            admin_logged_in: false,
+            save_results: false,
+            password: info.password
         }
     })
+}
+
+module.exports = {
+    createLoginInService
 }

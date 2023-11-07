@@ -8,7 +8,6 @@ import {
     deleteUsersMutation,
     getUsersCountQuery,
     setSearchInputMutation,
-    setSearchFiltersMutation,
     setPageSizeMutation,
     getPageSizeQuery,
     setStartIdMutation,
@@ -50,10 +49,6 @@ export const GetAllUsers = () => {
         setOperatorMutation(queryClient)
     )
 
-    const { mutateAsync: setSearchFilters } = useMutation(
-        setSearchFiltersMutation(queryClient)
-    )
-
     const { mutateAsync: setPageSize } = useMutation(
         setPageSizeMutation(queryClient)
     )
@@ -80,22 +75,12 @@ export const GetAllUsers = () => {
     const searchFields = useMemo(
         () => [
             {
-                key: 'user_type',
-                display: 'Тип корисника:',
-                type: 'enum',
-                values: ['корисник', 'администратор', 'супер администратор'],
-                filters: (search) =>
-                    setSearchFilters({
-                        search: search
-                    })
-            },
-            {
                 key: 'GSS_identification',
                 display: 'ГСС број',
                 type: 'int'
             }
         ],
-        [setSearchFilters]
+        []
     )
 
     if (usersError || usersCountError || pageSizeError) return <ErrorData />
@@ -120,7 +105,6 @@ export const GetAllUsers = () => {
                     setStartId={(search) => setStartId(search)}
                     setOperator={(operator) => setOperator(operator)}
                     noRowsMessage='Нема корисника'
-                    setSearchFilters={(pageSize) => setSearchFilters(pageSize)}
                 />
             ) : form === 1 ? (
                 <AddUser resetState={() => setForm(0)} />

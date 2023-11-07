@@ -13,7 +13,8 @@ const createUserInService = (newUser) => {
             last_name: newUser.last_name,
             nickname: newUser.nickname,
             logged_in_for_testing: false,
-            user_type: newUser.user_type
+            user_type: newUser.user_type,
+            password: newUser.password
         }
     })
 }
@@ -58,7 +59,6 @@ const logoutUserForTestingInService = (GSS_identification) => {
 const getFilteredUsersBatchInService = (
     page,
     searchInput,
-    searchFilters,
     pageSize,
     startId,
     operator
@@ -72,7 +72,6 @@ const getFilteredUsersBatchInService = (
                 { last_name: { [Op.substring]: searchInput } },
                 { nickname: { [Op.substring]: searchInput } }
             ],
-            user_type: { [Op.in]: searchFilters },
             GSS_identification: {
                 [Op[operator]]: startId
             }
@@ -80,18 +79,11 @@ const getFilteredUsersBatchInService = (
     })
 }
 
-const getUsersBatchInService = (
-    page,
-    searchFilters,
-    pageSize,
-    startId,
-    operator
-) => {
+const getUsersBatchInService = (page, pageSize, startId, operator) => {
     return user.findAll({
         offset: page * pageSize,
         limit: pageSize,
         where: {
-            user_type: { [Op.in]: searchFilters },
             GSS_identification: {
                 [Op[operator]]: startId
             }
@@ -99,10 +91,9 @@ const getUsersBatchInService = (
     })
 }
 
-const getUsersCountInService = (searchFilters, startId, operator) => {
+const getUsersCountInService = (startId, operator) => {
     return user.count({
         where: {
-            user_type: { [Op.in]: searchFilters },
             GSS_identification: {
                 [Op[operator]]: startId
             }
@@ -110,20 +101,14 @@ const getUsersCountInService = (searchFilters, startId, operator) => {
     })
 }
 
-const getFilteredUsersCountInService = (
-    searchInput,
-    searchFilters,
-    startId,
-    operator
-) => {
+const getFilteredUsersCountInService = (startId, operator) => {
     return user.count({
         where: {
             [Op.or]: [
-                { first_name: { [Op.like]: searchInput } },
-                { last_name: { [Op.like]: searchInput } },
-                { nickname: { [Op.like]: searchInput } }
+                { first_name: { [Op.substring]: searchInput } },
+                { last_name: { [Op.substring]: searchInput } },
+                { nickname: { [Op.substring]: searchInput } }
             ],
-            user_type: { [Op.in]: searchFilters },
             GSS_identification: {
                 [Op[operator]]: startId
             }
