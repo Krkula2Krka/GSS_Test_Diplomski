@@ -16,7 +16,7 @@ app.use('/areas', areasRouter)
 app.use('/questions', questionsRouter)
 app.use('/users', usersRouter)
 app.use('/answers', answersRouter)
-app.use('/logins', answersRouter)
+app.use('/logins', loginsRouter)
 
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {
