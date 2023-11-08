@@ -2,9 +2,6 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
-import { useMutation } from '@tanstack/react-query'
-import { useQueryClient } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 // css
@@ -15,7 +12,6 @@ import { AiFillEyeInvisible } from 'react-icons/ai'
 import { AiFillEye } from 'react-icons/ai'
 
 export const DbForm = () => {
-    const queryClient = useQueryClient()
     const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
@@ -31,6 +27,8 @@ export const DbForm = () => {
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
+            validateOnChange={false}
+            validateOnBlur={false}
         >
             <Form className='formContainer centered'>
                 <div className='credentials-form-field'>
@@ -41,6 +39,7 @@ export const DbForm = () => {
                         placeholder='шифра'
                     />
                     <button
+                        type='button'
                         className='credentials-form-button'
                         onClick={() => setShowPassword(!showPassword)}
                     >
@@ -48,7 +47,9 @@ export const DbForm = () => {
                     </button>
                 </div>
                 <div className='credentials-form-buttons'>
-                    <button onClick={() => navigate('/')}>назад</button>
+                    <button type='button' onClick={() => navigate('/')}>
+                        назад
+                    </button>
                     <button type='submit'>настави</button>
                 </div>
             </Form>

@@ -53,42 +53,44 @@ export const RegistrationForm = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
         >
-            <Form className="formContainer centered">
+            <Form className='formContainer centered'>
                 <h1>Регистрација:</h1>
                 <label>ГСС број:</label>
                 <ErrorMessage
-                    name="GSS_identification"
-                    component="span"
-                    className="errorMessage"
+                    name='GSS_identification'
+                    component='span'
+                    className='errorMessage'
                 />
                 <Field
-                    type="number"
-                    name="GSS_identification"
+                    type='number'
+                    name='GSS_identification'
                     onWheel={(e) => e.target.blur()}
                 />
                 <label>Име:</label>
                 <ErrorMessage
-                    name="first_name"
-                    component="span"
-                    className="errorMessage"
+                    name='first_name'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="first_name" />
+                <Field name='first_name' />
                 <label>Презиме:</label>
                 <ErrorMessage
-                    name="last_name"
-                    component="span"
-                    className="errorMessage"
+                    name='last_name'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="last_name" />
+                <Field name='last_name' />
                 <label>Надимак:</label>
                 <ErrorMessage
-                    name="nickname"
-                    component="span"
-                    className="errorMessage"
+                    name='nickname'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="nickname" />
-                <button type="submit">Настави</button>
+                <Field name='nickname' />
+                <button type='submit'>Настави</button>
             </Form>
         </Formik>
     )

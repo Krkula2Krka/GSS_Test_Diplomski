@@ -8,7 +8,6 @@
     display: flex;
     background-color: #060b26;
     padding: 1rem;
-    border: solid;
     border-radius: 1rem;
     justify-content: space-between;
     height: 8rem
@@ -35,7 +34,6 @@
     flex-direction: column;
     background-color: #060b26;
     padding: 1rem;
-    border: solid;
     border-radius: 1rem;
     justify-content: space-between;
     height: 8rem

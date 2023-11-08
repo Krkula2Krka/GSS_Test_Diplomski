@@ -36,24 +36,26 @@ export const AddAnswer = (props) => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
         >
-            <Form className="formContainer centered">
+            <Form className='formContainer centered'>
                 <label>Текст одговора:</label>
                 <ErrorMessage
-                    name="answer_text"
-                    component="span"
-                    className="errorMessage"
+                    name='answer_text'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="answer_text" />
+                <Field name='answer_text' />
                 <label>
                     Тачност одговора:
-                    <Field type="checkbox" name="correctness" />
+                    <Field type='checkbox' name='correctness' />
                 </label>
-                <div className="registration-buttons">
+                <div className='registration-buttons'>
                     {props.noBackButton !== true ? (
                         <button onClick={props.resetState}>Назад</button>
                     ) : null}
-                    <button type="submit">Настави</button>
+                    <button type='submit'>Настави</button>
                 </div>
             </Form>
         </Formik>

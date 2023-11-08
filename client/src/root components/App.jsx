@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import toast, { Toaster } from 'react-hot-toast'
+import { useEffect } from 'react'
 
 // Components
 import { LoginForm } from '../components/form/loginForm'
@@ -18,6 +19,7 @@ import { Root } from './root'
 import { PageNotFound } from '../components/error/pageNotFound'
 import { RegistrationForm } from '../components/form/registrationForm'
 import { ErrorPage } from '../components/error/errorPage'
+import { DbForm } from '../components/form/dbForm'
 
 // Pages
 import { TakeTest } from '../pages/takeTest'
@@ -28,8 +30,7 @@ import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
 import { usersLoader } from '../queries/userQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
-import { useEffect } from 'react'
-import { DbForm } from '../components/form/dbForm'
+import { shouldInitLoader } from '../queries/loginQueries'
 
 export const App = () => {
     const queryClient = new QueryClient({
@@ -77,6 +78,15 @@ export const App = () => {
                         return { Component: GetAllUsers }
                     },
                     loader: usersLoader(queryClient),
+                    errorElement: <ErrorPage />
+                },
+                {
+                    path: '/settings',
+                    lazy: async () => {
+                        const { Settings } = await import('../pages/settings')
+                        return { Component: Settings }
+                    },
+                    loader: shouldInitLoader(queryClient),
                     errorElement: <ErrorPage />
                 },
                 {

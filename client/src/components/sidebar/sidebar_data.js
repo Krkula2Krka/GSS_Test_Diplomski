@@ -29,7 +29,7 @@ export const SidebarData = [
     {
         id: 3,
         title: 'Подешавања',
-        path: '/getAllUsers',
+        path: '/settings',
         icon: <IoMdInformationCircle />,
         cName: 'side-text'
     }

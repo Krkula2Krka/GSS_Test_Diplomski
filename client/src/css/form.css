@@ -20,8 +20,12 @@
 }
 
 .credentials-form-input {
-    width: 20rem;
+    width: 25rem;
     height: 1.2rem;
+}
+
+.form-margin {
+    margin-top: 9rem;
 }
 
 .formContainer {

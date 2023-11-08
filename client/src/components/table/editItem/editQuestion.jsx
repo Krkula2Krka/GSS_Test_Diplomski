@@ -38,6 +38,8 @@ export const EditQuestion = (props) => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
         >
             <Form className='formContainer centered'>
                 <label>Текст питања:</label>
