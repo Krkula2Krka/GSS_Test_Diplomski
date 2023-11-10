@@ -49,13 +49,6 @@ const logoutInService = () => {
     login.update({ admin_logged_in: false }, { where: { id: 1 } })
 }
 
-const getAdminLoggedInInService = (save) => {
-    return login.findOne({
-        attributes: ['admin_logged_in'],
-        where: { id: 1 }
-    })
-}
-
 module.exports = {
     createLoginInService,
     shouldInitInService,
@@ -64,6 +57,5 @@ module.exports = {
     setSaveResultsInService,
     getSaveResultsInService,
     loginInService,
-    logoutInService,
-    getAdminLoggedInInService
+    logoutInService
 }

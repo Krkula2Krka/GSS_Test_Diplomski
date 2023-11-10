@@ -9,8 +9,7 @@ const {
     setSaveResultsInService,
     getSaveResultsInService,
     loginInService,
-    logoutInService,
-    getAdminLoggedInInService
+    logoutInService
 } = require('../service/loginsService')
 
 const createLoginInController = async (req, res) => {
