@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 
 // css
 import '../../css/form.css'
@@ -11,10 +13,15 @@ import '../../css/form.css'
 import { AiFillEyeInvisible } from 'react-icons/ai'
 import { AiFillEye } from 'react-icons/ai'
 
+// queries
+import { loginMutation } from '../../queries/loginQueries'
+
 export const DbForm = () => {
     const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
+
+    const { mutateAsync: login } = useMutation(loginMutation())
 
     const initialValues = {
         password: ''
@@ -23,10 +30,21 @@ export const DbForm = () => {
     const validationSchema = Yup.object().shape({
         password: Yup.string().required('Обавезно поље')
     })
+
+    const onSubmit = async (data) => {
+        const res = await login(data)
+        if (res.data.loginSuccessful) navigate('/getAllAreas')
+        else {
+            toast.remove()
+            toast.error('Администратор је већ улогован.')
+        }
+    }
+
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
+            onSubmit={onSubmit}
             validateOnChange={false}
             validateOnBlur={false}
         >

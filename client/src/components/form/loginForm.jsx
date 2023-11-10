@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 
 // css
@@ -14,15 +13,13 @@ import '../../css/form.css'
 import { loginForTestingMutation } from '../../queries/userQueries'
 
 export const LoginForm = () => {
-    const queryClient = useQueryClient()
-
     const initialValues = {
         GSS_identification: '',
         first_name: ''
     }
 
     const { mutateAsync: loginForTesting } = useMutation(
-        loginForTestingMutation(queryClient)
+        loginForTestingMutation()
     )
 
     const validationSchema = Yup.object().shape({

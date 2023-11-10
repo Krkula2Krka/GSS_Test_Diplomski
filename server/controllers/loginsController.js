@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const {
     createLoginInService,
@@ -6,7 +7,10 @@ const {
     changePasswordInService,
     getPasswordInService,
     setSaveResultsInService,
-    getSaveResultsInService
+    getSaveResultsInService,
+    loginInService,
+    logoutInService,
+    getAdminLoggedInInService
 } = require('../service/loginsService')
 
 const createLoginInController = async (req, res) => {
@@ -46,10 +50,27 @@ const getSaveResultsInController = async (_, res) => {
     else return res.sendStatus(404)
 }
 
+const loginInController = async (req, res) => {
+    const data = await shouldInitInService()
+    if (data !== null && data.admin_logged_in)
+        res.json({ loginSuccessful: false })
+    else if (await bcrypt.compare(req.body.password, data.password)) {
+        await loginInService()
+        res.json({ loginSuccessful: true })
+    } else return res.sendStatus(404)
+}
+
+const logoutInController = async (_, res) => {
+    await logoutInService()
+    res.sendStatus(200)
+}
+
 module.exports = {
     createLoginInController,
     shouldInitInController,
     changePasswordInController,
     setSaveResultsInController,
-    getSaveResultsInController
+    getSaveResultsInController,
+    loginInController,
+    logoutInController
 }

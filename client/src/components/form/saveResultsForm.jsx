@@ -2,11 +2,13 @@
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Formik, Form, Field } from 'formik'
+import { useNavigate } from 'react-router-dom'
 
 // queries
 import {
     getSaveResultsQuery,
-    saveResultsMutation
+    saveResultsMutation,
+    logoutMutation
 } from '../../queries/loginQueries'
 
 // components
@@ -18,6 +20,10 @@ export const SaveResultsForm = () => {
     const { mutateAsync: saveResults } = useMutation(
         saveResultsMutation(queryClient)
     )
+
+    const navigate = useNavigate()
+
+    const { mutateAsync: logout } = useMutation(logoutMutation())
 
     const initialValues = {
         save: false
@@ -46,6 +52,15 @@ export const SaveResultsForm = () => {
                     />
                 </label>
                 <button type='submit'>промени</button>
+                <button
+                    type='button'
+                    onClick={async () => {
+                        await logout()
+                        navigate('/')
+                    }}
+                >
+                    одјави се
+                </button>
             </Form>
         </Formik>
     )

@@ -57,6 +57,23 @@ export const saveResultsMutation = (queryClient) => ({
     }
 })
 
+export const loginMutation = () => ({
+    mutationFn: (data) =>
+        axios.post('http://localhost:3001/logins/adminLogin', data),
+    onError: () => {
+        toast.remove()
+        toast.error('Погрешна шифра.')
+    }
+})
+
+export const logoutMutation = () => ({
+    mutationFn: () => axios.post('http://localhost:3001/logins/adminLogout'),
+    onError: () => {
+        toast.remove()
+        toast.error('Грешка са одјављивањем.')
+    }
+})
+
 export const getSaveResultsQuery = () => ({
     queryKey: queryKeys.save,
     queryFn: async () => {

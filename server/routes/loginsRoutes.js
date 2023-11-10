@@ -5,7 +5,9 @@ const {
     shouldInitInController,
     changePasswordInController,
     setSaveResultsInController,
-    getSaveResultsInController
+    getSaveResultsInController,
+    loginInController,
+    logoutInController
 } = require('../controllers/loginsController')
 
 router.get('/shouldInit', shouldInitInController)
@@ -13,6 +15,10 @@ router.get('/shouldInit', shouldInitInController)
 router.get('/saveResults', getSaveResultsInController)
 
 router.post('/changePassword', changePasswordInController)
+
+router.post('/adminLogin', loginInController)
+
+router.post('/adminLogout', logoutInController)
 
 router.post('/saveResults', setSaveResultsInController)
 
