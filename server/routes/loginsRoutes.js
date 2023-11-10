@@ -7,10 +7,11 @@ const {
     setSaveResultsInController,
     getSaveResultsInController,
     loginInController,
-    logoutInController
+    logoutInController,
+    authenticateToken
 } = require('../controllers/loginsController')
 
-router.get('/shouldInit', shouldInitInController)
+router.get('/shouldInit', authenticateToken, shouldInitInController)
 
 router.get('/saveResults', getSaveResultsInController)
 
@@ -20,7 +21,7 @@ router.post('/adminLogin', loginInController)
 
 router.post('/adminLogout', logoutInController)
 
-router.post('/saveResults', setSaveResultsInController)
+router.post('/saveResults', authenticateToken, setSaveResultsInController)
 
 router.post('/', createLoginInController)
 

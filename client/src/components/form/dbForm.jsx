@@ -33,8 +33,10 @@ export const DbForm = () => {
 
     const onSubmit = async (data) => {
         const res = await login(data)
-        if (res.data.loginSuccessful) navigate('/getAllAreas')
-        else {
+        if (res.data.loginSuccessful) {
+            localStorage.setItem('accessToken', res.data.accessToken)
+            navigate('/getAllAreas')
+        } else {
             toast.remove()
             toast.error('Администратор је већ улогован.')
         }

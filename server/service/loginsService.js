@@ -34,7 +34,7 @@ const setSaveResultsInService = (save) => {
     login.update({ save_results: save }, { where: { id: 1 } })
 }
 
-const getSaveResultsInService = (save) => {
+const getSaveResultsInService = () => {
     return login.findOne({
         attributes: ['save_results'],
         where: { id: 1 }

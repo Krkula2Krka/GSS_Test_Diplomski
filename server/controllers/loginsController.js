@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const {
     createLoginInService,
@@ -35,9 +36,9 @@ const changePasswordInController = async (req, res) => {
     return res.sendStatus(404)
 }
 
-const setSaveResultsInController = async (_, res) => {
+const setSaveResultsInController = async (req, res) => {
     const login = await getSaveResultsInService()
-    if (login !== null) {
+    if (login !== null && req.verified) {
         await setSaveResultsInService(!login.save_results)
         return res.sendStatus(200)
     } else res.sendStatus(404)
@@ -54,14 +55,30 @@ const loginInController = async (req, res) => {
     if (data !== null && data.admin_logged_in)
         res.json({ loginSuccessful: false })
     else if (await bcrypt.compare(req.body.password, data.password)) {
+        const accessToken = jwt.sign(
+            { data: data },
+            process.env.ACCESS_TOKEN_SECRET
+        )
         await loginInService()
-        res.json({ loginSuccessful: true })
+        res.json({ loginSuccessful: true, accessToken: accessToken })
     } else return res.sendStatus(404)
 }
 
 const logoutInController = async (_, res) => {
     await logoutInService()
     res.sendStatus(200)
+}
+
+const authenticateToken = (req, res, next) => {
+    const auth = req.headers['authorization']
+    const token = auth && auth.split(' ')[1]
+    if (token === 'null') return res.sendStatus(401)
+    else
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error) => {
+            if (error) return res.sendStatus(401)
+            else req.verified = true
+            next()
+        })
 }
 
 module.exports = {
@@ -71,5 +88,6 @@ module.exports = {
     setSaveResultsInController,
     getSaveResultsInController,
     loginInController,
-    logoutInController
+    logoutInController,
+    authenticateToken
 }

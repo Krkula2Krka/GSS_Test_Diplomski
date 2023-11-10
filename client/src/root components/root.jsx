@@ -12,7 +12,7 @@ export const Root = () => {
     return (
         <ErrorBoundary key={location.pathname} FallbackComponent={ErrorPage}>
             {window.innerWidth > 891 ? <Sidebar /> : <RetractableSidebar />}
-            <div className="content">
+            <div className='content'>
                 <Outlet />
             </div>
         </ErrorBoundary>

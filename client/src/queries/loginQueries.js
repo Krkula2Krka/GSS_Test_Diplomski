@@ -1,5 +1,6 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { request } from '../utils/axios'
 
 const queryKeys = {
     init: ['init'],
@@ -19,9 +20,10 @@ export const addLoginMutation = (queryClient) => ({
 
 export const shouldInitQuery = () => ({
     queryKey: queryKeys.init,
-    queryFn: async () => {
-        const res = await fetch('http://localhost:3001/logins/shouldInit')
-        return res.json()
+    queryFn: () => {
+        //const res = await fetch('http://localhost:3001/logins/shouldInit')
+        //return res.json()
+        return request({ url: '/logins/shouldInit', method: 'get' })
     },
     staleTime: Infinity,
     cacheTime: Infinity
@@ -49,7 +51,9 @@ export const changePasswordMutation = () => ({
 })
 
 export const saveResultsMutation = (queryClient) => ({
-    mutationFn: () => axios.post('http://localhost:3001/logins/saveResults'),
+    mutationFn: () => {
+        return request({ url: '/logins/saveResults', method: 'post' })
+    },
     onSuccess: () => queryClient.invalidateQueries(queryKeys.save),
     onError: () => {
         toast.remove()
@@ -68,6 +72,10 @@ export const loginMutation = () => ({
 
 export const logoutMutation = () => ({
     mutationFn: () => axios.post('http://localhost:3001/logins/adminLogout'),
+    onSuccess: () => {
+        localStorage.removeItem('accessToken')
+        axios.defaults.headers.common['Authorization'] = 'undefined'
+    },
     onError: () => {
         toast.remove()
         toast.error('Грешка са одјављивањем.')
