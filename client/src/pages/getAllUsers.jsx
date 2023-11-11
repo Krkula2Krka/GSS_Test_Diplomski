@@ -89,7 +89,7 @@ export const GetAllUsers = () => {
         <>
             {form === 0 ? (
                 <Table
-                    tableData={users}
+                    tableData={users !== undefined ? users.data : []}
                     calledFrom='users'
                     tableColumns={UserTableColumns}
                     deleteItems={(users) => deleteUsers(users)}
@@ -97,11 +97,11 @@ export const GetAllUsers = () => {
                     openEditForm={(userId) => setForm(userId + 2)}
                     setPage={setPage}
                     page={page}
-                    itemsCount={usersCount}
+                    itemsCount={usersCount !== undefined ? usersCount.data : []}
                     setSearchInput={(search) => setSearchInput(search)}
                     searchFields={searchFields}
                     setPageSize={(pageSize) => setPageSize(pageSize)}
-                    pageSize={pageSize}
+                    pageSize={pageSize !== undefined ? pageSize.data : []}
                     setStartId={(search) => setStartId(search)}
                     setOperator={(operator) => setOperator(operator)}
                     noRowsMessage='Нема корисника'

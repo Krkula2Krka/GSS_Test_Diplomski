@@ -124,18 +124,28 @@ export const AreaDetails = () => {
             {form === 0 ? (
                 <div className='cointainer'>
                     <div className='infoContainer'>
-                        <h2>{location.state.areaName}</h2>
+                        <h2>
+                            {location.state !== null
+                                ? location.state.areaName
+                                : null}
+                        </h2>
                     </div>
                     <Table
-                        tableData={questions}
+                        tableData={
+                            questions !== undefined ? questions.data : []
+                        }
                         tableColumns={QuestionTableColumns}
                         calledFrom='questions'
                         deleteItems={(questions) => deleteQuestions(questions)}
                         openAddForm={() => setForm(1)}
                         openEditForm={(questionId) => setForm(questionId + 2)}
                         searchFields={searchFields}
-                        itemsCount={questionsCount}
-                        pageSize={pageSize}
+                        itemsCount={
+                            questionsCount !== undefined
+                                ? questionsCount.data
+                                : 0
+                        }
+                        pageSize={pageSize !== undefined ? pageSize.data : 30}
                         page={page}
                         setSearchInput={(search) => setSearchInput(search)}
                         setPageSize={(pageSize) => setPageSize(pageSize)}

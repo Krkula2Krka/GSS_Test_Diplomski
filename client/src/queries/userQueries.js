@@ -1,5 +1,6 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { request } from '../utils/axios'
 
 const queryKeys = {
     users: (page) => ['users', page],
@@ -51,7 +52,8 @@ export const loginForTestingMutation = () => ({
 })
 
 export const createUserMutation = (queryClient) => ({
-    mutationFn: (data) => axios.post('http://localhost:3001/users', data),
+    mutationFn: (data) =>
+        request({ url: '/users', method: 'post', data: data }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['users'] })
         queryClient.invalidateQueries(queryKeys.count)
@@ -63,7 +65,8 @@ export const createUserMutation = (queryClient) => ({
 })
 
 export const editUserMutation = (queryClient, page) => ({
-    mutationFn: (data) => axios.post('http://localhost:3001/users/edit', data),
+    mutationFn: (data) =>
+        request({ url: '/users/edit', method: 'post', data: data }),
     onSuccess: () => queryClient.invalidateQueries(queryKeys.users(page)),
     onError: () => {
         toast.remove()
@@ -73,7 +76,7 @@ export const editUserMutation = (queryClient, page) => ({
 
 export const deleteUsersMutation = (queryClient, page) => ({
     mutationFn: (data) =>
-        axios.post('http://localhost:3001/users/delete', data),
+        request({ url: '/users/delete', method: 'post', data: data }),
     onSuccess: () => {
         queryClient.invalidateQueries({
             predicate: (query) =>
@@ -89,7 +92,7 @@ export const deleteUsersMutation = (queryClient, page) => ({
 
 export const setSearchInputMutation = (queryClient) => ({
     mutationFn: (search) =>
-        axios.post('http://localhost:3001/users/setSearchInput', search),
+        request({ url: '/users/setSearchInput', method: 'post', data: search }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['users'] })
         queryClient.invalidateQueries(queryKeys.count)
@@ -101,7 +104,7 @@ export const setSearchInputMutation = (queryClient) => ({
 })
 
 export const resetMutation = (queryClient) => ({
-    mutationFn: () => axios.post('http://localhost:3001/users/reset'),
+    mutationFn: () => request({ url: '/users/reset', method: 'post' }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['users'] })
         queryClient.invalidateQueries(queryKeys.count)
@@ -115,7 +118,7 @@ export const resetMutation = (queryClient) => ({
 
 export const setStartIdMutation = (queryClient) => ({
     mutationFn: (search) =>
-        axios.post('http://localhost:3001/users/setStartId', search),
+        request({ url: '/users/setStartId', method: 'post', data: search }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['users'] })
         queryClient.invalidateQueries(queryKeys.count)
@@ -128,7 +131,7 @@ export const setStartIdMutation = (queryClient) => ({
 
 export const setPageSizeMutation = (queryClient) => ({
     mutationFn: (pageSize) =>
-        axios.post('http://localhost:3001/users/setPageSize', pageSize),
+        request({ url: '/users/setPageSize', method: 'post', data: pageSize }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['users'] })
         queryClient.invalidateQueries(queryKeys.count)
@@ -142,7 +145,7 @@ export const setPageSizeMutation = (queryClient) => ({
 
 export const setOperatorMutation = (queryClient) => ({
     mutationFn: (operator) =>
-        axios.post('http://localhost:3001/users/operator', operator),
+        request({ url: '/users/operator', method: 'post', data: operator }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['users'] })
         queryClient.invalidateQueries(queryKeys.count)
@@ -155,38 +158,21 @@ export const setOperatorMutation = (queryClient) => ({
 
 export const getPageSizeQuery = () => ({
     queryKey: queryKeys.size,
-    queryFn: async () => {
-        const res = await fetch('http://localhost:3001/users/pageSize')
-        return res.json()
-    },
+    queryFn: () => request({ url: '/users/pageSize', method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const getUsersCountQuery = () => ({
     queryKey: queryKeys.count,
-    queryFn: async () => {
-        const res = await fetch('http://localhost:3001/users/count')
-        return res.json()
-    },
+    queryFn: () => request({ url: '/users/count', method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const getUsersBatchQuery = (page) => ({
     queryKey: queryKeys.users(page),
-    queryFn: async () => {
-        const res = await fetch(`http://localhost:3001/users/${page}`)
-        return res.json()
-    },
+    queryFn: () => request({ url: `/users/${page}`, method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
-
-export const usersLoader = (queryClient) => async () => {
-    const query = getUsersBatchQuery(0)
-    return await queryClient.ensureQueryData({
-        queryKey: query.queryKey,
-        queryFn: query.queryFn
-    })
-}

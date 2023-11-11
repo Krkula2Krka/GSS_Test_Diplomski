@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
+import Cookies from 'js-cookie'
 
 // css
 import '../../css/form.css'
@@ -34,7 +35,9 @@ export const DbForm = () => {
     const onSubmit = async (data) => {
         const res = await login(data)
         if (res.data.loginSuccessful) {
-            localStorage.setItem('accessToken', res.data.accessToken)
+            Cookies.set('accessToken', res.data.accessToken, {
+                expires: 1
+            })
             navigate('/getAllAreas')
         } else {
             toast.remove()

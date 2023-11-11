@@ -17,32 +17,42 @@ const {
     resetSearchParametersInController
 } = require('../controllers/questionsController')
 
+const { authenticateToken } = require('../controllers/loginsController')
+
 router.get('/test', getTestQuestionsInController)
 
-router.get('/pageSize', getPageSizeInController)
+router.get('/pageSize', authenticateToken, getPageSizeInController)
 
-router.get('/count/:area_id', getQuestionsCountInController)
+router.get('/count/:area_id', authenticateToken, getQuestionsCountInController)
 
-router.get('/:area_id/:page', getQuestionsBatchInController)
+router.get('/:area_id/:page', authenticateToken, getQuestionsBatchInController)
 
-router.post('/', createQuestionInController)
+router.post('/', authenticateToken, createQuestionInController)
 
-router.post('/delete', deleteQuestionsInController)
+router.post('/delete', authenticateToken, deleteQuestionsInController)
 
-router.post('/reset', resetSearchParametersInController)
+router.post('/reset', authenticateToken, resetSearchParametersInController)
 
-router.post('/setSearchInput', setSearchInputInController)
+router.post('/setSearchInput', authenticateToken, setSearchInputInController)
 
-router.post('/setDifficultyFilters', setDifficultyFiltersInController)
+router.post(
+    '/setDifficultyFilters',
+    authenticateToken,
+    setDifficultyFiltersInController
+)
 
-router.post('/setImportanceFilters', setImportanceFiltersInController)
+router.post(
+    '/setImportanceFilters',
+    authenticateToken,
+    setImportanceFiltersInController
+)
 
-router.post('/setStartId', setStartIdInController)
+router.post('/setStartId', authenticateToken, setStartIdInController)
 
-router.post('/setPageSize', setPageSizeInController)
+router.post('/setPageSize', authenticateToken, setPageSizeInController)
 
-router.post('/operator', setOperatorInController)
+router.post('/operator', authenticateToken, setOperatorInController)
 
-router.post('/edit/:id', editQuestionInController)
+router.post('/edit/:id', authenticateToken, editQuestionInController)
 
 module.exports = router

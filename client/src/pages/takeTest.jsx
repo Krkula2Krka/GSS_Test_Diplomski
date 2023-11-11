@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 // components
-import { InfoModal } from '../components/test/infoModal'
+import { InfoModal } from '../components/quiz/infoModal'
 import { useUnloadConditionally } from '../utils/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../utils/hooks/useOnWindowResizeConditionally'
 import { useVisibilityChangeConditionally } from '../utils/hooks/useVisibilityChangeConditionally'
-import { Quiz } from '../components/test/quiz'
+import { Quiz } from '../components/quiz/quiz'
 
 // queries
 import {

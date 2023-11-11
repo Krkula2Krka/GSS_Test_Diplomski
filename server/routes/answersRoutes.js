@@ -15,28 +15,42 @@ const {
     resetSearchParametersInController
 } = require('../controllers/answersController')
 
-router.get('/pageSize', getPageSizeInController)
+const { authenticateToken } = require('../controllers/loginsController')
 
-router.get('/count/:question_id', getAnswersCountInController)
+router.get('/pageSize', authenticateToken, getPageSizeInController)
 
-router.get('/:question_id/:page', getAnswersBatchInController)
+router.get(
+    '/count/:question_id',
+    authenticateToken,
+    getAnswersCountInController
+)
 
-router.post('/', createAnswerInController)
+router.get(
+    '/:question_id/:page',
+    authenticateToken,
+    getAnswersBatchInController
+)
 
-router.post('/setSearchInput', setSearchInputInController)
+router.post('/', authenticateToken, createAnswerInController)
 
-router.post('/setCorrectnessFilters', setCorrectnessInController)
+router.post('/setSearchInput', authenticateToken, setSearchInputInController)
 
-router.post('/setStartId', setStartIdInController)
+router.post(
+    '/setCorrectnessFilters',
+    authenticateToken,
+    setCorrectnessInController
+)
 
-router.post('/setPageSize', setPageSizeInController)
+router.post('/setStartId', authenticateToken, setStartIdInController)
 
-router.post('/reset', resetSearchParametersInController)
+router.post('/setPageSize', authenticateToken, setPageSizeInController)
 
-router.post('/operator', setOperatorInController)
+router.post('/reset', authenticateToken, resetSearchParametersInController)
 
-router.post('/delete', deleteAnswersInController)
+router.post('/operator', authenticateToken, setOperatorInController)
 
-router.post('/edit/:id', editAnswerInController)
+router.post('/delete', authenticateToken, deleteAnswersInController)
+
+router.post('/edit/:id', authenticateToken, editAnswerInController)
 
 module.exports = router

@@ -1,5 +1,5 @@
-import axios from 'axios'
 import toast from 'react-hot-toast'
+import { request } from '../utils/axios'
 
 const queryKeys = {
     questions: (id, page) => ['questions', id, page],
@@ -10,37 +10,28 @@ const queryKeys = {
 
 export const getQuestionsBatchQuery = (id, page) => ({
     queryKey: queryKeys.questions(id, page),
-    queryFn: async () => {
-        const res = await fetch(`http://localhost:3001/questions/${id}/${page}`)
-        return res.json()
-    },
+    queryFn: () => request({ url: `/questions/${id}/${page}`, method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const getQuestionsCountQuery = (id) => ({
     queryKey: queryKeys.count(id),
-    queryFn: async () => {
-        const res = await fetch(`http://localhost:3001/questions/count/${id}`)
-        return res.json()
-    },
+    queryFn: () => request({ url: `/questions/count/${id}`, method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const getPageSizeQuery = () => ({
     queryKey: queryKeys.size,
-    queryFn: async () => {
-        const res = await fetch('http://localhost:3001/questions/pageSize')
-        return res.json()
-    },
+    queryFn: () => request({ url: '/questions/pageSize', method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const setOperatorMutation = (queryClient, area_id) => ({
     mutationFn: (operator) =>
-        axios.post('http://localhost:3001/questions/operator', operator),
+        request({ url: '/questions/operator', method: 'post', data: operator }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions', area_id] })
         queryClient.invalidateQueries(queryKeys.count(area_id))
@@ -52,7 +43,7 @@ export const setOperatorMutation = (queryClient, area_id) => ({
 })
 
 export const resetMutation = (queryClient) => ({
-    mutationFn: () => axios.post('http://localhost:3001/questions/reset'),
+    mutationFn: () => request({ url: '/questions/reset', method: 'post' }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions'] })
         queryClient.invalidateQueries({ queryKey: ['questionsCount'] })
@@ -66,7 +57,11 @@ export const resetMutation = (queryClient) => ({
 
 export const setPageSizeMutation = (queryClient, area_id) => ({
     mutationFn: (pageSize) =>
-        axios.post('http://localhost:3001/questions/setPageSize', pageSize),
+        request({
+            url: '/questions/setPageSize',
+            method: 'post',
+            data: pageSize
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions', area_id] })
         queryClient.invalidateQueries(queryKeys.count(area_id))
@@ -80,7 +75,11 @@ export const setPageSizeMutation = (queryClient, area_id) => ({
 
 export const setStartIdMutation = (queryClient, area_id) => ({
     mutationFn: (search) =>
-        axios.post('http://localhost:3001/questions/setStartId', search),
+        request({
+            url: '/questions/setStartId',
+            method: 'post',
+            data: search
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions', area_id] })
         queryClient.invalidateQueries(queryKeys.count(area_id))
@@ -93,10 +92,11 @@ export const setStartIdMutation = (queryClient, area_id) => ({
 
 export const setDifficultyFiltersMutation = (queryClient, area_id) => ({
     mutationFn: (search) =>
-        axios.post(
-            'http://localhost:3001/questions/setDifficultyFilters',
-            search
-        ),
+        request({
+            url: '/questions/setDifficultyFilters',
+            method: 'post',
+            data: search
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions', area_id] })
         queryClient.invalidateQueries(queryKeys.count(area_id))
@@ -109,10 +109,11 @@ export const setDifficultyFiltersMutation = (queryClient, area_id) => ({
 
 export const setImportanceFiltersMutation = (queryClient, area_id) => ({
     mutationFn: (search) =>
-        axios.post(
-            'http://localhost:3001/questions/setImportanceFilters',
-            search
-        ),
+        request({
+            url: '/questions/setImportanceFilters',
+            method: 'post',
+            data: search
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions', area_id] })
         queryClient.invalidateQueries(queryKeys.count(area_id))
@@ -125,7 +126,11 @@ export const setImportanceFiltersMutation = (queryClient, area_id) => ({
 
 export const setSearchInputMutation = (queryClient, area_id) => ({
     mutationFn: (search) =>
-        axios.post('http://localhost:3001/questions/setSearchInput', search),
+        request({
+            url: '/questions/setSearchInput',
+            method: 'post',
+            data: search
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions', area_id] })
         queryClient.invalidateQueries(queryKeys.count(area_id))
@@ -138,7 +143,11 @@ export const setSearchInputMutation = (queryClient, area_id) => ({
 
 export const deleteQuestionsMutation = (queryClient, area_id, page) => ({
     mutationFn: (data) =>
-        axios.post('http://localhost:3001/questions/delete', data),
+        request({
+            url: '/questions/delete',
+            method: 'post',
+            data: data
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({
             predicate: (query) =>
@@ -155,7 +164,12 @@ export const deleteQuestionsMutation = (queryClient, area_id, page) => ({
 })
 
 export const addQuestionMutation = (queryClient, area_id) => ({
-    mutationFn: (data) => axios.post('http://localhost:3001/questions', data),
+    mutationFn: (data) =>
+        request({
+            url: '/questions',
+            method: 'post',
+            data: data
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['questions', area_id] })
         queryClient.invalidateQueries(queryKeys.count(area_id))
@@ -168,10 +182,11 @@ export const addQuestionMutation = (queryClient, area_id) => ({
 
 export const editQuestionMutation = (queryClient, area_id, page) => ({
     mutationFn: (data) =>
-        axios.post(
-            `http://localhost:3001/questions/edit/${data.id}`,
-            data.formData
-        ),
+        request({
+            url: `/questions/edit/${data.id}`,
+            method: 'post',
+            data: data.formData
+        }),
     onSuccess: () =>
         queryClient.invalidateQueries(queryKeys.questions(area_id, page)),
     onError: () => {

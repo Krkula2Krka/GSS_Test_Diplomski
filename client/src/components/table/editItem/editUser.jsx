@@ -62,11 +62,6 @@ export const EditUser = (props) => {
                     className='errorMessage'
                 />
                 <Field name='nickname' placeholder='надимак' />
-                <label>Тип корисника:</label>
-                <Field as='select' name='user_type'>
-                    <option value='корисник'>корисник</option>
-                    <option value='администратор'>администратор</option>
-                </Field>
                 <div className='registration-buttons'>
                     <button onClick={props.resetState}>назад</button>
                     <button type='submit'>настави</button>

@@ -1,5 +1,5 @@
-import axios from 'axios'
 import toast from 'react-hot-toast'
+import { request } from '../utils/axios'
 
 const queryKeys = {
     areas: ['areas'],
@@ -8,13 +8,9 @@ const queryKeys = {
 
 export const getAllAreasQuery = () => ({
     queryKey: queryKeys.areas,
-    queryFn: async () => {
-        const res = await fetch('http://localhost:3001/areas')
-        const data = await res.json()
-        return data
-    },
-    staleTime: 1000 * 60 * 30,
-    cacheTime: 1000 * 60 * 30
+    queryFn: () => request({ url: '/areas', method: 'get' }),
+    staleTime: Infinity,
+    cacheTime: Infinity
 })
 
 export const areasLoader = (queryClient) => async () => {
@@ -26,7 +22,8 @@ export const areasLoader = (queryClient) => async () => {
 }
 
 export const addAreaMutation = (queryClient) => ({
-    mutationFn: (data) => axios.post('http://localhost:3001/areas', data),
+    mutationFn: (data) =>
+        request({ url: '/areas', method: 'post', data: data }),
     onSuccess: () => queryClient.invalidateQueries(queryKeys.areas),
     onError: () => {
         toast.remove()
@@ -35,7 +32,7 @@ export const addAreaMutation = (queryClient) => ({
 })
 
 export const deleteAreaMutation = (queryClient) => ({
-    mutationFn: (id) => axios.post(`http://localhost:3001/areas/delete/${id}`),
+    mutationFn: (id) => request({ url: `/areas/delete/${id}`, method: 'post' }),
     onSuccess: () => queryClient.invalidateQueries(queryKeys.areas),
     onError: () => {
         toast.remove()
@@ -45,10 +42,11 @@ export const deleteAreaMutation = (queryClient) => ({
 
 export const editAreaMutation = (queryClient) => ({
     mutationFn: (data) =>
-        axios.post(
-            `http://localhost:3001/areas/edit/${data.id}`,
-            data.formData
-        ),
+        request({
+            url: `/areas/edit/${data.id}`,
+            method: 'post',
+            data: data.formData
+        }),
     onSuccess: () => queryClient.invalidateQueries(queryKeys.areas),
     onError: () => {
         toast.remove()

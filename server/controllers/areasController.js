@@ -1,7 +1,6 @@
 const {
     getAllAreasInService,
     createAreaInService,
-    getAreaByIdInService,
     deleteAreaInService,
     editAreaInService
 } = require('../service/areasService')
@@ -21,11 +20,6 @@ const deleteAreaInController = async (req, res) => {
     res.sendStatus(200)
 }
 
-const getAreaByIdInController = async (req, res) => {
-    const area = await getAreaByIdInService(req.params.id)
-    res.json(area)
-}
-
 const editAreaInController = async (req, res) => {
     await editAreaInService(req.params.id, req.body)
     res.sendStatus(200)
@@ -34,7 +28,6 @@ const editAreaInController = async (req, res) => {
 module.exports = {
     getAllAreasInController,
     createAreaInController,
-    getAreaByIdInController,
     deleteAreaInController,
     editAreaInController
 }

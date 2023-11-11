@@ -1,5 +1,5 @@
-import axios from 'axios'
 import toast from 'react-hot-toast'
+import { request } from '../utils/axios'
 
 const queryKeys = {
     answers: (id, page) => ['answers', id, page],
@@ -9,16 +9,13 @@ const queryKeys = {
 
 export const getAnswersBatchQuery = (id, page) => ({
     queryKey: queryKeys.answers(id, page),
-    queryFn: async () => {
-        const res = await fetch(`http://localhost:3001/answers/${id}/${page}`)
-        return res.json()
-    },
+    queryFn: () => request({ url: `/answers/${id}/${page}`, method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const resetMutation = (queryClient) => ({
-    mutationFn: () => axios.post('http://localhost:3001/answers/reset'),
+    mutationFn: () => request({ url: '/answers/reset', method: 'post' }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['answers'] })
         queryClient.invalidateQueries({ queryKey: ['answersCount'] })
@@ -32,27 +29,21 @@ export const resetMutation = (queryClient) => ({
 
 export const getAnswersCountQuery = (id) => ({
     queryKey: queryKeys.count(id),
-    queryFn: async () => {
-        const res = await fetch(`http://localhost:3001/answers/count/${id}`)
-        return res.json()
-    },
+    queryFn: () => request({ url: `/answers/count/${id}`, method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const getPageSizeQuery = () => ({
     queryKey: queryKeys.size,
-    queryFn: async () => {
-        const res = await fetch('http://localhost:3001/answers/pageSize')
-        return res.json()
-    },
+    queryFn: () => request({ url: '/answers/pageSize', method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
 
 export const setOperatorMutation = (queryClient, question_id) => ({
     mutationFn: (operator) =>
-        axios.post('http://localhost:3001/answers/operator', operator),
+        request({ url: '/answers/operator', method: 'post', data: operator }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['answers', question_id] })
         queryClient.invalidateQueries(queryKeys.count(question_id))
@@ -65,7 +56,11 @@ export const setOperatorMutation = (queryClient, question_id) => ({
 
 export const setPageSizeMutation = (queryClient, question_id) => ({
     mutationFn: (pageSize) =>
-        axios.post('http://localhost:3001/answers/setPageSize', pageSize),
+        request({
+            url: '/answers/setPageSize',
+            method: 'post',
+            data: pageSize
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['answers', question_id] })
         queryClient.invalidateQueries(queryKeys.count(question_id))
@@ -79,7 +74,11 @@ export const setPageSizeMutation = (queryClient, question_id) => ({
 
 export const setStartIdMutation = (queryClient, question_id) => ({
     mutationFn: (search) =>
-        axios.post('http://localhost:3001/answers/setStartId', search),
+        request({
+            url: '/answers/setStartId',
+            method: 'post',
+            data: search
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['answers', question_id] })
         queryClient.invalidateQueries(queryKeys.count(question_id))
@@ -92,10 +91,11 @@ export const setStartIdMutation = (queryClient, question_id) => ({
 
 export const setCorrectnessFiltersMutation = (queryClient, question_id) => ({
     mutationFn: (search) =>
-        axios.post(
-            'http://localhost:3001/answers/setCorrectnessFilters',
-            search
-        ),
+        request({
+            url: '/answers/setCorrectnessFilters',
+            method: 'post',
+            data: search
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['answers', question_id] })
         queryClient.invalidateQueries(queryKeys.count(question_id))
@@ -108,7 +108,11 @@ export const setCorrectnessFiltersMutation = (queryClient, question_id) => ({
 
 export const setSearchInputMutation = (queryClient, question_id) => ({
     mutationFn: (search) =>
-        axios.post('http://localhost:3001/answers/setSearchInput', search),
+        request({
+            url: '/answers/setSearchInput',
+            method: 'post',
+            data: search
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['answers', question_id] })
         queryClient.invalidateQueries(queryKeys.count(question_id))
@@ -120,7 +124,12 @@ export const setSearchInputMutation = (queryClient, question_id) => ({
 })
 
 export const addAnswerMutation = (queryClient, question_id) => ({
-    mutationFn: (data) => axios.post('http://localhost:3001/answers', data),
+    mutationFn: (data) =>
+        request({
+            url: '/answers',
+            method: 'post',
+            data: data
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['answers', question_id] })
         queryClient.invalidateQueries(queryKeys.count(question_id))
@@ -133,7 +142,11 @@ export const addAnswerMutation = (queryClient, question_id) => ({
 
 export const deleteAnswersMutation = (queryClient, question_id, page) => ({
     mutationFn: (data) =>
-        axios.post('http://localhost:3001/answers/delete', data),
+        request({
+            url: '/answers/delete',
+            method: 'post',
+            data: data
+        }),
     onSuccess: () => {
         queryClient.invalidateQueries({
             predicate: (query) =>
@@ -151,10 +164,11 @@ export const deleteAnswersMutation = (queryClient, question_id, page) => ({
 
 export const editAnswerMutation = (queryClient, id, page) => ({
     mutationFn: (data) =>
-        axios.post(
-            `http://localhost:3001/answers/edit/${data.id}`,
-            data.formData
-        ),
+        request({
+            url: `/answers/edit/${data.id}`,
+            method: 'post',
+            data: data.formData
+        }),
     onSuccess: () => queryClient.invalidateQueries(queryKeys.answers(id, page)),
     onError: () => {
         toast.remove()

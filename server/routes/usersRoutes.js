@@ -17,25 +17,27 @@ const {
     resetSearchParametersInController
 } = require('../controllers/usersController')
 
-router.get('/count', getUsersCountInController)
+const { authenticateToken } = require('../controllers/loginsController')
 
-router.get('/pageSize', getPageSizeInController)
+router.get('/count', authenticateToken, getUsersCountInController)
 
-router.get('/:page', getUsersBatchInController)
+router.get('/pageSize', authenticateToken, getPageSizeInController)
 
-router.post('/setSearchInput', setSearchInputInController)
+router.get('/:page', authenticateToken, getUsersBatchInController)
 
-router.post('/setStartId', setStartIdInController)
+router.post('/setSearchInput', authenticateToken, setSearchInputInController)
 
-router.post('/setPageSize', setPageSizeInController)
+router.post('/setStartId', authenticateToken, setStartIdInController)
 
-router.post('/reset', resetSearchParametersInController)
+router.post('/setPageSize', authenticateToken, setPageSizeInController)
 
-router.post('/operator', setOperatorInController)
+router.post('/reset', authenticateToken, resetSearchParametersInController)
 
-router.post('/', createUserInController)
+router.post('/operator', authenticateToken, setOperatorInController)
 
-router.post('/loginForTesting/', loginUserForTestingInController)
+router.post('/', authenticateToken, createUserInController)
+
+router.post('/loginForTesting', loginUserForTestingInController)
 
 router.get(
     '/checkLoginForTesting/:GSS_identification',
@@ -47,8 +49,8 @@ router.post(
     logoutUserForTestingInController
 )
 
-router.post('/edit', editUserInController)
+router.post('/edit', authenticateToken, editUserInController)
 
-router.post('/delete', deleteUsersInController)
+router.post('/delete', authenticateToken, deleteUsersInController)
 
 module.exports = router

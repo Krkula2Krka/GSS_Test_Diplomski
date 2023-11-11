@@ -106,20 +106,36 @@ export const QuestionDetails = () => {
             {form === 0 ? (
                 <div className='cointainer'>
                     <div className='infoContainer'>
-                        <h2>{location.state.questionText}</h2>
-                        <h2>Тежина: {location.state.difficulty}</h2>
-                        <h2>Важност: {location.state.importance}</h2>
+                        <h2>
+                            {location.state !== null
+                                ? location.state.questionText
+                                : null}
+                        </h2>
+                        <h2>
+                            Тежина:{' '}
+                            {location.state !== null
+                                ? location.state.difficulty
+                                : null}
+                        </h2>
+                        <h2>
+                            Важност:{' '}
+                            {location.state !== null
+                                ? location.state.importance
+                                : null}
+                        </h2>
                     </div>
                     <Table
-                        tableData={answers}
+                        tableData={answers !== undefined ? answers.data : []}
                         tableColumns={AnswerTableColumns}
                         calledFrom='answers'
                         deleteItems={(answers) => deleteAnswers(answers)}
                         openAddForm={() => setForm(1)}
                         openEditForm={(answerId) => setForm(answerId + 2)}
                         searchFields={searchFields}
-                        itemsCount={answersCount}
-                        pageSize={pageSize}
+                        itemsCount={
+                            answersCount !== undefined ? answersCount.data : []
+                        }
+                        pageSize={pageSize !== undefined ? pageSize.data : []}
                         page={page}
                         setPage={setPage}
                         setSearchInput={(search) => setSearchInput(search)}

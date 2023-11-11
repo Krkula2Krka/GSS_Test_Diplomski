@@ -1,6 +1,7 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { request } from '../utils/axios'
+import Cookies from 'js-cookie'
 
 const queryKeys = {
     init: ['init'],
@@ -20,11 +21,7 @@ export const addLoginMutation = (queryClient) => ({
 
 export const shouldInitQuery = () => ({
     queryKey: queryKeys.init,
-    queryFn: () => {
-        //const res = await fetch('http://localhost:3001/logins/shouldInit')
-        //return res.json()
-        return request({ url: '/logins/shouldInit', method: 'get' })
-    },
+    queryFn: () => request({ url: '/logins/shouldInit', method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })
@@ -39,7 +36,7 @@ export const shouldInitLoader = (queryClient) => async () => {
 
 export const changePasswordMutation = () => ({
     mutationFn: (data) =>
-        axios.post('http://localhost:3001/logins/changePassword', data),
+        request({ url: '/logins/changePassword', method: 'post', data: data }),
     onSuccess: () => {
         toast.remove()
         toast.success('Успешно мењање шифре.')
@@ -51,9 +48,7 @@ export const changePasswordMutation = () => ({
 })
 
 export const saveResultsMutation = (queryClient) => ({
-    mutationFn: () => {
-        return request({ url: '/logins/saveResults', method: 'post' })
-    },
+    mutationFn: () => request({ url: '/logins/saveResults', method: 'post' }),
     onSuccess: () => queryClient.invalidateQueries(queryKeys.save),
     onError: () => {
         toast.remove()
@@ -71,11 +66,8 @@ export const loginMutation = () => ({
 })
 
 export const logoutMutation = () => ({
-    mutationFn: () => axios.post('http://localhost:3001/logins/adminLogout'),
-    onSuccess: () => {
-        localStorage.removeItem('accessToken')
-        axios.defaults.headers.common['Authorization'] = 'undefined'
-    },
+    mutationFn: () => request({ url: '/logins/adminLogout', method: 'post' }),
+    onSuccess: () => Cookies.remove('accessToken'),
     onError: () => {
         toast.remove()
         toast.error('Грешка са одјављивањем.')
@@ -84,10 +76,7 @@ export const logoutMutation = () => ({
 
 export const getSaveResultsQuery = () => ({
     queryKey: queryKeys.save,
-    queryFn: async () => {
-        const res = await fetch('http://localhost:3001/logins/saveResults')
-        return res.json()
-    },
+    queryFn: () => request({ url: '/logins/saveResults', method: 'get' }),
     staleTime: Infinity,
     cacheTime: Infinity
 })

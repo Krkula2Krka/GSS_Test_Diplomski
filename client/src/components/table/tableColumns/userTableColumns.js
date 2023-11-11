@@ -15,9 +15,5 @@ export const UserTableColumns = [
     {
         field: 'nickname',
         headerName: 'надимак'
-    },
-    {
-        field: 'user_type',
-        headerName: 'тип корисника'
     }
 ]

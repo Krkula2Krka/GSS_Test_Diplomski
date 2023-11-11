@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import { LoginForm } from '../components/form/loginForm'
 import { Root } from './root'
 import { PageNotFound } from '../utils/error/pageNotFound'
+import { UnauthorizedAccess } from '../utils/error/unauthorizedAccess'
 import { RegistrationForm } from '../components/form/registrationForm'
 import { ErrorPage } from '../utils/error/errorPage'
 import { DbForm } from '../components/form/dbForm'
@@ -23,7 +24,6 @@ import { Home } from '../pages/home'
 // queries
 import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
-import { usersLoader } from '../queries/userQueries'
 import { testQuestionsLoader } from '../queries/questionQueries'
 import { shouldInitLoader } from '../queries/loginQueries'
 
@@ -60,7 +60,6 @@ export const App = () => {
                         )
                         return { Component: GetAllUsers }
                     },
-                    loader: usersLoader(queryClient),
                     errorElement: <ErrorPage />
                 },
                 {
@@ -128,6 +127,10 @@ export const App = () => {
                 return await testQuestionsLoader(queryClient, isUserLoggedIn)
             },
             errorElement: <ErrorPage />
+        },
+        {
+            path: '/unauthorized',
+            element: <UnauthorizedAccess />
         },
         {
             path: '*',

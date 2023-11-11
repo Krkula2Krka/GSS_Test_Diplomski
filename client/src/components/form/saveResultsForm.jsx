@@ -48,7 +48,13 @@ export const SaveResultsForm = () => {
                     <Field
                         type='checkbox'
                         name='save'
-                        checked={data === true ? true : false}
+                        checked={
+                            data !== undefined
+                                ? data.data === true
+                                    ? true
+                                    : false
+                                : false
+                        }
                     />
                 </label>
                 <button type='submit'>промени</button>

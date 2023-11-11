@@ -13,13 +13,13 @@ const {
 
 router.get('/shouldInit', authenticateToken, shouldInitInController)
 
-router.get('/saveResults', getSaveResultsInController)
+router.get('/saveResults', authenticateToken, getSaveResultsInController)
 
-router.post('/changePassword', changePasswordInController)
+router.post('/changePassword', authenticateToken, changePasswordInController)
 
 router.post('/adminLogin', loginInController)
 
-router.post('/adminLogout', logoutInController)
+router.post('/adminLogout', authenticateToken, logoutInController)
 
 router.post('/saveResults', authenticateToken, setSaveResultsInController)
 

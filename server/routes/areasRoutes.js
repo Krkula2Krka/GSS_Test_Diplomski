@@ -3,19 +3,18 @@ const router = express.Router()
 const {
     getAllAreasInController,
     createAreaInController,
-    getAreaByIdInController,
     deleteAreaInController,
     editAreaInController
 } = require('../controllers/areasController')
 
-router.get('/', getAllAreasInController)
+const { authenticateToken } = require('../controllers/loginsController')
 
-router.get('/:id', getAreaByIdInController)
+router.get('/', authenticateToken, getAllAreasInController)
 
-router.post('/', createAreaInController)
+router.post('/', authenticateToken, createAreaInController)
 
-router.post('/delete/:id', deleteAreaInController)
+router.post('/delete/:id', authenticateToken, deleteAreaInController)
 
-router.post('/edit/:id', editAreaInController)
+router.post('/edit/:id', authenticateToken, editAreaInController)
 
 module.exports = router

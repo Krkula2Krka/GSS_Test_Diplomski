@@ -28,15 +28,9 @@ const editAreaInService = (id, data) => {
     )
 }
 
-const getAreaByIdInService = (id) => {
-    const wantedArea = area.findByPk(id)
-    return wantedArea
-}
-
 module.exports = {
     getAllAreasInService,
     createAreaInService,
-    getAreaByIdInService,
     deleteAreaInService,
     editAreaInService
 }

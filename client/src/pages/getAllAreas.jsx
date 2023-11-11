@@ -27,8 +27,8 @@ export const GetAllAreas = () => {
         isFetching
     } = useQuery(getAllAreasQuery())
 
-    const areasWithDummyData = [...areas]
-    if (areas.length !== 0)
+    const areasWithDummyData = [...areas.data]
+    if (areas.data.length !== 0)
         areasWithDummyData.push({ id: -1, area_name: 'dummy' })
 
     if (isLoading || isFetching) return <LoadingData />
@@ -43,13 +43,13 @@ export const GetAllAreas = () => {
                     <div key={key}>
                         {area.id > 0 ? (
                             stateButton !==
-                                area.id + areasWithDummyData.length &&
-                            stateButton !== area.id ? (
+                                key + 1 + areasWithDummyData.length &&
+                            stateButton !== key + 1 ? (
                                 <Area
-                                    setEditState={() => setStateButton(area.id)}
+                                    setEditState={() => setStateButton(key + 1)}
                                     setDeleteState={() =>
                                         setStateButton(
-                                            areasWithDummyData.length + area.id
+                                            areasWithDummyData.length + key + 1
                                         )
                                     }
                                     areaName={area.area_name}

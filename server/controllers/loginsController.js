@@ -57,7 +57,8 @@ const loginInController = async (req, res) => {
     else if (await bcrypt.compare(req.body.password, data.password)) {
         const accessToken = jwt.sign(
             { data: data },
-            process.env.ACCESS_TOKEN_SECRET
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: 86400 }
         )
         await loginInService()
         res.json({ loginSuccessful: true, accessToken: accessToken })
