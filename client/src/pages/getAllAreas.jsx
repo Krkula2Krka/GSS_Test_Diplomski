@@ -14,8 +14,8 @@ import { EditArea } from '../components/area/editArea'
 import { Area } from '../components/area/area'
 import { DeleteArea } from '../components/area/deleteArea'
 import { NoArea } from '../components/area/noArea'
-import { ErrorData } from '../components/error/errorData'
-import { LoadingData } from '../components/loadingData'
+import { ErrorData } from '../utils/error/errorData'
+import { LoadingData } from '../utils/loadingData'
 
 export const GetAllAreas = () => {
     const [stateButton, setStateButton] = useState(0)
@@ -37,7 +37,7 @@ export const GetAllAreas = () => {
     if (areasWithDummyData.length === 0) return <NoArea />
 
     return (
-        <div className="areas">
+        <div className='areas'>
             {areasWithDummyData.map((area, key) => {
                 return (
                     <div key={key}>

@@ -20,10 +20,10 @@ import { UserTableColumns } from '../components/table/tableColumns/userTableColu
 import { Table } from '../components/table/table'
 import { AddUser } from '../components/table/addItem/addUser'
 import { EditUser } from '../components/table/editItem/editUser'
-import { ErrorData } from '../components/error/errorData'
+import { ErrorData } from '../utils/error/errorData'
 
 // hooks
-import { useUnloadConditionally } from '../components/hooks/useUnloadConditionally'
+import { useUnloadConditionally } from '../utils/hooks/useUnloadConditionally'
 
 export const GetAllUsers = () => {
     const [form, setForm] = useState(0)

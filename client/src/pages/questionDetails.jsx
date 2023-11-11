@@ -25,7 +25,7 @@ import { Table } from '../components/table/table'
 import { AnswerTableColumns } from '../components/table/tableColumns/answerTableColumns'
 import { AddAnswer } from '../components/table/addItem/addAnswer'
 import { EditAnswer } from '../components/table/editItem/editAnswer'
-import { ErrorData } from '../components/error/errorData'
+import { ErrorData } from '../utils/error/errorData'
 
 export const QuestionDetails = () => {
     const [form, setForm] = useState(0)

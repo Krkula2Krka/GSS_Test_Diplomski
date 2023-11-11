@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { shouldInitQuery } from '../queries/loginQueries'
 
 // components
-import { ErrorData } from '../components/error/errorData'
+import { ErrorData } from '../utils/error/errorData'
 import { SaveResultsForm } from '../components/form/saveResultsForm'
 import { InitSettingsForm } from '../components/form/initSettingsForm'
 import { ChangePassworfForm } from '../components/form/changePassworfForm'

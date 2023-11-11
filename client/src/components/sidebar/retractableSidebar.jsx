@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import { SidebarData } from './sidebar_data'
 
 // Hooks
-import { useStopScrolling } from '../hooks/useStopScrolling'
+import { useStopScrolling } from '../../utils/hooks/useStopScrolling'
 
 // css
 import '../../css/sidebar.css'
@@ -21,11 +21,11 @@ export const RetractableSidebar = () => {
     return (
         <div>
             {open === 1 ? (
-                <nav className="side-menu full-witdh">
+                <nav className='side-menu full-witdh'>
                     <ul>
                         <li>
                             <button
-                                className="hamburger-button open-hamburger-button"
+                                className='hamburger-button open-hamburger-button'
                                 onClick={() => setOpen(0)}
                             >
                                 <ImCross />
@@ -38,11 +38,11 @@ export const RetractableSidebar = () => {
                                         onClick={() => setOpen(0)}
                                         to={item.path}
                                     >
-                                        <div className="open-mobile-sidebar-element">
-                                            <div className="side-icon-mobile">
+                                        <div className='open-mobile-sidebar-element'>
+                                            <div className='side-icon-mobile'>
                                                 {item.icon}
                                             </div>
-                                            <div className="side-text">
+                                            <div className='side-text'>
                                                 {item.title}
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@ export const RetractableSidebar = () => {
                     </ul>
                 </nav>
             ) : (
-                <button className="hamburger-button" onClick={() => setOpen(1)}>
+                <button className='hamburger-button' onClick={() => setOpen(1)}>
                     <GiHamburgerMenu />
                 </button>
             )}

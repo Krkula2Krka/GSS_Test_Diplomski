@@ -24,7 +24,7 @@ import { QuestionTableColumns } from '../components/table/tableColumns/questionT
 import { Table } from '../components/table/table'
 import { AddQuestion } from '../components/table/addItem/addQuestion'
 import { EditQuestion } from '../components/table/editItem/editQuestion'
-import { ErrorData } from '../components/error/errorData'
+import { ErrorData } from '../utils/error/errorData'
 
 // css
 import '../css/table.css'

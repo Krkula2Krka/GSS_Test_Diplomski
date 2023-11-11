@@ -12,7 +12,7 @@ import {
 } from '../../queries/loginQueries'
 
 // components
-import { ErrorData } from '../error/errorData'
+import { ErrorData } from '../../utils/error/errorData'
 
 export const SaveResultsForm = () => {
     const { data, isError } = useQuery(getSaveResultsQuery())

@@ -11,9 +11,9 @@ import { useEffect } from 'react'
 // Components
 import { LoginForm } from '../components/form/loginForm'
 import { Root } from './root'
-import { PageNotFound } from '../components/error/pageNotFound'
+import { PageNotFound } from '../utils/error/pageNotFound'
 import { RegistrationForm } from '../components/form/registrationForm'
-import { ErrorPage } from '../components/error/errorPage'
+import { ErrorPage } from '../utils/error/errorPage'
 import { DbForm } from '../components/form/dbForm'
 
 // Pages

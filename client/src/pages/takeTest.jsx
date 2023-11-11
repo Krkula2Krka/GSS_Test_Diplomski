@@ -5,9 +5,9 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 // components
 import { InfoModal } from '../components/test/infoModal'
-import { useUnloadConditionally } from '../components/hooks/useUnloadConditionally'
-import { useOnWindowResizeConditionally } from '../components/hooks/useOnWindowResizeConditionally'
-import { useVisibilityChangeConditionally } from '../components/hooks/useVisibilityChangeConditionally'
+import { useUnloadConditionally } from '../utils/hooks/useUnloadConditionally'
+import { useOnWindowResizeConditionally } from '../utils/hooks/useOnWindowResizeConditionally'
+import { useVisibilityChangeConditionally } from '../utils/hooks/useVisibilityChangeConditionally'
 import { Quiz } from '../components/test/quiz'
 
 // queries
