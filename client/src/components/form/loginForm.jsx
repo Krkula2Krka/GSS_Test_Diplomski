@@ -2,9 +2,9 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 // css
 import '../../css/form.css'
@@ -13,6 +13,8 @@ import '../../css/form.css'
 import { loginForTestingMutation } from '../../queries/userQueries'
 
 export const LoginForm = () => {
+    const navigate = useNavigate()
+
     const initialValues = {
         GSS_identification: '',
         first_name: ''
@@ -56,7 +58,6 @@ export const LoginForm = () => {
             validateOnBlur={false}
         >
             <Form className='formContainer centered'>
-                <label>ГСС број:</label>
                 <ErrorMessage
                     name='GSS_identification'
                     component='span'
@@ -66,22 +67,20 @@ export const LoginForm = () => {
                     type='number'
                     name='GSS_identification'
                     onWheel={(e) => e.target.blur()}
+                    placeholder='ГСС број'
                 />
-                <label>Име:</label>
                 <ErrorMessage
                     name='first_name'
                     component='span'
                     className='errorMessage'
                 />
-                <Field name='first_name' />
-                <button type='submit'>Настави</button>
-                <h1>
-                    Уколико немате налог кликните да се{' '}
-                    <Link to='/registration' className='link'>
-                        овде
-                    </Link>{' '}
-                    региструјете!
-                </h1>
+                <Field name='first_name' placeholder='име' />
+                <div className='credentials-form-buttons'>
+                    <button type='button' onClick={() => navigate('/')}>
+                        назад
+                    </button>
+                    <button type='submit'>настави</button>
+                </div>
             </Form>
         </Formik>
     )

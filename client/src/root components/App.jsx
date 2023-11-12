@@ -13,7 +13,6 @@ import { LoginForm } from '../components/form/loginForm'
 import { Root } from './root'
 import { PageNotFound } from '../utils/error/pageNotFound'
 import { UnauthorizedAccess } from '../utils/error/unauthorizedAccess'
-import { RegistrationForm } from '../components/form/registrationForm'
 import { ErrorPage } from '../utils/error/errorPage'
 import { DbForm } from '../components/form/dbForm'
 
@@ -114,10 +113,6 @@ export const App = () => {
         {
             path: '/credentialsForDb',
             element: <DbForm navigateToLocation='/getAllAreas' />
-        },
-        {
-            path: '/registration',
-            element: <RegistrationForm />
         },
         {
             path: '/takeTest/:id',

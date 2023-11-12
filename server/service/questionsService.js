@@ -94,10 +94,14 @@ const getFilteredQuestionsCountInService = (
     })
 }
 
-const getTestQuestionsInService = () => {
+const getTestQuestionsInService = (importance, difficulty, limit) => {
     return question.findAll({
         order: Sequelize.literal('rand()'),
-        limit: 30
+        limit: limit,
+        where: {
+            importance: importance,
+            difficulty: difficulty
+        }
     })
 }
 

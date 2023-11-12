@@ -62,8 +62,8 @@ export const EditQuestion = (props) => {
                     <option value='битно'>битно</option>
                 </Field>
                 <div className='registration-buttons'>
-                    <button onClick={props.resetState}>Назад</button>
-                    <button type='submit'>Настави</button>
+                    <button onClick={props.resetState}>назад</button>
+                    <button type='submit'>настави</button>
                 </div>
             </Form>
         </Formik>

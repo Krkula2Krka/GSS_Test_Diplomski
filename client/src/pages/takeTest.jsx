@@ -9,6 +9,7 @@ import { useUnloadConditionally } from '../utils/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../utils/hooks/useOnWindowResizeConditionally'
 import { useVisibilityChangeConditionally } from '../utils/hooks/useVisibilityChangeConditionally'
 import { Quiz } from '../components/quiz/quiz'
+import { ErrorData } from '../utils/error/errorData'
 
 // queries
 import {
@@ -22,40 +23,46 @@ export const TakeTest = () => {
 
     const [modalOpen, setModalOpen] = useState(true)
 
-    const { data: loggedIn } = useQuery(checkLoginForTestingQuery(id))
+    const { data: loggedIn, isError: loggedInError } = useQuery(
+        checkLoginForTestingQuery(id)
+    )
     const queryClient = useQueryClient()
     const { mutateAsync: logoutForTesting } = useMutation(
         logoutForTestingMutation(id, queryClient)
     )
 
-    const { data: questions } = useQuery(
+    const { data: questions, isError: questionsError } = useQuery(
         getTestQuestionsQuery(loggedIn && !modalOpen)
     )
 
-    useVisibilityChangeConditionally(async () => {
+    /*useVisibilityChangeConditionally(async () => {
         await logoutForTesting()
     }, loggedIn)
 
     useOnWindowResizeConditionally(
         async () => await logoutForTesting(),
         loggedIn
-    )
+    )*/
 
     useUnloadConditionally(async () => await logoutForTesting(), loggedIn)
+
+    if (loggedInError || questionsError) return <ErrorData />
 
     return (
         <div>
             {loggedIn ? (
                 <div>
                     {!modalOpen ? (
-                        <Quiz questions={questions} />
+                        <Quiz questions={[]} />
                     ) : (
                         <InfoModal setOpenModal={setModalOpen} />
                     )}
                 </div>
             ) : (
                 <div>
-                    <h1>Нисте улоговани</h1>
+                    <h1 className='centered errorPageMessage'>
+                        Нисте улоговани
+                    </h1>
                 </div>
             )}
         </div>

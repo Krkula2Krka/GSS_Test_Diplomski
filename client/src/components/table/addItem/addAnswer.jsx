@@ -53,9 +53,9 @@ export const AddAnswer = (props) => {
                 </label>
                 <div className='registration-buttons'>
                     {props.noBackButton !== true ? (
-                        <button onClick={props.resetState}>Назад</button>
+                        <button onClick={props.resetState}>назад</button>
                     ) : null}
-                    <button type='submit'>Настави</button>
+                    <button type='submit'>настави</button>
                 </div>
             </Form>
         </Formik>

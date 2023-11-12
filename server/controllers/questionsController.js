@@ -9,6 +9,8 @@ const {
     getFilteredQuestionsCountInService
 } = require('../service/questionsService')
 
+const { getAllQuestionAnswersInService } = require('../service/answersService')
+
 const searchParameters = {
     searchInput: '',
     difficultyFilters: ['лако', 'средње', 'тешко'],
@@ -139,9 +141,86 @@ const editQuestionInController = async (req, res) => {
     res.sendStatus(200)
 }
 
-const getTestQuestionsInController = async (req, res) => {
-    const questions = await getTestQuestionsInService()
-    res.json(questions)
+const FisherYatesAkaKnuthShuffle = (array) => {
+    let currentIndex = array.length,
+        randomIndex
+    while (currentIndex > 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--
+        ;[array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex]
+        ]
+    }
+    return array
+}
+
+const getTestQuestionsInController = async (_, res) => {
+    let questions = await getTestQuestionsInService('битно', 'тешко', 4)
+    const important_medium_questions = await getTestQuestionsInService(
+        'битно',
+        'средње',
+        5
+    )
+    questions = questions.concat(important_medium_questions)
+    const important_easy_questions = await getTestQuestionsInService(
+        'битно',
+        'лако',
+        7
+    )
+    questions = questions.concat(important_easy_questions)
+    const medium_hard_questions = await getTestQuestionsInService(
+        'средње',
+        'тешко',
+        1
+    )
+    questions = questions.concat(medium_hard_questions)
+    const medium_medium_questions = await getTestQuestionsInService(
+        'средње',
+        'средње',
+        3
+    )
+    questions = questions.concat(medium_medium_questions)
+    const medium_easy_questions = await getTestQuestionsInService(
+        'средње',
+        'лако',
+        5
+    )
+    questions = questions.concat(medium_easy_questions)
+    const less_medium_questions = await getTestQuestionsInService(
+        'мање',
+        'средње',
+        2
+    )
+    questions = questions.concat(less_medium_questions)
+    const less_easy_questions = await getTestQuestionsInService(
+        'мање',
+        'лако',
+        3
+    )
+    questions = questions.concat(less_easy_questions)
+    questions = FisherYatesAkaKnuthShuffle(questions)
+    res.json(
+        questions.map(async (question) => {
+            const answers = await getAllQuestionAnswersInService(question.id)
+            return {
+                question_id: question.id,
+                question_text: question.question_text,
+                answer1_id: answers[0].id,
+                answer1_text: answers[0].answer_text,
+                answer1_correctness: answers[0].correctness,
+                answer2_id: answers[1].id,
+                answer2_text: answers[1].answer_text,
+                answer2_correctness: answers[1].correctness,
+                answer3_id: answers[2].id,
+                answer3_text: answers[2].answer_text,
+                answer3_correctness: answers[2].correctness,
+                answer4_id: answers[3].id,
+                answer4_text: answers[3].answer_text,
+                answer4_correctness: answers[3].correctness
+            }
+        })
+    )
 }
 
 const deleteQuestionsInController = (req, res) => {
