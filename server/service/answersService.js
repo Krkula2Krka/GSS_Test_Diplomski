@@ -6,14 +6,6 @@ const createAnswerInService = (newAnswer) => {
     answer.create(newAnswer)
 }
 
-const getAllQuestionAnswersInService = (question_id) => {
-    return answer.findAll({
-        where: {
-            question_id: question_id
-        }
-    })
-}
-
 const getAnswersBatchInService = (
     question_id,
     page,
@@ -157,6 +149,5 @@ module.exports = {
     editAnswerInService,
     getFilteredAnswersBatchInService,
     getAnswersCountInService,
-    getFilteredAnswersCountInService,
-    getAllQuestionAnswersInService
+    getFilteredAnswersCountInService
 }

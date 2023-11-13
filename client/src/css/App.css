@@ -1,7 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+:root {
+  --primary: #060B26;
+  --secondary: #1A83FF;
+  --ternary: #F5F5F5;
+  --accent: #008080;
+}
+
 body {
-  background-color: #1a83ff;
+  background: linear-gradient(0deg, var(--primary) 0.03%, var(--accent));
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 100vh;
+  font-family: 'Lato', sans-serif;
 }
 
 .stop-scrolling {
@@ -11,13 +25,6 @@ body {
 .content {
   padding: 1rem;
   padding-left: 6rem;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Lato', sans-serif;
 }
 
 iframe {
@@ -48,7 +55,7 @@ iframe {
 }
 
 .errorPageMessage {
-  color: #060b26;
+  color: var(--ternary);
 }
 
 ul {

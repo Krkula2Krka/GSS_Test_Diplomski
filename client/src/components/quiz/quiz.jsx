@@ -1,72 +1,68 @@
 // libraries
-import React, { useMemo } from 'react'
-import { useTable, usePagination } from 'react-table'
+import React, { Fragment, useState } from 'react'
 
 // css
 import '../../css/quiz.css'
 
-// components
-import { NoTestQuestion } from './noTestQuestion'
-
-export const Quiz = (props) => {
-    const tableData = useMemo(() => props.questions, [props.questions])
-
-    const tableColumns = useMemo(
-        () => [
-            {
-                Header: 'Питање',
-                accessor: 'question_text'
-            }
-        ],
-        []
-    )
-
-    const {
-        getTableProps,
-        getTableBodyProps,
-        page,
-        nextPage,
-        previousPage,
-        canNextPage,
-        canPreviousPage,
-        prepareRow
-    } = useTable(
-        {
-            columns: tableColumns,
-            data: tableData,
-            initialState: { pageSize: 1 }
-        },
-        usePagination
-    )
-
-    if (props.questions.length === 0) return <NoTestQuestion />
+export const Quiz = ({ questions }) => {
+    const [index, setIndex] = useState(0)
+    // eslint-disable-next-line no-unused-vars
+    const [answerId, setAnswerId] = useState(0)
 
     return (
-        <table pageSize={1} {...getTableProps()}>
-            <tbody {...getTableBodyProps()}>
-                {page.map((row) => {
-                    prepareRow(row)
-                    return row.cells.map((cell) => (
-                        <div className="centered quizQuestion">
-                            <td key={cell.id} {...cell.getCellProps()}>
-                                {cell.render('Cell')}
-                            </td>
-                            <button
-                                onClick={() => previousPage()}
-                                disabled={!canPreviousPage}
-                            >
-                                Претходна
-                            </button>
-                            <button
-                                onClick={() => nextPage()}
-                                disabled={!canNextPage}
-                            >
-                                Следећа
-                            </button>
-                        </div>
-                    ))
-                })}
-            </tbody>
-        </table>
+        <div className='quiz-container'>
+            <span>{index + 1 + ' / ' + questions.length}</span>
+            <br />
+            <h2>{questions[index].question_text}</h2>
+            <br />
+            {questions[index].answers.map((answer) => (
+                <Fragment key={answer.id}>
+                    <input
+                        type='radio'
+                        id={answer.id}
+                        name='quiz_questions'
+                        checked={
+                            Number(
+                                localStorage.getItem(questions[index].id)
+                            ) === answer.id
+                                ? true
+                                : null
+                        }
+                        value={answer.answer_text}
+                        onClick={() => {
+                            const answer_id = localStorage.getItem(
+                                questions[index].id
+                            )
+                            if (answer_id !== null && answer_id !== answer.id) {
+                                localStorage.removeItem(questions[index].id)
+                                localStorage.setItem(
+                                    questions[index].id,
+                                    answer.id
+                                )
+                                setAnswerId(answer.id)
+                            } else {
+                                localStorage.setItem(
+                                    questions[index].id,
+                                    answer.id
+                                )
+                                setAnswerId(answer.id)
+                            }
+                        }}
+                    />
+                      <label htmlFor={answer.id}>{answer.answer_text}</label>
+                    <br />
+                </Fragment>
+            ))}
+            <br />
+            {questions.map((question, index) => (
+                <button
+                    className='quiz-button'
+                    value={question.id}
+                    onClick={() => setIndex(index)}
+                >
+                    {index + 1}
+                </button>
+            ))}
+        </div>
     )
 }

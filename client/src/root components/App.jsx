@@ -23,7 +23,6 @@ import { Home } from '../pages/home'
 // queries
 import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
-import { testQuestionsLoader } from '../queries/questionQueries'
 import { shouldInitLoader } from '../queries/loginQueries'
 
 export const App = () => {
@@ -117,10 +116,7 @@ export const App = () => {
         {
             path: '/takeTest/:id',
             element: <TakeTest />,
-            loader: async () => {
-                const isUserLoggedIn = await loggedInLoader(queryClient)
-                return await testQuestionsLoader(queryClient, isUserLoggedIn)
-            },
+            loader: loggedInLoader(queryClient),
             errorElement: <ErrorPage />
         },
         {

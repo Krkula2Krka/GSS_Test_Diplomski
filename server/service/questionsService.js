@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize')
 const { question } = require('../models')
+const { answer } = require('../models')
 const Op = Sequelize.Op
 
 const createQuestionInService = (newQuestion) => {
@@ -101,7 +102,8 @@ const getTestQuestionsInService = (importance, difficulty, limit) => {
         where: {
             importance: importance,
             difficulty: difficulty
-        }
+        },
+        include: answer
     })
 }
 

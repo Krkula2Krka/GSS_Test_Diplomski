@@ -1,15 +1,15 @@
 // libraries
-import React, { useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 // components
-import { InfoModal } from '../components/quiz/infoModal'
 import { useUnloadConditionally } from '../utils/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../utils/hooks/useOnWindowResizeConditionally'
 import { useVisibilityChangeConditionally } from '../utils/hooks/useVisibilityChangeConditionally'
 import { Quiz } from '../components/quiz/quiz'
 import { ErrorData } from '../utils/error/errorData'
+import { LoadingData } from '../utils/loadingData'
 
 // queries
 import {
@@ -21,8 +21,6 @@ import { getTestQuestionsQuery } from '../queries/questionQueries'
 export const TakeTest = () => {
     const { id } = useParams()
 
-    const [modalOpen, setModalOpen] = useState(true)
-
     const { data: loggedIn, isError: loggedInError } = useQuery(
         checkLoginForTestingQuery(id)
     )
@@ -31,9 +29,11 @@ export const TakeTest = () => {
         logoutForTestingMutation(id, queryClient)
     )
 
-    const { data: questions, isError: questionsError } = useQuery(
-        getTestQuestionsQuery(loggedIn && !modalOpen)
-    )
+    const {
+        data: questions,
+        isError: questionsError,
+        isLoading
+    } = useQuery(getTestQuestionsQuery(loggedIn))
 
     /*useVisibilityChangeConditionally(async () => {
         await logoutForTesting()
@@ -46,24 +46,16 @@ export const TakeTest = () => {
 
     useUnloadConditionally(async () => await logoutForTesting(), loggedIn)
 
+    if (isLoading && loggedIn) return <LoadingData />
+
     if (loggedInError || questionsError) return <ErrorData />
 
     return (
         <div>
             {loggedIn ? (
-                <div>
-                    {!modalOpen ? (
-                        <Quiz questions={[]} />
-                    ) : (
-                        <InfoModal setOpenModal={setModalOpen} />
-                    )}
-                </div>
+                <Quiz questions={questions} />
             ) : (
-                <div>
-                    <h1 className='centered errorPageMessage'>
-                        Нисте улоговани
-                    </h1>
-                </div>
+                <h1 className='centered errorPageMessage'>Нисте пријављени</h1>
             )}
         </div>
     )

@@ -9,8 +9,6 @@ const {
     getFilteredQuestionsCountInService
 } = require('../service/questionsService')
 
-const { getAllQuestionAnswersInService } = require('../service/answersService')
-
 const searchParameters = {
     searchInput: '',
     difficultyFilters: ['лако', 'средње', 'тешко'],
@@ -141,11 +139,10 @@ const editQuestionInController = async (req, res) => {
     res.sendStatus(200)
 }
 
-const FisherYatesAkaKnuthShuffle = (array) => {
-    let currentIndex = array.length,
-        randomIndex
+const fisherYatesAkaKnuthShuffle = (array) => {
+    let currentIndex = array.length
     while (currentIndex > 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex)
+        const randomIndex = Math.floor(Math.random() * currentIndex)
         currentIndex--
         ;[array[currentIndex], array[randomIndex]] = [
             array[randomIndex],
@@ -199,28 +196,8 @@ const getTestQuestionsInController = async (_, res) => {
         3
     )
     questions = questions.concat(less_easy_questions)
-    questions = FisherYatesAkaKnuthShuffle(questions)
-    res.json(
-        questions.map(async (question) => {
-            const answers = await getAllQuestionAnswersInService(question.id)
-            return {
-                question_id: question.id,
-                question_text: question.question_text,
-                answer1_id: answers[0].id,
-                answer1_text: answers[0].answer_text,
-                answer1_correctness: answers[0].correctness,
-                answer2_id: answers[1].id,
-                answer2_text: answers[1].answer_text,
-                answer2_correctness: answers[1].correctness,
-                answer3_id: answers[2].id,
-                answer3_text: answers[2].answer_text,
-                answer3_correctness: answers[2].correctness,
-                answer4_id: answers[3].id,
-                answer4_text: answers[3].answer_text,
-                answer4_correctness: answers[3].correctness
-            }
-        })
-    )
+    questions = await fisherYatesAkaKnuthShuffle(questions)
+    res.json(questions)
 }
 
 const deleteQuestionsInController = (req, res) => {
