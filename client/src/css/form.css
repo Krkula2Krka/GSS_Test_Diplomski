@@ -28,6 +28,11 @@
     margin-top: 9rem;
 }
 
+label {
+    color: #F5F5F5;
+    font-size: 1.1rem;
+}
+
 .formContainer {
     display: flex;
     flex-direction: column;

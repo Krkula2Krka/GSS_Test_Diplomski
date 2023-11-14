@@ -20,7 +20,8 @@ module.exports = function (sequelize, DataTypes) {
                 defaultValue: false
             },
             questions_answers: {
-                type: DataTypes.JSON
+                type: DataTypes.JSON,
+                defaultValue: '[]'
             },
             date_of_application: {
                 type: DataTypes.DATEONLY,

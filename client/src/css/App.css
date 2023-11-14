@@ -10,12 +10,9 @@
 body {
   background: linear-gradient(0deg, var(--primary) 0.03%, var(--accent));
   color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0 2rem;
   height: 100vh;
   font-family: 'Lato', sans-serif;
+  margin: 0;
 }
 
 .stop-scrolling {
@@ -67,6 +64,13 @@ label {
   color: #F5F5F5;
   font-size: 1.1rem;
 }
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
 
 .loading-wrapper {
   width: 100vw;

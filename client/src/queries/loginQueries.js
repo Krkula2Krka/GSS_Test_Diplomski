@@ -76,7 +76,11 @@ export const logoutMutation = () => ({
 
 export const getSaveResultsQuery = () => ({
     queryKey: queryKeys.save,
-    queryFn: () => request({ url: '/logins/saveResults', method: 'get' }),
+    queryFn: async () => {
+        const res = await fetch('http://localhost:3001/logins/saveResults')
+        const data = await res.json()
+        return data
+    },
     staleTime: Infinity,
     cacheTime: Infinity
 })

@@ -7,7 +7,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useUnloadConditionally } from '../utils/hooks/useUnloadConditionally'
 import { useOnWindowResizeConditionally } from '../utils/hooks/useOnWindowResizeConditionally'
 import { useVisibilityChangeConditionally } from '../utils/hooks/useVisibilityChangeConditionally'
-import { Quiz } from '../components/quiz/quiz'
+import { Quiz } from '../components/quiz'
 import { ErrorData } from '../utils/error/errorData'
 import { LoadingData } from '../utils/loadingData'
 
@@ -17,6 +17,8 @@ import {
     checkLoginForTestingQuery
 } from '../queries/userQueries'
 import { getTestQuestionsQuery } from '../queries/questionQueries'
+import { getSaveResultsQuery } from '../queries/loginQueries'
+import { addResultMutation } from '../queries/resultQueries'
 
 export const TakeTest = () => {
     const { id } = useParams()
@@ -29,31 +31,47 @@ export const TakeTest = () => {
         logoutForTestingMutation(id, queryClient)
     )
 
+    const { mutateAsync: addResult } = useMutation(
+        addResultMutation(queryClient)
+    )
+
+    const {
+        data: save,
+        isError: saveError,
+        isLoading: saveLoading
+    } = useQuery(getSaveResultsQuery())
+
     const {
         data: questions,
         isError: questionsError,
-        isLoading
+        isLoading: questionsLoading
     } = useQuery(getTestQuestionsQuery(loggedIn))
 
-    /*useVisibilityChangeConditionally(async () => {
+    useVisibilityChangeConditionally(async () => {
         await logoutForTesting()
     }, loggedIn)
 
     useOnWindowResizeConditionally(
         async () => await logoutForTesting(),
         loggedIn
-    )*/
+    )
 
     useUnloadConditionally(async () => await logoutForTesting(), loggedIn)
 
-    if (isLoading && loggedIn) return <LoadingData />
+    if ((questionsLoading || saveLoading) && loggedIn) return <LoadingData />
 
-    if (loggedInError || questionsError) return <ErrorData />
+    if (loggedInError || questionsError || saveError) return <ErrorData />
 
     return (
         <div>
             {loggedIn ? (
-                <Quiz questions={questions} />
+                <Quiz
+                    questions={questions}
+                    save={save}
+                    logoutForTesting={logoutForTesting}
+                    addResult={addResult}
+                    id={id}
+                />
             ) : (
                 <h1 className='centered errorPageMessage'>Нисте пријављени</h1>
             )}

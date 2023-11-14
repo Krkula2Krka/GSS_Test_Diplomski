@@ -11,6 +11,9 @@ import {
     logoutMutation
 } from '../../queries/loginQueries'
 
+// css
+import '../../css/form.css'
+
 // components
 import { ErrorData } from '../../utils/error/errorData'
 
@@ -50,7 +53,7 @@ export const SaveResultsForm = () => {
                         name='save'
                         checked={
                             data !== undefined
-                                ? data.data === true
+                                ? data === true
                                     ? true
                                     : false
                                 : false
