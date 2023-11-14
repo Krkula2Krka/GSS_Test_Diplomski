@@ -36,28 +36,35 @@ export const PaginationHeader = (props) => {
             >
                 <RiDeleteBin6Fill />
             </button>
-            <button className='userButton' onClick={props.openAddForm}>
-                <ImPlus />
-            </button>
-            <button
-                className='userButton'
-                onClick={() => {
-                    const selectedItems =
-                        props.calledFrom === 'users'
-                            ? props.api
-                                  .getSelectedRows()
-                                  .map((row) => row.GSS_identification)
-                            : props.api.getSelectedRows().map((row) => row.id)
-                    if (selectedItems.length !== 1) {
-                        toast.remove()
-                        toast.error(
-                            'Један ред мора бити изабран за опцију ажурирања.'
-                        )
-                    } else props.openEditForm(selectedItems[0])
-                }}
-            >
-                <AiFillEdit />
-            </button>
+
+            {props.calledFrom !== 'results' ? (
+                <>
+                    <button className='userButton' onClick={props.openAddForm}>
+                        <ImPlus />
+                    </button>
+                    <button
+                        className='userButton'
+                        onClick={() => {
+                            const selectedItems =
+                                props.calledFrom === 'users'
+                                    ? props.api
+                                          .getSelectedRows()
+                                          .map((row) => row.GSS_identification)
+                                    : props.api
+                                          .getSelectedRows()
+                                          .map((row) => row.id)
+                            if (selectedItems.length !== 1) {
+                                toast.remove()
+                                toast.error(
+                                    'Један ред мора бити изабран за опцију ажурирања.'
+                                )
+                            } else props.openEditForm(selectedItems[0])
+                        }}
+                    >
+                        <AiFillEdit />
+                    </button>
+                </>
+            ) : null}
             <select
                 onChange={(e) => {
                     props.setPage(0)
