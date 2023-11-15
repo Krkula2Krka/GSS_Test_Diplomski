@@ -126,8 +126,8 @@ const editAnswerInController = async (req, res) => {
     res.sendStatus(200)
 }
 
-const deleteAnswersInController = (req, res) => {
-    req.body.forEach(async (id) => await deleteAnswerInService(id))
+const deleteAnswersInController = async (req, res) => {
+    await deleteAnswerInService(req.body)
     res.sendStatus(200)
 }
 

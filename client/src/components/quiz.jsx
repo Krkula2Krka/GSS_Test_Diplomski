@@ -13,8 +13,8 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
     // eslint-disable-next-line no-unused-vars
     const [answerId, setAnswerId] = useState(0)
     const [testDone, setTestDone] = useState(0)
-    const [minutes, setMinutes] = useState(0)
-    const [seconds, setSeconds] = useState(2)
+    const [minutes, setMinutes] = useState(30)
+    const [seconds, setSeconds] = useState(0)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -80,8 +80,16 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
 
     return (
         <div className='quiz-container centered'>
-            <span>{minutes + ' минута ' + seconds + ' секунди'}</span>
-            <br />
+            {testDone === 0 ? (
+                <>
+                    {seconds < 10 ? (
+                        <span>{minutes + ' : 0' + seconds}</span>
+                    ) : (
+                        <span>{minutes + ' : ' + seconds}</span>
+                    )}
+                    <br />
+                </>
+            ) : null}
             <span>{index + 1 + ' / ' + questions.length}</span> <br />
             <h2 className='quiz-h2'>{questions[index].question_text}</h2>
             <br />
@@ -174,6 +182,8 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
                         onClick={() => {
                             saveResults()
                             setTestDone(1)
+                            setMinutes(0)
+                            setSeconds(0)
                         }}
                     >
                         заврши и види резултате

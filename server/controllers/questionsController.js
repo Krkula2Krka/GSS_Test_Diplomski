@@ -200,8 +200,8 @@ const getTestQuestionsInController = async (_, res) => {
     res.json(questions)
 }
 
-const deleteQuestionsInController = (req, res) => {
-    req.body.forEach(async (id) => await deleteQuestionInService(id))
+const deleteQuestionsInController = async (req, res) => {
+    await deleteQuestionInService(req.body)
     res.sendStatus(200)
 }
 

@@ -92,11 +92,19 @@ export const QuestionDetails = () => {
             },
             {
                 key: 'id',
-                display: 'идентификатор',
-                type: 'int'
+                display: 'Претражи по идентификатору:',
+                type: 'int',
+                filters: (search) =>
+                    setStartId({
+                        startId: search
+                    }),
+                operator: (operator) =>
+                    setOperator({
+                        operator: operator
+                    })
             }
         ],
-        [setCorrectnessFilters]
+        [setCorrectnessFilters, setStartId, setOperator]
     )
 
     if (answersError || answersCountError || pageSizeError) return <ErrorData />
@@ -135,16 +143,11 @@ export const QuestionDetails = () => {
                         itemsCount={
                             answersCount !== undefined ? answersCount.data : []
                         }
-                        pageSize={pageSize !== undefined ? pageSize.data : []}
+                        pageSize={pageSize !== undefined ? pageSize.data : 30}
                         page={page}
                         setPage={setPage}
                         setSearchInput={(search) => setSearchInput(search)}
                         setPageSize={(pageSize) => setPageSize(pageSize)}
-                        setStartId={(search) => setStartId(search)}
-                        setOperator={(operator) => setOperator(operator)}
-                        setCorrectnessFilters={(search) =>
-                            setCorrectnessFilters(search)
-                        }
                         noRowsMessage='Нема одговора'
                     />
                 </div>

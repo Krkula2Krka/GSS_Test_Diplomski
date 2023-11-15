@@ -80,6 +80,16 @@ export const App = () => {
                     errorElement: <ErrorPage />
                 },
                 {
+                    path: '/testResult/:id',
+                    lazy: async () => {
+                        const { TestResult } = await import(
+                            '../pages/testResult'
+                        )
+                        return { Component: TestResult }
+                    },
+                    errorElement: <ErrorPage />
+                },
+                {
                     path: '/areaDetails/:id',
                     lazy: async () => {
                         const { AreaDetails } = await import(

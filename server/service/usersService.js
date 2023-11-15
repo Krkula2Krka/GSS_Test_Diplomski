@@ -101,7 +101,7 @@ const getUsersCountInService = (startId, operator) => {
     })
 }
 
-const getFilteredUsersCountInService = (startId, operator) => {
+const getFilteredUsersCountInService = (searchInput, startId, operator) => {
     return user.count({
         where: {
             [Op.or]: [

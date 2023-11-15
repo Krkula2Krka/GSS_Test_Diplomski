@@ -76,11 +76,19 @@ export const GetAllUsers = () => {
         () => [
             {
                 key: 'GSS_identification',
-                display: 'ГСС број',
-                type: 'int'
+                display: 'Претражи по ГСС идентификатору:',
+                type: 'int',
+                filters: (search) =>
+                    setStartId({
+                        startId: search
+                    }),
+                operator: (operator) =>
+                    setOperator({
+                        operator: operator
+                    })
             }
         ],
-        []
+        [setStartId, setOperator]
     )
 
     if (usersError || usersCountError || pageSizeError) return <ErrorData />
@@ -101,9 +109,7 @@ export const GetAllUsers = () => {
                     setSearchInput={(search) => setSearchInput(search)}
                     searchFields={searchFields}
                     setPageSize={(pageSize) => setPageSize(pageSize)}
-                    pageSize={pageSize !== undefined ? pageSize.data : []}
-                    setStartId={(search) => setStartId(search)}
-                    setOperator={(operator) => setOperator(operator)}
+                    pageSize={pageSize !== undefined ? pageSize.data : 30}
                     noRowsMessage='Нема корисника'
                 />
             ) : form === 1 ? (

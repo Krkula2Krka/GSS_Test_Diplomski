@@ -45,8 +45,7 @@ export const Table = (props) => {
                 setPage={props.setPage}
                 setSearchInput={props.setSearchInput}
                 searchFields={props.searchFields}
-                setStartId={props.setStartId}
-                setOperator={props.setOperator}
+                calledFrom={props.calledFrom}
             />
             <div className='ag-theme-alpine'>
                 <AgGridReact
@@ -67,12 +66,20 @@ export const Table = (props) => {
                                       difficulty: e.data.difficulty,
                                       importance: e.data.importance
                                   }
+                                : props.calledFrom === 'users'
+                                ? {
+                                      first_name: e.data.first_name,
+                                      last_name: e.data.last_name,
+                                      nickname: e.data.nickname
+                                  }
                                 : null
                         const location =
                             props.calledFrom === 'users'
                                 ? `/userResults/${e.data.GSS_identification}`
                                 : props.calledFrom === 'questions'
                                 ? `/questionDetails/${e.data.id}`
+                                : props.calledFrom === 'results'
+                                ? `/testResult/${e.data.id}`
                                 : null
                         if (location !== null)
                             navigate(location, { state: state })

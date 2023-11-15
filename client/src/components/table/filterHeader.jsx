@@ -7,13 +7,19 @@ import '../../css/table.css'
 export const FilterHeader = (props) => {
     return (
         <div className='header'>
-            <div className='search-label'>Претражи:</div>
-            <input
-                onChange={(e) => {
-                    props.setPage(0)
-                    props.setSearchInput({ search: e.target.value.trim() })
-                }}
-            />
+            {props.calledFrom !== 'results' ? (
+                <>
+                    <div className='search-label'>Претражи:</div>
+                    <input
+                        onChange={(e) => {
+                            props.setPage(0)
+                            props.setSearchInput({
+                                search: e.target.value.trim()
+                            })
+                        }}
+                    />
+                </>
+            ) : null}
             {props.searchFields.map((searchField, index) => {
                 return searchField.type === 'enum' ? (
                     <Fragment key={index}>
@@ -62,25 +68,44 @@ export const FilterHeader = (props) => {
                 ) : searchField.type === 'int' ? (
                     <Fragment key={index}>
                         <div className='search-label'>
-                            Претражи по идентификатору:
+                            {searchField.display}
                         </div>
                         <input
                             type='number'
-                            min='1'
+                            min='0'
                             onChange={(e) => {
                                 props.setPage(0)
-                                props.setStartId({
-                                    startId: e.target.value
-                                })
+                                searchField.filters(e.target.value)
                             }}
                         />
                         <select
                             className='table-select'
                             onChange={(e) => {
                                 props.setPage(0)
-                                props.setOperator({
-                                    operator: e.target.value
-                                })
+                                searchField.operator(e.target.value)
+                            }}
+                        >
+                            <option value='gte'>веће или једнако</option>
+                            <option value='lte'>мање или једнако</option>
+                        </select>
+                    </Fragment>
+                ) : searchField.type === 'date' ? (
+                    <Fragment key={index}>
+                        <div className='search-label'>
+                            {searchField.display}
+                        </div>
+                        <input
+                            type='date'
+                            onChange={(e) => {
+                                props.setPage(0)
+                                searchField.filters(e.target.value)
+                            }}
+                        />
+                        <select
+                            className='table-select'
+                            onChange={(e) => {
+                                props.setPage(0)
+                                searchField.operator(e.target.value)
                             }}
                         >
                             <option value='gte'>веће или једнако</option>

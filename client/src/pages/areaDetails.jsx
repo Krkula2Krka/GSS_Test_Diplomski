@@ -109,11 +109,19 @@ export const AreaDetails = () => {
             },
             {
                 key: 'id',
-                display: 'идентификатор',
-                type: 'int'
+                display: 'Претражи по идентификатору:',
+                type: 'int',
+                filters: (search) =>
+                    setStartId({
+                        startId: search
+                    }),
+                operator: (operator) =>
+                    setOperator({
+                        operator: operator
+                    })
             }
         ],
-        [setDifficultyFilters, setImportanceFilters]
+        [setDifficultyFilters, setImportanceFilters, setStartId, setOperator]
     )
 
     if (questionsError || questionsCountError || pageSizeError)
@@ -149,8 +157,6 @@ export const AreaDetails = () => {
                         page={page}
                         setSearchInput={(search) => setSearchInput(search)}
                         setPageSize={(pageSize) => setPageSize(pageSize)}
-                        setStartId={(search) => setStartId(search)}
-                        setOperator={(operator) => setOperator(operator)}
                         setPage={setPage}
                         noRowsMessage='Нема питања'
                         setDifficultyFilters={(search) =>

@@ -6,6 +6,10 @@ const addResultInService = (newResult) => {
     result.create(newResult)
 }
 
+const getResultByPkInService = (id) => {
+    return result.findByPk(id)
+}
+
 const getResultsBatchInService = (
     user_id,
     page,
@@ -100,8 +104,18 @@ const getResultsCountInService = (
         })
 }
 
+const deleteResultsInService = (id) => {
+    result.destroy({
+        where: {
+            id: id
+        }
+    })
+}
+
 module.exports = {
     addResultInService,
     getResultsBatchInService,
-    getResultsCountInService
+    getResultsCountInService,
+    deleteResultsInService,
+    getResultByPkInService
 }
