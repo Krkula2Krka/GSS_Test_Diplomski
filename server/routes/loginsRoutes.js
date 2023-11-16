@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const {
     createLoginInController,
-    shouldInitInController,
     changePasswordInController,
     setSaveResultsInController,
     getSaveResultsInController,
@@ -10,8 +9,6 @@ const {
     logoutInController,
     authenticateToken
 } = require('../controllers/loginsController')
-
-router.get('/shouldInit', authenticateToken, shouldInitInController)
 
 router.get('/saveResults', getSaveResultsInController)
 

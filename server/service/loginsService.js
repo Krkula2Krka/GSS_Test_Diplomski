@@ -15,10 +15,6 @@ const createLoginInService = (info) => {
     })
 }
 
-const shouldInitInService = () => {
-    return login.findByPk(1)
-}
-
 const getPasswordInService = () => {
     return login.findOne({
         attributes: ['password'],
@@ -51,7 +47,6 @@ const logoutInService = () => {
 
 module.exports = {
     createLoginInService,
-    shouldInitInService,
     changePasswordInService,
     getPasswordInService,
     setSaveResultsInService,

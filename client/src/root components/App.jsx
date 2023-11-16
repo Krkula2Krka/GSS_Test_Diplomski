@@ -22,7 +22,6 @@ import { Home } from '../pages/home'
 // queries
 import { loggedInLoader } from '../queries/userQueries'
 import { areasLoader } from '../queries/areaQueries'
-import { shouldInitLoader } from '../queries/loginQueries'
 
 export const App = () => {
     const queryClient = new QueryClient({
@@ -65,7 +64,6 @@ export const App = () => {
                         const { Settings } = await import('../pages/settings')
                         return { Component: Settings }
                     },
-                    loader: shouldInitLoader(queryClient),
                     errorElement: <ErrorPage />
                 },
                 {

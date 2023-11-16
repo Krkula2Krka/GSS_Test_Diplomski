@@ -19,21 +19,6 @@ export const addLoginMutation = (queryClient) => ({
     }
 })
 
-export const shouldInitQuery = () => ({
-    queryKey: queryKeys.init,
-    queryFn: () => request({ url: '/logins/shouldInit', method: 'get' }),
-    staleTime: Infinity,
-    cacheTime: Infinity
-})
-
-export const shouldInitLoader = (queryClient) => async () => {
-    const query = shouldInitQuery()
-    return await queryClient.ensureQueryData({
-        queryKey: query.queryKey,
-        queryFn: query.queryFn
-    })
-}
-
 export const changePasswordMutation = () => ({
     mutationFn: (data) =>
         request({ url: '/logins/changePassword', method: 'post', data: data }),

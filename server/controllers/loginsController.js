@@ -4,7 +4,6 @@ require('dotenv').config()
 
 const {
     createLoginInService,
-    shouldInitInService,
     changePasswordInService,
     getPasswordInService,
     setSaveResultsInService,
@@ -16,11 +15,6 @@ const {
 const createLoginInController = async (req, res) => {
     await createLoginInService(req.body)
     res.sendStatus(200)
-}
-
-const shouldInitInController = async (req, res) => {
-    const init = await shouldInitInService(req.body)
-    res.json({ shouldInit: init === null })
 }
 
 const changePasswordInController = async (req, res) => {
@@ -84,7 +78,6 @@ const authenticateToken = (req, res, next) => {
 
 module.exports = {
     createLoginInController,
-    shouldInitInController,
     changePasswordInController,
     setSaveResultsInController,
     getSaveResultsInController,
