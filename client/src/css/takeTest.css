@@ -1,4 +1,4 @@
-.quiz-container {
+.result-container {
     width: 32rem;
     background: var(--secondary);
     border-radius: 0.25rem;
@@ -6,34 +6,30 @@
     box-sizing: border-box;
 }
 
-.quiz-h2 {
+.result-h2 {
     font-size: 1.5rem;
     font-weight: 500;
     margin: 0;
     color: var(--primary);
 }
 
-.quiz-label {
-    color: var(--primary);
-}
-
-.quiz-buttons {
+.result-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
     gap: 0.5rem;
 }
 
-.quiz-button {
+.result-button {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 0.25rem;
 }
 
-.end-button-wrapper {
+.back-button-container {
     display: flex;
     justify-content: center;
 }
 
-.end-button {
+.back-button {
     border-radius: 0.25rem;
 }

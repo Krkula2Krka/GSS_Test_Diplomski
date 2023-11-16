@@ -47,6 +47,12 @@ iframe {
   transform: translate(0%, -50%);
 }
 
+span {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
 .errorMessage {
   color: red;
 }

@@ -57,14 +57,29 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
             const pointsAcquired = countCorrectAnswers()
             const result = []
             questions.forEach((question) => {
+                const answer_id = Number(localStorage.getItem(question.id))
+                let answer_text = 'Није одговорио на питање'
+                let correctness = false
+                question.answers.forEach((answer) => {
+                    if (answer.id === answer_id) {
+                        answer_text = answer.answer_text
+                        correctness = answer.correctness
+                    }
+                })
                 localStorage.getItem(question.id) !== null
                     ? result.push({
                           question_id: question.id,
-                          answer_id: Number(localStorage.getItem(question.id))
+                          question_text: question.question_text,
+                          answer_id: answer_id,
+                          answer_text: answer_text,
+                          correctness: correctness
                       })
                     : result.push({
                           question_id: question.id,
-                          answer_id: null
+                          question_text: question.question_text,
+                          answer_id: null,
+                          answer_text: answer_text,
+                          correctness: correctness
                       })
             })
             const newResult = {
@@ -163,11 +178,10 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
                 </>
             ) : null}
             <div className='quiz-buttons'>
-                {questions.map((question, index) => (
+                {questions.map((_, index) => (
                     <button
                         key={index}
                         className='quiz-button'
-                        value={question.id}
                         onClick={() => setIndex(index)}
                     >
                         {index + 1}

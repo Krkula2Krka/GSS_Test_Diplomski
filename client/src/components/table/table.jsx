@@ -72,6 +72,10 @@ export const Table = (props) => {
                                       last_name: e.data.last_name,
                                       nickname: e.data.nickname
                                   }
+                                : props.calledFrom === 'results'
+                                ? {
+                                      id: e.data.user_id
+                                  }
                                 : null
                         const location =
                             props.calledFrom === 'users'
