@@ -39,21 +39,26 @@ export const EditArea = (props) => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            <Form className="confirmDeleteOrEditArea">
-                <label className="areaNameChange">Промени назив области:</label>
+            <Form className='confirmDeleteOrEditArea'>
+                <label className='areaNameChange'>Промени назив области:</label>
                 <ErrorMessage
-                    name="area_name"
-                    component="span"
-                    className="errorMessage"
+                    name='area_name'
+                    component='span'
+                    className='errorMessage'
                 />
-                <Field name="area_name" />
-                <div className="confirmButtons">
-                    <button type="submit" className="areaButton">
-                        <BsFillCheckCircleFill />
-                    </button>
-                    <button onClick={props.resetState} className="areaButton">
-                        <RxCrossCircled />
-                    </button>
+                <Field name='area_name' />
+                <div class='confirm-buttons-container'>
+                    <div className='confirmButtons'>
+                        <button type='submit' className='areaButton'>
+                            <BsFillCheckCircleFill />
+                        </button>
+                        <button
+                            onClick={props.resetState}
+                            className='areaButton'
+                        >
+                            <RxCrossCircled />
+                        </button>
+                    </div>
                 </div>
             </Form>
         </Formik>

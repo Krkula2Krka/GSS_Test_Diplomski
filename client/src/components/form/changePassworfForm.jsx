@@ -77,7 +77,7 @@ export const ChangePassworfForm = () => {
                 />
                 <div className='credentials-form-field'>
                     <Field
-                        className='credentials-form-input'
+                        className='credentials-form-input text-field'
                         type={showOldPassword ? 'text' : 'password'}
                         name='old_password'
                         placeholder='стара шифра'
@@ -101,7 +101,7 @@ export const ChangePassworfForm = () => {
                 />
                 <div className='credentials-form-field'>
                     <Field
-                        className='credentials-form-input'
+                        className='credentials-form-input text-field'
                         type={showNewPassword ? 'text' : 'password'}
                         name='new_password'
                         placeholder='нова шифра'

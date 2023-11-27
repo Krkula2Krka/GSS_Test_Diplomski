@@ -50,7 +50,7 @@ export const EditAnswer = (props) => {
                     component='span'
                     className='errorMessage'
                 />
-                <Field name='answer_text' />
+                <Field as='textarea' name='answer_text' />
                 <label>
                     Тачност одговора:
                     <Field type='checkbox' name='correctness' />

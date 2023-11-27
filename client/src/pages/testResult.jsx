@@ -20,7 +20,8 @@ export const TestResult = () => {
     const location = useLocation()
     const { data, isError, isLoading } = useQuery(getTestResultQuery(id))
 
-    const jsonData = JSON.parse(data.data.questions_answers)
+    const jsonData =
+        data !== undefined ? JSON.parse(data.data.questions_answers) : '[]'
 
     if (isError) return <ErrorData />
     if (isLoading) return <LoadingData />

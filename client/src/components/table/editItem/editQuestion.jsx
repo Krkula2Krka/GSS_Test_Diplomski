@@ -48,7 +48,7 @@ export const EditQuestion = (props) => {
                     component='span'
                     className='errorMessage'
                 />
-                <Field name='question_text' />
+                <Field as='textarea' name='question_text' />
                 <label>Тежина питања:</label>
                 <Field as='select' name='difficulty'>
                     <option value='лако'>лако</option>

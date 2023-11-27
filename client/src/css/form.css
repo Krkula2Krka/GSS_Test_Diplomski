@@ -25,7 +25,7 @@
 }
 
 .form-margin {
-    margin-top: 9rem;
+    margin-top: 10rem;
 }
 
 label {
@@ -36,11 +36,28 @@ label {
 .formContainer {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
     justify-content: center;
     padding: 2rem;
     height: auto;
     background-color: #060b26;
     width: 30rem;
+    border-radius: 0.5rem;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.text-field, .number-field {
+    padding: 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
 }
 
 button {

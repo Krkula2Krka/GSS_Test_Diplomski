@@ -8,7 +8,7 @@
     display: flex;
     background-color: #060b26;
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     justify-content: space-between;
     height: 8rem
 }
@@ -32,19 +32,26 @@
 .confirmDeleteOrEditArea {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.2rem;
     background-color: #060b26;
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     justify-content: space-between;
     height: 8rem
 }
 
+.confirm-buttons-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+}
+
 .confirmButtons {
     display: flex;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
+    flex-wrap: wrap;
+    gap: 6rem;
 }
 
 .confirmDeleteOrEditArea input:focus {
@@ -64,17 +71,18 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-top: auto;
+    margin-bottom: 0;
 }
 
 .areaNameChange {
     color: #f5f5f5;
     font-size: 1.4rem;
     font-weight: bold;
-    margin-top: auto;
 }
 
 .areaMessage {
     color: #f5f5f5;
+    margin: 0;
 }
 
 .areaButtons {
@@ -84,13 +92,18 @@
     margin-right: 0.5rem;
 }
 
-.areaButton {
+.areaButton, .confirm-button {
     border: none;
     background-color: #060b26;
     color: #f5f5f5;
-    width: 1rem;
+    width: 2rem;
+    height: 2rem;
     margin: 0;
     padding: 0;
+    text-align: center;
+}
+
+.areaButton {
     margin-bottom: 1rem;
 }
 

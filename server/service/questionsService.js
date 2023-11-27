@@ -97,7 +97,7 @@ const getFilteredQuestionsCountInService = (
 
 const getTestQuestionsInService = (importance, difficulty, limit) => {
     return question.findAll({
-        order: Sequelize.literal('rand()'),
+        order: Sequelize.literal('random()'),
         limit: limit,
         where: {
             importance: importance,

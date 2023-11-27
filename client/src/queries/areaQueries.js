@@ -14,7 +14,6 @@ export const getAllAreasQuery = () => ({
 })
 
 export const areasLoader = (queryClient) => async () => {
-    //throw new Error('')
     const query = getAllAreasQuery()
     return await queryClient.ensureQueryData({
         queryKey: query.queryKey,

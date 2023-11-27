@@ -41,34 +41,36 @@ export const AddArea = (props) => {
                     onSubmit={onSubmit}
                     validationSchema={validationSchema}
                 >
-                    <Form className="confirmDeleteOrEditArea">
-                        <label className="areaNameChange">
+                    <Form className='confirmDeleteOrEditArea'>
+                        <label className='areaNameChange'>
                             Назив нове области:
                         </label>
                         <ErrorMessage
-                            name="area_name"
-                            component="span"
-                            className="errorMessage"
+                            name='area_name'
+                            component='span'
+                            className='errorMessage'
                         />
-                        <Field name="area_name" />
-                        <div className="confirmButtons">
-                            <button type="submit" className="areaButton">
-                                <BsFillCheckCircleFill />
-                            </button>
-                            <button
-                                onClick={props.resetState}
-                                className="areaButton"
-                            >
-                                <RxCrossCircled />
-                            </button>
+                        <Field name='area_name' />
+                        <div class='confirm-buttons-container'>
+                            <div className='confirmButtons'>
+                                <button type='submit' className='areaButton'>
+                                    <BsFillCheckCircleFill />
+                                </button>
+                                <button
+                                    onClick={props.resetState}
+                                    className='areaButton'
+                                >
+                                    <RxCrossCircled />
+                                </button>
+                            </div>
                         </div>
                     </Form>
                 </Formik>
             ) : (
-                <div className="area centeredAreaButton">
+                <div className='area centeredAreaButton'>
                     <button
                         onClick={props.setAddNewAreaState}
-                        className="areaButton single-area-button"
+                        className='areaButton single-area-button'
                     >
                         <BsPlusCircleFill />
                     </button>

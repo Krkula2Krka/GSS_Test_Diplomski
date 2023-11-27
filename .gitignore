@@ -131,3 +131,4 @@ dist
 
 server/config
 .vscode/
+client/build

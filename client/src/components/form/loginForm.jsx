@@ -58,23 +58,33 @@ export const LoginForm = () => {
             validateOnBlur={false}
         >
             <Form className='formContainer centered'>
-                <ErrorMessage
-                    name='GSS_identification'
-                    component='span'
-                    className='errorMessage'
-                />
-                <Field
-                    type='number'
-                    name='GSS_identification'
-                    onWheel={(e) => e.target.blur()}
-                    placeholder='ГСС број'
-                />
-                <ErrorMessage
-                    name='first_name'
-                    component='span'
-                    className='errorMessage'
-                />
-                <Field name='first_name' placeholder='име' />
+                <div class='field-container'>
+                    <ErrorMessage
+                        name='GSS_identification'
+                        component='span'
+                        className='errorMessage'
+                    />
+                    <Field
+                        className='number-field'
+                        type='number'
+                        min={1}
+                        name='GSS_identification'
+                        onWheel={(e) => e.target.blur()}
+                        placeholder='ГСС број'
+                    />
+                </div>
+                <div class='field-container'>
+                    <ErrorMessage
+                        name='first_name'
+                        component='span'
+                        className='errorMessage'
+                    />
+                    <Field
+                        name='first_name'
+                        placeholder='име'
+                        className='text-field'
+                    />
+                </div>
                 <div className='credentials-form-buttons'>
                     <button type='button' onClick={() => navigate('/')}>
                         назад

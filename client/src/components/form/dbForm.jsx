@@ -56,7 +56,7 @@ export const DbForm = () => {
             <Form className='formContainer centered'>
                 <div className='credentials-form-field'>
                     <Field
-                        className='credentials-form-input'
+                        className='credentials-form-input text-field'
                         type={showPassword ? 'text' : 'password'}
                         name='password'
                         placeholder='шифра'
