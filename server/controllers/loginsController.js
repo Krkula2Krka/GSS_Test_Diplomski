@@ -45,7 +45,7 @@ const getSaveResultsInController = async (_, res) => {
 }
 
 const loginInController = async (req, res) => {
-    const data = await shouldInitInService()
+    const data = await getPasswordInService()
     if (data !== null && data.admin_logged_in)
         res.json({ loginSuccessful: false })
     else if (await bcrypt.compare(req.body.password, data.password)) {
