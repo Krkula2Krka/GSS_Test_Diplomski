@@ -6,9 +6,9 @@ import '../../css/table.css'
 
 export const FilterHeader = (props) => {
     return (
-        <div className='header'>
+        <div className='header filter-header'>
             {props.calledFrom !== 'results' ? (
-                <>
+                <div className='filter-container'>
                     <div className='search-label'>Претражи:</div>
                     <input
                         onChange={(e) => {
@@ -18,11 +18,11 @@ export const FilterHeader = (props) => {
                             })
                         }}
                     />
-                </>
+                </div>
             ) : null}
             {props.searchFields.map((searchField, index) => {
                 return searchField.type === 'enum' ? (
-                    <Fragment key={index}>
+                    <div key={index} className='filter-container'>
                         <div className='search-label'>
                             {searchField.display}
                         </div>
@@ -42,9 +42,9 @@ export const FilterHeader = (props) => {
                                 )
                             })}
                         </select>
-                    </Fragment>
+                    </div>
                 ) : searchField.type === 'bool' ? (
-                    <Fragment key={index}>
+                    <div key={index} className='filter-container'>
                         <div className='search-label'>
                             {searchField.display}
                         </div>
@@ -64,9 +64,9 @@ export const FilterHeader = (props) => {
                                 )
                             })}
                         </select>
-                    </Fragment>
+                    </div>
                 ) : searchField.type === 'int' ? (
-                    <Fragment key={index}>
+                    <div key={index} className='filter-container'>
                         <div className='search-label'>
                             {searchField.display}
                         </div>
@@ -88,9 +88,9 @@ export const FilterHeader = (props) => {
                             <option value='gte'>веће или једнако</option>
                             <option value='lte'>мање или једнако</option>
                         </select>
-                    </Fragment>
+                    </div>
                 ) : searchField.type === 'date' ? (
-                    <Fragment key={index}>
+                    <div key={index} className='filter-container'>
                         <div className='search-label'>
                             {searchField.display}
                         </div>
@@ -111,7 +111,7 @@ export const FilterHeader = (props) => {
                             <option value='gte'>веће или једнако</option>
                             <option value='lte'>мање или једнако</option>
                         </select>
-                    </Fragment>
+                    </div>
                 ) : null
             })}
         </div>

@@ -109,7 +109,7 @@ export const AreaDetails = () => {
             },
             {
                 key: 'id',
-                display: 'Претражи по идентификатору:',
+                display: 'По идентификатору:',
                 type: 'int',
                 filters: (search) =>
                     setStartId({
@@ -130,7 +130,7 @@ export const AreaDetails = () => {
     return (
         <div>
             {form === 0 ? (
-                <div className='cointainer'>
+                <div className='container'>
                     <div className='infoContainer'>
                         <h2>
                             {location.state !== null
