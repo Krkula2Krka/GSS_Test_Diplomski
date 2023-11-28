@@ -58,7 +58,7 @@ export const LoginForm = () => {
             validateOnBlur={false}
         >
             <Form className='formContainer centered'>
-                <div class='field-container'>
+                <div className='field-container'>
                     <ErrorMessage
                         name='GSS_identification'
                         component='span'

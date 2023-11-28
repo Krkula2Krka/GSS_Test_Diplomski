@@ -15,6 +15,7 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
     const [testDone, setTestDone] = useState(0)
     const [minutes, setMinutes] = useState(30)
     const [seconds, setSeconds] = useState(0)
+    const [correctAnswers, setCorrectAnswers] = useState(0)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -172,7 +173,7 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
             {testDone === 1 ? (
                 <>
                     <h2 className='quiz-h2'>
-                        Освојили сте {countCorrectAnswers()} / 30 поена
+                        Освојили сте {correctAnswers} / 30 поена
                     </h2>
                     <br />
                 </>
@@ -194,6 +195,8 @@ export const Quiz = ({ questions, save, logoutForTesting, addResult, id }) => {
                     <button
                         className='end-button'
                         onClick={() => {
+                            const count = countCorrectAnswers()
+                            setCorrectAnswers(count)
                             saveResults()
                             setTestDone(1)
                             setMinutes(0)
