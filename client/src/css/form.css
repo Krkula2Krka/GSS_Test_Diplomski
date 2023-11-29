@@ -4,7 +4,6 @@
 
 .credentials-form-field {
     display: flex;
-    justify-content: center;
     margin-top: 0.1rem;
 }
 
@@ -22,10 +21,6 @@
 .credentials-form-input {
     width: 25rem;
     height: 1.2rem;
-}
-
-.form-margin {
-    margin-top: 20rem;
 }
 
 label {
@@ -85,4 +80,14 @@ form input, form select {
 
 button:hover {
     color: #008080;
+}
+
+.no-bottom-border-radius {
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+.no-top-border-radius {
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
 }

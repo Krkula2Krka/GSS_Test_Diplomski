@@ -7,9 +7,9 @@ import { ChangePassworfForm } from '../components/form/changePassworfForm'
 
 export const Settings = () => {
     return (
-        <>
+        <div className='centered'>
             <ChangePassworfForm />
             <SaveResultsForm />
-        </>
+        </div>
     )
 }

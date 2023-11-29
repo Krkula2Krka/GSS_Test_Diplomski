@@ -69,7 +69,7 @@ export const ChangePassworfForm = () => {
             validateOnChange={false}
             validateOnBlur={false}
         >
-            <Form className='formContainer centeredHorizontal'>
+            <Form className='formContainer no-bottom-border-radius'>
                 <ErrorMessage
                     name='old_password'
                     component='span'

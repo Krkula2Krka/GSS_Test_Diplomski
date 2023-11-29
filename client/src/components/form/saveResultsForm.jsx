@@ -45,7 +45,7 @@ export const SaveResultsForm = () => {
             validateOnChange={false}
             validateOnBlur={false}
         >
-            <Form className='formContainer centeredHorizontal form-margin'>
+            <Form className='formContainer no-top-border-radius'>
                 <label>
                     резултати се чувају{' '}
                     <Field
